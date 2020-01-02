@@ -1,0 +1,46 @@
+image: node:8
+
+clone:
+  depth: full
+
+installDependencies: &installDependencies
+  step:
+    name: Install node modules
+    script:
+      - yarn
+    caches:
+      - node
+
+format: &format
+  step:
+    name: Format
+    caches:
+      - node
+    script:
+      - yarn format
+
+lint: &lint
+  step:
+    name: Check linting issues
+    caches:
+      - node
+    script:
+      - yarn lint
+
+
+runTests: &runTests
+  step:
+    name: Run tests
+    caches:
+      - node
+    script:
+      - yarn test
+
+pipelines:
+ pull-requests:
+  '**': #this runs as default for any branch not elsewhere defined
+      - <<: *installDependencies
+      - <<: *build
+      - <<: *format
+      - <<: *lint
+      - <<: *runTests
