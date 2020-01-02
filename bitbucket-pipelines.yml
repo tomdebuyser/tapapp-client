@@ -27,7 +27,6 @@ lint: &lint
     script:
       - yarn lint
 
-
 runTests: &runTests
   step:
     name: Run tests
@@ -37,10 +36,9 @@ runTests: &runTests
       - yarn test
 
 pipelines:
- pull-requests:
-  '**': #this runs as default for any branch not elsewhere defined
+  pull-requests:
+    '**': #this runs as default for any branch not elsewhere defined
       - <<: *installDependencies
-      - <<: *build
       - <<: *format
       - <<: *lint
       - <<: *runTests
