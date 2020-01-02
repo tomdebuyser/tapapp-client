@@ -44,6 +44,14 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## TODO
+### `yarn lint`
 
-- Redux observable
+Runs eslint to check for linting errors
+
+### `yarn format`
+
+Runs prettier and formats all files
+
+### `yarn format:check`
+
+Runs prettier to check if all changed files are formatted correctly
