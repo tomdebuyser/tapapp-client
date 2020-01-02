@@ -3,33 +3,21 @@ image: node:8
 clone:
   depth: full
 
-definitions:
-  services:
-    postgres:
-      image: sameersbn/postgresql:latest
-      environment:
-        DB_USER: developer
-        DB_PASS: developer
-        DB_NAME: silvernext_api_test
-        DB_EXTENSION: '"uuid-ossp"'
-    redis:
-      image: redis
-
 installDependencies: &installDependencies
   step:
     name: Install node modules
     script:
-      - npm install
+      - yarn
     caches:
       - node
 
-build: &build
-  - step:
-      name: Build project
-      caches:
-        - node
-      script:
-        - npm run build
+format: &format
+  step:
+    name: Format
+    caches:
+      - node
+    script:
+      - yarn format
 
 lint: &lint
   step:
@@ -37,56 +25,20 @@ lint: &lint
     caches:
       - node
     script:
-      - npm run lint
+      - yarn lint
 
 runTests: &runTests
-  - parallel:
-    - step:
-        name: Run unit tests
-        caches:
-          - node
-        script:
-          - npm run test:unit
-        services:
-          - postgres
-          - redis
-    - step:
-        name: Run integration tests
-        caches:
-          - node
-        script:
-          - npm run test:integration
-        services:
-          - postgres
-          - redis
+  step:
+    name: Run tests
+    caches:
+      - node
+    script:
+      - yarn test
 
 pipelines:
- pull-requests:
-  '**': #this runs as default for any branch not elsewhere defined
+  pull-requests:
+    '**': #this runs as default for any branch not elsewhere defined
       - <<: *installDependencies
-      - <<: *build
+      - <<: *format
       - <<: *lint
       - <<: *runTests
- branches:
-    develop:
-      - <<: *installDependencies
-      - <<: *build
-      - <<: *lint
-      - <<: *runTests
-      - step:
-          name: Deploy to development
-          deployment: test
-          script:
-            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_DEVELOP.git HEAD:master
-
-    release/**:
-      - <<: *installDependencies
-      - <<: *build
-      - <<: *lint
-      - <<: *runTests
-      - step:
-          name: Deploy to staging
-          deployment: staging
-          trigger: manual
-          script:
-            - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_STAGING.git HEAD:master
