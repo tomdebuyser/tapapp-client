@@ -1,6 +1,6 @@
 import I18n from 'i18n-js';
 
-import nl from './nl.json';
+import en from './en.json';
 
 const getLabel = (key: string, inserts = {}): string => {
   if (process.env.REACT_APP_ENV !== 'production' && I18n.t(key, inserts) === '') {
@@ -10,12 +10,12 @@ const getLabel = (key: string, inserts = {}): string => {
 };
 
 I18n.fallbacks = true;
-I18n.locale = 'nl';
+I18n.locale = 'en';
 I18n.missingTranslation = translation => `[[${translation}]]`;
 
 // Make translations object with all the labels
 const translations = {
-  nl,
+  en,
 };
 
 I18n.translations = translations;

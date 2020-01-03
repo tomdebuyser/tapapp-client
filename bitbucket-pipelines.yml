@@ -11,13 +11,21 @@ installDependencies: &installDependencies
     caches:
       - node
 
-format: &format
+build: &build
   step:
-    name: Format
+    name: Build project
     caches:
       - node
     script:
-      - yarn format
+      - yarn build
+
+format: &format
+  step:
+    name: Check for formatting issues
+    caches:
+      - node
+    script:
+      - yarn format:check
 
 lint: &lint
   step:
@@ -42,3 +50,27 @@ pipelines:
       - <<: *format
       - <<: *lint
       - <<: *runTests
+  branches:
+    develop:
+      - <<: *installDependencies
+      - <<: *build
+      - <<: *format
+      - <<: *lint
+      - <<: *runTests
+      - step:
+          name: Deploy to development
+          deployment: test
+          script:
+            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_DEVELOP.git HEAD:master
+    release/**:
+      - <<: *installDependencies
+      - <<: *build
+      - <<: *format
+      - <<: *lint
+      - <<: *runTests
+      - step:
+          name: Deploy to staging
+          deployment: staging
+          trigger: manual
+          script:
+            - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_STAGING.git HEAD:master
