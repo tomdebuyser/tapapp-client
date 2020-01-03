@@ -4,6 +4,7 @@
   },
   "USERS": {
     "TITLE": "Users",
-    "EMAIL": "Email"
+    "EMAIL": "Email",
+    "EMPTY": "No users found"
   }
 }
