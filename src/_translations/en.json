@@ -1,5 +1,9 @@
 {
   "NAVIGATION": {
     "USERS": "Users"
+  },
+  "USERS": {
+    "TITLE": "Users",
+    "EMAIL": "Email"
   }
 }
