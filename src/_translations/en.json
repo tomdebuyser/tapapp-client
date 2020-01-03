@@ -1,4 +1,5 @@
 {
-  "SILVERNEXT": "Silvernext",
-  "USERS": "Users"
+  "NAVIGATION": {
+    "USERS": "Users"
+  }
 }
