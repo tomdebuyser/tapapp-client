@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Menu } from './_shared';
 import Users from './users/Users';
 import './App.scss';
@@ -10,6 +10,7 @@ const App: React.FC = () => {
       <Menu />
       <Switch>
         <Route path="/users" component={Users} />
+        <Redirect to={'/users'} />
       </Switch>
     </div>
   );
