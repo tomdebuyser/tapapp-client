@@ -36,7 +36,7 @@ const Users: FC = () => {
 
   useEffect(() => {
     dispatch(new usersActions.GetUsers());
-    //eslint-ignore react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
