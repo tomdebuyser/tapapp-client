@@ -10,6 +10,9 @@
     "TITLE": "Users",
     "EMAIL": "Email",
     "EMPTY": "No users found",
-    "CREATE_USER": "Create user"
+    "CREATE_USER": "Create user",
+    "CREATED_AT": "Created at",
+    "UPDATED_AT": "Updated at",
+    "STATE": "State"
   }
 }

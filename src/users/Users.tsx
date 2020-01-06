@@ -4,29 +4,44 @@ import { Button as SemanticButton } from 'semantic-ui-react';
 import { Table, Icon } from '../_shared';
 import { translations } from '../_translations';
 import { usersSelectors } from '../_store/selectors';
+import { usersActions } from '../_store/actions';
 import useModal from '../_hooks/useModal';
-import { IUser } from './_models/User';
-import { GetUsersAction } from './_store/actions';
 import CreateUserModal from './modals/CreateUserModal';
+import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
+import { IUser } from './_models/User';
 import './users.scss';
 
-const renderBodyRow = ({ email }: IUser) => ({
-  key: email,
-  cells: [email],
-});
+const renderHeader = () => (
+  <Table.Row>
+    <Table.HeaderCell>{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
+    <Table.HeaderCell>{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
+    <Table.HeaderCell>{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
+    <Table.HeaderCell>{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
+  </Table.Row>
+);
+
+const renderBody = users => {
+  return users.map((user: IUser) => (
+    <Table.Row key={user.email}>
+      <Table.Cell>{user.email}</Table.Cell>
+      <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
+      <Table.Cell>{formatDate(dateFromISOString(user.updatedAt))}</Table.Cell>
+      <Table.Cell>{user.state}</Table.Cell>
+    </Table.Row>
+  ));
+};
 
 const Users: FC = () => {
-  const data = useSelector(usersSelectors.users);
+  const users = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isLoading);
   const [renderCreateUserModal, showCreateUserModal] = useModal(modalProps => <CreateUserModal {...modalProps} />);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(new GetUsersAction());
-  }, [dispatch]);
-
-  const headerRow = [translations.getLabel('USERS.EMAIL')];
+    dispatch(new usersActions.GetUsers());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="users">
@@ -38,10 +53,11 @@ const Users: FC = () => {
         </SemanticButton>
       </div>
       <Table
-        headerRow={headerRow}
-        renderBodyRow={renderBodyRow}
-        data={data}
+        renderHeader={renderHeader}
+        renderBody={renderBody}
+        data={users}
         isLoading={isLoading}
+        columnCount={4}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
       />
       {renderCreateUserModal()}

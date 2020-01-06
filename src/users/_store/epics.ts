@@ -1,15 +1,15 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
 import { map, catchError, exhaustMap } from 'rxjs/operators';
+import { UsersActionType, GetUsersSuccess, GetUsersError } from '../_store/actions';
 import * as usersApi from './api';
-import { ActionType, GetUsersSuccessAction, GetUsersErrorAction } from './actions';
 
 export const GetUsersEpic$: Epic = action$ =>
-  action$.ofType(ActionType.GetUsers).pipe(
+  action$.ofType(UsersActionType.GetUsers).pipe(
     exhaustMap(() =>
       from(usersApi.getUsers()).pipe(
-        map(data => new GetUsersSuccessAction({ data })),
-        catchError(error => of(new GetUsersErrorAction({ error }))),
+        map(data => new GetUsersSuccess({ data })),
+        catchError(error => of(new GetUsersError({ error }))),
       ),
     ),
   );

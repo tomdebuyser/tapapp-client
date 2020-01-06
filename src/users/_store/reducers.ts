@@ -1,6 +1,6 @@
 import { IUser } from '../_models/User';
 import { ApiError } from '../../_http';
-import { Actions, ActionType } from './actions';
+import { UsersAction, UsersActionType } from '../_store/actions';
 
 export interface UsersState {
   users?: IUser[];
@@ -12,21 +12,21 @@ const initialState: UsersState = {
   isLoading: false,
 };
 
-export default function reducer(state = initialState, action: Actions): UsersState {
+export default function reducer(state = initialState, action: UsersAction): UsersState {
   switch (action.type) {
-    case ActionType.GetUsers:
+    case UsersActionType.GetUsers:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
-    case ActionType.GetUsersSuccess:
+    case UsersActionType.GetUsersSuccess:
       return {
         ...state,
         isLoading: false,
         users: action.payload.data,
       };
-    case ActionType.GetUsersError:
+    case UsersActionType.GetUsersError:
       return {
         ...state,
         isLoading: false,
