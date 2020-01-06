@@ -1,7 +1,7 @@
 import { build, fake, sequence, oneOf } from 'test-data-bot';
-import { UserState } from '../users/_models/User';
+import { UserState, IUser } from '../users/_models/User';
 
-export const userBuilder = build('User').fields({
+export const userBuilder: () => IUser = build('User').fields({
   id: sequence(x => `user-${x}`),
   email: fake(f => f.internet.email()),
   createdAt: fake(f => f.date.past().toISOString()),
