@@ -6,18 +6,26 @@ interface Props {
   renderHeader: () => ReactElement;
   renderBody: (data: object[]) => ReactElement;
   data?: object[];
+  columnCount: number;
   isLoading: boolean;
   emptyLabel: string;
 }
 
-const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({ renderHeader, renderBody, data = [], isLoading, emptyLabel }) => {
+const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
+  renderHeader,
+  renderBody,
+  data = [],
+  columnCount,
+  isLoading,
+  emptyLabel,
+}) => {
   return (
-    <SemanticTable celled>
+    <SemanticTable celled fixed>
       <SemanticTable.Header>{renderHeader()}</SemanticTable.Header>
       <SemanticTable.Body>
         {isLoading ? (
           <SemanticTable.Row>
-            <SemanticTable.Cell>
+            <SemanticTable.Cell colSpan={columnCount}>
               <Loader active inline="centered" />
             </SemanticTable.Cell>
           </SemanticTable.Row>
@@ -25,7 +33,9 @@ const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({ re
           renderBody(data)
         ) : (
           <SemanticTable.Row>
-            <SemanticTable.Cell className="table-empty">{emptyLabel}</SemanticTable.Cell>
+            <SemanticTable.Cell className="table-empty" colSpan={columnCount}>
+              {emptyLabel}
+            </SemanticTable.Cell>
           </SemanticTable.Row>
         )}
       </SemanticTable.Body>

@@ -5,6 +5,9 @@
   "USERS": {
     "TITLE": "Users",
     "EMAIL": "Email",
-    "EMPTY": "No users found"
+    "EMPTY": "No users found",
+    "CREATED_AT": "Created at",
+    "UPDATED_AT": "Updated at",
+    "STATE": "State"
   }
 }
