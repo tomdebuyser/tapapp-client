@@ -7,10 +7,19 @@ import { usersActions } from '../_store/actions';
 import { IUser } from './_models/User';
 import './users.scss';
 
-const renderBodyRow = ({ email }: IUser) => ({
-  key: email,
-  cells: [email],
-});
+const renderHeader = () => (
+  <Table.Row>
+    <Table.HeaderCell>{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
+  </Table.Row>
+);
+
+const renderBody = users => {
+  return users.map((user: IUser) => (
+    <Table.Row key={user.email}>
+      <Table.Cell>{user.email}</Table.Cell>
+    </Table.Row>
+  ));
+};
 
 const Users: FC = () => {
   const data = useSelector(usersSelectors.users);
@@ -22,14 +31,12 @@ const Users: FC = () => {
     dispatch(new usersActions.GetUsers());
   }, []);
 
-  const headerRow = [translations.getLabel('USERS.EMAIL')];
-
   return (
     <main className="users">
       <h1>{translations.getLabel('USERS.TITLE')}</h1>
       <Table
-        headerRow={headerRow}
-        renderBodyRow={renderBodyRow}
+        renderHeader={renderHeader}
+        renderBody={renderBody}
         data={data}
         isLoading={isLoading}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
