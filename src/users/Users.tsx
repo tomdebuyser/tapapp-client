@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react';
-import './users.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table } from '../_shared';
 import { translations } from '../_translations';
+import { Table } from '../_shared';
 import { usersSelectors } from '../_store/selectors';
+import { usersActions } from '../_store/actions';
 import { IUser } from './_models/User';
-import { GetUsersAction } from './_store/actions';
+import './users.scss';
 
 const renderBodyRow = ({ email }: IUser) => ({
   key: email,
@@ -19,8 +19,8 @@ const Users: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(new GetUsersAction());
-  }, [dispatch]);
+    dispatch(new usersActions.GetUsers());
+  }, []);
 
   const headerRow = [translations.getLabel('USERS.EMAIL')];
 
