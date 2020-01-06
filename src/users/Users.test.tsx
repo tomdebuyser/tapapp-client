@@ -2,12 +2,13 @@ import React from 'react';
 import { wait } from '@testing-library/react';
 import { renderWithRedux } from '../_utils/testHelpers';
 import { translations } from '../_translations';
+import { userBuilder } from '../_mocks/users';
 import Users from './Users';
 import { getUsers } from './_store/api';
 
 jest.mock('./_store/api');
 
-const dummyUser = { email: 'test@icapps.com' };
+const fakeUser = userBuilder();
 
 describe('Users component', () => {
   beforeEach(() => {
@@ -15,7 +16,7 @@ describe('Users component', () => {
   });
 
   it('Should show a table of all users', async () => {
-    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve([dummyUser])));
+    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve([fakeUser])));
 
     const { getByText } = renderWithRedux(<Users />);
 
@@ -23,7 +24,7 @@ describe('Users component', () => {
 
     await wait(() => {
       const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
-      const cellValue = getByText(dummyUser.email);
+      const cellValue = getByText(fakeUser.email);
 
       expect(emailColumnHeader).toBeInTheDocument();
       expect(cellValue).toBeInTheDocument();
@@ -41,7 +42,7 @@ describe('Users component', () => {
 
     await wait(() => {
       const emptyText = getByText(translations.getLabel('USERS.EMPTY'));
-      const cellValue = queryByText(dummyUser.email);
+      const cellValue = queryByText(fakeUser.email);
 
       expect(cellValue).toBeNull();
       expect(emptyText).toBeInTheDocument();
