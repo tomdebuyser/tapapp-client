@@ -1,11 +1,14 @@
 import React, { FC, useEffect } from 'react';
-import './users.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table } from '../_shared';
+import { Button as SemanticButton } from 'semantic-ui-react';
+import { Table, Icon } from '../_shared';
 import { translations } from '../_translations';
 import { usersSelectors } from '../_store/selectors';
+import useModal from '../_hooks/useModal';
 import { IUser } from './_models/User';
 import { GetUsersAction } from './_store/actions';
+import CreateUserModal from './modals/CreateUserModal';
+import './users.scss';
 
 const renderBodyRow = ({ email }: IUser) => ({
   key: email,
@@ -15,6 +18,7 @@ const renderBodyRow = ({ email }: IUser) => ({
 const Users: FC = () => {
   const data = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isLoading);
+  const [renderCreateUserModal, showCreateUserModal] = useModal(modalProps => <CreateUserModal {...modalProps} />);
 
   const dispatch = useDispatch();
 
@@ -26,7 +30,13 @@ const Users: FC = () => {
 
   return (
     <main className="users">
-      <h1>{translations.getLabel('USERS.TITLE')}</h1>
+      <div className="header">
+        <h1>{translations.getLabel('USERS.TITLE')}</h1>
+        <SemanticButton onClick={showCreateUserModal} primary>
+          <Icon name="SvgAdd" size={1.6} />
+          {translations.getLabel('USERS.CREATE_USER')}
+        </SemanticButton>
+      </div>
       <Table
         headerRow={headerRow}
         renderBodyRow={renderBodyRow}
@@ -34,6 +44,7 @@ const Users: FC = () => {
         isLoading={isLoading}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
       />
+      {renderCreateUserModal()}
     </main>
   );
 };

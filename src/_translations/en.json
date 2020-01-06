@@ -1,10 +1,15 @@
 {
+  "BUTTONS": {
+    "CANCEL": "Cancel",
+    "CREATE": "Create"
+  },
   "NAVIGATION": {
     "USERS": "Users"
   },
   "USERS": {
     "TITLE": "Users",
     "EMAIL": "Email",
-    "EMPTY": "No users found"
+    "EMPTY": "No users found",
+    "CREATE_USER": "Create user"
   }
 }
