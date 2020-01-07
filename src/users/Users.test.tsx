@@ -10,6 +10,11 @@ import { getUsers } from './_store/api';
 jest.mock('./_store/api');
 
 const fakeUser = userBuilder();
+const dummyMeta = {
+  count: 1,
+  totalCount: 1,
+  offset: 0,
+};
 
 describe('Users component', () => {
   beforeEach(() => {
@@ -17,7 +22,7 @@ describe('Users component', () => {
   });
 
   it('Should show a table of all users', async () => {
-    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve([fakeUser])));
+    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [fakeUser], meta: dummyMeta })));
 
     const { getByText } = renderWithRedux(<Users />);
 
@@ -45,7 +50,7 @@ describe('Users component', () => {
   });
 
   it('Should display a message when there are no users', async () => {
-    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve([])));
+    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
 
     const { queryByText, getByText } = renderWithRedux(<Users />);
     const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
