@@ -10,7 +10,7 @@ const App: React.FC = () => {
       <Menu />
       <Switch>
         <Route path="/users" component={Users} />
-        <Redirect to={'/users'} />
+        <Redirect to="/users" />
       </Switch>
     </div>
   );
