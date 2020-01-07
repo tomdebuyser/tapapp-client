@@ -7,12 +7,14 @@
     "USERS": "Users"
   },
   "USERS": {
-    "TITLE": "Users",
-    "EMAIL": "Email",
-    "EMPTY": "No users found",
     "CREATE_USER": "Create user",
     "CREATED_AT": "Created at",
-    "UPDATED_AT": "Updated at",
-    "STATE": "State"
+    "EMAIL": "Email",
+    "EMPTY": "No users found",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "STATE": "State",
+    "TITLE": "Users",
+    "UPDATED_AT": "Updated at"
   }
 }
