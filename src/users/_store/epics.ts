@@ -8,7 +8,7 @@ export const GetUsersEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.GetUsers).pipe(
     exhaustMap(() =>
       from(usersApi.getUsers()).pipe(
-        map(data => new GetUsersSuccess({ data })),
+        map(({ data, meta }) => new GetUsersSuccess({ data, meta })),
         catchError(error => of(new GetUsersError({ error }))),
       ),
     ),
