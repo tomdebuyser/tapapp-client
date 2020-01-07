@@ -24,7 +24,17 @@ export interface InputFieldProps {
   value?: string;
 }
 
-const InputField: FC<InputFieldProps> = ({ autoFocus, className, label, labelIcon, error, errorMessage, onChange, normalize, ...props }) => {
+const InputField: FC<InputFieldProps> = ({
+  autoFocus,
+  className,
+  label,
+  labelIcon,
+  error,
+  errorMessage,
+  onChange,
+  normalize,
+  ...props
+}) => {
   const inputWrapperRef = React.createRef<HTMLDivElement>();
   const { showError, setDirty } = useInputError(error);
 

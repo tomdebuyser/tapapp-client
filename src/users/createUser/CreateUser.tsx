@@ -20,8 +20,20 @@ const CreateUser: FC = () => {
       <form onSubmit={submitUser}>
         <InputField type="string" name="email" value={email} onChange={setEmail} label={translations.getLabel('USERS.EMAIL')} />
         <div role="group">
-          <InputField type="string" name="firstName" value={firstName} onChange={setFirstName} label={translations.getLabel('USERS.FIRST_NAME')} />
-          <InputField type="string" name="lastName" value={lastName} onChange={setLastName} label={translations.getLabel('USERS.LAST_NAME')} />
+          <InputField
+            type="string"
+            name="firstName"
+            value={firstName}
+            onChange={setFirstName}
+            label={translations.getLabel('USERS.FIRST_NAME')}
+          />
+          <InputField
+            type="string"
+            name="lastName"
+            value={lastName}
+            onChange={setLastName}
+            label={translations.getLabel('USERS.LAST_NAME')}
+          />
         </div>
         <div className="actions">
           <Button primary type="submit">
