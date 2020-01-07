@@ -1,13 +1,20 @@
 {
+  "BUTTONS": {
+    "CANCEL": "Cancel",
+    "CREATE": "Create"
+  },
   "NAVIGATION": {
     "USERS": "Users"
   },
   "USERS": {
-    "TITLE": "Users",
+    "CREATE_USER": "Create user",
+    "CREATED_AT": "Created at",
     "EMAIL": "Email",
     "EMPTY": "No users found",
-    "CREATED_AT": "Created at",
-    "UPDATED_AT": "Updated at",
-    "STATE": "State"
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "STATE": "State",
+    "TITLE": "Users",
+    "UPDATED_AT": "Updated at"
   }
 }

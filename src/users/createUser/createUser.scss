@@ -1,0 +1,29 @@
+.create-user {
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+    .ui.input {
+      margin-bottom: 2rem;
+    }
+
+    div[role='group'] {
+      display: flex;
+      .input-wrapper:first-of-type {
+        margin-right: 2rem;
+      }
+    }
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+    }
+  }
+}

@@ -10,7 +10,10 @@ import { createEpicMiddleware } from 'redux-observable';
 import createRootReducer from '../_store/rootReducer';
 import rootEpic from '../_store/rootEpic';
 
-function renderWithRouter(ui: ReactElement, { route = '/', history = createMemoryHistory({ initialEntries: [route] }), ...renderOptions } = {}) {
+function renderWithRouter(
+  ui: ReactElement,
+  { route = '/', history = createMemoryHistory({ initialEntries: [route] }), ...renderOptions } = {},
+) {
   function Wrapper({ children }: { children: ReactNode }) {
     return <Router history={history}>{children}</Router>;
   }

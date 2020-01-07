@@ -1,7 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container } from 'semantic-ui-react';
+import { Table, Icon, Button } from '../_shared';
 import { translations } from '../_translations';
-import { Table } from '../_shared';
 import { usersSelectors } from '../_store/selectors';
 import { usersActions } from '../_store/actions';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
@@ -40,8 +41,14 @@ const Users: FC = () => {
   }, []);
 
   return (
-    <main className="users">
-      <h1>{translations.getLabel('USERS.TITLE')}</h1>
+    <Container as="main" className="users">
+      <div className="header">
+        <h1>{translations.getLabel('USERS.TITLE')}</h1>
+        <Button isTextLink href="/users/create" primary>
+          <Icon name="SvgAdd" size={1.6} />
+          {translations.getLabel('USERS.CREATE_USER')}
+        </Button>
+      </div>
       <Table
         renderHeader={renderHeader}
         renderBody={renderBody}
@@ -50,7 +57,7 @@ const Users: FC = () => {
         columnCount={4}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
       />
-    </main>
+    </Container>
   );
 };
 
