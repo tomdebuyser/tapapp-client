@@ -58,9 +58,9 @@ class HttpClient {
         statusCode: data.statusCode,
         validationErrors: Array.isArray(data.message)
           ? data.message.reduce(
-              (acc: Record<string, ValidationError>, { property, ...validationError }) => ({ ...acc, [property]: validationError }),
-              {},
-            )
+            (acc: Record<string, ValidationError>, { property, ...validationError }) => ({ ...acc, [property]: validationError }),
+            {},
+          )
           : null,
       };
     }
@@ -83,8 +83,12 @@ class HttpClient {
   }
 
   static async get<T>(route: string, params: Params = {}, headers: Headers = {}, responseType: ResponseType = 'json'): Promise<T> {
-    const result = await this.getRaw<T>(route, params, headers, responseType);
-    return result.data;
+    try {
+      const result = await this.getRaw<T>(route, params, headers, responseType);
+      return result.data;
+    } catch (error) {
+      throw this.createApiError(error);
+    }
   }
 
   static async put<T>(route: string, body: object = {}, headers: Headers = {}, params: Params = {}): Promise<T> {
