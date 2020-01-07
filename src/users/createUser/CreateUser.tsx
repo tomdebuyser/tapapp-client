@@ -11,7 +11,6 @@ const CreateUser: FC = () => {
   const [lastName, setLastName] = useState('');
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
-    console.log({ email, firstName, lastName });
   };
 
   return (
