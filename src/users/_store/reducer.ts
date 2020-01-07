@@ -21,6 +21,7 @@ export default function reducer(state = initialState, action: UsersAction): User
         ...state,
         isLoading: true,
         error: null,
+        metadata: null,
       };
     case UsersActionType.GetUsersSuccess:
       return {

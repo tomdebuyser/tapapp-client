@@ -58,9 +58,9 @@ class HttpClient {
         statusCode: data.statusCode,
         validationErrors: Array.isArray(data.message)
           ? data.message.reduce(
-            (acc: Record<string, ValidationError>, { property, ...validationError }) => ({ ...acc, [property]: validationError }),
-            {},
-          )
+              (acc: Record<string, ValidationError>, { property, ...validationError }) => ({ ...acc, [property]: validationError }),
+              {},
+            )
           : null,
       };
     }
