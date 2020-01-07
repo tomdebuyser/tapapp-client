@@ -4,16 +4,16 @@ import { renderWithRedux } from '../_utils/testHelpers';
 import { translations } from '../_translations';
 import { userBuilder } from '../_mocks/users';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
+import { HttpMetadataPagingResponse } from '../_http/HttpMetadata';
 import Users from './Users';
 import { getUsers } from './_store/api';
 
 jest.mock('./_store/api');
 
 const fakeUser = userBuilder();
-const dummyMeta = {
+const dummyMeta: HttpMetadataPagingResponse = {
   count: 1,
   totalCount: 1,
-  offset: 0,
 };
 
 describe('Users component', () => {
