@@ -5,8 +5,6 @@ import { Table, Icon } from '../_shared';
 import { translations } from '../_translations';
 import { usersSelectors } from '../_store/selectors';
 import { usersActions } from '../_store/actions';
-import useModal from '../_hooks/useModal';
-import CreateUserModal from './modals/CreateUserModal';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import { IUser } from './_models/User';
 import './users.scss';
@@ -34,7 +32,6 @@ const renderBody = users => {
 const Users: FC = () => {
   const users = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isLoading);
-  const [renderCreateUserModal, showCreateUserModal] = useModal(modalProps => <CreateUserModal {...modalProps} />);
 
   const dispatch = useDispatch();
 
@@ -47,7 +44,7 @@ const Users: FC = () => {
     <main className="users">
       <div className="header">
         <h1>{translations.getLabel('USERS.TITLE')}</h1>
-        <SemanticButton onClick={showCreateUserModal} primary>
+        <SemanticButton onClick={() => {}} primary>
           <Icon name="SvgAdd" size={1.6} />
           {translations.getLabel('USERS.CREATE_USER')}
         </SemanticButton>
@@ -60,7 +57,6 @@ const Users: FC = () => {
         columnCount={4}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
       />
-      {renderCreateUserModal()}
     </main>
   );
 };

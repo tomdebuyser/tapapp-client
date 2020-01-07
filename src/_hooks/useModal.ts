@@ -21,10 +21,7 @@ function useModal(render: (props: { hideModal: () => void }) => ReactElement, on
     return null;
   }, [isVisible, render, hideModal]);
 
-  return [
-    renderModal,
-    showModal,
-  ];
+  return [renderModal, showModal];
 }
 
 export default useModal;

@@ -2,13 +2,13 @@ import React, { FC, useState, ChangeEvent } from 'react';
 import { Button as SemanticButton, Input } from 'semantic-ui-react';
 import { Modal } from '../../_shared';
 import { translations } from '../../_translations';
-import './createUserModal.scss';
+import './createUser.scss';
 
 interface Props {
   hideModal: () => void;
 }
 
-const CreateUserModal: FC<Props> = ({ hideModal }) => {
+const CreateUser: FC<Props> = ({ hideModal }) => {
   const [email, setEmail] = useState('');
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
@@ -34,4 +34,4 @@ const CreateUserModal: FC<Props> = ({ hideModal }) => {
   );
 };
 
-export default CreateUserModal;
+export default CreateUser;
