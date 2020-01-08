@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
@@ -9,6 +9,7 @@ import { usersSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { IUserForm } from '../_models/User';
+import useForm from '../../_hooks/useForm';
 
 const initialForm: IUserForm = {
   email: '',
@@ -20,14 +21,10 @@ const CreateUser: FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(usersSelectors.isCreateUserLoading);
   const error = useSelector(usersSelectors.errorCreateUser);
-  const [userForm, setUserForm] = useState(initialForm);
+  const { form, setFormAttribute } = useForm(initialForm);
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
-    dispatch(new usersActions.CreateUser(userForm));
-  };
-
-  const setFormAttribute = (value: string, name: string) => {
-    setUserForm({ ...userForm, [name]: value });
+    dispatch(new usersActions.CreateUser(form));
   };
 
   return (
@@ -37,7 +34,7 @@ const CreateUser: FC = () => {
         <InputField
           type="string"
           name="email"
-          value={userForm.email}
+          value={form.email}
           onChange={setFormAttribute}
           label={translations.getLabel('USERS.EMAIL')}
         />
@@ -45,14 +42,14 @@ const CreateUser: FC = () => {
           <InputField
             type="string"
             name="firstName"
-            value={userForm.firstName}
+            value={form.firstName}
             onChange={setFormAttribute}
             label={translations.getLabel('USERS.FIRST_NAME')}
           />
           <InputField
             type="string"
             name="lastName"
-            value={userForm.lastName}
+            value={form.lastName}
             onChange={setFormAttribute}
             label={translations.getLabel('USERS.LAST_NAME')}
           />
