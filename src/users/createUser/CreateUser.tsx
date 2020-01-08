@@ -8,43 +8,52 @@ import './createUser.scss';
 import { usersSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
+import { IUserForm } from '../_models/User';
+
+const initialForm: IUserForm = {
+  email: '',
+  firstName: '',
+  lastName: '',
+};
 
 const CreateUser: FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(usersSelectors.isCreateUserLoading);
   const error = useSelector(usersSelectors.errorCreateUser);
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [userForm, setUserForm] = useState(initialForm);
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
-    dispatch(
-      new usersActions.CreateUser({
-        email,
-        firstName,
-        lastName,
-      }),
-    );
+    dispatch(new usersActions.CreateUser(userForm));
+  };
+
+  const setFormAttribute = (value: string, name: string) => {
+    setUserForm({ ...userForm, [name]: value });
   };
 
   return (
     <Container as="main" className="create-user">
       <h1>{translations.getLabel('USERS.CREATE_USER')}</h1>
       <form onSubmit={submitUser}>
-        <InputField type="string" name="email" value={email} onChange={setEmail} label={translations.getLabel('USERS.EMAIL')} />
+        <InputField
+          type="string"
+          name="email"
+          value={userForm.email}
+          onChange={setFormAttribute}
+          label={translations.getLabel('USERS.EMAIL')}
+        />
         <div role="group">
           <InputField
             type="string"
             name="firstName"
-            value={firstName}
-            onChange={setFirstName}
+            value={userForm.firstName}
+            onChange={setFormAttribute}
             label={translations.getLabel('USERS.FIRST_NAME')}
           />
           <InputField
             type="string"
             name="lastName"
-            value={lastName}
-            onChange={setLastName}
+            value={userForm.lastName}
+            onChange={setFormAttribute}
             label={translations.getLabel('USERS.LAST_NAME')}
           />
         </div>
