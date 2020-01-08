@@ -1,6 +1,6 @@
 import React, { ReactNode, ReactElement } from 'react';
 import { createMemoryHistory, History } from 'history';
-import { render } from '@testing-library/react';
+import { render as tlRender } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, Store } from 'redux';
@@ -18,7 +18,7 @@ function renderWithRouter(
     return <Router history={history}>{children}</Router>;
   }
   return {
-    ...render(ui, {
+    ...tlRender(ui, {
       wrapper: Wrapper,
       ...renderOptions,
     }),
@@ -48,7 +48,7 @@ function renderWithRedux(ui: ReactElement, { initialState = {}, store = configur
     return <Provider store={store}>{children}</Provider>;
   }
   return {
-    ...render(ui, {
+    ...tlRender(ui, {
       wrapper: Wrapper,
       ...renderOptions,
     }),
@@ -56,4 +56,25 @@ function renderWithRedux(ui: ReactElement, { initialState = {}, store = configur
   };
 }
 
-export { renderWithRouter, renderWithRedux };
+function render(
+  ui: ReactElement,
+  { initialState = {}, store = configureStore(initialState) } = {},
+  { route = '/', history = createMemoryHistory({ initialEntries: [route] }) } = {},
+) {
+  function Wrapper({ children }) {
+    return (
+      <Provider store={store}>
+        <Router history={history}>{children}</Router>
+      </Provider>
+    );
+  }
+  return {
+    ...tlRender(ui, {
+      wrapper: Wrapper,
+    }),
+    history,
+    store,
+  };
+}
+
+export { renderWithRouter, renderWithRedux, render };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { wait } from '@testing-library/react';
-import { renderWithRedux } from '../_utils/testHelpers';
+import { render } from '../_utils/testHelpers';
 import { translations } from '../_translations';
 import { userBuilder } from '../_mocks/users';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
@@ -24,7 +24,7 @@ describe('Users component', () => {
   it('Should show a table of all users', async () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [fakeUser], meta: dummyMeta })));
 
-    const { getByText } = renderWithRedux(<Users />);
+    const { getByText } = render(<Users />);
 
     await wait(() => {
       expect(getUsers).toHaveBeenCalledTimes(1);
@@ -61,7 +61,7 @@ describe('Users component', () => {
   it('Should display a message when there are no users', async () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
 
-    const { queryByText, getByText } = renderWithRedux(<Users />);
+    const { queryByText, getByText } = render(<Users />);
     const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
     const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
     const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
@@ -90,7 +90,7 @@ describe('Users component', () => {
 
   it('Should have a create user button', async () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
-    const { getByText } = renderWithRedux(<Users />);
+    const { getByText } = render(<Users />);
     const createUserButton = getByText(translations.getLabel('USERS.CREATE_USER'));
     expect(createUserButton).toBeInTheDocument();
   });
