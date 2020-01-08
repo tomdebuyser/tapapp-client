@@ -12,6 +12,8 @@ import './users.scss';
 const renderHeader = () => (
   <Table.Row>
     <Table.HeaderCell>{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
+    <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
+    <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
     <Table.HeaderCell>{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
     <Table.HeaderCell>{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
     <Table.HeaderCell>{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
@@ -22,6 +24,8 @@ const renderBody = users => {
   return users.map((user: IUser) => (
     <Table.Row key={user.email}>
       <Table.Cell>{user.email}</Table.Cell>
+      <Table.Cell>{user.firstName}</Table.Cell>
+      <Table.Cell>{user.lastName}</Table.Cell>
       <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
       <Table.Cell>{formatDate(dateFromISOString(user.updatedAt))}</Table.Cell>
       <Table.Cell>{user.state}</Table.Cell>
