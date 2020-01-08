@@ -11,7 +11,7 @@ import './users.scss';
 
 const renderHeader = () => (
   <Table.Row>
-    <Table.HeaderCell>{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
+    <Table.HeaderCell className="email-cell">{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
     <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
     <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
     <Table.HeaderCell>{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
@@ -23,7 +23,7 @@ const renderHeader = () => (
 const renderBody = users => {
   return users.map((user: IUser) => (
     <Table.Row key={user.email}>
-      <Table.Cell>{user.email}</Table.Cell>
+      <Table.Cell className="email-cell">{user.email}</Table.Cell>
       <Table.Cell>{user.firstName}</Table.Cell>
       <Table.Cell>{user.lastName}</Table.Cell>
       <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
@@ -58,7 +58,7 @@ const Users: FC = () => {
         renderBody={renderBody}
         data={users}
         isLoading={isLoading}
-        columnCount={4}
+        columnCount={6}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
       />
     </Container>

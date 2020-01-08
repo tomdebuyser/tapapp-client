@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Button as SemanticButton } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import './button.scss';
 
@@ -20,17 +21,11 @@ const noop = () => {};
 const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop, disabled, loading, href }) => {
   if (isTextLink) {
     return (
-      <SemanticButton
-        as="a"
-        href={href}
-        type={type}
-        primary={primary}
-        onClick={onClick}
-        disabled={disabled || loading}
-        loading={loading}
-      >
-        {children}
-      </SemanticButton>
+      <Link to={href}>
+        <SemanticButton primary={primary} disabled={disabled || loading} loading={loading}>
+          {children}
+        </SemanticButton>
+      </Link>
     );
   }
   return (

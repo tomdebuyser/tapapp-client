@@ -1,7 +1,7 @@
 import React from 'react';
 import user from '@testing-library/user-event';
 import { Simulate } from 'react-dom/test-utils';
-import { renderWithRedux } from '../../_utils/testHelpers';
+import { render } from '../../_utils/testHelpers';
 import { translations } from '../../_translations';
 import { createUser } from '../_store/api';
 import { userBuilder } from '../../_mocks/users';
@@ -14,7 +14,7 @@ describe('CreateUser component', () => {
     (createUser as jest.Mock).mockImplementation(() => new Promise(resolve => resolve()));
     const dummyUser = userBuilder();
 
-    const { getByLabelText, getByText } = renderWithRedux(<CreateUser />);
+    const { getByLabelText, getByText } = render(<CreateUser />);
 
     const emailInput = getByLabelText(translations.getLabel('USERS.EMAIL'));
     const firstNameInput = getByLabelText(translations.getLabel('USERS.FIRST_NAME'));
