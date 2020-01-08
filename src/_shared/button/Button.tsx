@@ -17,17 +17,25 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
-const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop, disabled, loading, href, ...props }) => {
+const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop, disabled, loading, href }) => {
   if (isTextLink) {
     return (
-      <SemanticButton as="a" href={href} type={type} primary={primary} onClick={onClick} disabled={disabled || loading} loading={loading}>
+      <SemanticButton
+        as="a"
+        href={href}
+        type={type}
+        primary={primary}
+        onClick={onClick}
+        disabled={disabled || loading}
+        loading={loading}
+      >
         {children}
       </SemanticButton>
     );
   }
   return (
     <SemanticButton type={type} primary={primary} onClick={onClick} disabled={disabled || loading} loading={loading}>
-      <div className="semantic-button-content">{children}</div>
+      {children}
     </SemanticButton>
   );
 };

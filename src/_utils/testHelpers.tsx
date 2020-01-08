@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactElement } from 'react';
-import { createMemoryHistory, History, createBrowserHistory } from 'history';
+import { createMemoryHistory, History } from 'history';
 import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -10,7 +10,10 @@ import { createEpicMiddleware } from 'redux-observable';
 import createRootReducer from '../_store/rootReducer';
 import rootEpic from '../_store/rootEpic';
 
-function renderWithRouter(ui: ReactElement, { route = '/', history = createMemoryHistory({ initialEntries: [route] }), ...renderOptions } = {}) {
+function renderWithRouter(
+  ui: ReactElement,
+  { route = '/', history = createMemoryHistory({ initialEntries: [route] }), ...renderOptions } = {},
+) {
   function Wrapper({ children }: { children: ReactNode }) {
     return <Router history={history}>{children}</Router>;
   }
@@ -40,7 +43,7 @@ function configureStore(initialState): Store {
   return store;
 }
 
-function renderWithRedux(ui, { initialState = {}, store = configureStore(initialState), ...renderOptions } = {}) {
+function renderWithRedux(ui: ReactElement, { initialState = {}, store = configureStore(initialState), ...renderOptions } = {}) {
   function Wrapper({ children }) {
     return <Provider store={store}>{children}</Provider>;
   }

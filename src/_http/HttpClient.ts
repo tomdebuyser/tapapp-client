@@ -38,7 +38,10 @@ class HttpClient {
   }
 
   static parseRequestPayload<T>(object: T): T {
-    return Object.keys(object).reduce((acc: T, key: string) => ({ ...acc, [key]: object[key] === '' ? null : object[key] }), {} as T);
+    return Object.keys(object).reduce(
+      (acc: T, key: string) => ({ ...acc, [key]: object[key] === '' ? null : object[key] }),
+      {} as T,
+    );
   }
 
   static getBasicHeaders(): Headers {
@@ -51,14 +54,18 @@ class HttpClient {
 
   static createApiError(error: AxiosError): ApiError {
     if (error.response) {
-      const data: { error?: string; message?: string | Array<ValidationError & { property: string }>; statusCode: HttpStatus } = error.response.data;
+      const data: { error?: string; message?: string | Array<ValidationError & { property: string }>; statusCode: HttpStatus } =
+        error.response.data;
       return {
         error: data.error,
         message: typeof data.message === 'string' ? data.message : null,
         statusCode: data.statusCode,
         validationErrors: Array.isArray(data.message)
           ? data.message.reduce(
-              (acc: Record<string, ValidationError>, { property, ...validationError }) => ({ ...acc, [property]: validationError }),
+              (acc: Record<string, ValidationError>, { property, ...validationError }) => ({
+                ...acc,
+                [property]: validationError,
+              }),
               {},
             )
           : null,
@@ -70,7 +77,12 @@ class HttpClient {
     };
   }
 
-  static async getRaw<T>(route: string, params: Params = {}, headers: Headers = {}, responseType: ResponseType = 'json'): Promise<AxiosResponse<T>> {
+  static async getRaw<T>(
+    route: string,
+    params: Params = {},
+    headers: Headers = {},
+    responseType: ResponseType = 'json',
+  ): Promise<AxiosResponse<T>> {
     try {
       return await axios.get<T>(this.getUrlWithParams(route, params), {
         headers: { ...this.getBasicHeaders(), ...headers },
@@ -82,7 +94,12 @@ class HttpClient {
     }
   }
 
-  static async get<T>(route: string, params: Params = {}, headers: Headers = {}, responseType: ResponseType = 'json'): Promise<T> {
+  static async get<T>(
+    route: string,
+    params: Params = {},
+    headers: Headers = {},
+    responseType: ResponseType = 'json',
+  ): Promise<T> {
     try {
       const result = await this.getRaw<T>(route, params, headers, responseType);
       return result.data;
@@ -105,7 +122,10 @@ class HttpClient {
 
   static async patch<T>(route: string, body: object = {}, headers: Headers = {}): Promise<T> {
     try {
-      const result = await axios.patch<T>(this.getUrl(route), body, { headers: { ...this.getBasicHeaders(), ...headers }, withCredentials: true });
+      const result = await axios.patch<T>(this.getUrl(route), body, {
+        headers: { ...this.getBasicHeaders(), ...headers },
+        withCredentials: true,
+      });
       return result.data;
     } catch (error) {
       throw this.createApiError(error);
@@ -114,7 +134,10 @@ class HttpClient {
 
   static async post<T>(route: string, body: object = {}, headers: Headers = {}): Promise<T> {
     try {
-      const result = await axios.post<T>(this.getUrl(route), body, { headers: { ...this.getBasicHeaders(), ...headers }, withCredentials: true });
+      const result = await axios.post<T>(this.getUrl(route), body, {
+        headers: { ...this.getBasicHeaders(), ...headers },
+        withCredentials: true,
+      });
       return result.data;
     } catch (error) {
       throw this.createApiError(error);
@@ -123,7 +146,10 @@ class HttpClient {
 
   static async delete<T>(route: string, headers: Headers = {}): Promise<T> {
     try {
-      const result = await axios.delete(this.getUrl(route), { headers: { ...this.getBasicHeaders(), ...headers }, withCredentials: true });
+      const result = await axios.delete(this.getUrl(route), {
+        headers: { ...this.getBasicHeaders(), ...headers },
+        withCredentials: true,
+      });
       return result.data || true;
     } catch (error) {
       throw this.createApiError(error);

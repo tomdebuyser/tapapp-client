@@ -79,4 +79,11 @@ describe('Users component', () => {
       expect(emptyText).toBeInTheDocument();
     });
   });
+
+  it('Should have a create user button', async () => {
+    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
+    const { getByText } = renderWithRedux(<Users />);
+    const createUserButton = getByText(translations.getLabel('USERS.CREATE_USER'));
+    expect(createUserButton).toBeInTheDocument();
+  });
 });

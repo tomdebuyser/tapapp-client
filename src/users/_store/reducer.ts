@@ -8,10 +8,13 @@ export interface UsersState {
   metadata?: HttpMetadataPagingResponse;
   isLoading: boolean;
   error?: ApiError;
+  isCreateUserLoading: boolean;
+  errorCreateUser?: ApiError;
 }
 
 const initialState: UsersState = {
   isLoading: false,
+  isCreateUserLoading: false,
 };
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
@@ -35,6 +38,23 @@ export default function reducer(state = initialState, action: UsersAction): User
         ...state,
         isLoading: false,
         error: action.payload.error,
+      };
+    case UsersActionType.CreateUser:
+      return {
+        ...state,
+        isCreateUserLoading: true,
+        errorCreateUser: null,
+      };
+    case UsersActionType.CreateUserSuccess:
+      return {
+        ...state,
+        isCreateUserLoading: false,
+      };
+    case UsersActionType.CreateUserError:
+      return {
+        ...state,
+        isCreateUserLoading: false,
+        errorCreateUser: action.payload.error,
       };
     default:
       return state;

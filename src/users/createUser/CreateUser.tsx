@@ -1,17 +1,24 @@
 import React, { FC, useState } from 'react';
 import { Container } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
-import './createUser.scss';
 import { Button } from '../../_shared';
 import InputField from '../../_shared/inputField/InputField';
+import './createUser.scss';
+import { usersSelectors } from '../../_store/selectors';
+import { usersActions } from '../../_store/actions';
+import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 
 const CreateUser: FC = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(usersSelectors.isCreateUserLoading);
+  const error = useSelector(usersSelectors.errorCreateUser);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
-    console.log({ email, firstName, lastName });
+    dispatch(new usersActions.CreateUser({ email, firstName, lastName }));
   };
 
   return (
@@ -20,11 +27,24 @@ const CreateUser: FC = () => {
       <form onSubmit={submitUser}>
         <InputField type="string" name="email" value={email} onChange={setEmail} label={translations.getLabel('USERS.EMAIL')} />
         <div role="group">
-          <InputField type="string" name="firstName" value={firstName} onChange={setFirstName} label={translations.getLabel('USERS.FIRST_NAME')} />
-          <InputField type="string" name="lastName" value={lastName} onChange={setLastName} label={translations.getLabel('USERS.LAST_NAME')} />
+          <InputField
+            type="string"
+            name="firstName"
+            value={firstName}
+            onChange={setFirstName}
+            label={translations.getLabel('USERS.FIRST_NAME')}
+          />
+          <InputField
+            type="string"
+            name="lastName"
+            value={lastName}
+            onChange={setLastName}
+            label={translations.getLabel('USERS.LAST_NAME')}
+          />
         </div>
+        <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
-          <Button primary type="submit">
+          <Button primary type="submit" loading={isLoading}>
             {translations.getLabel('BUTTONS.CREATE')}
           </Button>
           <Button isTextLink href="/users">

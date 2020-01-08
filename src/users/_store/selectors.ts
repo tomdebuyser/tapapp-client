@@ -8,3 +8,5 @@ export const users = createSelector(selectNode, (state: UsersState) => state.use
 export const metadata = createSelector(selectNode, (state: UsersState) => state.metadata);
 export const isLoading = createSelector(selectNode, (state: UsersState) => state.isLoading);
 export const error = createSelector(selectNode, (state: UsersState) => state.error);
+export const isCreateUserLoading = createSelector(selectNode, (state: UsersState) => state.isCreateUserLoading);
+export const errorCreateUser = createSelector(selectNode, (state: UsersState) => state.errorCreateUser);
