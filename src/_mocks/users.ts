@@ -7,4 +7,6 @@ export const userBuilder: () => IUser = build('User').fields({
   createdAt: fake(f => f.date.past().toISOString()),
   updatedAt: fake(f => f.date.past().toISOString()),
   state: oneOf(...Object.values(UserState)),
+  firstName: fake(f => f.name.firstName()),
+  lastName: fake(f => f.name.lastName()),
 });

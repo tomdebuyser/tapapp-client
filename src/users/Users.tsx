@@ -31,7 +31,7 @@ const renderBody = users => {
 
 const Users: FC = () => {
   const users = useSelector(usersSelectors.users);
-  const isLoading = useSelector(usersSelectors.isLoading);
+  const isLoading = useSelector(usersSelectors.isGetUsersLoading);
 
   const dispatch = useDispatch();
 

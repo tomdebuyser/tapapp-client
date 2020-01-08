@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactElement } from 'react';
-import { createMemoryHistory, History, createBrowserHistory } from 'history';
+import { createMemoryHistory, History } from 'history';
 import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -43,7 +43,7 @@ function configureStore(initialState): Store {
   return store;
 }
 
-function renderWithRedux(ui, { initialState = {}, store = configureStore(initialState), ...renderOptions } = {}) {
+function renderWithRedux(ui: ReactElement, { initialState = {}, store = configureStore(initialState), ...renderOptions } = {}) {
   function Wrapper({ children }) {
     return <Provider store={store}>{children}</Provider>;
   }

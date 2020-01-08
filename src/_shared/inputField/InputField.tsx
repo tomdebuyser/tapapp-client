@@ -48,12 +48,12 @@ const InputField: FC<InputFieldProps> = ({
       )}
       <Input
         {...props}
-        id={props.name}
+        id={props?.name}
         autoFocus={autoFocus}
         error={showError}
         onChange={(event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
-          const normalizedValue = normalize(data.value);
-          onChange(normalizedValue, data.name);
+          const normalizedValue = normalize(data?.value);
+          onChange(normalizedValue, data?.name);
           setDirty();
         }}
       />

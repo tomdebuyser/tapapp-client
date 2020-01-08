@@ -1,41 +1,62 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
-import './createUser.scss';
 import { Button } from '../../_shared';
 import InputField from '../../_shared/inputField/InputField';
+import './createUser.scss';
+import { usersSelectors } from '../../_store/selectors';
+import { usersActions } from '../../_store/actions';
+import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
+import { IUserForm } from '../_models/User';
+import useForm from '../../_hooks/useForm';
+
+const initialForm: IUserForm = {
+  email: '',
+  firstName: '',
+  lastName: '',
+};
 
 const CreateUser: FC = () => {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const dispatch = useDispatch();
+  const isLoading = useSelector(usersSelectors.isCreateUserLoading);
+  const error = useSelector(usersSelectors.errorCreateUser);
+  const { form, setFormAttribute } = useForm(initialForm);
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
+    dispatch(new usersActions.CreateUser(form));
   };
 
   return (
     <Container as="main" className="create-user">
       <h1>{translations.getLabel('USERS.CREATE_USER')}</h1>
       <form onSubmit={submitUser}>
-        <InputField type="string" name="email" value={email} onChange={setEmail} label={translations.getLabel('USERS.EMAIL')} />
+        <InputField
+          type="string"
+          name="email"
+          value={form.email}
+          onChange={setFormAttribute}
+          label={translations.getLabel('USERS.EMAIL')}
+        />
         <div role="group">
           <InputField
             type="string"
             name="firstName"
-            value={firstName}
-            onChange={setFirstName}
+            value={form.firstName}
+            onChange={setFormAttribute}
             label={translations.getLabel('USERS.FIRST_NAME')}
           />
           <InputField
             type="string"
             name="lastName"
-            value={lastName}
-            onChange={setLastName}
+            value={form.lastName}
+            onChange={setFormAttribute}
             label={translations.getLabel('USERS.LAST_NAME')}
           />
         </div>
+        <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
-          <Button primary type="submit">
+          <Button primary type="submit" loading={isLoading}>
             {translations.getLabel('BUTTONS.CREATE')}
           </Button>
           <Button isTextLink href="/users">

@@ -8,6 +8,12 @@ export interface IUser {
   lastName?: string;
 }
 
+export interface IUserForm {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+}
+
 export enum UserState {
   ACTIVE = 'ACTIVE',
   REGISTERING = 'REGISTERING',
