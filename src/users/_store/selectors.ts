@@ -6,7 +6,7 @@ const selectNode = (state: AppState) => state.users;
 
 export const users = createSelector(selectNode, (state: UsersState) => state.users);
 export const metadata = createSelector(selectNode, (state: UsersState) => state.metadata);
-export const isLoading = createSelector(selectNode, (state: UsersState) => state.isLoading);
-export const error = createSelector(selectNode, (state: UsersState) => state.error);
+export const isGetUsersLoading = createSelector(selectNode, (state: UsersState) => state.isGetUsersLoading);
+export const errorGetUsers = createSelector(selectNode, (state: UsersState) => state.errorGetUsers);
 export const isCreateUserLoading = createSelector(selectNode, (state: UsersState) => state.isCreateUserLoading);
 export const errorCreateUser = createSelector(selectNode, (state: UsersState) => state.errorCreateUser);

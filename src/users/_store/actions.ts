@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
-import { IUser } from '../_models/User';
+import { IUser, IUserForm } from '../_models/User';
 import { HttpMetadataPagingResponse } from '../../_http/HttpMetadata';
 
 export enum UsersActionType {
@@ -28,7 +28,7 @@ export class GetUsersError implements Action<UsersActionType> {
 
 export class CreateUser implements Action<UsersActionType> {
   readonly type = UsersActionType.CreateUser;
-  constructor(public payload: { email: string; firstName: string; lastName: string }) {}
+  constructor(public payload: IUserForm) {}
 }
 
 export class CreateUserSuccess implements Action<UsersActionType> {

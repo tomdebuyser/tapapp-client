@@ -35,6 +35,10 @@ describe('CreateUser component', () => {
     user.click(createButton);
 
     expect(createUser).toHaveBeenCalledTimes(1);
-    expect(createUser).toHaveBeenCalledWith(dummyUser.email, dummyUser.firstName, dummyUser.lastName);
+    expect(createUser).toHaveBeenCalledWith({
+      email: dummyUser.email,
+      firstName: dummyUser.firstName,
+      lastName: dummyUser.lastName,
+    });
   });
 });
