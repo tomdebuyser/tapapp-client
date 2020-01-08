@@ -16,6 +16,7 @@
 
     div[role='group'] {
       display: flex;
+      flex-wrap: wrap;
       .input-wrapper:first-of-type {
         margin-right: 2rem;
       }
