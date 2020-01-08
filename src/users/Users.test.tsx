@@ -26,23 +26,32 @@ describe('Users component', () => {
 
     const { getByText } = renderWithRedux(<Users />);
 
-    expect(getUsers).toHaveBeenCalledTimes(1);
-
     await wait(() => {
+      expect(getUsers).toHaveBeenCalledTimes(1);
       const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
+      const firstNameHeader = getByText(translations.getLabel('USERS.FIRST_NAME'));
+      const lastNameHeader = getByText(translations.getLabel('USERS.LAST_NAME'));
       const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
       const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
       const stateColumnHeader = getByText(translations.getLabel('USERS.STATE'));
+
       const email = getByText(fakeUser.email);
+      const firstName = getByText(fakeUser.firstName);
+      const lastName = getByText(fakeUser.lastName);
       const createdAt = getByText(formatDate(dateFromISOString(fakeUser.createdAt)));
       const updatedAt = getByText(formatDate(dateFromISOString(fakeUser.updatedAt)));
       const userState = getByText(fakeUser.state);
 
       expect(emailColumnHeader).toBeInTheDocument();
+      expect(firstNameHeader).toBeInTheDocument();
+      expect(lastNameHeader).toBeInTheDocument();
       expect(createdAtColumnHeader).toBeInTheDocument();
       expect(updatedAtColumnHeader).toBeInTheDocument();
       expect(stateColumnHeader).toBeInTheDocument();
+
       expect(email).toBeInTheDocument();
+      expect(firstName).toBeInTheDocument();
+      expect(lastName).toBeInTheDocument();
       expect(createdAt).toBeInTheDocument();
       expect(updatedAt).toBeInTheDocument();
       expect(userState).toBeInTheDocument();
@@ -62,7 +71,6 @@ describe('Users component', () => {
     expect(createdAtColumnHeader).toBeInTheDocument();
     expect(updatedAtColumnHeader).toBeInTheDocument();
     expect(stateColumnHeader).toBeInTheDocument();
-
     expect(getUsers).toHaveBeenCalledTimes(1);
 
     await wait(() => {
