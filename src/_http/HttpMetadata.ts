@@ -12,3 +12,11 @@ export interface HttpPagedResponse<T> {
   data: T[];
   meta: HttpMetadataPagingResponse;
 }
+
+export interface HttpMetadataQuery {
+  take?: number;
+  skip?: number;
+  search?: string;
+  sortDirection?: HttpSortDirection;
+  sortBy?: string;
+}

@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
 import { IUser, IUserForm } from '../_models/User';
-import { HttpMetadataPagingResponse } from '../../_http/HttpMetadata';
+import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
 
 export enum UsersActionType {
   GetUsers = '[Users] GetUsers',
@@ -14,6 +14,7 @@ export enum UsersActionType {
 
 export class GetUsers implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUsers;
+  constructor(public query: HttpMetadataQuery) {}
 }
 
 export class GetUsersSuccess implements Action<UsersActionType> {

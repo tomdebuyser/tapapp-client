@@ -16,5 +16,6 @@
     "STATE": "State",
     "TITLE": "Users",
     "UPDATED_AT": "Updated at"
-  }
+  },
+  "SEARCH_PLACEHOLDER": "Search..."
 }

@@ -22,6 +22,7 @@ export interface InputFieldProps {
   placeholder?: string;
   type?: string;
   value?: string;
+  icon?: string;
 }
 
 const InputField: FC<InputFieldProps> = ({
@@ -33,6 +34,7 @@ const InputField: FC<InputFieldProps> = ({
   errorMessage,
   onChange,
   normalize,
+  icon,
   ...props
 }) => {
   const inputWrapperRef = React.createRef<HTMLDivElement>();
@@ -48,6 +50,7 @@ const InputField: FC<InputFieldProps> = ({
       )}
       <Input
         {...props}
+        icon={icon}
         id={props?.name}
         autoFocus={autoFocus}
         error={showError}

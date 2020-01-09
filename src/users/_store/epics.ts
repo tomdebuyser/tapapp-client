@@ -8,8 +8,8 @@ import * as usersApi from './api';
 
 export const GetUsersEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.GetUsers).pipe(
-    exhaustMap(() =>
-      from(usersApi.getUsers()).pipe(
+    exhaustMap(({ query }: usersActions.GetUsers) =>
+      from(usersApi.getUsers(query)).pipe(
         map(({ data, meta }) => new usersActions.GetUsersSuccess({ data, meta })),
         catchError(error => of(new usersActions.GetUsersError({ error }))),
       ),
