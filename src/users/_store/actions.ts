@@ -14,7 +14,7 @@ export enum UsersActionType {
 
 export class GetUsers implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUsers;
-  constructor(public query: HttpMetadataQuery) {}
+  constructor(public query?: HttpMetadataQuery) {}
 }
 
 export class GetUsersSuccess implements Action<UsersActionType> {

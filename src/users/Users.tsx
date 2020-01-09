@@ -1,13 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import { Table, Icon, Button } from '../_shared';
+import { Table, Icon, Button, SearchInput } from '../_shared';
 import { translations } from '../_translations';
 import { usersSelectors } from '../_store/selectors';
 import { usersActions } from '../_store/actions';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
-import InputField from '../_shared/inputField/InputField';
-import useDebounce from '../_hooks/useDebounce';
+import { HttpMetadataQuery } from '../_http/HttpMetadata';
 import { IUser } from './_models/User';
 import './users.scss';
 
@@ -36,28 +35,29 @@ const renderBody = users => {
 };
 
 const Users: FC = () => {
-  const [search, setSearch] = useState('');
   const users = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
 
   const dispatch = useDispatch();
-  const debouncedSearch = useDebounce(search, 500);
+
+  const getUsers = useCallback(
+    (query?: HttpMetadataQuery) => {
+      dispatch(new usersActions.GetUsers(query));
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   useEffect(() => {
-    dispatch(new usersActions.GetUsers({ search: debouncedSearch }));
-  }, [dispatch, debouncedSearch]);
+    getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container as="main" className="users">
       <h1>{translations.getLabel('USERS.TITLE')}</h1>
       <div className="header">
-        <InputField
-          className="search-field"
-          icon="search"
-          value={search}
-          onChange={setSearch}
-          placeholder={translations.getLabel('SEARCH_PLACEHOLDER')}
-        />
+        <SearchInput get={getUsers} />
         <Button isTextLink href="/users/create" primary>
           <Icon name="SvgAdd" size={1.6} />
           {translations.getLabel('USERS.CREATE_USER')}
