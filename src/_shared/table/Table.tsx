@@ -1,16 +1,14 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, createContext, useContext } from 'react';
 import { Table as SemanticTable, Loader } from 'semantic-ui-react';
-import { HttpSortDirection } from '../../_http/HttpMetadata';
 import './table.scss';
 
 interface Sorting {
-  sortBy: string;
-  sortDirection: HttpSortDirection;
   handleSort: (clickedColumn: string) => void;
+  setSorted: (column: string) => 'ascending' | 'descending';
 }
 
 interface Props {
-  renderHeader: (sorting?: Sorting) => ReactElement;
+  renderHeader: () => ReactElement;
   renderBody: (data: object[]) => ReactElement;
   data?: object[];
   columnCount: number;
@@ -18,6 +16,8 @@ interface Props {
   emptyLabel: string;
   sorting?: Sorting;
 }
+
+const SortContext = createContext<Sorting>({ handleSort: null, setSorted: null });
 
 const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
   renderHeader,
@@ -30,7 +30,9 @@ const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
 }) => {
   return (
     <SemanticTable celled fixed sortable={!!sorting}>
-      <SemanticTable.Header>{renderHeader(sorting)}</SemanticTable.Header>
+      <SortContext.Provider value={sorting}>
+        <SemanticTable.Header>{renderHeader()}</SemanticTable.Header>
+      </SortContext.Provider>
       <SemanticTable.Body>
         {isLoading ? (
           <SemanticTable.Row>
@@ -52,11 +54,20 @@ const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
   );
 };
 
+const HeaderCell = ({ children, className, name }) => {
+  const sorting = useContext(SortContext);
+  return (
+    <SemanticTable.HeaderCell className={className} sorted={sorting.setSorted(name)} onClick={() => sorting.handleSort(name)}>
+      {children}
+    </SemanticTable.HeaderCell>
+  );
+};
+
 Table.Body = SemanticTable.Body;
 Table.Cell = SemanticTable.Cell;
 Table.Footer = SemanticTable.Footer;
 Table.Header = SemanticTable.Header;
-Table.HeaderCell = SemanticTable.HeaderCell;
+Table.HeaderCell = HeaderCell;
 Table.Row = SemanticTable.Row;
 
 export default Table;

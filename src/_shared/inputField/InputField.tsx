@@ -3,7 +3,7 @@ import { Input, InputOnChangeData } from 'semantic-ui-react';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Icon from '../icon/Icon';
-import useInputError from '../../_hooks/useInputError';
+import { useInputError } from '../../_hooks';
 
 import './inputField.scss';
 

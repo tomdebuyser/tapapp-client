@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback, createContext } from 'react';
+import React, { FC, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import { Table, Icon, Button, SearchInput } from '../_shared';
@@ -6,34 +6,22 @@ import { translations } from '../_translations';
 import { usersSelectors } from '../_store/selectors';
 import { usersActions } from '../_store/actions';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
-import useSort from '../_hooks/useSort';
+import { useSort } from '../_hooks';
 import { HttpMetadataQuery } from '../_http/HttpMetadata';
 import { IUser } from './_models/User';
 import './users.scss';
 
-const SortContext = createContext({});
-
-const renderHeader = (sorting: { sortBy: string; sortDirection: string; handleSort: (column: string) => void }) => {
-  const setSorted = (column: string) => {
-    const direction = sorting.sortDirection === 'ASC' ? 'ascending' : 'descending';
-    return sorting.sortBy === column ? direction : null;
-  };
+const renderHeader = () => {
   return (
     <Table.Row>
-      <Table.HeaderCell className="email-cell" sorted={setSorted('email')} onClick={() => sorting.handleSort('email')}>
+      <Table.HeaderCell className="email-cell" name="email">
         {translations.getLabel('USERS.EMAIL')}
       </Table.HeaderCell>
       <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
       <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
-      <Table.HeaderCell sorted={setSorted('createdAt')} onClick={() => sorting.handleSort('createdAt')}>
-        {translations.getLabel('USERS.CREATED_AT')}
-      </Table.HeaderCell>
-      <Table.HeaderCell sorted={setSorted('updatedAt')} onClick={() => sorting.handleSort('updatedAt')}>
-        {translations.getLabel('USERS.UPDATED_AT')}
-      </Table.HeaderCell>
-      <Table.HeaderCell sorted={setSorted('state')} onClick={() => sorting.handleSort('state')}>
-        {translations.getLabel('USERS.STATE')}
-      </Table.HeaderCell>
+      <Table.HeaderCell name="createdAt">{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
+      <Table.HeaderCell name="updatedAt">{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
+      <Table.HeaderCell name="state">{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
     </Table.Row>
   );
 };
@@ -56,15 +44,14 @@ const Users: FC = () => {
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
 
   const dispatch = useDispatch();
-  const [sortBy, sortDirection, handleSort] = useSort();
+  const { sortBy, sortDirection, sorting } = useSort();
 
   const getUsers = useCallback(
     (query?: HttpMetadataQuery) => {
-      console.log('TCL: Users:FC -> query', query);
       dispatch(new usersActions.GetUsers(query));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [dispatch],
   );
 
   useEffect(() => {
@@ -88,11 +75,7 @@ const Users: FC = () => {
         isLoading={isLoading}
         columnCount={6}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
-        sorting={{
-          sortBy,
-          sortDirection,
-          handleSort,
-        }}
+        sorting={sorting}
       />
     </Container>
   );

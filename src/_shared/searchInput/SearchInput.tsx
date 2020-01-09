@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 import { translations } from '../../_translations';
-import useDebounce from '../../_hooks/useDebounce';
+import { useDebounce } from '../../_hooks';
 import InputField from '../inputField/InputField';
 import { HttpMetadataQuery } from '../../_http/HttpMetadata';
 
