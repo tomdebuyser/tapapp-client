@@ -8,19 +8,34 @@ import { usersActions } from '../_store/actions';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import InputField from '../_shared/inputField/InputField';
 import useDebounce from '../_hooks/useDebounce';
+import useSort from '../_hooks/useSort';
 import { IUser } from './_models/User';
 import './users.scss';
 
-const renderHeader = () => (
-  <Table.Row>
-    <Table.HeaderCell className="email-cell">{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
-  </Table.Row>
-);
+const renderHeader = (sorting: { sortBy: string; sortDirection: string; handleSort: (column: string) => void }) => {
+  const setSorted = (column: string) => {
+    const direction = sorting.sortDirection === 'ASC' ? 'ascending' : 'descending';
+    return sorting.sortBy === column ? direction : null;
+  };
+  return (
+    <Table.Row>
+      <Table.HeaderCell className="email-cell" sorted={setSorted('email')} onClick={() => sorting.handleSort('email')}>
+        {translations.getLabel('USERS.EMAIL')}
+      </Table.HeaderCell>
+      <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
+      <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
+      <Table.HeaderCell sorted={setSorted('createdAt')} onClick={() => sorting.handleSort('createdAt')}>
+        {translations.getLabel('USERS.CREATED_AT')}
+      </Table.HeaderCell>
+      <Table.HeaderCell sorted={setSorted('updatedAt')} onClick={() => sorting.handleSort('updatedAt')}>
+        {translations.getLabel('USERS.UPDATED_AT')}
+      </Table.HeaderCell>
+      <Table.HeaderCell sorted={setSorted('state')} onClick={() => sorting.handleSort('state')}>
+        {translations.getLabel('USERS.STATE')}
+      </Table.HeaderCell>
+    </Table.Row>
+  );
+};
 
 const renderBody = users => {
   return users.map((user: IUser) => (
@@ -41,11 +56,12 @@ const Users: FC = () => {
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
 
   const dispatch = useDispatch();
+  const [sortBy, sortDirection, handleSort] = useSort();
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
-    dispatch(new usersActions.GetUsers({ search: debouncedSearch }));
-  }, [dispatch, debouncedSearch]);
+    dispatch(new usersActions.GetUsers({ search: debouncedSearch, sortBy, sortDirection }));
+  }, [dispatch, debouncedSearch, sortBy, sortDirection]);
 
   return (
     <Container as="main" className="users">
@@ -70,6 +86,11 @@ const Users: FC = () => {
         isLoading={isLoading}
         columnCount={6}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
+        sorting={{
+          sortBy,
+          sortDirection,
+          handleSort,
+        }}
       />
     </Container>
   );

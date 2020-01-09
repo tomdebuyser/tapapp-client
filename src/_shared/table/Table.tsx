@@ -1,14 +1,22 @@
 import React, { FC, ReactElement } from 'react';
 import { Table as SemanticTable, Loader } from 'semantic-ui-react';
+import { HttpSortDirection } from '../../_http/HttpMetadata';
 import './table.scss';
 
+interface Sorting {
+  sortBy: string;
+  sortDirection: HttpSortDirection;
+  handleSort: (clickedColumn: string) => void;
+}
+
 interface Props {
-  renderHeader: () => ReactElement;
+  renderHeader: (sorting?: Sorting) => ReactElement;
   renderBody: (data: object[]) => ReactElement;
   data?: object[];
   columnCount: number;
   isLoading: boolean;
   emptyLabel: string;
+  sorting?: Sorting;
 }
 
 const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
@@ -18,10 +26,11 @@ const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
   columnCount,
   isLoading,
   emptyLabel,
+  sorting,
 }) => {
   return (
-    <SemanticTable celled fixed>
-      <SemanticTable.Header>{renderHeader()}</SemanticTable.Header>
+    <SemanticTable celled fixed sortable={!!sorting}>
+      <SemanticTable.Header>{renderHeader(sorting)}</SemanticTable.Header>
       <SemanticTable.Body>
         {isLoading ? (
           <SemanticTable.Row>
