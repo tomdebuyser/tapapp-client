@@ -18,7 +18,7 @@ export const GetUsersEpic$: Epic = action$ =>
 
 export const CreateUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUser).pipe(
-    exhaustMap(({ payload }: usersActions.CreateUser) =>
+    switchMap(({ payload }: usersActions.CreateUser) =>
       from(usersApi.createUser(payload)).pipe(
         map(() => new usersActions.CreateUserSuccess()),
         catchError(error => of(new usersActions.CreateUserError({ error }))),
