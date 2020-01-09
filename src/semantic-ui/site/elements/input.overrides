@@ -4,4 +4,8 @@
 
 .ui.input{
   min-width: 30rem;
+
+  input::placeholder {
+  color: #333f4833;
+}
 }
