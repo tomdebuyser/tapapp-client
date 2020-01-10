@@ -1,0 +1,32 @@
+@import '../../_styles/colors';
+@import '../../_styles/create';
+
+.create-role {
+  form {
+    .permissions {
+      h2 {
+        margin-bottom: 1rem;
+      }
+
+      fieldset {
+        legend {
+          margin-bottom: 1rem;
+          font-size: 1.6rem;
+        }
+
+        > div {
+          margin-bottom: 2rem;
+
+          .checkbox {
+            margin-right: 3rem;
+
+            label {
+              font-size: 1.4rem;
+              color: $dark-grey;
+            }
+          }
+        }
+      }
+    }
+  }
+}

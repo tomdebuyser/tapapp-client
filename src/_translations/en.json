@@ -10,10 +10,12 @@
   "ROLES": {
     "CREATE_ROLE": "Create roles",
     "CREATED_AT": "Created at",
+    "EDIT": "Edit",
     "NAME": "Name",
     "PERMISSIONS": "Permissions",
     "TITLE": "Roles",
-    "UPDATED_AT": "Updated at"
+    "UPDATED_AT": "Updated at",
+    "VIEW": "View"
   },
   "USERS": {
     "CREATE_USER": "Create user",
