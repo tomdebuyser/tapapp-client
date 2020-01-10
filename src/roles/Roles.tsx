@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { translations } from '../_translations';
@@ -42,7 +42,7 @@ const renderRow = (role: IRole) => (
   </Table.Row>
 );
 
-const Roles = () => {
+const Roles: FC = () => {
   const roles = useSelector(rolesSelectors.roles);
   const isLoading = useSelector(rolesSelectors.isGetRolesLoading);
   const dispatch = useDispatch();
@@ -51,15 +51,13 @@ const Roles = () => {
     (query?: HttpMetadataQuery) => {
       dispatch(new rolesActions.GetRoles(query));
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [dispatch],
   );
 
   const { sortFunctions } = useSort(getRoles);
   useEffect(() => {
     getRoles();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getRoles]);
 
   return (
     <Container as="main" className="roles">

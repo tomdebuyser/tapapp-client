@@ -39,15 +39,17 @@ const Users: FC = () => {
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
   const dispatch = useDispatch();
 
-  const getUsers = useCallback((query?: HttpMetadataQuery) => {
-    dispatch(new usersActions.GetUsers(query));
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const getUsers = useCallback(
+    (query?: HttpMetadataQuery) => {
+      dispatch(new usersActions.GetUsers(query));
+    },
+    [dispatch],
+  );
 
   const { sortFunctions } = useSort(getUsers);
   useEffect(() => {
     getUsers();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [getUsers]);
   return (
     <Container as="main" className="users">
       <h1>{translations.getLabel('USERS.TITLE')}</h1>

@@ -10,8 +10,7 @@ function useForm<T>(initial: T, shouldClear?: boolean) {
   }
   const clearForm = useCallback(() => {
     setForm(initial);
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initial]);
 
   const clearError = useCallback(() => {
     setError(null);
