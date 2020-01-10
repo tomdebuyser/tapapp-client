@@ -42,21 +42,20 @@ const renderBody = users => {
 const Users: FC = () => {
   const users = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
-
   const dispatch = useDispatch();
-  const { sortBy, sortDirection, sorting } = useSort();
 
   const getUsers = useCallback(
     (query?: HttpMetadataQuery) => {
       dispatch(new usersActions.GetUsers(query));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [dispatch],
+    [],
   );
 
+  const sorting = useSort(getUsers);
   useEffect(() => {
-    getUsers({ sortBy, sortDirection });
-  }, [getUsers, sortBy, sortDirection]);
+    getUsers();
+  }, [getUsers]);
 
   return (
     <Container as="main" className="users">

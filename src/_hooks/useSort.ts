@@ -1,36 +1,43 @@
-import { useState, useCallback } from 'react';
-import { HttpSortDirection } from '../_http/HttpMetadata';
+import { useState, useCallback, useEffect } from 'react';
+import { HttpSortDirection, HttpMetadataQuery } from '../_http/HttpMetadata';
 
-const useSort = (): {
-  sortBy: string;
-  sortDirection: HttpSortDirection;
-  sorting: { handleSort: (clickedColumn: string) => void; setSorted: (column: string) => 'ascending' | 'descending' };
-} => {
-  const [sortBy, setSortBy] = useState();
-  const [sortDirection, setSortDirection] = useState();
+export interface Sorting {
+  handleSort: (clickedColumn: string) => void;
+  getSortDirection: (column: string) => 'ascending' | 'descending';
+}
+
+const useSort = (get: (query: HttpMetadataQuery) => void): Sorting => {
+  const [sortBy, setSortBy] = useState<string>();
+  const [sortDirection, setSortDirection] = useState<HttpSortDirection>();
 
   const handleSort = useCallback(
     (clickedColumn: string) => {
       if (!clickedColumn) return;
       if (sortBy !== clickedColumn) {
         setSortBy(clickedColumn);
-        setSortDirection('ASC');
+        setSortDirection(HttpSortDirection.Ascending);
       } else {
-        setSortDirection(sortDirection === 'DESC' ? 'ASC' : 'DESC');
+        setSortDirection(
+          sortDirection === HttpSortDirection.Descending ? HttpSortDirection.Ascending : HttpSortDirection.Descending,
+        );
       }
     },
     [sortBy, sortDirection],
   );
 
-  const setSorted = useCallback(
+  const getSortDirection = useCallback(
     (column: string) => {
-      const direction = sortDirection === 'ASC' ? 'ascending' : 'descending';
-      return column && sortBy === column ? direction : null;
+      if (column && sortBy === column) return sortDirection === HttpSortDirection.Ascending ? 'ascending' : 'descending';
+      return null;
     },
     [sortBy, sortDirection],
   );
 
-  return { sortBy, sortDirection, sorting: { handleSort, setSorted } };
+  useEffect(() => {
+    get({ sortBy, sortDirection });
+  }, [get, sortBy, sortDirection]);
+
+  return { handleSort, getSortDirection };
 };
 
 export default useSort;

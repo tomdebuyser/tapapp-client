@@ -1,11 +1,7 @@
 import React, { FC, ReactElement, createContext, useContext } from 'react';
 import { Table as SemanticTable, Loader } from 'semantic-ui-react';
+import { Sorting } from '../../_hooks/useSort';
 import './table.scss';
-
-interface Sorting {
-  handleSort: (clickedColumn: string) => void;
-  setSorted: (column: string) => 'ascending' | 'descending';
-}
 
 interface Props {
   renderHeader: () => ReactElement;
@@ -17,7 +13,7 @@ interface Props {
   sorting?: Sorting;
 }
 
-const SortContext = createContext<Sorting>({ handleSort: null, setSorted: null });
+const SortContext = createContext<Sorting>({ handleSort: null, getSortDirection: null });
 
 const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
   renderHeader,
@@ -55,9 +51,9 @@ const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
 };
 
 const HeaderCell = ({ children, className, name }) => {
-  const sorting = useContext(SortContext);
+  const { getSortDirection, handleSort } = useContext(SortContext);
   return (
-    <SemanticTable.HeaderCell className={className} sorted={sorting.setSorted(name)} onClick={() => sorting.handleSort(name)}>
+    <SemanticTable.HeaderCell className={className} sorted={getSortDirection(name)} onClick={() => handleSort(name)}>
       {children}
     </SemanticTable.HeaderCell>
   );
