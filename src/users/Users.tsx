@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import { Icon, Button, SearchInput } from '../_shared';
@@ -23,13 +23,11 @@ const Users: FC = () => {
     dispatch(new usersActions.SetUsersQuery({ query: { ...query, ...partialQuery } }));
   };
 
-  console.log('render');
-
   return (
     <Container as="main" className="users">
       <h1>{translations.getLabel('USERS.TITLE')}</h1>
       <div className="header">
-        <SearchInput setQuery={setQuery} />
+        <SearchInput query={query} setQuery={setQuery} />
         <Button isTextLink href="/users/create" primary>
           <Icon name="SvgAdd" size={1.6} />
           {translations.getLabel('USERS.CREATE_USER')}

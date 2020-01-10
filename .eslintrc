@@ -36,7 +36,7 @@
         "import/order": 1,
         "react/prop-types": 0,
         "@typescript-eslint/interface-name-prefix": 0,
-        "react-hooks/exhaustive-deps": 0
+        "react-hooks/exhaustive-deps": "warn"
       }
     }
   ]
