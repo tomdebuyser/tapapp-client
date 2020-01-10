@@ -80,7 +80,7 @@ const Roles = () => {
         renderBody={renderBody}
         data={roles}
         isLoading={isLoading}
-        columnCount={1}
+        columnCount={4}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
         sorting={sorting}
       />

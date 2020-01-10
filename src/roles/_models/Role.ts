@@ -19,5 +19,5 @@ export interface IPermissions {
 
 export interface IRoleForm {
   name: string;
-  // TODO: Implement
+  permissions: IPermissions;
 }

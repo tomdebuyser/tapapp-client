@@ -1,0 +1,50 @@
+@import '../../_styles/colors';
+
+.create-role {
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+    .ui.input {
+      margin-bottom: 2rem;
+    }
+
+    .permissions {
+      h2 {
+        margin-bottom: 1rem;
+      }
+
+      fieldset {
+        legend {
+          margin-bottom: 1rem;
+          font-size: 1.6rem;
+        }
+
+        > div {
+          margin-bottom: 2rem;
+
+          .checkbox {
+            margin-right: 3rem;
+
+            label {
+              font-size: 1.4rem;
+              color: $dark-grey;
+            }
+          }
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+    }
+  }
+}
