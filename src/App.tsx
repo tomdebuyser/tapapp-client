@@ -2,8 +2,10 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Menu } from './_shared';
 import Users from './users/Users';
-import './App.scss';
 import CreateUser from './users/createUser/CreateUser';
+import Roles from './roles/Roles';
+import CreateRole from './roles/createRole/CreateRole';
+import './App.scss';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +14,8 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/users" component={Users} />
         <Route exact path="/users/create" component={CreateUser} />
+        <Route exact path="/roles" component={Roles} />
+        <Route exact path="/roles/create" component={CreateRole} />
         <Redirect to="/users" />
       </Switch>
     </div>
