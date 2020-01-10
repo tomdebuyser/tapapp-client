@@ -4,6 +4,7 @@
     "CREATE": "Create"
   },
   "NAVIGATION": {
+    "ROLES": "Roles",
     "USERS": "Users"
   },
   "USERS": {

@@ -7,9 +7,12 @@ import './menu.scss';
 const Menu = () => {
   return (
     <header className="main-menu">
-      <img src={slash} alt="Silvernext" />
+      <NavLink to="/">
+        <img src={slash} alt="Silvernext" />
+      </NavLink>
       <nav>
-        <NavLink to={'/users'}>{translations.getLabel('NAVIGATION.USERS')}</NavLink>
+        <NavLink to="users">{translations.getLabel('NAVIGATION.USERS')}</NavLink>
+        <NavLink to="roles">{translations.getLabel('NAVIGATION.ROLES')}</NavLink>
       </nav>
     </header>
   );
