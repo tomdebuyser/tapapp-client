@@ -1,6 +1,8 @@
-@import '../_styles/overview';
+main {
+  h1 {
+    margin-bottom: 2rem;
+  }
 
-.roles {
   .header {
     display: flex;
     justify-content: space-between;

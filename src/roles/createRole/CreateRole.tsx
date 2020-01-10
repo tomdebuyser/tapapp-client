@@ -9,6 +9,7 @@ import { rolesSelectors } from '../../_store/selectors';
 import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models/Role';
 import { rolesActions } from '../../_store/actions';
+import { setInObject } from '../../_utils/objectHelpers';
 
 import './createRole.scss';
 
@@ -31,11 +32,7 @@ const CreateRole = () => {
   };
 
   const setPermissions = (event, data: CheckboxProps) => {
-    const permissionKeys = data.name.split('.');
-    if (permissionKeys.length !== 2) return;
-    const newPermissions = JSON.parse(JSON.stringify(form.permissions)); // Create a deep-copy
-    newPermissions[permissionKeys[0]][permissionKeys[1]] = data.checked;
-    setFormAttribute(newPermissions, 'permissions');
+    setFormAttribute(setInObject(form.permissions, data.name, data.checked), 'permissions');
   };
 
   return (
@@ -63,7 +60,7 @@ const CreateRole = () => {
                       id={optionName}
                       name={optionName}
                       label={translations.getLabel(`ROLES.${option.toUpperCase()}`)}
-                      checked={form?.permissions[permission][option]}
+                      checked={form.permissions[permission][option]}
                       onChange={setPermissions}
                     />
                   );

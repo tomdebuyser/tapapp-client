@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { translations } from '../_translations';
@@ -8,46 +8,41 @@ import { rolesActions } from '../_store/actions';
 import { HttpMetadataQuery } from '../_http/HttpMetadata';
 import { useSort } from '../_hooks';
 import { dateFromISOString, formatDate } from '../_utils/timeHelpers';
+import { TableColumn } from '../_shared/table/Table';
 import { IRole } from './_models/Role';
 
 import './roles.scss';
 
-const renderHeader = () => {
-  return (
-    <Table.Row>
-      <Table.HeaderCell name="name">{translations.getLabel('ROLES.NAME')}</Table.HeaderCell>
-      <Table.HeaderCell name="createdAt">{translations.getLabel('ROLES.CREATED_AT')}</Table.HeaderCell>
-      <Table.HeaderCell name="updatedAt">{translations.getLabel('ROLES.UPDATED_AT')}</Table.HeaderCell>
-      <Table.HeaderCell>{translations.getLabel('ROLES.PERMISSIONS')}</Table.HeaderCell>
-    </Table.Row>
-  );
-};
+const columns: TableColumn[] = [
+  { name: 'name', label: 'ROLES.NAME', sortable: true },
+  { name: 'createdAt', label: 'ROLES.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'ROLES.UPDATED_AT', sortable: true },
+  { name: 'permissions', label: 'ROLES.PERMISSIONS', sortable: false },
+];
 
-const renderBody = roles => {
-  return roles.map((role: IRole) => (
-    <Table.Row key={role.id}>
-      <Table.Cell>{role.name}</Table.Cell>
-      <Table.Cell>{formatDate(dateFromISOString(role.createdAt))}</Table.Cell>
-      <Table.Cell>{formatDate(dateFromISOString(role.updatedAt))}</Table.Cell>
-      <Table.Cell>
-        <ul className="permissions">
-          {Object.keys(role.permissions).map(permission => {
-            const options = Object.keys(role.permissions[permission]).filter(option => role.permissions[permission][option]);
-            if (!options?.length) return '';
-            return (
-              <li key={permission}>
-                <span>{`${permission}: `}</span>
-                {options.join(', ')}
-              </li>
-            );
-          })}
-        </ul>
-      </Table.Cell>
-    </Table.Row>
-  ));
-};
+const renderRow = (role: IRole) => (
+  <Table.Row key={role.id}>
+    <Table.Cell>{role.name}</Table.Cell>
+    <Table.Cell>{formatDate(dateFromISOString(role.createdAt))}</Table.Cell>
+    <Table.Cell>{formatDate(dateFromISOString(role.updatedAt))}</Table.Cell>
+    <Table.Cell>
+      <ul className="permissions">
+        {Object.keys(role.permissions).map(permission => {
+          const options = Object.keys(role.permissions[permission]).filter(option => role.permissions[permission][option]);
+          if (!options?.length) return '';
+          return (
+            <li key={permission}>
+              <span>{`${permission}: `}</span>
+              {options.join(', ')}
+            </li>
+          );
+        })}
+      </ul>
+    </Table.Cell>
+  </Table.Row>
+);
 
-const Roles = () => {
+const Roles: FC = () => {
   const roles = useSelector(rolesSelectors.roles);
   const isLoading = useSelector(rolesSelectors.isGetRolesLoading);
   const dispatch = useDispatch();
@@ -56,11 +51,10 @@ const Roles = () => {
     (query?: HttpMetadataQuery) => {
       dispatch(new rolesActions.GetRoles(query));
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [dispatch],
   );
 
-  const sorting = useSort(getRoles);
+  const { sortFunctions } = useSort(getRoles);
   useEffect(() => {
     getRoles();
   }, [getRoles]);
@@ -76,13 +70,12 @@ const Roles = () => {
         </Button>
       </div>
       <Table
-        renderHeader={renderHeader}
-        renderBody={renderBody}
+        columns={columns}
+        renderRow={renderRow}
         data={roles}
         isLoading={isLoading}
-        columnCount={4}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
-        sorting={sorting}
+        sortFunctions={sortFunctions}
       />
     </Container>
   );
