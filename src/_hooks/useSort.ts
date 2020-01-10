@@ -1,20 +1,28 @@
 import { useState, useCallback, useEffect } from 'react';
 import { HttpSortDirection, HttpMetadataQuery } from '../_http/HttpMetadata';
 
-export interface Sorting {
-  handleSort: (clickedColumn: string) => void;
-  getSortDirection: (column: string) => 'ascending' | 'descending';
+type SemanticSortDirection = 'ascending' | 'descending';
+
+export interface SortFunctions {
+  handleSort: (column: string) => void;
+  getSortDirection: (column: string) => SemanticSortDirection;
 }
 
-const useSort = (get: (query: HttpMetadataQuery) => void): Sorting => {
+interface Response {
+  sortBy?: string;
+  sortDirection?: HttpSortDirection;
+  sortFunctions: SortFunctions;
+}
+
+const useSort = (get: (query: HttpMetadataQuery) => void): Response => {
   const [sortBy, setSortBy] = useState<string>();
   const [sortDirection, setSortDirection] = useState<HttpSortDirection>();
 
   const handleSort = useCallback(
-    (clickedColumn: string) => {
-      if (!clickedColumn) return;
-      if (sortBy !== clickedColumn) {
-        setSortBy(clickedColumn);
+    (column: string) => {
+      if (!column) return;
+      if (sortBy !== column) {
+        setSortBy(column);
         setSortDirection(HttpSortDirection.Ascending);
       } else {
         setSortDirection(
@@ -26,7 +34,7 @@ const useSort = (get: (query: HttpMetadataQuery) => void): Sorting => {
   );
 
   const getSortDirection = useCallback(
-    (column: string) => {
+    (column: string): SemanticSortDirection => {
       if (column && sortBy === column) return sortDirection === HttpSortDirection.Ascending ? 'ascending' : 'descending';
       return null;
     },
@@ -37,7 +45,7 @@ const useSort = (get: (query: HttpMetadataQuery) => void): Sorting => {
     get({ sortBy, sortDirection });
   }, [get, sortBy, sortDirection]);
 
-  return { handleSort, getSortDirection };
+  return { sortBy, sortDirection, sortFunctions: { handleSort, getSortDirection } };
 };
 
 export default useSort;
