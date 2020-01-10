@@ -1,6 +1,6 @@
 import { IUser } from '../_models/User';
 import { ApiError } from '../../_http';
-import { HttpMetadataPagingResponse } from '../../_http/HttpMetadata';
+import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
 import { UsersAction, UsersActionType } from './actions';
 
 export interface UsersState {
@@ -10,6 +10,7 @@ export interface UsersState {
   errorGetUsers?: ApiError;
   metadata?: HttpMetadataPagingResponse;
   users?: IUser[];
+  query?: HttpMetadataQuery;
 }
 
 const initialState: UsersState = {
@@ -38,6 +39,11 @@ export default function reducer(state = initialState, action: UsersAction): User
         ...state,
         isGetUsersLoading: false,
         errorGetUsers: action.payload.error,
+      };
+    case UsersActionType.SetUsersQuery:
+      return {
+        ...state,
+        query: action.payload.query,
       };
     case UsersActionType.CreateUser:
       return {

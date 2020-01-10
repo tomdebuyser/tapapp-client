@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Table as SemanticTable, Loader } from 'semantic-ui-react';
-import { SortFunctions } from '../../_hooks/useSort';
 import { translations } from '../../_translations';
+import { SortFunctions } from '../../_hooks/useTableSort';
 import './table.scss';
 
 export interface TableColumn {
@@ -25,8 +25,8 @@ const Table: FC<Props> & { Row; Cell } = ({ columns, renderRow, data = [], isLoa
       <SemanticTable.HeaderCell
         key={column.name}
         name={column.name}
-        onClick={column.sortable ? () => sortFunctions.handleSort(column.name) : null}
-        sorted={column.sortable ? sortFunctions.getSortDirection(column.name) : null}
+        onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
+        sorted={column.sortable ? sortFunctions.sortDirectionForColumn(column.name) : null}
       >
         {translations.getLabel(column.label)}
       </SemanticTable.HeaderCell>

@@ -7,6 +7,7 @@ export enum RolesActionType {
   GetRoles = '[Roles] GetRoles',
   GetRolesSuccess = '[Roles] GetRolesSuccess',
   GetRolesError = '[Roles] GetRolesError',
+  SetRolesQuery = '[Roles] SetRolesQuery',
   CreateRole = '[Roles] CreateRole',
   CreateRoleSuccess = '[Roles] CreateRoleSuccess',
   CreateRoleError = '[Roles] CreateRoleError',
@@ -14,7 +15,6 @@ export enum RolesActionType {
 
 export class GetRoles implements Action<RolesActionType> {
   readonly type = RolesActionType.GetRoles;
-  constructor(public query?: HttpMetadataQuery) {}
 }
 
 export class GetRolesSuccess implements Action<RolesActionType> {
@@ -25,6 +25,11 @@ export class GetRolesSuccess implements Action<RolesActionType> {
 export class GetRolesError implements Action<RolesActionType> {
   readonly type = RolesActionType.GetRolesError;
   constructor(public payload: { error: ApiError }) {}
+}
+
+export class SetRolesQuery implements Action<RolesActionType> {
+  readonly type = RolesActionType.SetRolesQuery;
+  constructor(public payload: { query: HttpMetadataQuery }) {}
 }
 
 export class CreateRole implements Action<RolesActionType> {
@@ -41,4 +46,11 @@ export class CreateRoleError implements Action<RolesActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export type RolesAction = GetRoles | GetRolesSuccess | GetRolesError | CreateRole | CreateRoleSuccess | CreateRoleError;
+export type RolesAction =
+  | GetRoles
+  | GetRolesSuccess
+  | GetRolesError
+  | SetRolesQuery
+  | CreateRole
+  | CreateRoleSuccess
+  | CreateRoleError;

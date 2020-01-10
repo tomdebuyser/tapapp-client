@@ -13,7 +13,8 @@
     "NAME": "Name",
     "PERMISSIONS": "Permissions",
     "TITLE": "Roles",
-    "UPDATED_AT": "Updated at"
+    "UPDATED_AT": "Updated at",
+    "EMPTY": "No roles found"
   },
   "USERS": {
     "CREATE_USER": "Create user",

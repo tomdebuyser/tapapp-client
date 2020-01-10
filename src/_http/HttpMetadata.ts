@@ -20,3 +20,5 @@ export interface HttpMetadataQuery {
   sortDirection?: HttpSortDirection;
   sortBy?: string;
 }
+
+export type FillMetadataQueryFunction = (partialQuery: HttpMetadataQuery) => void;
