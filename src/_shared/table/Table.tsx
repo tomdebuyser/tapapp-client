@@ -1,47 +1,62 @@
-import React, { FC, ReactElement, createContext, useContext } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Table as SemanticTable, Loader } from 'semantic-ui-react';
-import { Sorting } from '../../_hooks/useSort';
+import { SortFunctions } from '../../_hooks/useSort';
+import { translations } from '../../_translations';
 import './table.scss';
 
-interface Props {
-  renderHeader: () => ReactElement;
-  renderBody: (data: object[]) => ReactElement;
-  data?: object[];
-  columnCount: number;
-  isLoading: boolean;
-  emptyLabel: string;
-  sorting?: Sorting;
+export interface TableColumn {
+  name: string;
+  label: string;
+  sortable?: boolean;
 }
 
-const SortContext = createContext<Sorting>({ handleSort: null, getSortDirection: null });
+interface Props {
+  columns: TableColumn[];
+  renderRow: (item: unknown) => ReactElement;
+  data?: object[];
+  isLoading: boolean;
+  emptyLabel: string;
+  sortFunctions?: SortFunctions;
+}
 
-const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
-  renderHeader,
-  renderBody,
-  data = [],
-  columnCount,
-  isLoading,
-  emptyLabel,
-  sorting,
-}) => {
+const Table: FC<Props> & { Row; Cell } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
+  function renderHeaderCell(column: TableColumn) {
+    return (
+      <SemanticTable.HeaderCell
+        key={column.name}
+        name={column.name}
+        onClick={column.sortable ? () => sortFunctions.handleSort(column.name) : null}
+        sorted={column.sortable ? sortFunctions.getSortDirection(column.name) : null}
+      >
+        {translations.getLabel(column.label)}
+      </SemanticTable.HeaderCell>
+    );
+  }
+
+  function renderBody() {
+    if (!isLoading && !data?.length) {
+      return (
+        <SemanticTable.Row>
+          <SemanticTable.Cell className="table-empty" colSpan={columns.length}>
+            {emptyLabel}
+          </SemanticTable.Cell>
+        </SemanticTable.Row>
+      );
+    }
+    return data.map(renderRow);
+  }
+
   return (
-    <SemanticTable celled fixed sortable={!!sorting}>
-      <SortContext.Provider value={sorting}>
-        <SemanticTable.Header>{renderHeader()}</SemanticTable.Header>
-      </SortContext.Provider>
+    <SemanticTable celled fixed sortable={columns.some(col => col.sortable)}>
+      <SemanticTable.Header>
+        <SemanticTable.Row>{columns.map(column => renderHeaderCell(column))}</SemanticTable.Row>
+      </SemanticTable.Header>
       <SemanticTable.Body>
-        {isLoading ? (
+        {renderBody()}
+        {isLoading && (
           <SemanticTable.Row>
-            <SemanticTable.Cell colSpan={columnCount}>
+            <SemanticTable.Cell colSpan={columns.length}>
               <Loader active inline="centered" />
-            </SemanticTable.Cell>
-          </SemanticTable.Row>
-        ) : data?.length ? (
-          renderBody(data)
-        ) : (
-          <SemanticTable.Row>
-            <SemanticTable.Cell className="table-empty" colSpan={columnCount}>
-              {emptyLabel}
             </SemanticTable.Cell>
           </SemanticTable.Row>
         )}
@@ -50,20 +65,7 @@ const Table: FC<Props> & { Body; Cell; Footer; Header; HeaderCell; Row } = ({
   );
 };
 
-const HeaderCell = ({ children, className, name }) => {
-  const { getSortDirection, handleSort } = useContext(SortContext);
-  return (
-    <SemanticTable.HeaderCell className={className} sorted={getSortDirection(name)} onClick={() => handleSort(name)}>
-      {children}
-    </SemanticTable.HeaderCell>
-  );
-};
-
-Table.Body = SemanticTable.Body;
-Table.Cell = SemanticTable.Cell;
-Table.Footer = SemanticTable.Footer;
-Table.Header = SemanticTable.Header;
-Table.HeaderCell = HeaderCell;
 Table.Row = SemanticTable.Row;
+Table.Cell = SemanticTable.Cell;
 
 export default Table;

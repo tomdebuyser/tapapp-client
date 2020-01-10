@@ -8,26 +8,21 @@ import { usersActions } from '../_store/actions';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import { useSort } from '../_hooks';
 import { HttpMetadataQuery } from '../_http/HttpMetadata';
+import { TableColumn } from '../_shared/table/Table';
 import { IUser } from './_models/User';
 import './users.scss';
 
-const renderHeader = () => {
-  return (
-    <Table.Row>
-      <Table.HeaderCell className="email-cell" name="email">
-        {translations.getLabel('USERS.EMAIL')}
-      </Table.HeaderCell>
-      <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
-      <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
-      <Table.HeaderCell name="createdAt">{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
-      <Table.HeaderCell name="updatedAt">{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
-      <Table.HeaderCell name="state">{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
-    </Table.Row>
-  );
-};
+const columns: TableColumn[] = [
+  { name: 'email', label: 'USERS.EMAIL', sortable: true },
+  { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
+  { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
+  { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
+  { name: 'state', label: 'USERS.STATE', sortable: true },
+];
 
-const renderBody = users => {
-  return users.map((user: IUser) => (
+function renderRow(user: IUser): JSX.Element {
+  return (
     <Table.Row key={user.email}>
       <Table.Cell className="email-cell">{user.email}</Table.Cell>
       <Table.Cell>{user.firstName}</Table.Cell>
@@ -36,26 +31,22 @@ const renderBody = users => {
       <Table.Cell>{formatDate(dateFromISOString(user.updatedAt))}</Table.Cell>
       <Table.Cell>{user.state}</Table.Cell>
     </Table.Row>
-  ));
-};
+  );
+}
 
 const Users: FC = () => {
   const users = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
   const dispatch = useDispatch();
 
-  const getUsers = useCallback(
-    (query?: HttpMetadataQuery) => {
-      dispatch(new usersActions.GetUsers(query));
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
+  const getUsers = useCallback((query?: HttpMetadataQuery) => {
+    dispatch(new usersActions.GetUsers(query));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const sorting = useSort(getUsers);
+  const { sortFunctions } = useSort(getUsers);
   useEffect(() => {
     getUsers();
-  }, [getUsers]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Container as="main" className="users">
@@ -68,13 +59,12 @@ const Users: FC = () => {
         </Button>
       </div>
       <Table
-        renderHeader={renderHeader}
-        renderBody={renderBody}
+        columns={columns}
+        renderRow={renderRow}
         data={users}
         isLoading={isLoading}
-        columnCount={6}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
-        sorting={sorting}
+        sortFunctions={sortFunctions}
       />
     </Container>
   );
