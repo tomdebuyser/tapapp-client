@@ -6,20 +6,25 @@ import { translations } from '../_translations';
 import { usersSelectors } from '../_store/selectors';
 import { usersActions } from '../_store/actions';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
+import { useSort } from '../_hooks';
 import { HttpMetadataQuery } from '../_http/HttpMetadata';
 import { IUser } from './_models/User';
 import './users.scss';
 
-const renderHeader = () => (
-  <Table.Row>
-    <Table.HeaderCell className="email-cell">{translations.getLabel('USERS.EMAIL')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
-    <Table.HeaderCell>{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
-  </Table.Row>
-);
+const renderHeader = () => {
+  return (
+    <Table.Row>
+      <Table.HeaderCell className="email-cell" name="email">
+        {translations.getLabel('USERS.EMAIL')}
+      </Table.HeaderCell>
+      <Table.HeaderCell>{translations.getLabel('USERS.FIRST_NAME')}</Table.HeaderCell>
+      <Table.HeaderCell>{translations.getLabel('USERS.LAST_NAME')}</Table.HeaderCell>
+      <Table.HeaderCell name="createdAt">{translations.getLabel('USERS.CREATED_AT')}</Table.HeaderCell>
+      <Table.HeaderCell name="updatedAt">{translations.getLabel('USERS.UPDATED_AT')}</Table.HeaderCell>
+      <Table.HeaderCell name="state">{translations.getLabel('USERS.STATE')}</Table.HeaderCell>
+    </Table.Row>
+  );
+};
 
 const renderBody = users => {
   return users.map((user: IUser) => (
@@ -37,7 +42,6 @@ const renderBody = users => {
 const Users: FC = () => {
   const users = useSelector(usersSelectors.users);
   const isLoading = useSelector(usersSelectors.isGetUsersLoading);
-
   const dispatch = useDispatch();
 
   const getUsers = useCallback(
@@ -48,10 +52,10 @@ const Users: FC = () => {
     [],
   );
 
+  const sorting = useSort(getUsers);
   useEffect(() => {
     getUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getUsers]);
 
   return (
     <Container as="main" className="users">
@@ -70,6 +74,7 @@ const Users: FC = () => {
         isLoading={isLoading}
         columnCount={6}
         emptyLabel={translations.getLabel('USERS.EMPTY')}
+        sorting={sorting}
       />
     </Container>
   );

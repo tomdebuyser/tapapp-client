@@ -9,7 +9,7 @@ import { usersSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { IUserForm } from '../_models/User';
-import useForm from '../../_hooks/useForm';
+import { useForm } from '../../_hooks';
 
 const initialForm: IUserForm = {
   email: '',
