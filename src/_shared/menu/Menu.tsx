@@ -11,8 +11,8 @@ const Menu = () => {
         <img src={slash} alt="Silvernext" />
       </NavLink>
       <nav>
-        <NavLink to="users">{translations.getLabel('NAVIGATION.USERS')}</NavLink>
-        <NavLink to="roles">{translations.getLabel('NAVIGATION.ROLES')}</NavLink>
+        <NavLink to="/users">{translations.getLabel('NAVIGATION.USERS')}</NavLink>
+        <NavLink to="/roles">{translations.getLabel('NAVIGATION.ROLES')}</NavLink>
       </nav>
     </header>
   );
