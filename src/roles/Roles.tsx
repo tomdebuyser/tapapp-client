@@ -58,7 +58,8 @@ const Roles = () => {
   const { sortFunctions } = useSort(getRoles);
   useEffect(() => {
     getRoles();
-  }, [getRoles]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container as="main" className="roles">
