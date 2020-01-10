@@ -1,8 +1,9 @@
 @import '../_styles/overview';
 
 .roles {
-  .header {
-    display: flex;
-    justify-content: space-between;
+  .permissions {
+    span {
+      font-weight: bold;
+    }
   }
 }
