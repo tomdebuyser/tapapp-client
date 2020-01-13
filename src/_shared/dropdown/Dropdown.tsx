@@ -5,6 +5,12 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './dropdown.scss';
 
+export interface DropdownOption {
+  key?: string;
+  text: string;
+  value: string;
+}
+
 interface Props {
   error?: boolean;
   errorMessage?: string;
@@ -13,11 +19,11 @@ interface Props {
   name: string;
   normalize?: (value: string) => string;
   onChange: (value: string | string[], name: string) => void;
-  options: { key: string; text: string; value: string }[] | [];
+  options: DropdownOption[] | [];
   value: string | string[];
 }
 
-const Dropdown: FC<Props> = ({ name, multiple, value, label, normalize, onChange, error, errorMessage, options }) => {
+const Dropdown: FC<Props> = ({ name, label, normalize, onChange, error, errorMessage, options, ...props }) => {
   const { showError, setDirty } = useInputError(error);
 
   return (
@@ -26,16 +32,15 @@ const Dropdown: FC<Props> = ({ name, multiple, value, label, normalize, onChange
       <SemanticDropdown
         id={name}
         name={name}
-        multiple={multiple}
         selection
-        value={value}
         onChange={(event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
           const normalizedValue = normalize(data?.value);
           onChange(normalizedValue, data?.name);
           setDirty();
         }}
         error={showError}
-        options={options}
+        options={options || []}
+        {...props}
       />
       <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>
     </div>

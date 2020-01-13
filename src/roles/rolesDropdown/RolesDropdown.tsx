@@ -22,13 +22,12 @@ const RolesDropdown: FC<Props> = ({ label, name, value, onChange }) => {
   const options = useMemo(
     () =>
       roles?.map(role => ({
-        key: role.id,
         text: role.name,
         value: role.id,
       })),
     [roles],
   );
-  return <Dropdown label={label} name={name} multiple value={value || []} onChange={onChange} options={options} />;
+  return <Dropdown label={label} name={name} multiple value={value} onChange={onChange} options={options} />;
 };
 
 export default RolesDropdown;
