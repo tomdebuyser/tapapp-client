@@ -6,15 +6,15 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './dropdown.scss';
 
 interface Props {
-  name: string;
-  multiple?: boolean;
-  value: string | string[];
-  normalize?: (value: string) => string;
-  onChange: (value: string | string[], name: string) => void;
-  options: { key: string; text: string; value: string }[] | [];
   error?: boolean;
   errorMessage?: string;
   label: string;
+  multiple?: boolean;
+  name: string;
+  normalize?: (value: string) => string;
+  onChange: (value: string | string[], name: string) => void;
+  options: { key: string; text: string; value: string }[] | [];
+  value: string | string[];
 }
 
 const Dropdown: FC<Props> = ({ name, multiple, value, label, normalize, onChange, error, errorMessage, options }) => {

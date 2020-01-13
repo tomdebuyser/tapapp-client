@@ -1,15 +1,16 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
-import { Button, Dropdown } from '../../_shared';
+import { Button } from '../../_shared';
 import InputField from '../../_shared/inputField/InputField';
-import './createUser.scss';
-import { usersSelectors, rolesSelectors } from '../../_store/selectors';
-import { usersActions, rolesActions } from '../../_store/actions';
+import { usersSelectors } from '../../_store/selectors';
+import { usersActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { IUserForm } from '../_models/User';
 import { useForm } from '../../_hooks';
+import RolesDropdown from '../../roles/rolesDropdown/RolesDropdown';
+import './createUser.scss';
 
 const initialForm: IUserForm = {
   email: '',
@@ -22,26 +23,11 @@ const CreateUser: FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(usersSelectors.isCreateUserLoading);
   const error = useSelector(usersSelectors.errorCreateUser);
-  const roles = useSelector(rolesSelectors.roles);
   const { form, setFormAttribute } = useForm(initialForm);
   const submitUser = (event: React.FormEvent): void => {
     event.preventDefault();
     dispatch(new usersActions.CreateUser(form));
   };
-
-  useEffect(() => {
-    dispatch(new rolesActions.GetRoles());
-  }, [dispatch]);
-
-  const roleOptions = useMemo(
-    () =>
-      roles?.map(role => ({
-        key: role.id,
-        text: role.name,
-        value: role.id,
-      })) || [],
-    [roles],
-  );
 
   return (
     <Container as="main" className="create-user">
@@ -70,13 +56,11 @@ const CreateUser: FC = () => {
             label={translations.getLabel('USERS.LAST_NAME')}
           />
         </div>
-        <Dropdown
+        <RolesDropdown
           label={translations.getLabel('USERS.ROLE')}
           name="roleIds"
-          multiple
           value={form.roleIds}
           onChange={setFormAttribute}
-          options={roleOptions}
         />
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
