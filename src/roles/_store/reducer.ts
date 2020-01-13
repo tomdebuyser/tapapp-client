@@ -27,13 +27,17 @@ export default function reducer(state = initialState, action: RolesAction): Role
         errorGetRoles: null,
         metadata: null,
       };
-    case RolesActionType.GetRolesSuccess:
+    case RolesActionType.GetRolesSuccess: {
+      let currentData = state.roles || [];
+      if (!action.payload.meta.skip) currentData = []; // Start overnew when the offset was reset
+      const updatedIds = action.payload.data.map(value => value.id);
       return {
         ...state,
         isGetRolesLoading: false,
-        roles: action.payload.data,
+        roles: [...currentData.filter(value => !updatedIds.includes(value.id)), ...action.payload.data],
         metadata: action.payload.meta,
       };
+    }
     case RolesActionType.GetRolesError:
       return {
         ...state,

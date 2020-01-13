@@ -12,9 +12,7 @@ export const getUsersEpic$: Epic = (action$, state$) =>
     exhaustMap(() => {
       const query = usersSelectors.query(state$.value);
       return from(usersApi.getUsers(query)).pipe(
-        map(
-          ({ data, meta }) => new usersActions.GetUsersSuccess({ data, meta: { ...meta, skip: query?.skip }, skip: query?.skip }),
-        ),
+        map(({ data, meta }) => new usersActions.GetUsersSuccess({ data, meta })),
         catchError(error => of(new usersActions.GetUsersError({ error }))),
       );
     }),

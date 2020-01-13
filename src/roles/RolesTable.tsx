@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../_http/HttpMetadata';
 import Table, { TableColumn } from '../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
-import { useTableSort } from '../_hooks';
+import { useTableSort, useInfiniteScroll } from '../_hooks';
 import { translations } from '../_translations';
+import { rolesSelectors } from '../_store/selectors';
 import { IRole } from './_models/Role';
 
 interface Props {
@@ -20,9 +22,12 @@ const columns: TableColumn[] = [
 ];
 
 const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
+  const metadata = useSelector(rolesSelectors.metadata);
+
   const { sortFunctions } = useTableSort((column: string, direction: HttpSortDirection) =>
-    setQuery({ sortBy: column, sortDirection: direction }),
+    setQuery({ sortBy: column, sortDirection: direction, skip: 0 }),
   );
+  useInfiniteScroll((skip: number) => setQuery({ skip }), metadata, isLoading);
 
   function renderRow(role: IRole): JSX.Element {
     return (

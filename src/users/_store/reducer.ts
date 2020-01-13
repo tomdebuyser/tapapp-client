@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       };
     case UsersActionType.GetUsersSuccess: {
       let currentData = state.users || [];
-      if (!action.payload.skip) currentData = []; // Start overnew when the offset was reset
+      if (!action.payload.meta.skip) currentData = []; // Start overnew when the offset was reset
       const updatedIds = action.payload.data.map(value => value.id);
       return {
         ...state,

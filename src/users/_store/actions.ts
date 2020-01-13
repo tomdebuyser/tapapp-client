@@ -19,7 +19,7 @@ export class GetUsers implements Action<UsersActionType> {
 
 export class GetUsersSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUsersSuccess;
-  constructor(public payload: { data: IUser[]; meta: HttpMetadataPagingResponse; skip?: number }) {}
+  constructor(public payload: { data: IUser[]; meta: HttpMetadataPagingResponse }) {}
 }
 
 export class GetUsersError implements Action<UsersActionType> {

@@ -21,14 +21,13 @@ const Roles: FC = () => {
 
   const setQuery: FillMetadataQueryFunction = (partialQuery: HttpMetadataQuery) => {
     dispatch(new rolesActions.SetRolesQuery({ query: { ...query, ...partialQuery } }));
-    // TODO: Reset offset?
   };
 
   return (
     <Container as="main" className="roles">
       <h1>{translations.getLabel('ROLES.TITLE')}</h1>
       <div className="header">
-        <SearchInput setQuery={setQuery} />
+        <SearchInput query={query} setQuery={setQuery} />
         <Button isTextLink href="/roles/create" primary>
           <Icon name="SvgAdd" size={1.6} />
           {translations.getLabel('ROLES.CREATE_ROLE')}
