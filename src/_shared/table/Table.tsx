@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react';
+import classnames from 'classnames';
 import { Table as SemanticTable, Loader } from 'semantic-ui-react';
 import { translations } from '../../_translations';
 import { SortFunctions } from '../../_hooks/useTableSort';
@@ -23,6 +24,7 @@ const Table: FC<Props> & { Row; Cell } = ({ columns, renderRow, data = [], isLoa
   function renderHeaderCell(column: TableColumn) {
     return (
       <SemanticTable.HeaderCell
+        className={classnames({ 'not-sortable': !column.sortable })}
         key={column.name}
         name={column.name}
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
