@@ -4,13 +4,13 @@ import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpM
 import { RolesAction, RolesActionType } from './actions';
 
 export interface RolesState {
-  isCreateRoleLoading: boolean;
-  isGetRolesLoading: boolean;
   errorCreateRole?: ApiError;
   errorGetRoles?: ApiError;
+  isCreateRoleLoading: boolean;
+  isGetRolesLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
-  roles?: IRole[];
   query?: HttpMetadataQuery;
+  roles?: IRole[];
 }
 
 const initialState: RolesState = {

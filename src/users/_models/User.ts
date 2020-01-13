@@ -1,15 +1,15 @@
 export interface IUser {
-  id: string;
-  email: string;
   createdAt: string;
-  updatedAt: string;
-  state: UserState;
+  email: string;
   firstName?: string;
+  id: string;
   lastName?: string;
   roles: {
     id: string;
     name: string;
   }[];
+  state: UserState;
+  updatedAt: string;
 }
 
 export interface IUserForm {

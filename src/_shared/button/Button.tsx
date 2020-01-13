@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import './button.scss';
 
 interface Props {
-  type?: 'button' | 'submit' | 'reset';
-  isTextLink?: boolean;
   children: ReactNode;
+  disabled?: boolean;
+  href?: string;
+  isTextLink?: boolean;
+  loading?: boolean;
   onClick?: () => void;
   primary?: boolean;
-  disabled?: boolean;
-  loading?: boolean;
-  href?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function

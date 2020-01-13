@@ -3,14 +3,14 @@ import * as ICONS from '../../_assets/svg';
 import './icon.scss';
 
 interface Props {
-  name: string;
-  size?: number;
-  disabled?: boolean;
   className?: string;
-  label?: string;
   clickable?: boolean;
+  disabled?: boolean;
   id?: string;
+  label?: string;
+  name: string;
   onClick?: (value: React.MouseEvent) => void;
+  size?: number;
 }
 
 const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clickable, id, ...otherProps }) => {

@@ -1,19 +1,19 @@
 export interface IRole {
-  id: string;
   createdAt: string;
-  updatedAt: string;
+  id: string;
   name: string;
   permissions: IPermissions;
+  updatedAt: string;
 }
 
 export interface IPermissions {
   roles: {
-    view: boolean;
     edit: boolean;
+    view: boolean;
   };
   users: {
-    view: boolean;
     edit: boolean;
+    view: boolean;
   };
 }
 

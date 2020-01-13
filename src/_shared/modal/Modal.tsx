@@ -5,15 +5,15 @@ import Icon from '../icon/Icon';
 import './modal.scss';
 
 interface Props {
-  className?: string;
-  open: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
-  trigger?: ReactNode;
   children: ReactNode;
+  className?: string;
+  onClose?: () => void;
+  onOpen?: () => void;
+  open: boolean;
+  trigger?: ReactNode;
 }
 
-const Modal: FC<Props> & { Header; Content; Actions } = ({ className, open, onOpen, onClose, trigger, children }) => {
+const Modal: FC<Props> & { Actions; Content; Header } = ({ className, open, onOpen, onClose, trigger, children }) => {
   return (
     <SemanticModal
       className={`base-modal ${className}`}

@@ -8,21 +8,21 @@ import { useInputError } from '../../_hooks';
 import './inputField.scss';
 
 export interface InputFieldProps {
+  autoFocus?: boolean;
+  className?: string;
   disabled?: boolean;
   error?: boolean;
   errorMessage?: string;
   fluid?: boolean;
-  autoFocus?: boolean;
+  icon?: string;
   label?: string;
   labelIcon?: string;
-  className?: string;
   name?: string;
   normalize?: (value: string) => string;
   onChange?: (value: string, name: string) => void;
   placeholder?: string;
   type?: string;
   value?: string;
-  icon?: string;
 }
 
 const InputField: FC<InputFieldProps> = ({
