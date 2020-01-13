@@ -20,7 +20,7 @@ interface Props {
   sortFunctions?: SortFunctions;
 }
 
-const Table: FC<Props> & { Cell, Row; } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
+const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
   function renderHeaderCell(column: TableColumn) {
     return (
       <SemanticTable.HeaderCell

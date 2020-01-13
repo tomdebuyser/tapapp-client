@@ -10,7 +10,7 @@ export enum RolesActionType {
   GetRoles = '[Roles] GetRoles',
   GetRolesError = '[Roles] GetRolesError',
   GetRolesSuccess = '[Roles] GetRolesSuccess',
-  SetRolesQuery = '[Roles] SetRolesQuery'
+  SetRolesQuery = '[Roles] SetRolesQuery',
 }
 
 export class GetRoles implements Action<RolesActionType> {

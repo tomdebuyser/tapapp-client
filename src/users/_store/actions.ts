@@ -10,7 +10,7 @@ export enum UsersActionType {
   GetUsers = '[Users] GetUsers',
   GetUsersError = '[Users] GetUsersError',
   GetUsersSuccess = '[Users] GetUsersSuccess',
-  SetUsersQuery = '[Users] SetUsersQuery'
+  SetUsersQuery = '[Users] SetUsersQuery',
 }
 
 export class GetUsers implements Action<UsersActionType> {

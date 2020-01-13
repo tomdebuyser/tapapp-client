@@ -13,7 +13,7 @@ interface Props {
   trigger?: ReactNode;
 }
 
-const Modal: FC<Props> & { Actions, Content; Header; } = ({ className, open, onOpen, onClose, trigger, children }) => {
+const Modal: FC<Props> & { Actions; Content; Header } = ({ className, open, onOpen, onClose, trigger, children }) => {
   return (
     <SemanticModal
       className={`base-modal ${className}`}
