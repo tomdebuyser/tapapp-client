@@ -4,17 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
 import { Button } from '../../_shared';
 import InputField from '../../_shared/inputField/InputField';
-import './createUser.scss';
 import { usersSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { IUserForm } from '../_models/User';
 import { useForm } from '../../_hooks';
+import RolesDropdown from '../../roles/rolesDropdown/RolesDropdown';
+import './createUser.scss';
 
 const initialForm: IUserForm = {
   email: '',
   firstName: '',
   lastName: '',
+  roleIds: [],
 };
 
 const CreateUser: FC = () => {
@@ -54,6 +56,12 @@ const CreateUser: FC = () => {
             label={translations.getLabel('USERS.LAST_NAME')}
           />
         </div>
+        <RolesDropdown
+          label={translations.getLabel('USERS.ROLE')}
+          name="roleIds"
+          value={form.roleIds}
+          onChange={setFormAttribute}
+        />
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
           <Button primary type="submit" loading={isLoading}>
