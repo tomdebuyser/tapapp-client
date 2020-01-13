@@ -7,6 +7,7 @@ export enum UsersActionType {
   GetUsers = '[Users] GetUsers',
   GetUsersSuccess = '[Users] GetUsersSuccess',
   GetUsersError = '[Users] GetUsersError',
+  SetUsersQuery = '[Users] SetUsersQuery',
   CreateUser = '[Users] CreateUser',
   CreateUserSuccess = '[Users] CreateUserSuccess',
   CreateUserError = '[Users] CreateUserError',
@@ -14,7 +15,6 @@ export enum UsersActionType {
 
 export class GetUsers implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUsers;
-  constructor(public query?: HttpMetadataQuery) {}
 }
 
 export class GetUsersSuccess implements Action<UsersActionType> {
@@ -25,6 +25,11 @@ export class GetUsersSuccess implements Action<UsersActionType> {
 export class GetUsersError implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUsersError;
   constructor(public payload: { error: ApiError }) {}
+}
+
+export class SetUsersQuery implements Action<UsersActionType> {
+  readonly type = UsersActionType.SetUsersQuery;
+  constructor(public payload: { query: HttpMetadataQuery }) {}
 }
 
 export class CreateUser implements Action<UsersActionType> {
@@ -41,4 +46,11 @@ export class CreateUserError implements Action<UsersActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export type UsersAction = GetUsers | GetUsersSuccess | GetUsersError | CreateUser | CreateUserSuccess | CreateUserError;
+export type UsersAction =
+  | GetUsers
+  | GetUsersSuccess
+  | GetUsersError
+  | SetUsersQuery
+  | CreateUser
+  | CreateUserSuccess
+  | CreateUserError;

@@ -2,19 +2,28 @@ import React, { useState, useEffect, FC } from 'react';
 import { translations } from '../../_translations';
 import { useDebounce } from '../../_hooks';
 import InputField from '../inputField/InputField';
-import { HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http/HttpMetadata';
 
 interface Props {
-  get: (query: HttpMetadataQuery) => void;
+  query?: HttpMetadataQuery;
+  setQuery: FillMetadataQueryFunction;
 }
 
-const SearchInput: FC<Props> = ({ get }) => {
+function shouldSearch(currentQuery: HttpMetadataQuery, searchString: string): boolean {
+  if (currentQuery?.search === searchString) return false;
+  if (!currentQuery?.search && !searchString) return false;
+  return true;
+}
+
+const SearchInput: FC<Props> = ({ query, setQuery }) => {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
-    get({ search: debouncedSearch });
-  }, [debouncedSearch, get]);
+    if (shouldSearch(query, debouncedSearch)) {
+      setQuery({ search: debouncedSearch, skip: 0 });
+    }
+  }, [debouncedSearch, query, setQuery]);
 
   return (
     <InputField

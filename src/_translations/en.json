@@ -15,6 +15,7 @@
     "PERMISSIONS": "Permissions",
     "TITLE": "Roles",
     "UPDATED_AT": "Updated at",
+    "EMPTY": "No roles found",
     "VIEW": "View"
   },
   "USERS": {
