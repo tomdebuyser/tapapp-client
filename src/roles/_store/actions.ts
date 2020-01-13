@@ -4,13 +4,13 @@ import { IRole, IRoleForm } from '../_models/Role';
 import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
 
 export enum RolesActionType {
-  GetRoles = '[Roles] GetRoles',
-  GetRolesSuccess = '[Roles] GetRolesSuccess',
-  GetRolesError = '[Roles] GetRolesError',
-  SetRolesQuery = '[Roles] SetRolesQuery',
   CreateRole = '[Roles] CreateRole',
-  CreateRoleSuccess = '[Roles] CreateRoleSuccess',
   CreateRoleError = '[Roles] CreateRoleError',
+  CreateRoleSuccess = '[Roles] CreateRoleSuccess',
+  GetRoles = '[Roles] GetRoles',
+  GetRolesError = '[Roles] GetRolesError',
+  GetRolesSuccess = '[Roles] GetRolesSuccess',
+  SetRolesQuery = '[Roles] SetRolesQuery'
 }
 
 export class GetRoles implements Action<RolesActionType> {

@@ -7,8 +7,8 @@ import { rolesActions } from '../../_store/actions';
 interface Props {
   label: string;
   name: string;
-  value: string[];
   onChange: (value: string[], name: string) => void;
+  value: string[];
 }
 
 const RolesDropdown: FC<Props> = ({ label, name, value, onChange }) => {

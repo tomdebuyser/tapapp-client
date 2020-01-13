@@ -4,13 +4,13 @@ import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpM
 import { UsersAction, UsersActionType } from './actions';
 
 export interface UsersState {
-  isCreateUserLoading: boolean;
-  isGetUsersLoading: boolean;
   errorCreateUser?: ApiError;
   errorGetUsers?: ApiError;
+  isCreateUserLoading: boolean;
+  isGetUsersLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
-  users?: IUser[];
   query?: HttpMetadataQuery;
+  users?: IUser[];
 }
 
 const initialState: UsersState = {

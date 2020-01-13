@@ -4,13 +4,13 @@ import { IUser, IUserForm } from '../_models/User';
 import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
 
 export enum UsersActionType {
-  GetUsers = '[Users] GetUsers',
-  GetUsersSuccess = '[Users] GetUsersSuccess',
-  GetUsersError = '[Users] GetUsersError',
-  SetUsersQuery = '[Users] SetUsersQuery',
   CreateUser = '[Users] CreateUser',
-  CreateUserSuccess = '[Users] CreateUserSuccess',
   CreateUserError = '[Users] CreateUserError',
+  CreateUserSuccess = '[Users] CreateUserSuccess',
+  GetUsers = '[Users] GetUsers',
+  GetUsersError = '[Users] GetUsersError',
+  GetUsersSuccess = '[Users] GetUsersSuccess',
+  SetUsersQuery = '[Users] SetUsersQuery'
 }
 
 export class GetUsers implements Action<UsersActionType> {

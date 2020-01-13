@@ -4,8 +4,8 @@ import { HttpSortDirection } from '../_http/HttpMetadata';
 type SemanticSortDirection = 'ascending' | 'descending';
 
 export interface SortFunctions {
-  onChangeSortColumn: (column: string) => void;
   getSortDirectionForColumn: (column: string) => SemanticSortDirection;
+  onChangeSortColumn: (column: string) => void;
 }
 
 function sortDirectionOpposite(direction: string): HttpSortDirection {

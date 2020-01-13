@@ -6,21 +6,21 @@ import { SortFunctions } from '../../_hooks/useTableSort';
 import './table.scss';
 
 export interface TableColumn {
-  name: string;
   label: string;
+  name: string;
   sortable?: boolean;
 }
 
 interface Props {
   columns: TableColumn[];
-  renderRow: (item: unknown) => ReactElement;
   data?: object[];
-  isLoading: boolean;
   emptyLabel: string;
+  isLoading: boolean;
+  renderRow: (item: unknown) => ReactElement;
   sortFunctions?: SortFunctions;
 }
 
-const Table: FC<Props> & { Row; Cell } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
+const Table: FC<Props> & { Cell, Row; } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
   function renderHeaderCell(column: TableColumn) {
     return (
       <SemanticTable.HeaderCell

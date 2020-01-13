@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import useToggle from './useToggle';
 
 interface Response {
-  showError: boolean;
   setDirty: () => void;
+  showError: boolean;
 }
 
 export default function useInputError(error: boolean): Response {
