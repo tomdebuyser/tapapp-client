@@ -6,6 +6,10 @@ export interface IUser {
   state: UserState;
   firstName?: string;
   lastName?: string;
+  roles: {
+    id: string;
+    name: string;
+  }[];
 }
 
 export interface IUserForm {

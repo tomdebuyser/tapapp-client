@@ -70,7 +70,14 @@ const CreateUser: FC = () => {
             label={translations.getLabel('USERS.LAST_NAME')}
           />
         </div>
-        <Dropdown label={translations.getLabel('USERS.ROLE')} name="roleIds" multiple value={form.roleIds} onChange={setFormAttribute} options={roleOptions} />
+        <Dropdown
+          label={translations.getLabel('USERS.ROLE')}
+          name="roleIds"
+          multiple
+          value={form.roleIds}
+          onChange={setFormAttribute}
+          options={roleOptions}
+        />
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
           <Button primary type="submit" loading={isLoading}>

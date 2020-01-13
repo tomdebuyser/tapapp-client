@@ -9,4 +9,10 @@ export const userBuilder: () => IUser = build('User').fields({
   state: oneOf(...Object.values(UserState)),
   firstName: fake(f => f.name.firstName()),
   lastName: fake(f => f.name.lastName()),
+  roles: fake(f => [
+    {
+      id: f.random.uuid(),
+      name: f.lorem.word(),
+    },
+  ]),
 });
