@@ -27,13 +27,17 @@ export default function reducer(state = initialState, action: UsersAction): User
         errorGetUsers: null,
         metadata: null,
       };
-    case UsersActionType.GetUsersSuccess:
+    case UsersActionType.GetUsersSuccess: {
+      let currentData = state.users || [];
+      if (!action.payload.skip) currentData = []; // Start overnew when the offset was reset
+      const updatedIds = action.payload.data.map(value => value.id);
       return {
         ...state,
         isGetUsersLoading: false,
-        users: action.payload.data,
+        users: [...currentData.filter(value => !updatedIds.includes(value.id)), ...action.payload.data],
         metadata: action.payload.meta,
       };
+    }
     case UsersActionType.GetUsersError:
       return {
         ...state,

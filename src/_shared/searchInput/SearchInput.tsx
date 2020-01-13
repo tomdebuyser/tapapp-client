@@ -21,7 +21,7 @@ const SearchInput: FC<Props> = ({ query, setQuery }) => {
 
   useEffect(() => {
     if (shouldSearch(query, debouncedSearch)) {
-      setQuery({ search: debouncedSearch });
+      setQuery({ search: debouncedSearch, skip: 0 });
     }
   }, [debouncedSearch, query, setQuery]);
 

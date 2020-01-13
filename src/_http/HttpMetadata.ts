@@ -1,6 +1,7 @@
 export interface HttpMetadataPagingResponse {
   count: number;
   totalCount: number;
+  skip: number;
 }
 
 export enum HttpSortDirection {
