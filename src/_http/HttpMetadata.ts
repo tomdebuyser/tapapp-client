@@ -1,6 +1,7 @@
 export interface HttpMetadataPagingResponse {
   count: number;
   totalCount: number;
+  skip: number;
 }
 
 export enum HttpSortDirection {
@@ -20,3 +21,5 @@ export interface HttpMetadataQuery {
   sortDirection?: HttpSortDirection;
   sortBy?: string;
 }
+
+export type FillMetadataQueryFunction = (partialQuery: HttpMetadataQuery) => void;

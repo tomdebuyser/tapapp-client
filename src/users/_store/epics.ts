@@ -3,20 +3,25 @@ import { from, of } from 'rxjs';
 import { map, catchError, exhaustMap, switchMap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { usersActions } from '../../_store/actions';
+import { usersSelectors } from '../../_store/selectors';
 import { UsersActionType } from './actions';
 import * as usersApi from './api';
 
-export const GetUsersEpic$: Epic = action$ =>
+export const getUsersEpic$: Epic = (action$, state$) =>
   action$.ofType(UsersActionType.GetUsers).pipe(
-    exhaustMap(({ query }: usersActions.GetUsers) =>
-      from(usersApi.getUsers(query)).pipe(
+    exhaustMap(() => {
+      const query = usersSelectors.query(state$.value);
+      return from(usersApi.getUsers(query)).pipe(
         map(({ data, meta }) => new usersActions.GetUsersSuccess({ data, meta })),
         catchError(error => of(new usersActions.GetUsersError({ error }))),
-      ),
-    ),
+      );
+    }),
   );
 
-export const CreateUserEpic$: Epic = action$ =>
+export const setUsersQueryEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.SetUsersQuery).pipe(map(() => new usersActions.GetUsers()));
+
+export const createUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUser).pipe(
     switchMap(({ payload }: usersActions.CreateUser) =>
       from(usersApi.createUser(payload)).pipe(
@@ -26,9 +31,9 @@ export const CreateUserEpic$: Epic = action$ =>
     ),
   );
 
-export const CreateUserSuccessEpic$: Epic = action$ =>
+export const createUserSuccessEpic$: Epic = action$ =>
   action$.ofType(usersActions.UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
 
-const UsersEpics = [GetUsersEpic$, CreateUserEpic$, CreateUserSuccessEpic$];
+const UsersEpics = [getUsersEpic$, setUsersQueryEpic$, createUserEpic$, createUserSuccessEpic$];
 
 export default UsersEpics;
