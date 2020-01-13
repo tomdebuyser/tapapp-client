@@ -5,7 +5,7 @@ type SemanticSortDirection = 'ascending' | 'descending';
 
 export interface SortFunctions {
   onChangeSortColumn: (column: string) => void;
-  sortDirectionForColumn: (column: string) => SemanticSortDirection;
+  getSortDirectionForColumn: (column: string) => SemanticSortDirection;
 }
 
 function sortDirectionOpposite(direction: string): HttpSortDirection {
@@ -37,14 +37,14 @@ const useTableSort = (
     callback(column, direction);
   };
 
-  const sortDirectionForColumn = (column: string) => (sortColumn === column ? semanticSortDirection(sortDirection) : null);
+  const getSortDirectionForColumn = (column: string) => (sortColumn === column ? semanticSortDirection(sortDirection) : null);
 
   return {
     sortColumn,
     sortDirection,
     sortFunctions: {
       onChangeSortColumn,
-      sortDirectionForColumn,
+      getSortDirectionForColumn,
     },
   };
 };

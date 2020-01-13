@@ -28,7 +28,7 @@ const Table: FC<Props> & { Row; Cell } = ({ columns, renderRow, data = [], isLoa
         key={column.name}
         name={column.name}
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
-        sorted={column.sortable ? sortFunctions.sortDirectionForColumn(column.name) : null}
+        sorted={column.sortable ? sortFunctions.getSortDirectionForColumn(column.name) : null}
       >
         {translations.getLabel(column.label)}
       </SemanticTable.HeaderCell>
