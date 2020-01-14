@@ -26,7 +26,7 @@ const ResetPassword = () => {
   useEffect(() => {
     setFormAttribute(token, 'resetToken');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setFormAttribute, token]);
+  }, [token]);
 
   const submitNewPassword = (event: FormEvent) => {
     event.preventDefault();
