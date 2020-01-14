@@ -4,10 +4,14 @@ import { ApiError } from '../_http';
 function useForm<T>(initial: T, shouldClear?: boolean) {
   const [form, setForm] = useState<T>(initial);
   const [error, setError] = useState<ApiError>(null);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function setFormAttribute(value: any, name: string) {
-    setForm({ ...form, [name]: value });
-  }
+  const setFormAttribute = useCallback(
+    (value: any, name: string) => {
+      setForm({ ...form, [name]: value });
+    },
+    [form],
+  );
   const clearForm = useCallback(() => {
     setForm(initial);
   }, [initial]);

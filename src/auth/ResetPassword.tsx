@@ -27,7 +27,7 @@ const ResetPassword = () => {
   useEffect(() => {
     setFormAttribute(token, 'resetToken');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
   const submitNewPassword = (event: FormEvent) => {
     event.preventDefault();
@@ -43,7 +43,8 @@ const ResetPassword = () => {
         <h1>{translations.getLabel('REGISTER.TITLE')}</h1>
         <form onSubmit={submitNewPassword}>
           <InputField
-            type="string"
+            type="password"
+            autoComplete="new-password"
             name="newPassword"
             label={translations.getLabel('REGISTER.CHOOSE_PASSWORD')}
             value={form.newPassword}
