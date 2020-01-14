@@ -1,4 +1,5 @@
 import { ApiError } from '../../_http';
+import { IUser } from '../../users/_models/User';
 import { AuthActions, AuthActionType } from './actions';
 
 export interface AuthState {
@@ -6,6 +7,7 @@ export interface AuthState {
   errorResetPassword?: ApiError;
   isLoginLoading: boolean;
   isResetPasswordLoading: boolean;
+  user?: IUser;
 }
 
 const initialState: AuthState = {
@@ -37,11 +39,13 @@ export default function reducer(state = initialState, action: AuthActions): Auth
         ...state,
         isLoginLoading: true,
         errorLogin: null,
+        user: null,
       };
     case AuthActionType.LoginSuccess:
       return {
         ...state,
         isLoginLoading: false,
+        user: action.payload.user,
       };
     case AuthActionType.LoginError:
       return {

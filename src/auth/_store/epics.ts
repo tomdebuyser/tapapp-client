@@ -23,7 +23,7 @@ export const LoginEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Login).pipe(
     switchMap(({ payload }: authActions.Login) =>
       from(authApi.login(payload)).pipe(
-        map(() => new authActions.LoginSuccess()),
+        map(user => new authActions.LoginSuccess({ user })),
         catchError(error => of(new authActions.LoginError({ error }))),
       ),
     ),

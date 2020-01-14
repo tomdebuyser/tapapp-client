@@ -2,6 +2,7 @@ import { Action } from 'redux';
 import { ApiError } from '../../_http';
 import { IResetPasswordForm } from '../_models/ResetPassword';
 import { ILoginForm } from '../_models/Login';
+import { IUser } from '../../users/_models/User';
 
 export enum AuthActionType {
   Login = '[Auth] Login',
@@ -33,6 +34,7 @@ export class Login implements Action<AuthActionType> {
 
 export class LoginSuccess implements Action<AuthActionType> {
   readonly type = AuthActionType.LoginSuccess;
+  constructor(public payload: { user: IUser }) {}
 }
 
 export class LoginError implements Action<AuthActionType> {

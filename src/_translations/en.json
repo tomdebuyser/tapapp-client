@@ -37,10 +37,11 @@
     },
     "LOGIN": {
       "TITLE": "Welcome!",
-      "EMAIL": "Email",
+      "USERNAME": "Username",
       "PASSWORD": "Password",
       "LOGIN": "Login"
-    }
+    },
+    "LOGOUT": "Logout"
   },
   "SEARCH_PLACEHOLDER": "Search..."
 }

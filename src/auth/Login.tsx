@@ -11,7 +11,7 @@ import { ILoginForm } from './_models/Login';
 import './auth.scss';
 
 const initialForm: ILoginForm = {
-  email: '',
+  username: '',
   password: '',
 };
 
@@ -31,11 +31,11 @@ const Login = () => {
       <h1>{translations.getLabel('AUTH.LOGIN.TITLE')}</h1>
       <form onSubmit={login}>
         <InputField
-          label={translations.getLabel('AUTH.LOGIN.EMAIL')}
+          label={translations.getLabel('AUTH.LOGIN.USERNAME')}
           type="string"
-          name="email"
-          autoComplete="email"
-          value={form.email}
+          name="username"
+          autoComplete="username"
+          value={form.username}
           onChange={setFormAttribute}
         />
         <InputField
