@@ -1,13 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import slash from '../../_assets/images/slash-white.png';
 import { translations } from '../../_translations';
+import { authActions } from '../../_store/actions';
 import { Icon } from '..';
 import './menu.scss';
 
 const Menu = () => {
+  const dispatch = useDispatch();
   const logout = () => {
-    // TODO: Logout
+    dispatch(new authActions.Logout());
   };
 
   return (

@@ -4,8 +4,10 @@ import { AuthActions, AuthActionType } from './actions';
 
 export interface AuthState {
   errorLogin?: ApiError;
+  errorLogout?: ApiError;
   errorResetPassword?: ApiError;
   isLoginLoading: boolean;
+  isLogoutLoading: boolean;
   isResetPasswordLoading: boolean;
   user?: IUser;
 }
@@ -13,6 +15,7 @@ export interface AuthState {
 const initialState: AuthState = {
   isLoginLoading: false,
   isResetPasswordLoading: false,
+  isLogoutLoading: false,
 };
 
 export default function reducer(state = initialState, action: AuthActions): AuthState {
@@ -52,6 +55,24 @@ export default function reducer(state = initialState, action: AuthActions): Auth
         ...state,
         isLoginLoading: false,
         errorLogin: action.payload.error,
+      };
+    case AuthActionType.Logout:
+      return {
+        ...state,
+        isLogoutLoading: true,
+        errorLogout: null,
+      };
+    case AuthActionType.LogoutSuccess:
+      return {
+        ...state,
+        isLogoutLoading: false,
+        user: null,
+      };
+    case AuthActionType.LogoutError:
+      return {
+        ...state,
+        isLogoutLoading: false,
+        errorLogout: action.payload.error,
       };
     default:
       return state;

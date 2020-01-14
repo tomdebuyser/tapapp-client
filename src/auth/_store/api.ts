@@ -11,3 +11,8 @@ export function login(body: ILoginForm): Promise<IUser> {
   localStorage.setItem('LOGGED_IN', 'true'); // temporary functionality (to be removed once backend is ok)
   return HttpClient.post<IUser>('auth/login', body);
 }
+
+export function logout(): Promise<void> {
+  localStorage.removeItem('LOGGED_IN'); // temporary functionality (to be removed once backend is ok)
+  return HttpClient.post('auth/logout');
+}
