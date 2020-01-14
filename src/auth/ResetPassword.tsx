@@ -9,7 +9,7 @@ import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../_store/selectors';
 import { IResetPasswordForm } from './_models/ResetPassword';
-import './resetPassword.scss';
+import './auth.scss';
 
 const initialForm: IResetPasswordForm = {
   newPassword: '',
@@ -35,20 +35,20 @@ const ResetPassword = () => {
 
   return (
     <Container as="main" className="reset-password">
-      <h1>{translations.getLabel('REGISTER.TITLE')}</h1>
+      <h1>{translations.getLabel('AUTH.REGISTER.TITLE')}</h1>
       <form onSubmit={submitNewPassword}>
         <InputField
           type="password"
           autoComplete="new-password"
           name="newPassword"
-          label={translations.getLabel('REGISTER.CHOOSE_PASSWORD')}
+          label={translations.getLabel('AUTH.REGISTER.CHOOSE_PASSWORD')}
           value={form.newPassword}
           onChange={setFormAttribute}
         />
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div>
           <Button primary type="submit" loading={isLoading}>
-            {translations.getLabel('REGISTER.REGISTER')}
+            {translations.getLabel('AUTH.REGISTER.REGISTER')}
           </Button>
         </div>
       </form>

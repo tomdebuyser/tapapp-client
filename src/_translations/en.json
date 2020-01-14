@@ -29,10 +29,18 @@
     "TITLE": "Users",
     "UPDATED_AT": "Updated at"
   },
-  "REGISTER": {
-    "TITLE": "Welcome!",
-    "CHOOSE_PASSWORD": "Choose password",
-    "REGISTER": "Register"
+  "AUTH": {
+    "REGISTER": {
+      "TITLE": "Welcome!",
+      "CHOOSE_PASSWORD": "Choose password",
+      "REGISTER": "Register"
+    },
+    "LOGIN": {
+      "TITLE": "Welcome!",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "LOGIN": "Login"
+    }
   },
   "SEARCH_PLACEHOLDER": "Search..."
 }
