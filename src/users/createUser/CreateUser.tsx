@@ -30,14 +30,14 @@ const CreateUser: FC = () => {
 
   return (
     <Container as="main" className="create-user">
-      <h1>{translations.getLabel('USERS.CREATE_USER')}</h1>
+      <h1>{translations.getLabel('USERS.CREATE.TITLE')}</h1>
       <form onSubmit={submitUser}>
         <InputField
           type="string"
           name="email"
           value={form.email}
           onChange={setFormAttribute}
-          label={translations.getLabel('USERS.EMAIL')}
+          label={translations.getLabel('USERS.CREATE.EMAIL')}
         />
         <div role="group">
           <InputField
@@ -45,18 +45,18 @@ const CreateUser: FC = () => {
             name="firstName"
             value={form.firstName}
             onChange={setFormAttribute}
-            label={translations.getLabel('USERS.FIRST_NAME')}
+            label={translations.getLabel('USERS.CREATE.FIRST_NAME')}
           />
           <InputField
             type="string"
             name="lastName"
             value={form.lastName}
             onChange={setFormAttribute}
-            label={translations.getLabel('USERS.LAST_NAME')}
+            label={translations.getLabel('USERS.CREATE.LAST_NAME')}
           />
         </div>
         <RolesDropdown
-          label={translations.getLabel('USERS.ROLE')}
+          label={translations.getLabel('USERS.CREATE.ROLE')}
           name="roleIds"
           value={form.roleIds}
           onChange={setFormAttribute}
@@ -64,10 +64,10 @@ const CreateUser: FC = () => {
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
           <Button primary type="submit" loading={isLoading}>
-            {translations.getLabel('BUTTONS.CREATE')}
+            {translations.getLabel('SHARED.BUTTONS.CREATE')}
           </Button>
           <Button isTextLink href="/users">
-            {translations.getLabel('BUTTONS.CANCEL')}
+            {translations.getLabel('SHARED.BUTTONS.CANCEL')}
           </Button>
         </div>
       </form>

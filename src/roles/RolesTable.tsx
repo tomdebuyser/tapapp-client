@@ -15,10 +15,10 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'name', label: 'ROLES.NAME', sortable: true },
-  { name: 'createdAt', label: 'ROLES.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'ROLES.UPDATED_AT', sortable: true },
-  { name: 'permissions', label: 'ROLES.PERMISSIONS' },
+  { name: 'name', label: 'ROLES.OVERVIEW.NAME', sortable: true },
+  { name: 'createdAt', label: 'ROLES.OVERVIEW.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'ROLES.OVERVIEW.UPDATED_AT', sortable: true },
+  { name: 'permissions', label: 'ROLES.OVERVIEW.PERMISSIONS' },
 ];
 
 const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {

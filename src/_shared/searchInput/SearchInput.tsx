@@ -31,7 +31,7 @@ const SearchInput: FC<Props> = ({ query, setQuery }) => {
       icon="search"
       value={search}
       onChange={setSearch}
-      placeholder={translations.getLabel('SEARCH_PLACEHOLDER')}
+      placeholder={translations.getLabel('SHARED.SEARCH_PLACEHOLDER')}
     />
   );
 };
