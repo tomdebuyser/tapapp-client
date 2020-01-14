@@ -1,6 +1,6 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, exhaustMap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { authActions } from '../../_store/actions';
 import * as authApi from './api';
@@ -21,7 +21,7 @@ export const resetPasswordSuccessEpic$: Epic = action$ =>
 
 export const LoginEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Login).pipe(
-    switchMap(({ payload }: authActions.Login) =>
+    exhaustMap(({ payload }: authActions.Login) =>
       from(authApi.login(payload)).pipe(
         map(user => new authActions.LoginSuccess({ user })),
         catchError(error => of(new authActions.LoginError({ error }))),
