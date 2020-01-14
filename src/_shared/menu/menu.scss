@@ -20,6 +20,7 @@
 
   nav {
     display: flex;
+    flex: 1;
 
     a {
       position: relative;
@@ -39,5 +40,10 @@
         opacity: 1;
       }
     }
+  }
+
+  .icon-button {
+    color: $white;
+    margin: 0 2rem;
   }
 }
