@@ -1,24 +1,19 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { Menu } from './_shared';
-import Users from './users/Users';
-import CreateUser from './users/createUser/CreateUser';
-import Roles from './roles/Roles';
-import CreateRole from './roles/createRole/CreateRole';
-import './App.scss';
+import { Switch, Redirect } from 'react-router-dom';
+import AuthorizedRoute from './_routing/AuthorizedRoute';
+import AuthorizedLayout from './_routing/AuthorizedLayout';
+import UnauthorizedRoute from './_routing/UnauthorizedRoute';
+import Login from './auth/Login';
+import ResetPassword from './auth/ResetPassword';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Menu />
-      <Switch>
-        <Route exact path="/users" component={Users} />
-        <Route exact path="/users/create" component={CreateUser} />
-        <Route exact path="/roles" component={Roles} />
-        <Route exact path="/roles/create" component={CreateRole} />
-        <Redirect to="/users" />
-      </Switch>
-    </div>
+    <Switch>
+      <UnauthorizedRoute path="/auth/login" component={Login} />
+      <UnauthorizedRoute path="/auth/reset-password/:token" component={ResetPassword} />
+      <AuthorizedRoute path="/" component={AuthorizedLayout} />
+      <Redirect to="/" />
+    </Switch>
   );
 };
 

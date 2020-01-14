@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Container, Checkbox, CheckboxProps } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
-import InputField from '../../_shared/inputField/InputField';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
-import { Button } from '../../_shared';
+import { Button, InputField } from '../../_shared';
 import { rolesSelectors } from '../../_store/selectors';
 import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models/Role';
@@ -31,7 +30,7 @@ const CreateRole = () => {
     dispatch(new rolesActions.CreateRole(form));
   };
 
-  const setPermissions = (event, data: CheckboxProps) => {
+  const setPermissions = (event: FormEvent, data: CheckboxProps) => {
     setFormAttribute(setInObject(form.permissions, data.name, data.checked), 'permissions');
   };
 
