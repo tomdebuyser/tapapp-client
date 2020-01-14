@@ -29,5 +29,10 @@
     "TITLE": "Users",
     "UPDATED_AT": "Updated at"
   },
+  "REGISTER": {
+    "TITLE": "Welcome!",
+    "CHOOSE_PASSWORD": "Choose password",
+    "REGISTER": "Register"
+  },
   "SEARCH_PLACEHOLDER": "Search..."
 }

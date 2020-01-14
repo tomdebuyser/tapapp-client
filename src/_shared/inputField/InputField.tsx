@@ -8,6 +8,7 @@ import { useInputError } from '../../_hooks';
 import './inputField.scss';
 
 export interface InputFieldProps {
+  autoComplete?: string;
   autoFocus?: boolean;
   className?: string;
   disabled?: boolean;
@@ -26,6 +27,7 @@ export interface InputFieldProps {
 }
 
 const InputField: FC<InputFieldProps> = ({
+  autoComplete,
   autoFocus,
   className,
   label,
@@ -51,6 +53,7 @@ const InputField: FC<InputFieldProps> = ({
       <Input
         {...props}
         icon={icon}
+        autoComplete={autoComplete}
         id={props?.name}
         autoFocus={autoFocus}
         error={showError}

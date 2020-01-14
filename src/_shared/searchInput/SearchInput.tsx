@@ -1,8 +1,8 @@
 import React, { useState, useEffect, FC } from 'react';
 import { translations } from '../../_translations';
 import { useDebounce } from '../../_hooks';
-import InputField from '../inputField/InputField';
 import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { InputField } from '..';
 
 interface Props {
   query?: HttpMetadataQuery;
