@@ -2,6 +2,7 @@ import { IResetPasswordForm } from '../_models/ResetPassword';
 import { HttpClient } from '../../_http';
 import { ILoginForm } from '../_models/Login';
 import { IUser } from '../../users/_models/User';
+import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
 export function resetPassword(body: IResetPasswordForm): Promise<void> {
   return HttpClient.post('auth/reset-password', body);
@@ -15,4 +16,8 @@ export function login(body: ILoginForm): Promise<IUser> {
 export function logout(): Promise<void> {
   localStorage.removeItem('LOGGED_IN'); // temporary functionality (to be removed once backend is ok)
   return HttpClient.post('auth/logout');
+}
+
+export function requestPasswordReset(body: IRequestPasswordResetForm): Promise<void> {
+  return HttpClient.post('auth/reset-password-request', body);
 }

@@ -3,6 +3,7 @@ import { ApiError } from '../../_http';
 import { IResetPasswordForm } from '../_models/ResetPassword';
 import { ILoginForm } from '../_models/Login';
 import { IUser } from '../../users/_models/User';
+import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
 export enum AuthActionType {
   Login = '[Auth] Login',
@@ -11,6 +12,9 @@ export enum AuthActionType {
   Logout = '[Auth] Logout',
   LogoutError = '[Auth] LogoutError',
   LogoutSuccess = '[Auth] LogoutSuccess',
+  RequestPasswordReset = '[Auth] RequestPasswordReset',
+  RequestPasswordResetError = '[Auth] RequestPasswordResetError',
+  RequestPasswordResetSuccess = '[Auth] RequestPasswordResetSuccess',
   ResetPassword = '[Auth] ResetPassword',
   ResetPasswordError = '[Auth] ResetPasswordError',
   ResetPasswordSuccess = '[Auth] ResetPasswordSuccess',
@@ -58,6 +62,20 @@ export class LogoutError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
+export class RequestPasswordReset implements Action<AuthActionType> {
+  readonly type = AuthActionType.RequestPasswordReset;
+  constructor(public payload: IRequestPasswordResetForm) {}
+}
+
+export class RequestPasswordResetSuccess implements Action<AuthActionType> {
+  readonly type = AuthActionType.RequestPasswordResetSuccess;
+}
+
+export class RequestPasswordResetError implements Action<AuthActionType> {
+  readonly type = AuthActionType.RequestPasswordResetError;
+  constructor(public payload: { error: ApiError }) {}
+}
+
 export type AuthActions =
   | ResetPassword
   | ResetPasswordSuccess
@@ -67,4 +85,7 @@ export type AuthActions =
   | LoginError
   | Logout
   | LogoutSuccess
-  | LogoutError;
+  | LogoutError
+  | RequestPasswordReset
+  | RequestPasswordResetSuccess
+  | RequestPasswordResetError;

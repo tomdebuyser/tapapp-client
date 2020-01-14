@@ -5,9 +5,11 @@ import { AuthActions, AuthActionType } from './actions';
 export interface AuthState {
   errorLogin?: ApiError;
   errorLogout?: ApiError;
+  errorRequestPasswordReset?: ApiError;
   errorResetPassword?: ApiError;
   isLoginLoading: boolean;
   isLogoutLoading: boolean;
+  isRequestPasswordResetLoading: boolean;
   isResetPasswordLoading: boolean;
   user?: IUser;
 }
@@ -16,6 +18,7 @@ const initialState: AuthState = {
   isLoginLoading: false,
   isResetPasswordLoading: false,
   isLogoutLoading: false,
+  isRequestPasswordResetLoading: false,
 };
 
 export default function reducer(state = initialState, action: AuthActions): AuthState {
@@ -73,6 +76,23 @@ export default function reducer(state = initialState, action: AuthActions): Auth
         ...state,
         isLogoutLoading: false,
         errorLogout: action.payload.error,
+      };
+    case AuthActionType.RequestPasswordReset:
+      return {
+        ...state,
+        isRequestPasswordResetLoading: true,
+        errorRequestPasswordReset: null,
+      };
+    case AuthActionType.RequestPasswordResetSuccess:
+      return {
+        ...state,
+        isRequestPasswordResetLoading: false,
+      };
+    case AuthActionType.RequestPasswordResetError:
+      return {
+        ...state,
+        isRequestPasswordResetLoading: false,
+        errorRequestPasswordReset: action.payload.error,
       };
     default:
       return state;

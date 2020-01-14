@@ -13,3 +13,9 @@ export const user = createSelector(selectNode, (state: AuthState) => state.user)
 
 export const isLogoutLoading = createSelector(selectNode, (state: AuthState) => state.isLogoutLoading);
 export const errorLogout = createSelector(selectNode, (state: AuthState) => state.errorLogout);
+
+export const isRequestPasswordResetLoading = createSelector(
+  selectNode,
+  (state: AuthState) => state.isRequestPasswordResetLoading,
+);
+export const errorRequestPasswordReset = createSelector(selectNode, (state: AuthState) => state.errorRequestPasswordReset);

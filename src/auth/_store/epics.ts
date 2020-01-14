@@ -43,6 +43,27 @@ export const logoutEpic$: Epic = action$ =>
 export const logoutSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.LogoutSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
-const AuthEpics = [resetPasswordEpic$, resetPasswordSuccessEpic$, loginEpic$, loginSuccessEpic$, logoutEpic$, logoutSuccessEpic$];
+export const requestPasswordResetEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.RequestPasswordReset).pipe(
+    exhaustMap(({ payload }: authActions.RequestPasswordReset) =>
+      from(authApi.requestPasswordReset(payload)).pipe(
+        map(() => new authActions.RequestPasswordResetSuccess()),
+        catchError(error => of(new authActions.RequestPasswordResetError({ error }))),
+      ),
+    ),
+  );
+
+export const requestPasswordResetSuccessEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.RequestPasswordResetSuccess).pipe(switchMap(() => of(push('/auth/login'))));
+
+const AuthEpics = [
+  resetPasswordEpic$,
+  resetPasswordSuccessEpic$,
+  loginEpic$,
+  loginSuccessEpic$,
+  logoutEpic$,
+  logoutSuccessEpic$,
+  requestPasswordResetEpic$,
+];
 
 export default AuthEpics;

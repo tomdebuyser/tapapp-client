@@ -16,7 +16,7 @@ const initialForm: IResetPasswordForm = {
   resetToken: '',
 };
 
-const ResetPassword = () => {
+const ChoosePassword = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(authSelectors.isResetPasswordLoading);
   const error = useSelector(authSelectors.errorResetPassword);
@@ -34,7 +34,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <Container as="main" className="reset-password">
+    <Container as="main" className="choose-password">
       <h1>{translations.getLabel('AUTH.REGISTER.TITLE')}</h1>
       <form onSubmit={submitNewPassword}>
         <InputField
@@ -56,4 +56,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ChoosePassword;

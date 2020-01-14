@@ -1,5 +1,13 @@
 .auth {
-  .ui.button {
-    margin-top: 2rem;
+  form {
+    align-items: flex-start;
+
+    .ui.button {
+      margin-top: 2rem;
+    }
+
+    a {
+      font-size: 1.4rem;
+    }
   }
 }
