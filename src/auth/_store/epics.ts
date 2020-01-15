@@ -6,18 +6,18 @@ import { authActions } from '../../_store/actions';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
-export const resetPasswordEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.ResetPassword).pipe(
-    switchMap(({ payload }: authActions.ResetPassword) =>
-      from(authApi.resetPassword(payload)).pipe(
-        map(() => new authActions.ResetPasswordSuccess()),
-        catchError(error => of(new authActions.ResetPasswordError({ error }))),
+export const choosePasswordEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.ChoosePassword).pipe(
+    switchMap(({ payload }: authActions.ChoosePassword) =>
+      from(authApi.choosePassword(payload)).pipe(
+        map(() => new authActions.ChoosePasswordSuccess()),
+        catchError(error => of(new authActions.ChoosePasswordError({ error }))),
       ),
     ),
   );
 
-export const resetPasswordSuccessEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.ResetPasswordSuccess).pipe(switchMap(() => of(push('/auth/login'))));
+export const choosePasswordSuccessEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.ChoosePasswordSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
 export const loginEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Login).pipe(
@@ -57,8 +57,8 @@ export const requestPasswordResetSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.RequestPasswordResetSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
 const AuthEpics = [
-  resetPasswordEpic$,
-  resetPasswordSuccessEpic$,
+  choosePasswordEpic$,
+  choosePasswordSuccessEpic$,
   loginEpic$,
   loginSuccessEpic$,
   logoutEpic$,

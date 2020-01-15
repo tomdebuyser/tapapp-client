@@ -8,18 +8,18 @@ import { translations } from '../_translations';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../_store/selectors';
-import { IResetPasswordForm } from './_models/ResetPassword';
+import { IChangePasswordForm } from './_models/ChoosePassword';
 import './auth.scss';
 
-const initialForm: IResetPasswordForm = {
+const initialForm: IChangePasswordForm = {
   newPassword: '',
   resetToken: '',
 };
 
 const ChoosePassword = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(authSelectors.isResetPasswordLoading);
-  const error = useSelector(authSelectors.errorResetPassword);
+  const isLoading = useSelector(authSelectors.isChoosePasswordLoading);
+  const error = useSelector(authSelectors.errorChoosePassword);
   const { token } = useParams();
   const { form, setFormAttribute } = useForm(initialForm);
 
@@ -30,7 +30,7 @@ const ChoosePassword = () => {
 
   const submitNewPassword = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(new authActions.ResetPassword(form));
+    dispatch(new authActions.ChoosePassword(form));
   };
 
   return (

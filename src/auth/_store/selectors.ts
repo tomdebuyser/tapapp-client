@@ -4,8 +4,8 @@ import { AuthState } from './reducer';
 
 const selectNode = (state: AppState) => state.auth;
 
-export const isResetPasswordLoading = createSelector(selectNode, (state: AuthState) => state.isResetPasswordLoading);
-export const errorResetPassword = createSelector(selectNode, (state: AuthState) => state.errorResetPassword);
+export const isChoosePasswordLoading = createSelector(selectNode, (state: AuthState) => state.isChoosePasswordLoading);
+export const errorChoosePassword = createSelector(selectNode, (state: AuthState) => state.errorChoosePassword);
 
 export const isLoginLoading = createSelector(selectNode, (state: AuthState) => state.isLoginLoading);
 export const errorLogin = createSelector(selectNode, (state: AuthState) => state.errorLogin);

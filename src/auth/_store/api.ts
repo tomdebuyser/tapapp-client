@@ -1,10 +1,10 @@
-import { IResetPasswordForm } from '../_models/ResetPassword';
+import { IChangePasswordForm } from '../_models/ChoosePassword';
 import { HttpClient } from '../../_http';
 import { ILoginForm } from '../_models/Login';
 import { IUser } from '../../users/_models/User';
 import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
-export function resetPassword(body: IResetPasswordForm): Promise<void> {
+export function choosePassword(body: IChangePasswordForm): Promise<void> {
   return HttpClient.post('auth/reset-password', body);
 }
 

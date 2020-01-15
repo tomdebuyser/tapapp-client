@@ -1,11 +1,14 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
-import { IResetPasswordForm } from '../_models/ResetPassword';
+import { IChangePasswordForm } from '../_models/ChoosePassword';
 import { ILoginForm } from '../_models/Login';
 import { IUser } from '../../users/_models/User';
 import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
 export enum AuthActionType {
+  ChoosePassword = '[Auth] ChoosePassword',
+  ChoosePasswordError = '[Auth] ChoosePasswordError',
+  ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
   Login = '[Auth] Login',
   LoginError = '[Auth] LoginError',
   LoginSuccess = '[Auth] LoginSuccess',
@@ -15,22 +18,19 @@ export enum AuthActionType {
   RequestPasswordReset = '[Auth] RequestPasswordReset',
   RequestPasswordResetError = '[Auth] RequestPasswordResetError',
   RequestPasswordResetSuccess = '[Auth] RequestPasswordResetSuccess',
-  ResetPassword = '[Auth] ResetPassword',
-  ResetPasswordError = '[Auth] ResetPasswordError',
-  ResetPasswordSuccess = '[Auth] ResetPasswordSuccess',
 }
 
-export class ResetPassword implements Action<AuthActionType> {
-  readonly type = AuthActionType.ResetPassword;
-  constructor(public payload: IResetPasswordForm) {}
+export class ChoosePassword implements Action<AuthActionType> {
+  readonly type = AuthActionType.ChoosePassword;
+  constructor(public payload: IChangePasswordForm) {}
 }
 
-export class ResetPasswordSuccess implements Action<AuthActionType> {
-  readonly type = AuthActionType.ResetPasswordSuccess;
+export class ChoosePasswordSuccess implements Action<AuthActionType> {
+  readonly type = AuthActionType.ChoosePasswordSuccess;
 }
 
-export class ResetPasswordError implements Action<AuthActionType> {
-  readonly type = AuthActionType.ResetPasswordError;
+export class ChoosePasswordError implements Action<AuthActionType> {
+  readonly type = AuthActionType.ChoosePasswordError;
   constructor(public payload: { error: ApiError }) {}
 }
 
@@ -77,9 +77,9 @@ export class RequestPasswordResetError implements Action<AuthActionType> {
 }
 
 export type AuthActions =
-  | ResetPassword
-  | ResetPasswordSuccess
-  | ResetPasswordError
+  | ChoosePassword
+  | ChoosePasswordSuccess
+  | ChoosePasswordError
   | Login
   | LoginSuccess
   | LoginError
