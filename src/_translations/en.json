@@ -1,6 +1,7 @@
 {
   "AUTH": {
     "LOGIN": {
+      "FORGOT_PASSWORD": "Forgot your password?",
       "LOGIN": "Login",
       "PASSWORD": "Password",
       "TITLE": "Welcome!",
@@ -11,6 +12,12 @@
       "CHOOSE_PASSWORD": "Choose password",
       "REGISTER": "Register",
       "TITLE": "Welcome!"
+    },
+    "REQUEST_PASSWORD_RESET": {
+      "DESCRIPTION": "Enter the email address you used to register and we'll email you the password reset instructions.",
+      "EMAIL": "Email",
+      "RESET": "Send reset instructions",
+      "TITLE": "Forgot your password?"
     }
   },
   "ROLES": {
