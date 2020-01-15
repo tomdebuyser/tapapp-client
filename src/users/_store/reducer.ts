@@ -6,8 +6,10 @@ import { UsersAction, UsersActionType } from './actions';
 export interface UsersState {
   errorCreateUser?: ApiError;
   errorGetUsers?: ApiError;
+  errorRemoveUser?: ApiError;
   isCreateUserLoading: boolean;
   isGetUsersLoading: boolean;
+  isRemoveUserLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   users?: IUser[];
@@ -16,6 +18,7 @@ export interface UsersState {
 const initialState: UsersState = {
   isGetUsersLoading: false,
   isCreateUserLoading: false,
+  isRemoveUserLoading: false,
 };
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
@@ -65,6 +68,23 @@ export default function reducer(state = initialState, action: UsersAction): User
         ...state,
         isCreateUserLoading: false,
         errorCreateUser: action.payload.error,
+      };
+    case UsersActionType.RemoveUser:
+      return {
+        ...state,
+        isRemoveUserLoading: action.confirmed,
+        errorCreateUser: null,
+      };
+    case UsersActionType.RemoveUserSuccess:
+      return {
+        ...state,
+        isRemoveUserLoading: false,
+      };
+    case UsersActionType.RemoveUserError:
+      return {
+        ...state,
+        isRemoveUserLoading: false,
+        errorRemoveUser: action.payload.error,
       };
     default:
       return state;
