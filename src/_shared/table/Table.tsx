@@ -9,6 +9,7 @@ export interface TableColumn {
   label: string;
   name: string;
   sortable?: boolean;
+  width?: string;
 }
 
 interface Props {
@@ -29,6 +30,7 @@ const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoa
         name={column.name}
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
         sorted={column.sortable ? sortFunctions.getSortDirectionForColumn(column.name) : null}
+        style={{ width: column?.width }}
       >
         {translations.getLabel(column.label)}
       </SemanticTable.HeaderCell>

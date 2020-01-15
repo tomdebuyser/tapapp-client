@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Table, { TableColumn } from '../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../_http/HttpMetadata';
@@ -15,7 +16,7 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true },
+  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true, width: '25rem' },
   { name: 'firstName', label: 'USERS.OVERVIEW.FIRST_NAME', sortable: true },
   { name: 'lastName', label: 'USERS.OVERVIEW.LAST_NAME', sortable: true },
   { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
@@ -34,7 +35,9 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   function renderRow(user: IUser): JSX.Element {
     return (
       <Table.Row key={user.email}>
-        <Table.Cell className="email-cell">{user.email}</Table.Cell>
+        <Table.Cell className="email-cell">
+          <Link to={{ pathname: `/users/${user.id}`, state: { user } }}>{user.email}</Link>
+        </Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
         <Table.Cell>{user.lastName}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
@@ -50,7 +53,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
       renderRow={renderRow}
       data={data}
       isLoading={isLoading}
-      emptyLabel={translations.getLabel('USERS.EMPTY')}
+      emptyLabel={translations.getLabel('USERS.OVERVIEW.EMPTY')}
       sortFunctions={sortFunctions}
     />
   );

@@ -52,6 +52,16 @@
     "SEARCH_PLACEHOLDER": "Search..."
   },
   "USERS": {
+    "DETAIL": {
+      "BACK": "Back to users",
+      "CREATED_AT": "Created at",
+      "EMAIL": "Email",
+      "FIRST_NAME": "First name",
+      "ID": "Id",
+      "LAST_NAME": "Last name",
+      "STATE": "State",
+      "UPDATED_AT": "Updated at"
+    },
     "OVERVIEW": {
       "CREATE_USER": "Create user",
       "CREATED_AT": "Created at",

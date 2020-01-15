@@ -59,7 +59,7 @@ const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
       renderRow={renderRow}
       data={data}
       isLoading={isLoading}
-      emptyLabel={translations.getLabel('ROLES.EMPTY')}
+      emptyLabel={translations.getLabel('ROLES.OVERVIEW.EMPTY')}
       sortFunctions={sortFunctions}
     />
   );
