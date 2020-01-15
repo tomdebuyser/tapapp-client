@@ -6,7 +6,7 @@ import { SortFunctions } from '../../_hooks/useTableSort';
 import './table.scss';
 
 export interface TableColumn {
-  label: string;
+  label?: string;
   name: string;
   sortable?: boolean;
 }
@@ -30,7 +30,7 @@ const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoa
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
         sorted={column.sortable ? sortFunctions.getSortDirectionForColumn(column.name) : null}
       >
-        {translations.getLabel(column.label)}
+        {!!column.label && translations.getLabel(column.label)}
       </SemanticTable.HeaderCell>
     );
   }
