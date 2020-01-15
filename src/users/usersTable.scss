@@ -1,0 +1,22 @@
+@import '../_styles/colors';
+
+.users-table {
+  .actions {
+    vertical-align: middle;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        color: $grey;
+
+        &:hover,
+        &:focus {
+          color: $red;
+        }
+      }
+    }
+  }
+}

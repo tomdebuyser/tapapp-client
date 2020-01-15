@@ -1,9 +1,10 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, switchMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap, switchMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
-import { usersActions } from '../../_store/actions';
+import { usersActions, modalActions } from '../../_store/actions';
 import { usersSelectors } from '../../_store/selectors';
+import { translations } from '../../_translations';
 import { UsersActionType } from './actions';
 import * as usersApi from './api';
 
@@ -32,8 +33,41 @@ export const createUserEpic$: Epic = action$ =>
   );
 
 export const createUserSuccessEpic$: Epic = action$ =>
-  action$.ofType(usersActions.UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
+  action$.ofType(UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
 
-const UsersEpics = [getUsersEpic$, setUsersQueryEpic$, createUserEpic$, createUserSuccessEpic$];
+export const removeUserWithConfirmationEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.RemoveUser).pipe(
+    filter((action: usersActions.RemoveUser) => !action.confirmed),
+    map(({ user }: usersActions.RemoveUser) => {
+      return new modalActions.ShowConfirmationModalAction({
+        data: {
+          title: translations.getLabel('USERS.REMOVE.TITLE'),
+          content: translations.getLabel('USERS.REMOVE.CONTENT'),
+          confirmText: translations.getLabel('USERS.REMOVE.CONFIRM'),
+          confirmAction: () => new usersActions.RemoveUser(user, true),
+        },
+      });
+    }),
+  );
+
+export const removeUserEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.RemoveUser).pipe(
+    filter((action: usersActions.RemoveUser) => action.confirmed),
+    exhaustMap(({ user }: usersActions.RemoveUser) =>
+      from(usersApi.removeUser(user)).pipe(
+        map(() => new usersActions.RemoveUserSuccess()),
+        catchError(error => of(new usersActions.RemoveUserError(error))),
+      ),
+    ),
+  );
+
+const UsersEpics = [
+  getUsersEpic$,
+  setUsersQueryEpic$,
+  createUserEpic$,
+  createUserSuccessEpic$,
+  removeUserWithConfirmationEpic$,
+  removeUserEpic$,
+];
 
 export default UsersEpics;

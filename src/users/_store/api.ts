@@ -10,3 +10,7 @@ export function getUsers(query?: HttpMetadataQuery): Promise<HttpPagedResponse<I
 export function createUser(body: IUserForm): Promise<void> {
   return HttpClient.post('users', body);
 }
+
+export function removeUser(user: IUser): Promise<void> {
+  return HttpClient.delete(`users/${user.id}`);
+}

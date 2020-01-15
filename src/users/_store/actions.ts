@@ -10,6 +10,9 @@ export enum UsersActionType {
   GetUsers = '[Users] GetUsers',
   GetUsersError = '[Users] GetUsersError',
   GetUsersSuccess = '[Users] GetUsersSuccess',
+  RemoveUser = '[Users] RemoveUser',
+  RemoveUserError = '[Users] RemoveUserError',
+  RemoveUserSuccess = '[Users] RemoveUserSuccess',
   SetUsersQuery = '[Users] SetUsersQuery',
 }
 
@@ -46,6 +49,20 @@ export class CreateUserError implements Action<UsersActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
+export class RemoveUser implements Action<UsersActionType> {
+  readonly type = UsersActionType.RemoveUser;
+  constructor(public user: IUser, public confirmed?: boolean) {}
+}
+
+export class RemoveUserSuccess implements Action<UsersActionType> {
+  readonly type = UsersActionType.RemoveUserSuccess;
+}
+
+export class RemoveUserError implements Action<UsersActionType> {
+  readonly type = UsersActionType.RemoveUserError;
+  constructor(public payload: { error: ApiError }) {}
+}
+
 export type UsersAction =
   | GetUsers
   | GetUsersSuccess
@@ -53,4 +70,7 @@ export type UsersAction =
   | SetUsersQuery
   | CreateUser
   | CreateUserSuccess
-  | CreateUserError;
+  | CreateUserError
+  | RemoveUser
+  | RemoveUserSuccess
+  | RemoveUserError;

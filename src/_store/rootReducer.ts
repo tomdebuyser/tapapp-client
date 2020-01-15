@@ -4,9 +4,11 @@ import { combineReducers, Reducer } from 'redux';
 import rolesReducer, { RolesState } from '../roles/_store/reducer';
 import usersReducer, { UsersState } from '../users/_store/reducer';
 import authReducer, { AuthState } from '../auth/_store/reducer';
+import modalsReducer, { ModalState } from '../modals/_store/reducer';
 
 export interface AppState {
   auth: AuthState;
+  modals: ModalState;
   roles: RolesState;
   router: RouterState;
   users: UsersState;
@@ -18,4 +20,5 @@ export default (history: History): Reducer =>
     roles: rolesReducer,
     router: connectRouter(history),
     users: usersReducer,
+    modals: modalsReducer,
   });
