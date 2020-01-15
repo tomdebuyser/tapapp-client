@@ -64,6 +64,7 @@ const AuthEpics = [
   logoutEpic$,
   logoutSuccessEpic$,
   requestPasswordResetEpic$,
+  requestPasswordResetSuccessEpic$,
 ];
 
 export default AuthEpics;

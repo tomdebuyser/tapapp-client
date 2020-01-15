@@ -14,9 +14,10 @@
       "TITLE": "Welcome!"
     },
     "REQUEST_PASSWORD_RESET": {
+      "DESCRIPTION": "Enter the email address you used to register and we'll email you the password reset instructions.",
       "EMAIL": "Email",
-      "RESET": "Reset",
-      "TITLE": "Reset your password"
+      "RESET": "Send reset instructions",
+      "TITLE": "Forgot your password?"
     }
   },
   "ROLES": {

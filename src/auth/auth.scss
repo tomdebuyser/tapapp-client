@@ -1,4 +1,11 @@
+@import '../_styles/colors';
+
 .auth {
+  p {
+    margin-bottom: 3rem;
+    color: $dark-grey;
+  }
+
   form {
     align-items: flex-start;
 

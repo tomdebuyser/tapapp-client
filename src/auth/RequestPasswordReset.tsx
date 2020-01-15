@@ -28,9 +28,10 @@ const RequestPasswordReset = () => {
   return (
     <Container as="main" className="request-password-reset">
       <h1>{translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.TITLE')}</h1>
+      <p>{translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.DESCRIPTION')}</p>
       <form onSubmit={submitNewPassword}>
         <InputField
-          type="string"
+          type="email"
           autoComplete="email"
           name="email"
           label={translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.EMAIL')}
