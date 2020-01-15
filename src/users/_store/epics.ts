@@ -5,7 +5,7 @@ import { push } from 'connected-react-router';
 import { usersActions, modalActions } from '../../_store/actions';
 import { usersSelectors } from '../../_store/selectors';
 import { translations } from '../../_translations';
-import { UsersActionType } from './actions';
+import { UsersActionType, GetUsers } from './actions';
 import * as usersApi from './api';
 
 export const getUsersEpic$: Epic = (action$, state$) =>
@@ -42,7 +42,7 @@ export const removeUserWithConfirmationEpic$: Epic = action$ =>
       return new modalActions.ShowConfirmationModalAction({
         data: {
           title: translations.getLabel('USERS.REMOVE.TITLE'),
-          content: translations.getLabel('USERS.REMOVE.CONTENT'),
+          content: translations.getLabel('USERS.REMOVE.CONTENT', { user: user.email }),
           confirmText: translations.getLabel('USERS.REMOVE.CONFIRM'),
           confirmAction: () => new usersActions.RemoveUser(user, true),
         },
@@ -61,6 +61,9 @@ export const removeUserEpic$: Epic = action$ =>
     ),
   );
 
+export const removeUserSuccessEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.RemoveUserSuccess).pipe(switchMap(() => of(new usersActions.GetUsers())));
+
 const UsersEpics = [
   getUsersEpic$,
   setUsersQueryEpic$,
@@ -68,6 +71,7 @@ const UsersEpics = [
   createUserSuccessEpic$,
   removeUserWithConfirmationEpic$,
   removeUserEpic$,
+  removeUserSuccessEpic$,
 ];
 
 export default UsersEpics;

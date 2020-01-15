@@ -25,12 +25,12 @@ const Users: FC = () => {
 
   return (
     <Container as="main" className="users">
-      <h1>{translations.getLabel('USERS.TITLE')}</h1>
+      <h1>{translations.getLabel('USERS.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
         <Button isTextLink href="/users/create" primary>
           <Icon name="SvgAdd" size={1.6} />
-          {translations.getLabel('USERS.CREATE_USER')}
+          {translations.getLabel('USERS.OVERVIEW.CREATE_USER')}
         </Button>
       </div>
       <UsersTable data={users} isLoading={isLoading} setQuery={setQuery} />

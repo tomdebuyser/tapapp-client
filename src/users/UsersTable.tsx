@@ -18,12 +18,12 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'email', label: 'USERS.EMAIL', sortable: true, width: '25rem' },
-  { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
-  { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
-  { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
-  { name: 'state', label: 'USERS.STATE', sortable: true },
+  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true, width: '25rem' },
+  { name: 'firstName', label: 'USERS.OVERVIEW.FIRST_NAME', sortable: true },
+  { name: 'lastName', label: 'USERS.OVERVIEW.LAST_NAME', sortable: true },
+  { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'USERS.OVERVIEW.UPDATED_AT', sortable: true },
+  { name: 'state', label: 'USERS.OVERVIEW.STATE', sortable: true },
   { name: 'actions', width: '4rem' },
 ];
 

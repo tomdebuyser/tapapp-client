@@ -25,12 +25,12 @@ const Roles: FC = () => {
 
   return (
     <Container as="main" className="roles">
-      <h1>{translations.getLabel('ROLES.TITLE')}</h1>
+      <h1>{translations.getLabel('ROLES.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
         <Button isTextLink href="/roles/create" primary>
           <Icon name="SvgAdd" size={1.6} />
-          {translations.getLabel('ROLES.CREATE_ROLE')}
+          {translations.getLabel('ROLES.OVERVIEW.CREATE_ROLE')}
         </Button>
       </div>
       <RolesTable data={roles} isLoading={isLoading} setQuery={setQuery} />
