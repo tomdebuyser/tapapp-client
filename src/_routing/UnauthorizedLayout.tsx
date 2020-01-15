@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 import Login from '../auth/Login';
-import ResetPassword from '../auth/ResetPassword';
+import ChoosePassword from '../auth/ChoosePassword';
 import slash from '../_assets/images/slash-white.png';
-
+import RequestPasswordReset from '../auth/RequestPasswordReset';
 import './unauthorizedLayout.scss';
 
 const UnauthorizedLayout: React.FC = () => {
@@ -14,7 +14,8 @@ const UnauthorizedLayout: React.FC = () => {
       </aside>
       <Switch>
         <Route path="/auth/login" component={Login} />
-        <Route path="/auth/reset-password/:token" component={ResetPassword} />
+        <Route path="/auth/choose-password/:token" component={ChoosePassword} />
+        <Route path="/auth/request-password-reset" component={RequestPasswordReset} />
         <Redirect to="/auth/login" />
       </Switch>
     </div>

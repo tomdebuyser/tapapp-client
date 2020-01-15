@@ -1,6 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { translations } from '../_translations';
 import { InputField, Button } from '../_shared';
 import { useForm } from '../_hooks';
@@ -47,6 +48,7 @@ const Login = () => {
           autoComplete="current-password"
         />
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
+        <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
         <div>
           <Button primary type="submit" loading={isLoading}>
             {translations.getLabel('AUTH.LOGIN.LOGIN')}
