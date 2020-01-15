@@ -8,6 +8,9 @@ export enum AuthActionType {
   Login = '[Auth] Login',
   LoginError = '[Auth] LoginError',
   LoginSuccess = '[Auth] LoginSuccess',
+  Logout = '[Auth] Logout',
+  LogoutError = '[Auth] LogoutError',
+  LogoutSuccess = '[Auth] LogoutSuccess',
   ResetPassword = '[Auth] ResetPassword',
   ResetPasswordError = '[Auth] ResetPasswordError',
   ResetPasswordSuccess = '[Auth] ResetPasswordSuccess',
@@ -42,4 +45,26 @@ export class LoginError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export type AuthActions = ResetPassword | ResetPasswordSuccess | ResetPasswordError | Login | LoginSuccess | LoginError;
+export class Logout implements Action<AuthActionType> {
+  readonly type = AuthActionType.Logout;
+}
+
+export class LogoutSuccess implements Action<AuthActionType> {
+  readonly type = AuthActionType.LogoutSuccess;
+}
+
+export class LogoutError implements Action<AuthActionType> {
+  readonly type = AuthActionType.LogoutError;
+  constructor(public payload: { error: ApiError }) {}
+}
+
+export type AuthActions =
+  | ResetPassword
+  | ResetPasswordSuccess
+  | ResetPasswordError
+  | Login
+  | LoginSuccess
+  | LoginError
+  | Logout
+  | LogoutSuccess
+  | LogoutError;

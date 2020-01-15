@@ -1,47 +1,67 @@
 {
-  "BUTTONS": {
-    "CANCEL": "Cancel",
-    "CREATE": "Create"
-  },
-  "NAVIGATION": {
-    "ROLES": "Roles",
-    "USERS": "Users"
+  "AUTH": {
+    "LOGIN": {
+      "LOGIN": "Login",
+      "PASSWORD": "Password",
+      "TITLE": "Welcome!",
+      "USERNAME": "Username"
+    },
+    "LOGOUT": "Logout",
+    "REGISTER": {
+      "CHOOSE_PASSWORD": "Choose password",
+      "REGISTER": "Register",
+      "TITLE": "Welcome!"
+    }
   },
   "ROLES": {
-    "CREATE_ROLE": "Create roles",
-    "CREATED_AT": "Created at",
-    "EDIT": "Edit",
-    "NAME": "Name",
-    "PERMISSIONS": "Permissions",
-    "TITLE": "Roles",
-    "UPDATED_AT": "Updated at",
-    "EMPTY": "No roles found",
-    "VIEW": "View"
+    "OVERVIEW": {
+      "CREATE_ROLE": "Create role",
+      "CREATED_AT": "Created at",
+      "EMPTY": "No roles found",
+      "NAME": "Name",
+      "PERMISSIONS": "Permissions",
+      "TITLE": "Roles",
+      "UPDATED_AT": "Updated at"
+    },
+    "CREATE": {
+      "EDIT": "Edit",
+      "NAME": "Name",
+      "PERMISSIONS": "Permissions",
+      "ROLES": "Roles",
+      "TITLE": "Create role",
+      "USERS": "Users",
+      "VIEW": "View"
+    }
+  },
+  "SHARED": {
+    "BUTTONS": {
+      "CANCEL": "Cancel",
+      "CREATE": "Create"
+    },
+    "NAVIGATION": {
+      "ROLES": "Roles",
+      "USERS": "Users"
+    },
+    "SEARCH_PLACEHOLDER": "Search..."
   },
   "USERS": {
-    "CREATE_USER": "Create user",
-    "CREATED_AT": "Created at",
-    "EMAIL": "Email",
-    "EMPTY": "No users found",
-    "FIRST_NAME": "First name",
-    "LAST_NAME": "Last name",
-    "STATE": "State",
-    "TITLE": "Users",
-    "UPDATED_AT": "Updated at"
-  },
-  "AUTH": {
-    "REGISTER": {
-      "TITLE": "Welcome!",
-      "CHOOSE_PASSWORD": "Choose password",
-      "REGISTER": "Register"
+    "OVERVIEW": {
+      "CREATE_USER": "Create user",
+      "CREATED_AT": "Created at",
+      "EMAIL": "Email",
+      "EMPTY": "No users found",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "STATE": "State",
+      "TITLE": "Users",
+      "UPDATED_AT": "Updated at"
     },
-    "LOGIN": {
-      "TITLE": "Welcome!",
-      "USERNAME": "Username",
-      "PASSWORD": "Password",
-      "LOGIN": "Login"
-    },
-    "LOGOUT": "Logout"
-  },
-  "SEARCH_PLACEHOLDER": "Search..."
+    "CREATE": {
+      "EMAIL": "Email",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "ROLE": "Role",
+      "TITLE": "Create user"
+    }
+  }
 }

@@ -36,20 +36,20 @@ const CreateRole = () => {
 
   return (
     <Container as="main" className="create-role">
-      <h1>{translations.getLabel('ROLES.CREATE_ROLE')}</h1>
+      <h1>{translations.getLabel('ROLES.CREATE.TITLE')}</h1>
       <form onSubmit={submitUser}>
         <InputField
           type="string"
           name="name"
           value={form.name}
           onChange={setFormAttribute}
-          label={translations.getLabel('ROLES.NAME')}
+          label={translations.getLabel('ROLES.CREATE.NAME')}
         />
         <div className="permissions">
-          <h2>{translations.getLabel('ROLES.PERMISSIONS')}</h2>
+          <h2>{translations.getLabel('ROLES.CREATE.PERMISSIONS')}</h2>
           {Object.keys(form.permissions).map(permission => (
             <fieldset key={permission}>
-              <legend>{translations.getLabel(`${permission.toUpperCase()}.TITLE`)}</legend>
+              <legend>{translations.getLabel(`ROLES.CREATE.${permission.toUpperCase()}`)}</legend>
               <div>
                 {Object.keys(form.permissions[permission]).map(option => {
                   const optionName = `${permission}.${option}`;
@@ -58,7 +58,7 @@ const CreateRole = () => {
                       key={optionName}
                       id={optionName}
                       name={optionName}
-                      label={translations.getLabel(`ROLES.${option.toUpperCase()}`)}
+                      label={translations.getLabel(`ROLES.CREATE.${option.toUpperCase()}`)}
                       checked={form.permissions[permission][option]}
                       onChange={setPermissions}
                     />
@@ -71,10 +71,10 @@ const CreateRole = () => {
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
           <Button primary type="submit" loading={isLoading}>
-            {translations.getLabel('BUTTONS.CREATE')}
+            {translations.getLabel('SHARED.BUTTONS.CREATE')}
           </Button>
           <Button isTextLink href="/roles">
-            {translations.getLabel('BUTTONS.CANCEL')}
+            {translations.getLabel('SHARED.BUTTONS.CANCEL')}
           </Button>
         </div>
       </form>

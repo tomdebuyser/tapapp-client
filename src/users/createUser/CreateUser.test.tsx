@@ -19,11 +19,11 @@ describe('CreateUser component', () => {
 
     const { getByLabelText, getByText } = render(<CreateUser />);
 
-    const emailInput = getByLabelText(translations.getLabel('USERS.EMAIL'));
-    const firstNameInput = getByLabelText(translations.getLabel('USERS.FIRST_NAME'));
-    const lastNameInput = getByLabelText(translations.getLabel('USERS.LAST_NAME'));
-    const roleDropdown = getByLabelText(translations.getLabel('USERS.ROLE'));
-    const createButton = getByText(translations.getLabel('BUTTONS.CREATE'), { selector: 'button' });
+    const emailInput = getByLabelText(translations.getLabel('USERS.CREATE.EMAIL'));
+    const firstNameInput = getByLabelText(translations.getLabel('USERS.CREATE.FIRST_NAME'));
+    const lastNameInput = getByLabelText(translations.getLabel('USERS.CREATE.LAST_NAME'));
+    const roleDropdown = getByLabelText(translations.getLabel('USERS.CREATE.ROLE'));
+    const createButton = getByText(translations.getLabel('SHARED.BUTTONS.CREATE'), { selector: 'button' });
 
     expect(emailInput).toBeInTheDocument();
     expect(firstNameInput).toBeInTheDocument();
