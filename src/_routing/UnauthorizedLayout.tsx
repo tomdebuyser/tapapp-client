@@ -14,7 +14,7 @@ const UnauthorizedLayout: React.FC = () => {
       </aside>
       <Switch>
         <Route path="/auth/login" component={Login} />
-        <Route path="/auth/choose-password/:token" component={ChoosePassword} />
+        <Route path="/auth/register/:token" component={ChoosePassword} />
         <Route path="/auth/request-password-reset" component={RequestPasswordReset} />
         <Redirect to="/auth/login" />
       </Switch>
