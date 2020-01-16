@@ -6,6 +6,9 @@ import { IUser } from '../../users/_models/User';
 import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
 export enum AuthActionType {
+  Authenticate = '[Auth] Authenticate',
+  AuthenticateError = '[Auth] AuthenticateError',
+  AuthenticateSuccess = '[Auth] AuthenticateSuccess',
   ChoosePassword = '[Auth] ChoosePassword',
   ChoosePasswordError = '[Auth] ChoosePasswordError',
   ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
@@ -18,6 +21,21 @@ export enum AuthActionType {
   RequestPasswordReset = '[Auth] RequestPasswordReset',
   RequestPasswordResetError = '[Auth] RequestPasswordResetError',
   RequestPasswordResetSuccess = '[Auth] RequestPasswordResetSuccess',
+}
+
+export class Authenticate implements Action<AuthActionType> {
+  readonly type = AuthActionType.Authenticate;
+  constructor(public payload: { pathname: string }) {}
+}
+
+export class AuthenticateSuccess implements Action<AuthActionType> {
+  readonly type = AuthActionType.AuthenticateSuccess;
+  constructor(public payload: { pathname: string; user: IUser }) {}
+}
+
+export class AuthenticateError implements Action<AuthActionType> {
+  readonly type = AuthActionType.AuthenticateError;
+  constructor(public payload: { error: ApiError }) {}
 }
 
 export class ChoosePassword implements Action<AuthActionType> {
@@ -77,6 +95,9 @@ export class RequestPasswordResetError implements Action<AuthActionType> {
 }
 
 export type AuthActions =
+  | Authenticate
+  | AuthenticateSuccess
+  | AuthenticateError
   | ChoosePassword
   | ChoosePasswordSuccess
   | ChoosePasswordError

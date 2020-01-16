@@ -17,5 +17,9 @@ export function logout(): Promise<void> {
 }
 
 export function requestPasswordReset(body: IRequestPasswordResetForm): Promise<void> {
-  return HttpClient.post('auth/reset-password-request', body);
+  return HttpClient.post('auth/request-password-reset', body);
+}
+
+export function authenticate(): Promise<IUser> {
+  return HttpClient.get('auth/authenticate');
 }

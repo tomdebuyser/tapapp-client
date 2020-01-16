@@ -3,13 +3,15 @@ import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, InputField } from '../_shared';
-import { useForm } from '../_hooks';
+import { useForm, useToggle } from '../_hooks';
 import { translations } from '../_translations';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../_store/selectors';
 import { IChangePasswordForm } from './_models/ChoosePassword';
 import './auth.scss';
+
+const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
 
 const initialForm: IChangePasswordForm = {
   newPassword: '',
@@ -20,6 +22,7 @@ const ChoosePassword = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(authSelectors.isChoosePasswordLoading);
   const error = useSelector(authSelectors.errorChoosePassword);
+  const [validationError, setValidationError] = useToggle(false);
   const { token } = useParams();
   const { form, setFormAttribute } = useForm(initialForm);
 
@@ -30,7 +33,12 @@ const ChoosePassword = () => {
 
   const submitNewPassword = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(new authActions.ChoosePassword(form));
+    if (passwordRegex.test(form.newPassword)) {
+      setValidationError(false);
+      dispatch(new authActions.ChoosePassword(form));
+    } else {
+      setValidationError(true);
+    }
   };
 
   return (
@@ -44,8 +52,11 @@ const ChoosePassword = () => {
           label={translations.getLabel('AUTH.REGISTER.CHOOSE_PASSWORD')}
           value={form.newPassword}
           onChange={setFormAttribute}
+          error={validationError}
+          errorMessage={translations.getLabel('AUTH.REGISTER.ERROR_UNSAFE_PASSWORD')}
         />
-        <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
+        <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
+        <ErrorMessage isVisible={!!error}>{translations.getLabel('AUTH.REGISTER.ERROR_GENERAL')}</ErrorMessage>
         <div>
           <Button primary type="submit" loading={isLoading}>
             {translations.getLabel('AUTH.REGISTER.REGISTER')}
