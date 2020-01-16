@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { translations } from '../_translations';
 import { InputField, Button } from '../_shared';
-import { useForm } from '../_hooks';
+import { useForm, useToggle } from '../_hooks';
 import { authSelectors } from '../_store/selectors';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
+import { ApiError, HttpStatus } from '../_http';
 import { ILoginForm } from './_models/Login';
 import './auth.scss';
 
@@ -16,15 +17,27 @@ const initialForm: ILoginForm = {
   password: '',
 };
 
+const getErrorMessage = (error: ApiError) => {
+  if (!error) return '';
+  if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel('AUTH.LOGIN.ERROR_UNAUTHORIZED');
+  return translations.getLabel('AUTH.LOGIN.ERROR_GENERAL');
+};
+
 const Login = () => {
   const dispatch = useDispatch();
+  const [validationError, setValidationError] = useToggle(false);
   const isLoading = useSelector(authSelectors.isLoginLoading);
   const error = useSelector(authSelectors.errorLogin);
   const { form, setFormAttribute } = useForm(initialForm);
 
   const login = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(new authActions.Login(form));
+    if (form.username && form.password) {
+      setValidationError(false);
+      dispatch(new authActions.Login(form));
+    } else {
+      setValidationError(true);
+    }
   };
 
   return (
@@ -38,6 +51,8 @@ const Login = () => {
           autoComplete="username"
           value={form.username}
           onChange={setFormAttribute}
+          error={validationError && !form.username}
+          errorMessage={translations.getLabel('AUTH.LOGIN.ERROR_EMPTY_USERNAME')}
         />
         <InputField
           label={translations.getLabel('AUTH.LOGIN.PASSWORD')}
@@ -46,8 +61,10 @@ const Login = () => {
           value={form.password}
           onChange={setFormAttribute}
           autoComplete="current-password"
+          error={validationError && !form.password}
+          errorMessage={translations.getLabel('AUTH.LOGIN.ERROR_EMPTY_PASSWORD')}
         />
-        <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
+        <ErrorMessage isVisible={!!error}>{getErrorMessage(error)}</ErrorMessage>
         <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
         <div>
           <Button primary type="submit" loading={isLoading}>

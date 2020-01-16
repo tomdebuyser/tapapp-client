@@ -1,6 +1,10 @@
 {
   "AUTH": {
     "LOGIN": {
+      "ERROR_EMPTY_USERNAME": "Username is required",
+      "ERROR_EMPTY_PASSWORD": "Password is required",
+      "ERROR_GENERAL": "Something went wrong while trying to login. Please try again.",
+      "ERROR_UNAUTHORIZED": "Incorrect username or password",
       "FORGOT_PASSWORD": "Forgot your password?",
       "LOGIN": "Login",
       "PASSWORD": "Password",
