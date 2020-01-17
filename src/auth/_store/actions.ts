@@ -6,12 +6,13 @@ import { IUser } from '../../users/_models/User';
 import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
 export enum AuthActionType {
+  Authenticate = '[Auth] Authenticate',
+  AuthenticateError = '[Auth] AuthenticateError',
+  AuthenticateSuccess = '[Auth] AuthenticateSuccess',
   ChoosePassword = '[Auth] ChoosePassword',
   ChoosePasswordError = '[Auth] ChoosePasswordError',
   ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
   Login = '[Auth] Login',
-  LoginError = '[Auth] LoginError',
-  LoginSuccess = '[Auth] LoginSuccess',
   Logout = '[Auth] Logout',
   LogoutError = '[Auth] LogoutError',
   LogoutSuccess = '[Auth] LogoutSuccess',
@@ -20,6 +21,28 @@ export enum AuthActionType {
   RequestPasswordResetSuccess = '[Auth] RequestPasswordResetSuccess',
 }
 
+// AUTHENTICATE
+export class Authenticate implements Action<AuthActionType> {
+  readonly type = AuthActionType.Authenticate;
+}
+
+export class AuthenticateSuccess implements Action<AuthActionType> {
+  readonly type = AuthActionType.AuthenticateSuccess;
+  constructor(public payload: { pathname?: string; user: IUser }) {}
+}
+
+export class AuthenticateError implements Action<AuthActionType> {
+  readonly type = AuthActionType.AuthenticateError;
+  constructor(public payload: { error?: ApiError }) {}
+}
+
+// LOGIN
+export class Login implements Action<AuthActionType> {
+  readonly type = AuthActionType.Login;
+  constructor(public payload: ILoginForm, public pathname: string) {}
+}
+
+// CHOOSE PASSWORD
 export class ChoosePassword implements Action<AuthActionType> {
   readonly type = AuthActionType.ChoosePassword;
   constructor(public payload: IChangePasswordForm) {}
@@ -34,21 +57,7 @@ export class ChoosePasswordError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export class Login implements Action<AuthActionType> {
-  readonly type = AuthActionType.Login;
-  constructor(public payload: ILoginForm) {}
-}
-
-export class LoginSuccess implements Action<AuthActionType> {
-  readonly type = AuthActionType.LoginSuccess;
-  constructor(public payload: { user: IUser }) {}
-}
-
-export class LoginError implements Action<AuthActionType> {
-  readonly type = AuthActionType.LoginError;
-  constructor(public payload: { error: ApiError }) {}
-}
-
+// LOGOUT
 export class Logout implements Action<AuthActionType> {
   readonly type = AuthActionType.Logout;
 }
@@ -62,6 +71,7 @@ export class LogoutError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
+// REQUEST PASSWORD RESET
 export class RequestPasswordReset implements Action<AuthActionType> {
   readonly type = AuthActionType.RequestPasswordReset;
   constructor(public payload: IRequestPasswordResetForm) {}
@@ -77,12 +87,13 @@ export class RequestPasswordResetError implements Action<AuthActionType> {
 }
 
 export type AuthActions =
+  | Authenticate
+  | AuthenticateSuccess
+  | AuthenticateError
   | ChoosePassword
   | ChoosePasswordSuccess
   | ChoosePasswordError
   | Login
-  | LoginSuccess
-  | LoginError
   | Logout
   | LogoutSuccess
   | LogoutError
