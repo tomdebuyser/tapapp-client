@@ -52,32 +52,22 @@
     "SEARCH_PLACEHOLDER": "Search..."
   },
   "USERS": {
+    "CREATED_AT": "Created at",
+    "EMAIL": "Email",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "ROLE": "Role",
+    "STATE": "State",
+    "UPDATED_AT": "Updated at",
     "DETAIL": {
-      "BACK": "Back to users",
-      "CREATED_AT": "Created at",
-      "EMAIL": "Email",
-      "FIRST_NAME": "First name",
-      "ID": "Id",
-      "LAST_NAME": "Last name",
-      "STATE": "State",
-      "UPDATED_AT": "Updated at"
+      "BACK": "Back to users"
     },
     "OVERVIEW": {
       "CREATE_USER": "Create user",
-      "CREATED_AT": "Created at",
-      "EMAIL": "Email",
       "EMPTY": "No users found",
-      "FIRST_NAME": "First name",
-      "LAST_NAME": "Last name",
-      "STATE": "State",
-      "TITLE": "Users",
-      "UPDATED_AT": "Updated at"
+      "TITLE": "Users"
     },
     "CREATE": {
-      "EMAIL": "Email",
-      "FIRST_NAME": "First name",
-      "LAST_NAME": "Last name",
-      "ROLE": "Role",
       "TITLE": "Create user"
     }
   }

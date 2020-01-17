@@ -37,7 +37,7 @@ const CreateUser: FC = () => {
           name="email"
           value={form.email}
           onChange={setFormAttribute}
-          label={translations.getLabel('USERS.CREATE.EMAIL')}
+          label={translations.getLabel('USERS.EMAIL')}
         />
         <div role="group">
           <InputField
@@ -45,18 +45,18 @@ const CreateUser: FC = () => {
             name="firstName"
             value={form.firstName}
             onChange={setFormAttribute}
-            label={translations.getLabel('USERS.CREATE.FIRST_NAME')}
+            label={translations.getLabel('USERS.FIRST_NAME')}
           />
           <InputField
             type="string"
             name="lastName"
             value={form.lastName}
             onChange={setFormAttribute}
-            label={translations.getLabel('USERS.CREATE.LAST_NAME')}
+            label={translations.getLabel('USERS.LAST_NAME')}
           />
         </div>
         <RolesDropdown
-          label={translations.getLabel('USERS.CREATE.ROLE')}
+          label={translations.getLabel('USERS.ROLE')}
           name="roleIds"
           value={form.roleIds}
           onChange={setFormAttribute}

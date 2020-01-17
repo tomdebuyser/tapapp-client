@@ -6,10 +6,10 @@ import { SortFunctions } from '../../_hooks/useTableSort';
 import './table.scss';
 
 export interface TableColumn {
+  className?: string;
   label: string;
   name: string;
   sortable?: boolean;
-  width?: string;
 }
 
 interface Props {
@@ -25,12 +25,11 @@ const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoa
   function renderHeaderCell(column: TableColumn) {
     return (
       <SemanticTable.HeaderCell
-        className={classnames({ 'not-sortable': !column.sortable })}
+        className={classnames(`${column.className}`, { 'not-sortable': !column.sortable })}
         key={column.name}
         name={column.name}
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
         sorted={column.sortable ? sortFunctions.getSortDirectionForColumn(column.name) : null}
-        style={{ width: column?.width }}
       >
         {translations.getLabel(column.label)}
       </SemanticTable.HeaderCell>

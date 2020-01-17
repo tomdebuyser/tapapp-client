@@ -8,27 +8,7 @@
     margin-bottom: 2rem;
   }
 
-  > h1 {
-    margin-bottom: 1rem;
-  }
-
-  .user-id {
-    display: block;
-    margin-bottom: 3rem;
-    color: $grey;
-  }
-
   .info-wrapper {
     display: flex;
-    margin-top: 2rem;
-
-    .info-field {
-      margin-right: 3rem;
-
-      .description {
-        font-size: 1.4rem;
-        color: $dark-grey;
-      }
-    }
   }
 }

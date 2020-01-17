@@ -22,7 +22,7 @@ const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop
   if (isTextLink) {
     return (
       <Link to={href}>
-        <SemanticButton primary={primary} disabled={disabled || loading} loading={loading}>
+        <SemanticButton as="span" primary={primary} disabled={disabled || loading} loading={loading}>
           {children}
         </SemanticButton>
       </Link>

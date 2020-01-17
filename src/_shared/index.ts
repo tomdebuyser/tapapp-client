@@ -1,3 +1,4 @@
+import Field from './field/Field';
 import Button from './button/Button';
 import Dropdown from './dropdown/Dropdown';
 import Icon from './icon/Icon';
@@ -7,4 +8,4 @@ import Modal from './modal/Modal';
 import Table from './table/Table';
 import SearchInput from './searchInput/SearchInput';
 
-export { Icon, InputField, Menu, Modal, Table, Button, SearchInput, Dropdown };
+export { Icon, Field, InputField, Menu, Modal, Table, Button, SearchInput, Dropdown };
