@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Redirect, useLocation } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 import AuthorizedRoute from './_routing/AuthorizedRoute';
@@ -11,11 +11,10 @@ import { authSelectors } from './_store/selectors';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
   const isLoading = useSelector(authSelectors.isAuthenticateLoading);
 
   useEffect(() => {
-    dispatch(new authActions.Authenticate({ pathname }));
+    dispatch(new authActions.Authenticate());
   }, [dispatch]);
 
   if (isLoading)

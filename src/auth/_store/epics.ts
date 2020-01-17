@@ -8,9 +8,9 @@ import { AuthActionType } from './actions';
 
 export const authenticateEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Authenticate).pipe(
-    exhaustMap(({ payload }: authActions.Authenticate) =>
+    exhaustMap(() =>
       from(authApi.authenticate()).pipe(
-        map(user => new authActions.AuthenticateSuccess({ user, pathname: payload.pathname })),
+        map(user => new authActions.AuthenticateSuccess({ user })),
         catchError(() => of(new authActions.AuthenticateError({}))),
       ),
     ),

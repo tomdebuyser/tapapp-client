@@ -13,8 +13,6 @@ export enum AuthActionType {
   ChoosePasswordError = '[Auth] ChoosePasswordError',
   ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
   Login = '[Auth] Login',
-  LoginError = '[Auth] LoginError',
-  LoginSuccess = '[Auth] LoginSuccess',
   Logout = '[Auth] Logout',
   LogoutError = '[Auth] LogoutError',
   LogoutSuccess = '[Auth] LogoutSuccess',
@@ -26,12 +24,11 @@ export enum AuthActionType {
 // AUTHENTICATE
 export class Authenticate implements Action<AuthActionType> {
   readonly type = AuthActionType.Authenticate;
-  constructor(public payload: { pathname: string }) {}
 }
 
 export class AuthenticateSuccess implements Action<AuthActionType> {
   readonly type = AuthActionType.AuthenticateSuccess;
-  constructor(public payload: { pathname: string; user: IUser }) {}
+  constructor(public payload: { pathname?: string; user: IUser }) {}
 }
 
 export class AuthenticateError implements Action<AuthActionType> {
