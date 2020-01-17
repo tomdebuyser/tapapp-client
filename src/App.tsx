@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Loader } from 'semantic-ui-react';
 import AuthorizedRoute from './_routing/AuthorizedRoute';
 import AuthorizedLayout from './_routing/AuthorizedLayout';
 import UnauthorizedRoute from './_routing/UnauthorizedRoute';
 import UnauthorizedLayout from './_routing/UnauthorizedLayout';
 import ReduxDelegatedModal from './modals/ReduxDelegatedModal';
+import { authActions } from './_store/actions';
+import { authSelectors } from './_store/selectors';
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(authSelectors.isAuthenticateLoading);
+
+  useEffect(() => {
+    dispatch(new authActions.Authenticate());
+  }, [dispatch]);
+
+  if (isLoading)
+    return (
+      <div>
+        <Loader size="large" active={isLoading} />
+      </div>
+    );
+
   return (
     <>
       <Switch>

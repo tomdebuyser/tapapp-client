@@ -1,7 +1,10 @@
 @import '../_styles/overview';
 
 .users {
-  .email-cell {
+  .email-column {
     width: 25rem;
+  }
+  .actions-column {
+    width: 4rem;
   }
 }
