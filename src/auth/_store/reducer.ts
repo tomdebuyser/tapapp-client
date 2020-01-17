@@ -7,6 +7,7 @@ export interface AuthState {
   errorLogin?: ApiError;
   errorLogout?: ApiError;
   errorRequestPasswordReset?: ApiError;
+  isAuthenticateLoading: boolean;
   isChoosePasswordLoading: boolean;
   isLoginLoading: boolean;
   isLogoutLoading: boolean;
@@ -15,6 +16,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
+  isAuthenticateLoading: true,
   isLoginLoading: false,
   isChoosePasswordLoading: false,
   isLogoutLoading: false,
@@ -47,16 +49,24 @@ export default function reducer(state = initialState, action: AuthActions): Auth
         errorLogin: null,
         user: null,
       };
-    case AuthActionType.LoginSuccess:
+    case AuthActionType.Authenticate:
+      return {
+        ...state,
+        isAuthenticateLoading: true,
+        user: null,
+      };
+    case AuthActionType.AuthenticateSuccess:
       return {
         ...state,
         isLoginLoading: false,
+        isAuthenticateLoading: false,
         user: action.payload.user,
       };
-    case AuthActionType.LoginError:
+    case AuthActionType.AuthenticateError:
       return {
         ...state,
         isLoginLoading: false,
+        isAuthenticateLoading: false,
         errorLogin: action.payload.error,
       };
     case AuthActionType.Logout:
