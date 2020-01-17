@@ -31,7 +31,8 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
 
   useEffect(() => {
     setFormAttribute(token, 'resetToken');
-  }, [setFormAttribute, token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const submitNewPassword = (event: FormEvent) => {
     event.preventDefault();
