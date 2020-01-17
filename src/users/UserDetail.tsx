@@ -3,19 +3,9 @@ import { Container } from 'semantic-ui-react';
 import { Link, useLocation, Redirect } from 'react-router-dom';
 import { Icon, InputField, Field } from '../_shared';
 import { translations } from '../_translations';
-import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
+import RolesDropdown from '../roles/rolesDropdown/RolesDropdown';
 import { IUser } from './_models/User';
 import './userDetail.scss';
-import RolesDropdown from '../roles/rolesDropdown/RolesDropdown';
-
-const renderField = (value: string, label: string) => (
-  <div className="info-field">
-    <label>{translations.getLabel(label)}</label>
-    <p>{value}</p>
-  </div>
-);
-
-const renderDate = (date: string, label: string) => renderField(formatDate(dateFromISOString(date)), label);
 
 const UserDetail = () => {
   const { state } = useLocation();
