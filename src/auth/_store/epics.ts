@@ -19,11 +19,7 @@ export const authenticateEpic$: Epic = action$ =>
 export const authenticateSuccessEpic$: Epic = action$ =>
   action$
     .ofType(AuthActionType.AuthenticateSuccess)
-    .pipe(
-      switchMap(({ payload }: authActions.AuthenticateSuccess) =>
-        of(push(payload.pathname === '/users' ? '/users' : payload.pathname)),
-      ),
-    );
+    .pipe(switchMap(({ payload }: authActions.AuthenticateSuccess) => of(push(payload.pathname || '/'))));
 
 export const choosePasswordEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.ChoosePassword).pipe(
