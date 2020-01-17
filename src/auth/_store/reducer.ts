@@ -3,7 +3,6 @@ import { IUser } from '../../users/_models/User';
 import { AuthActions, AuthActionType } from './actions';
 
 export interface AuthState {
-  errorAuthenticate?: ApiError;
   errorChoosePassword?: ApiError;
   errorLogin?: ApiError;
   errorLogout?: ApiError;
@@ -50,36 +49,25 @@ export default function reducer(state = initialState, action: AuthActions): Auth
         errorLogin: null,
         user: null,
       };
-    case AuthActionType.LoginSuccess:
-      return {
-        ...state,
-        isLoginLoading: false,
-        user: action.payload.user,
-      };
-    case AuthActionType.LoginError:
-      return {
-        ...state,
-        isLoginLoading: false,
-        errorLogin: action.payload.error,
-      };
     case AuthActionType.Authenticate:
       return {
         ...state,
         isAuthenticateLoading: true,
-        errorAuthenticate: null,
         user: null,
       };
     case AuthActionType.AuthenticateSuccess:
       return {
         ...state,
+        isLoginLoading: false,
         isAuthenticateLoading: false,
         user: action.payload.user,
       };
     case AuthActionType.AuthenticateError:
       return {
         ...state,
+        isLoginLoading: false,
         isAuthenticateLoading: false,
-        errorAuthenticate: action.payload.error,
+        errorLogin: action.payload.error,
       };
     case AuthActionType.Logout:
       return {

@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { authSelectors } from '../_store/selectors';
 
 const AuthorizedRoute = ({ component: Component, ...rest }) => {
-  const user = useSelector(authSelectors.user);
+  const isLoggedIn = useSelector(authSelectors.isLoggedIn);
 
-  return <Route {...rest} render={props => (user ? <Component {...props} /> : <Redirect to="/auth/login" />)} />;
+  return <Route {...rest} render={props => (isLoggedIn ? <Component {...props} /> : <Redirect to="/auth/login" />)} />;
 };
 
 export default AuthorizedRoute;

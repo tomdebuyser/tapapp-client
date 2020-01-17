@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useContext } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { authSelectors } from '../_store/selectors';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { ApiError, HttpStatus } from '../_http';
+import { PathnameContext } from '../App';
 import { ILoginForm } from './_models/Login';
 import './auth.scss';
 
@@ -19,11 +20,12 @@ const initialForm: ILoginForm = {
 
 const getErrorMessage = (error: ApiError) => {
   if (!error) return '';
-  if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel('AUTH.LOGIN.ERROR_UNAUTHORIZED');
-  return translations.getLabel('AUTH.LOGIN.ERROR_GENERAL');
+  if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel('AUTH.LOGIN.ERROR.UNAUTHORIZED');
+  return translations.getLabel('AUTH.LOGIN.ERROR.GENERAL');
 };
 
 const Login = () => {
+  const pathname = useContext(PathnameContext);
   const dispatch = useDispatch();
   const [validationError, setValidationError] = useToggle(false);
   const isLoading = useSelector(authSelectors.isLoginLoading);
@@ -34,7 +36,7 @@ const Login = () => {
     event.preventDefault();
     if (form.username && form.password) {
       setValidationError(false);
-      dispatch(new authActions.Login(form));
+      dispatch(new authActions.Login(form, pathname));
     } else {
       setValidationError(true);
     }
@@ -52,7 +54,7 @@ const Login = () => {
           value={form.username}
           onChange={setFormAttribute}
           error={validationError && !form.username}
-          errorMessage={translations.getLabel('AUTH.LOGIN.ERROR_EMPTY_USERNAME')}
+          errorMessage={translations.getLabel('AUTH.LOGIN.ERROR.EMPTY_USERNAME')}
         />
         <InputField
           label={translations.getLabel('AUTH.LOGIN.PASSWORD')}
@@ -62,7 +64,7 @@ const Login = () => {
           onChange={setFormAttribute}
           autoComplete="current-password"
           error={validationError && !form.password}
-          errorMessage={translations.getLabel('AUTH.LOGIN.ERROR_EMPTY_PASSWORD')}
+          errorMessage={translations.getLabel('AUTH.LOGIN.ERROR.EMPTY_PASSWORD')}
         />
         <ErrorMessage isVisible={!!error}>{getErrorMessage(error)}</ErrorMessage>
         <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>

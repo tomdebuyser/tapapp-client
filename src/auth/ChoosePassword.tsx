@@ -1,4 +1,4 @@
-import React, { useEffect, FormEvent } from 'react';
+import React, { useEffect, FormEvent, FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,17 +8,20 @@ import { translations } from '../_translations';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../_store/selectors';
+import { validatePassword } from '../_utils/validators';
 import { IChangePasswordForm } from './_models/ChoosePassword';
 import './auth.scss';
 
-const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+interface Props {
+  isPasswordReset?: boolean;
+}
 
 const initialForm: IChangePasswordForm = {
   newPassword: '',
   resetToken: '',
 };
 
-const ChoosePassword = () => {
+const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(authSelectors.isChoosePasswordLoading);
   const error = useSelector(authSelectors.errorChoosePassword);
@@ -28,12 +31,11 @@ const ChoosePassword = () => {
 
   useEffect(() => {
     setFormAttribute(token, 'resetToken');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [setFormAttribute, token]);
 
   const submitNewPassword = (event: FormEvent) => {
     event.preventDefault();
-    if (passwordRegex.test(form.newPassword)) {
+    if (validatePassword(form.newPassword)) {
       setValidationError(false);
       dispatch(new authActions.ChoosePassword(form));
     } else {
@@ -43,7 +45,7 @@ const ChoosePassword = () => {
 
   return (
     <Container as="main" className="choose-password">
-      <h1>{translations.getLabel('AUTH.REGISTER.TITLE')}</h1>
+      <h1>{translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.TITLE' : 'AUTH.REGISTER.TITLE')}</h1>
       <form onSubmit={submitNewPassword}>
         <InputField
           type="password"
@@ -53,13 +55,13 @@ const ChoosePassword = () => {
           value={form.newPassword}
           onChange={setFormAttribute}
           error={validationError}
-          errorMessage={translations.getLabel('AUTH.REGISTER.ERROR_UNSAFE_PASSWORD')}
+          errorMessage={translations.getLabel('AUTH.REGISTER.ERROR.UNSAFE_PASSWORD')}
         />
         <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
-        <ErrorMessage isVisible={!!error}>{translations.getLabel('AUTH.REGISTER.ERROR_GENERAL')}</ErrorMessage>
+        <ErrorMessage isVisible={!!error}>{translations.getLabel('AUTH.REGISTER.ERROR.GENERAL')}</ErrorMessage>
         <div>
           <Button primary type="submit" loading={isLoading}>
-            {translations.getLabel('AUTH.REGISTER.REGISTER')}
+            {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}
           </Button>
         </div>
       </form>
