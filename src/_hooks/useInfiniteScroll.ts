@@ -19,6 +19,7 @@ const useInfiniteScroll = (fetchData: (skip: number) => void, metadata: HttpMeta
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, metadata]);
 };
 
