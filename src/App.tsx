@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Redirect, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
@@ -9,13 +9,10 @@ import UnauthorizedLayout from './_routing/UnauthorizedLayout';
 import { authActions } from './_store/actions';
 import { authSelectors } from './_store/selectors';
 
-export const PathnameContext = createContext('');
-
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isLoading = useSelector(authSelectors.isAuthenticateLoading);
-  const initialPath = useMemo(() => pathname, []);
 
   useEffect(() => {
     dispatch(new authActions.Authenticate({ pathname }));
@@ -29,13 +26,11 @@ const App: React.FC = () => {
     );
 
   return (
-    <PathnameContext.Provider value={initialPath}>
-      <Switch>
-        <UnauthorizedRoute path="/auth" component={UnauthorizedLayout} />
-        <AuthorizedRoute path="/" component={AuthorizedLayout} />
-        <Redirect to="/" />
-      </Switch>
-    </PathnameContext.Provider>
+    <Switch>
+      <UnauthorizedRoute path="/auth" component={UnauthorizedLayout} />
+      <AuthorizedRoute path="/" component={AuthorizedLayout} />
+      <Redirect to="/" />
+    </Switch>
   );
 };
 

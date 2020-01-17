@@ -1,7 +1,7 @@
-import React, { FormEvent, useContext } from 'react';
+import React, { FormEvent } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { translations } from '../_translations';
 import { InputField, Button } from '../_shared';
 import { useForm, useToggle } from '../_hooks';
@@ -9,7 +9,6 @@ import { authSelectors } from '../_store/selectors';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { ApiError, HttpStatus } from '../_http';
-import { PathnameContext } from '../App';
 import { ILoginForm } from './_models/Login';
 import './auth.scss';
 
@@ -18,15 +17,15 @@ const initialForm: ILoginForm = {
   password: '',
 };
 
-const getErrorMessage = (error: ApiError) => {
+const getErrorMessage = (error: ApiError): string => {
   if (!error) return '';
   if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel('AUTH.LOGIN.ERROR.UNAUTHORIZED');
   return translations.getLabel('AUTH.LOGIN.ERROR.GENERAL');
 };
 
 const Login = () => {
-  const pathname = useContext(PathnameContext);
   const dispatch = useDispatch();
+  const { state } = useLocation();
   const [validationError, setValidationError] = useToggle(false);
   const isLoading = useSelector(authSelectors.isLoginLoading);
   const error = useSelector(authSelectors.errorLogin);
@@ -36,7 +35,7 @@ const Login = () => {
     event.preventDefault();
     if (form.username && form.password) {
       setValidationError(false);
-      dispatch(new authActions.Login(form, pathname));
+      dispatch(new authActions.Login(form, state?.pathname));
     } else {
       setValidationError(true);
     }
