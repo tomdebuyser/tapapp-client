@@ -13,7 +13,6 @@ export interface TableColumn {
 }
 
 interface Props {
-  className?: string;
   columns: TableColumn[];
   data?: object[];
   emptyLabel: string;
@@ -22,11 +21,11 @@ interface Props {
   sortFunctions?: SortFunctions;
 }
 
-const Table: FC<Props> & { Cell; Row } = ({ className, columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
+const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
   function renderHeaderCell(column: TableColumn) {
     return (
       <SemanticTable.HeaderCell
-        className={classnames(`${column.className}`, { 'not-sortable': !column.sortable })}
+        className={classnames(column.className || '', { 'not-sortable': !column.sortable })}
         key={column.name}
         name={column.name}
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
@@ -51,7 +50,7 @@ const Table: FC<Props> & { Cell; Row } = ({ className, columns, renderRow, data 
   }
 
   return (
-    <SemanticTable fixed sortable={columns.some(col => col.sortable)} className={className}>
+    <SemanticTable fixed sortable={columns.some(col => col.sortable)}>
       <SemanticTable.Header>
         <SemanticTable.Row>{columns.map(column => renderHeaderCell(column))}</SemanticTable.Row>
       </SemanticTable.Header>
