@@ -75,11 +75,14 @@ export default function reducer(state = initialState, action: UsersAction): User
         isInactivateUserLoading: action.payload.confirmed,
         errorCreateUser: null,
       };
-    case UsersActionType.InactivateUserSuccess:
+    case UsersActionType.InactivateUserSuccess: {
+      const { updatedUser } = action.payload;
       return {
         ...state,
         isInactivateUserLoading: false,
+        users: [...state.users.filter(user => user.id !== updatedUser.id), updatedUser],
       };
+    }
     case UsersActionType.InactivateUserError:
       return {
         ...state,

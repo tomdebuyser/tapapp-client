@@ -7,6 +7,6 @@ export function getRoles(query?: HttpMetadataQuery): Promise<HttpPagedResponse<I
   return HttpClient.get<HttpPagedResponse<IRole>>(`roles${getQueryParams(query)}`);
 }
 
-export function createRole(body: IRoleForm): Promise<void> {
+export function createRole(body: IRoleForm): Promise<IRole> {
   return HttpClient.post('roles', body);
 }

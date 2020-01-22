@@ -56,6 +56,7 @@ export class InactivateUser implements Action<UsersActionType> {
 
 export class InactivateUserSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.InactivateUserSuccess;
+  constructor(public payload: { updatedUser: IUser }) {}
 }
 
 export class InactivateUserError implements Action<UsersActionType> {

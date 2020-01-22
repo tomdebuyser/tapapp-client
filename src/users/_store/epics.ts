@@ -53,14 +53,11 @@ export const inactivateUserEpic$: Epic = action$ =>
     filter(({ payload }: usersActions.InactivateUser) => payload.confirmed),
     exhaustMap(({ payload }: usersActions.InactivateUser) =>
       from(usersApi.inactivateUser(payload.user)).pipe(
-        map(() => new usersActions.InactivateUserSuccess()),
+        map(updatedUser => new usersActions.InactivateUserSuccess({ updatedUser })),
         catchError(error => of(new usersActions.InactivateUserError({ error }))),
       ),
     ),
   );
-
-export const inactivateUserSuccessEpic$: Epic = action$ =>
-  action$.ofType(UsersActionType.InactivateUserSuccess).pipe(switchMap(() => of(new usersActions.GetUsers())));
 
 const UsersEpics = [
   getUsersEpic$,
@@ -69,7 +66,6 @@ const UsersEpics = [
   createUserSuccessEpic$,
   inactivateUserWithConfirmationEpic$,
   inactivateUserEpic$,
-  inactivateUserSuccessEpic$,
 ];
 
 export default UsersEpics;
