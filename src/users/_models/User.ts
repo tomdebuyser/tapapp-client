@@ -20,6 +20,7 @@ export interface IUserForm {
 }
 
 export enum UserState {
-  ACTIVE = 'ACTIVE',
-  REGISTERING = 'REGISTERING',
+  Active = 'ACTIVE',
+  Inactive = 'INACTIVE',
+  Registering = 'REGISTERING',
 }

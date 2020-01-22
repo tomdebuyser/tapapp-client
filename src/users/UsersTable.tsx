@@ -8,6 +8,7 @@ import { translations } from '../_translations';
 import { useTableSort, useInfiniteScroll } from '../_hooks';
 import { usersSelectors } from '../_store/selectors';
 import { IUser } from './_models/User';
+import { labelForUserState } from './_utils';
 
 interface Props {
   data?: IUser[];
@@ -21,7 +22,7 @@ const columns: TableColumn[] = [
   { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
   { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
   { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
-  { name: 'state', label: 'USERS.STATE', sortable: true },
+  { name: 'state', label: 'USERS.STATE.TITLE', sortable: true },
 ];
 
 const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
@@ -42,7 +43,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
         <Table.Cell>{user.lastName}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(user.updatedAt))}</Table.Cell>
-        <Table.Cell>{user.state}</Table.Cell>
+        <Table.Cell>{labelForUserState(user.state)}</Table.Cell>
       </Table.Row>
     );
   }

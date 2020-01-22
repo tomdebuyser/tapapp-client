@@ -72,7 +72,6 @@
     "FIRST_NAME": "First name",
     "LAST_NAME": "Last name",
     "ROLE": "Role",
-    "STATE": "State",
     "UPDATED_AT": "Updated at",
     "DETAIL": {
       "BACK": "Back to users"
@@ -89,6 +88,14 @@
       "TITLE": "Remove user",
       "CONTENT": "Are you sure you want to remove {{user}}?",
       "CONFIRM": "Remove"
+    },
+    "STATE": {
+      "TITLE": "State",
+      "OPTIONS": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "REGISTERING": "Registering"
+      }
     }
   }
 }

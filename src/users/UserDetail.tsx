@@ -6,6 +6,7 @@ import { translations } from '../_translations';
 import RolesDropdown from '../roles/rolesDropdown/RolesDropdown';
 import { IUser } from './_models/User';
 import './userDetail.scss';
+import { labelForUserState } from './_utils';
 
 const UserDetail = () => {
   const { state } = useLocation();
@@ -33,7 +34,7 @@ const UserDetail = () => {
           onChange={() => {}}
           value={user.roles.map(role => role.id)}
         />
-        <Field value={user.state} label="USERS.STATE" />
+        <Field value={labelForUserState(user.state)} label="USERS.STATE.TITLE" />
         <div className="info-wrapper">
           <Field value={user.createdAt} label="USERS.CREATED_AT" isDate />
           <Field value={user.updatedAt} label="USERS.UPDATED_AT" isDate />
