@@ -1,9 +1,9 @@
 import { combineEpics } from 'redux-observable';
-import AuthEpics from '../auth/_store/epics';
-import RolesEpics from '../roles/_store/epics';
-import UsersEpics from '../users/_store/epics';
-import ModalEpics from '../modals/_store/epics';
+import authEpics from '../auth/_store/epics';
+import rolesEpics from '../roles/_store/epics';
+import usersEpics from '../users/_store/epics';
+import modalEpics from '../modal/_store/epics';
 
-const rootEpic = combineEpics(...RolesEpics, ...UsersEpics, ...AuthEpics, ...ModalEpics);
+const rootEpic = combineEpics(...authEpics, ...modalEpics, ...rolesEpics, ...usersEpics);
 
 export default rootEpic;

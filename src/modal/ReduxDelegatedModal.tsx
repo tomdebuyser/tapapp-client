@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { modalsSelectors } from '../_store/selectors';
+import { modalSelectors } from '../_store/selectors';
 import { ModalType, IConfirmationModalData } from './_models';
 import ConfirmationModal from './confirmation/ConfirmationModal';
 
 const ReduxDelegatedModal: FC = () => {
-  const isOpen = useSelector(modalsSelectors.isOpen);
-  const data = useSelector(modalsSelectors.data);
-  const type = useSelector(modalsSelectors.type);
+  const isOpen = useSelector(modalSelectors.isOpen);
+  const data = useSelector(modalSelectors.data);
+  const type = useSelector(modalSelectors.type);
 
   if (!isOpen) return null;
   switch (type) {

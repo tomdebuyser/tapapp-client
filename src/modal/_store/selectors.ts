@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { AppState } from '../../_store/rootReducer';
 import { ModalState } from './reducer';
 
-const selectNode = (state: AppState) => state.modals;
+const selectNode = (state: AppState) => state.modal;
 
 export const data = createSelector(selectNode, (state: ModalState) => state.data);
 

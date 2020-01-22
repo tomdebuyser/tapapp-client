@@ -6,7 +6,7 @@ import AuthorizedRoute from './_routing/AuthorizedRoute';
 import AuthorizedLayout from './_routing/AuthorizedLayout';
 import UnauthorizedRoute from './_routing/UnauthorizedRoute';
 import UnauthorizedLayout from './_routing/UnauthorizedLayout';
-import ReduxDelegatedModal from './modals/ReduxDelegatedModal';
+import ReduxDelegatedModal from './modal/ReduxDelegatedModal';
 import { authActions } from './_store/actions';
 import { authSelectors } from './_store/selectors';
 
