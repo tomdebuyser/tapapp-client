@@ -3,4 +3,4 @@ import * as usersActions from '../users/_store/actions';
 import * as authActions from '../auth/_store/actions';
 import * as modalActions from '../modal/_store/actions';
 
-export { rolesActions, usersActions, authActions, modalActions };
+export { authActions, modalActions, rolesActions, usersActions };
