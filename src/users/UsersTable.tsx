@@ -15,7 +15,7 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true },
+  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true, className: 'email-column' },
   { name: 'firstName', label: 'USERS.OVERVIEW.FIRST_NAME', sortable: true },
   { name: 'lastName', label: 'USERS.OVERVIEW.LAST_NAME', sortable: true },
   { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
@@ -34,7 +34,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   function renderRow(user: IUser): JSX.Element {
     return (
       <Table.Row key={user.email}>
-        <Table.Cell className="email-cell">{user.email}</Table.Cell>
+        <Table.Cell>{user.email}</Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
         <Table.Cell>{user.lastName}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>

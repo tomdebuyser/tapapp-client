@@ -1,5 +1,4 @@
 import axios, { AxiosError, ResponseType, AxiosResponse } from 'axios';
-
 import { HttpStatus } from './HttpStatus';
 import { ApiError, ValidationError } from './HttpError';
 

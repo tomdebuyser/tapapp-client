@@ -6,8 +6,10 @@ import { UsersAction, UsersActionType } from './actions';
 export interface UsersState {
   errorCreateUser?: ApiError;
   errorGetUsers?: ApiError;
+  errorInactivateUser?: ApiError;
   isCreateUserLoading: boolean;
   isGetUsersLoading: boolean;
+  isInactivateUserLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   users?: IUser[];
@@ -16,6 +18,7 @@ export interface UsersState {
 const initialState: UsersState = {
   isGetUsersLoading: false,
   isCreateUserLoading: false,
+  isInactivateUserLoading: false,
 };
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
@@ -65,6 +68,26 @@ export default function reducer(state = initialState, action: UsersAction): User
         ...state,
         isCreateUserLoading: false,
         errorCreateUser: action.payload.error,
+      };
+    case UsersActionType.InactivateUser:
+      return {
+        ...state,
+        isInactivateUserLoading: action.payload.confirmed,
+        errorCreateUser: null,
+      };
+    case UsersActionType.InactivateUserSuccess: {
+      const { updatedUser } = action.payload;
+      return {
+        ...state,
+        isInactivateUserLoading: false,
+        users: [...state.users.filter(user => user.id !== updatedUser.id), updatedUser],
+      };
+    }
+    case UsersActionType.InactivateUserError:
+      return {
+        ...state,
+        isInactivateUserLoading: false,
+        errorInactivateUser: action.payload.error,
       };
     default:
       return state;

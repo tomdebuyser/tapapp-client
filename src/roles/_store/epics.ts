@@ -7,7 +7,7 @@ import { rolesSelectors } from '../../_store/selectors';
 import { RolesActionType } from './actions';
 import * as rolesApi from './api';
 
-export const getRolesEpic$: Epic = (action$, state$) =>
+const getRolesEpic$: Epic = (action$, state$) =>
   action$.ofType(RolesActionType.GetRoles).pipe(
     exhaustMap(() => {
       const query = rolesSelectors.query(state$.value);
@@ -18,10 +18,10 @@ export const getRolesEpic$: Epic = (action$, state$) =>
     }),
   );
 
-export const setRolesQueryEpic$: Epic = action$ =>
+const setRolesQueryEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.SetRolesQuery).pipe(map(() => new rolesActions.GetRoles()));
 
-export const createRoleEpic$: Epic = action$ =>
+const createRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.CreateRole).pipe(
     switchMap(({ payload }: rolesActions.CreateRole) =>
       from(rolesApi.createRole(payload)).pipe(
@@ -31,9 +31,7 @@ export const createRoleEpic$: Epic = action$ =>
     ),
   );
 
-export const createRoleSuccessEpic$: Epic = action$ =>
+const createRoleSuccessEpic$: Epic = action$ =>
   action$.ofType(rolesActions.RolesActionType.CreateRoleSuccess).pipe(switchMap(() => of(push('/roles'))));
 
-const RolesEpics = [getRolesEpic$, setRolesQueryEpic$, createRoleEpic$, createRoleSuccessEpic$];
-
-export default RolesEpics;
+export default [getRolesEpic$, setRolesQueryEpic$, createRoleEpic$, createRoleSuccessEpic$];

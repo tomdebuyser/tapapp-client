@@ -6,6 +6,7 @@ import AuthorizedRoute from './_routing/AuthorizedRoute';
 import AuthorizedLayout from './_routing/AuthorizedLayout';
 import UnauthorizedRoute from './_routing/UnauthorizedRoute';
 import UnauthorizedLayout from './_routing/UnauthorizedLayout';
+import ReduxDelegatedModal from './modal/ReduxDelegatedModal';
 import { authActions } from './_store/actions';
 import { authSelectors } from './_store/selectors';
 
@@ -25,11 +26,14 @@ const App: React.FC = () => {
     );
 
   return (
-    <Switch>
-      <UnauthorizedRoute path="/auth" component={UnauthorizedLayout} />
-      <AuthorizedRoute path="/" component={AuthorizedLayout} />
-      <Redirect to="/" />
-    </Switch>
+    <>
+      <Switch>
+        <UnauthorizedRoute path="/auth" component={UnauthorizedLayout} />
+        <AuthorizedRoute path="/" component={AuthorizedLayout} />
+        <Redirect to="/" />
+      </Switch>
+      <ReduxDelegatedModal />
+    </>
   );
 };
 

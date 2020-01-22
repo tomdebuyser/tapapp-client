@@ -5,9 +5,8 @@ function useForm<T>(initial: T, shouldClear?: boolean) {
   const [form, setForm] = useState<T>(initial);
   const [error, setError] = useState<ApiError>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setFormAttribute = useCallback(
-    (value: any, name: string) => {
+    (value: unknown, name: string) => {
       setForm({ ...form, [name]: value });
     },
     [form],

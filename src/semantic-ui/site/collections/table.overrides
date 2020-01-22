@@ -7,3 +7,7 @@
     color: @headerColor;
     cursor: default;
 }
+.ui.sortable.table thead th {
+    border-left: none;
+    border-right: none;
+}

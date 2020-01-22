@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Modal as SemanticModal } from 'semantic-ui-react';
 import Icon from '../icon/Icon';
-
 import './modal.scss';
 
 interface Props {
