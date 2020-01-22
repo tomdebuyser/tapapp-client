@@ -37,6 +37,7 @@
       "rules": {
         "@typescript-eslint/explicit-function-return-type": 0,
         "@typescript-eslint/interface-name-prefix": 0,
+        "@typescript-eslint/no-empty-function": 0,
         "typescript-sort-keys/interface": 1,
         "typescript-sort-keys/string-enum": 1
       }

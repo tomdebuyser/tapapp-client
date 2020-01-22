@@ -4,9 +4,9 @@ import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
 import './field.scss';
 
 interface Props {
-  value: string;
-  label: string;
   isDate?: boolean;
+  label: string;
+  value: string;
 }
 
 const Field: FC<Props> = ({ value, label, isDate }) => (
