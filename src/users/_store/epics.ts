@@ -8,7 +8,7 @@ import { translations } from '../../_translations';
 import { UsersActionType } from './actions';
 import * as usersApi from './api';
 
-export const getUsersEpic$: Epic = (action$, state$) =>
+const getUsersEpic$: Epic = (action$, state$) =>
   action$.ofType(UsersActionType.GetUsers).pipe(
     exhaustMap(() => {
       const query = usersSelectors.query(state$.value);
@@ -19,10 +19,10 @@ export const getUsersEpic$: Epic = (action$, state$) =>
     }),
   );
 
-export const setUsersQueryEpic$: Epic = action$ =>
+const setUsersQueryEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.SetUsersQuery).pipe(map(() => new usersActions.GetUsers()));
 
-export const createUserEpic$: Epic = action$ =>
+const createUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUser).pipe(
     switchMap(({ payload }: usersActions.CreateUser) =>
       from(usersApi.createUser(payload)).pipe(
@@ -32,10 +32,10 @@ export const createUserEpic$: Epic = action$ =>
     ),
   );
 
-export const createUserSuccessEpic$: Epic = action$ =>
+const createUserSuccessEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
 
-export const inactivateUserWithConfirmationEpic$: Epic = action$ =>
+const inactivateUserWithConfirmationEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.InactivateUser).pipe(
     filter(({ payload }: usersActions.InactivateUser) => !payload.confirmed),
     map(({ payload }: usersActions.InactivateUser) => {
@@ -48,7 +48,7 @@ export const inactivateUserWithConfirmationEpic$: Epic = action$ =>
     }),
   );
 
-export const inactivateUserEpic$: Epic = action$ =>
+const inactivateUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.InactivateUser).pipe(
     filter(({ payload }: usersActions.InactivateUser) => payload.confirmed),
     exhaustMap(({ payload }: usersActions.InactivateUser) =>
@@ -59,7 +59,7 @@ export const inactivateUserEpic$: Epic = action$ =>
     ),
   );
 
-const UsersEpics = [
+export default [
   getUsersEpic$,
   setUsersQueryEpic$,
   createUserEpic$,
@@ -67,5 +67,3 @@ const UsersEpics = [
   inactivateUserWithConfirmationEpic$,
   inactivateUserEpic$,
 ];
-
-export default UsersEpics;

@@ -6,7 +6,7 @@ import { authActions } from '../../_store/actions';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
-export const authenticateEpic$: Epic = action$ =>
+const authenticateEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Authenticate).pipe(
     exhaustMap(() =>
       from(authApi.authenticate()).pipe(
@@ -16,12 +16,12 @@ export const authenticateEpic$: Epic = action$ =>
     ),
   );
 
-export const authenticateSuccessEpic$: Epic = action$ =>
+const authenticateSuccessEpic$: Epic = action$ =>
   action$
     .ofType(AuthActionType.AuthenticateSuccess)
     .pipe(switchMap(({ payload }: authActions.AuthenticateSuccess) => of(push(payload.pathname || '/'))));
 
-export const choosePasswordEpic$: Epic = action$ =>
+const choosePasswordEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.ChoosePassword).pipe(
     switchMap(({ payload }: authActions.ChoosePassword) =>
       from(authApi.choosePassword(payload)).pipe(
@@ -31,10 +31,10 @@ export const choosePasswordEpic$: Epic = action$ =>
     ),
   );
 
-export const choosePasswordSuccessEpic$: Epic = action$ =>
+const choosePasswordSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.ChoosePasswordSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
-export const loginEpic$: Epic = action$ =>
+const loginEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Login).pipe(
     exhaustMap(({ payload, pathname }: authActions.Login) =>
       from(authApi.login(payload)).pipe(
@@ -44,7 +44,7 @@ export const loginEpic$: Epic = action$ =>
     ),
   );
 
-export const logoutEpic$: Epic = action$ =>
+const logoutEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Logout).pipe(
     exhaustMap(() =>
       from(authApi.logout()).pipe(
@@ -54,10 +54,10 @@ export const logoutEpic$: Epic = action$ =>
     ),
   );
 
-export const logoutSuccessEpic$: Epic = action$ =>
+const logoutSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.LogoutSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
-export const requestPasswordResetEpic$: Epic = action$ =>
+const requestPasswordResetEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.RequestPasswordReset).pipe(
     exhaustMap(({ payload }: authActions.RequestPasswordReset) =>
       from(authApi.requestPasswordReset(payload)).pipe(
@@ -67,10 +67,10 @@ export const requestPasswordResetEpic$: Epic = action$ =>
     ),
   );
 
-export const requestPasswordResetSuccessEpic$: Epic = action$ =>
+const requestPasswordResetSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.RequestPasswordResetSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
-const AuthEpics = [
+export default [
   authenticateEpic$,
   authenticateSuccessEpic$,
   choosePasswordEpic$,
@@ -81,5 +81,3 @@ const AuthEpics = [
   requestPasswordResetEpic$,
   requestPasswordResetSuccessEpic$,
 ];
-
-export default AuthEpics;
