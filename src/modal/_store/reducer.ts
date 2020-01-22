@@ -2,8 +2,8 @@ import { ModalType, IModalData } from '../_models';
 import { ModalActionType, ModalAction } from './actions';
 
 export interface ModalState {
-  isOpen: boolean;
   data?: IModalData;
+  isOpen: boolean;
   type?: ModalType;
 }
 
