@@ -29,12 +29,12 @@ describe('Users component', () => {
 
     await wait(() => {
       expect(getUsers).toHaveBeenCalledTimes(1);
-      const emailColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.EMAIL'));
-      const firstNameHeader = getByText(translations.getLabel('USERS.OVERVIEW.FIRST_NAME'));
-      const lastNameHeader = getByText(translations.getLabel('USERS.OVERVIEW.LAST_NAME'));
-      const createdAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.CREATED_AT'));
-      const updatedAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.UPDATED_AT'));
-      const stateColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.STATE'));
+      const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
+      const firstNameHeader = getByText(translations.getLabel('USERS.FIRST_NAME'));
+      const lastNameHeader = getByText(translations.getLabel('USERS.LAST_NAME'));
+      const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
+      const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
+      const stateColumnHeader = getByText(translations.getLabel('USERS.STATE'));
 
       const email = getByText(fakeUser.email);
       const firstName = getByText(fakeUser.firstName);
@@ -63,10 +63,10 @@ describe('Users component', () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
 
     const { queryByText, getByText } = render(<Users />);
-    const emailColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.EMAIL'));
-    const createdAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.CREATED_AT'));
-    const updatedAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.UPDATED_AT'));
-    const stateColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.STATE'));
+    const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
+    const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
+    const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
+    const stateColumnHeader = getByText(translations.getLabel('USERS.STATE'));
 
     expect(emailColumnHeader).toBeInTheDocument();
     expect(createdAtColumnHeader).toBeInTheDocument();
