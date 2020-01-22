@@ -7,7 +7,7 @@ import './table.scss';
 
 export interface TableColumn {
   className?: string;
-  label: string;
+  label?: string;
   name: string;
   sortable?: boolean;
 }
@@ -25,13 +25,13 @@ const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoa
   function renderHeaderCell(column: TableColumn) {
     return (
       <SemanticTable.HeaderCell
-        className={classnames(`${column.className}`, { 'not-sortable': !column.sortable })}
+        className={classnames(column.className || '', { 'not-sortable': !column.sortable })}
         key={column.name}
         name={column.name}
         onClick={column.sortable ? () => sortFunctions.onChangeSortColumn(column.name) : null}
         sorted={column.sortable ? sortFunctions.getSortDirectionForColumn(column.name) : null}
       >
-        {translations.getLabel(column.label)}
+        {!!column.label && translations.getLabel(column.label)}
       </SemanticTable.HeaderCell>
     );
   }
@@ -50,7 +50,7 @@ const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoa
   }
 
   return (
-    <SemanticTable celled fixed sortable={columns.some(col => col.sortable)}>
+    <SemanticTable fixed sortable={columns.some(col => col.sortable)}>
       <SemanticTable.Header>
         <SemanticTable.Row>{columns.map(column => renderHeaderCell(column))}</SemanticTable.Row>
       </SemanticTable.Header>

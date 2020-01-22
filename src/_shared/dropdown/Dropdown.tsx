@@ -2,7 +2,6 @@ import React, { FC, ChangeEvent } from 'react';
 import { Dropdown as SemanticDropdown, InputOnChangeData } from 'semantic-ui-react';
 import { useInputError } from '../../_hooks';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-
 import './dropdown.scss';
 
 export interface DropdownOption {

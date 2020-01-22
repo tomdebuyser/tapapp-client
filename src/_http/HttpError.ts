@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { translations } from '../_translations';
 import { HttpStatus } from './HttpStatus';
 
@@ -10,9 +9,9 @@ export interface ApiError {
 }
 
 export interface ValidationError {
-  constraints: Record<string, any>;
-  target?: Record<string, any>;
-  value?: any;
+  constraints: Record<string, unknown>;
+  target?: Record<string, unknown>;
+  value?: unknown;
 }
 
 export function getValidationError(error: ApiError, property: string): ValidationError {

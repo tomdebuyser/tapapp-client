@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Button as SemanticButton } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
 import './button.scss';
 
 interface Props {

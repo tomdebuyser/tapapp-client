@@ -84,6 +84,11 @@
     },
     "CREATE": {
       "TITLE": "Create user"
+    },
+    "REMOVE": {
+      "TITLE": "Remove user",
+      "CONTENT": "Are you sure you want to remove {{user}}?",
+      "CONFIRM": "Remove"
     }
   }
 }

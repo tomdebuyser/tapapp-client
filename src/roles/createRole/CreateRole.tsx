@@ -9,7 +9,6 @@ import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models/Role';
 import { rolesActions } from '../../_store/actions';
 import { setInObject } from '../../_utils/objectHelpers';
-
 import './createRole.scss';
 
 const initialForm: IRoleForm = {
@@ -30,7 +29,7 @@ const CreateRole = () => {
     dispatch(new rolesActions.CreateRole(form));
   };
 
-  const setPermissions = (event: FormEvent, data: CheckboxProps) => {
+  const setPermissions = (_: FormEvent, data: CheckboxProps) => {
     setFormAttribute(setInObject(form.permissions, data.name, data.checked), 'permissions');
   };
 

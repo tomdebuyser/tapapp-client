@@ -3,7 +3,6 @@ import { routerMiddleware } from 'connected-react-router';
 import { createEpicMiddleware } from 'redux-observable';
 import { createBrowserHistory, History } from 'history';
 import { createLogger } from 'redux-logger';
-
 import createRootReducer, { AppState } from './rootReducer';
 import rootEpic from './rootEpic';
 

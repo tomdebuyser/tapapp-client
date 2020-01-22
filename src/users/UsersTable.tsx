@@ -16,12 +16,12 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'email', label: 'USERS.EMAIL', sortable: true, className: 'email-column' },
-  { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
-  { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
-  { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
-  { name: 'state', label: 'USERS.STATE', sortable: true },
+  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true, className: 'email-column' },
+  { name: 'firstName', label: 'USERS.OVERVIEW.FIRST_NAME', sortable: true },
+  { name: 'lastName', label: 'USERS.OVERVIEW.LAST_NAME', sortable: true },
+  { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'USERS.OVERVIEW.UPDATED_AT', sortable: true },
+  { name: 'state', label: 'USERS.OVERVIEW.STATE', sortable: true },
 ];
 
 const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
@@ -35,7 +35,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   function renderRow(user: IUser): JSX.Element {
     return (
       <Table.Row key={user.email}>
-        <Table.Cell className="email-column">
+        <Table.Cell>
           <Link to={{ pathname: `/users/${user.id}`, state: { user } }}>{user.email}</Link>
         </Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
