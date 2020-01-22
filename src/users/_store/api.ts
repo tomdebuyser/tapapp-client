@@ -12,5 +12,5 @@ export function createUser(body: IUserForm): Promise<IUser> {
 }
 
 export function inactivateUser(user: IUser): Promise<IUser> {
-  return HttpClient.post(`users/${user.id}/inactivate`);
+  return HttpClient.post<IUser>(`users/${user.id}/inactivate`);
 }
