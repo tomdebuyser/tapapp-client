@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-
 import { AppState } from '../../_store/rootReducer';
 import { ModalState } from './reducer';
 

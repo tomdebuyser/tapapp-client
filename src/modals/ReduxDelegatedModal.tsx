@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-
 import { modalsSelectors } from '../_store/selectors';
 import { ModalType, IConfirmationModalData } from './_models';
 import ConfirmationModal from './confirmation/ConfirmationModal';

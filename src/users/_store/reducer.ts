@@ -6,10 +6,10 @@ import { UsersAction, UsersActionType } from './actions';
 export interface UsersState {
   errorCreateUser?: ApiError;
   errorGetUsers?: ApiError;
-  errorRemoveUser?: ApiError;
+  errorInactivateUser?: ApiError;
   isCreateUserLoading: boolean;
   isGetUsersLoading: boolean;
-  isRemoveUserLoading: boolean;
+  isInactivateUserLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   users?: IUser[];
@@ -18,7 +18,7 @@ export interface UsersState {
 const initialState: UsersState = {
   isGetUsersLoading: false,
   isCreateUserLoading: false,
-  isRemoveUserLoading: false,
+  isInactivateUserLoading: false,
 };
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
@@ -69,22 +69,22 @@ export default function reducer(state = initialState, action: UsersAction): User
         isCreateUserLoading: false,
         errorCreateUser: action.payload.error,
       };
-    case UsersActionType.RemoveUser:
+    case UsersActionType.InactivateUser:
       return {
         ...state,
-        isRemoveUserLoading: action.confirmed,
+        isInactivateUserLoading: action.payload.confirmed,
         errorCreateUser: null,
       };
-    case UsersActionType.RemoveUserSuccess:
+    case UsersActionType.InactivateUserSuccess:
       return {
         ...state,
-        isRemoveUserLoading: false,
+        isInactivateUserLoading: false,
       };
-    case UsersActionType.RemoveUserError:
+    case UsersActionType.InactivateUserError:
       return {
         ...state,
-        isRemoveUserLoading: false,
-        errorRemoveUser: action.payload.error,
+        isInactivateUserLoading: false,
+        errorInactivateUser: action.payload.error,
       };
     default:
       return state;

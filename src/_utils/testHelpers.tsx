@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, Store } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import { createEpicMiddleware } from 'redux-observable';
-
 import createRootReducer from '../_store/rootReducer';
 import rootEpic from '../_store/rootEpic';
 

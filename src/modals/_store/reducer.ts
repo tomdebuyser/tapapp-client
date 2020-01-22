@@ -1,5 +1,5 @@
 import { ModalType, IModalData } from '../_models';
-import { ActionType, Actions } from './actions';
+import { ModalActionType, ModalAction } from './actions';
 
 export interface ModalState {
   isOpen: boolean;
@@ -12,19 +12,19 @@ const initialState: ModalState = {
 };
 
 const actionTypeToModalType = {
-  [ActionType.ShowConfirmationModal]: ModalType.Confirmation,
+  [ModalActionType.ShowConfirmationModal]: ModalType.Confirmation,
 };
 
-export default function reducer(state = initialState, action: Actions): ModalState {
+export default function reducer(state = initialState, action: ModalAction): ModalState {
   switch (action.type) {
-    case ActionType.ShowConfirmationModal:
+    case ModalActionType.ShowConfirmationModal:
       return {
         ...state,
         isOpen: true,
         type: actionTypeToModalType[action.type],
-        data: action.payload.data,
+        data: action.payload,
       };
-    case ActionType.CloseModal:
+    case ModalActionType.CloseModal:
       return {
         ...initialState,
       };

@@ -10,9 +10,9 @@ export enum UsersActionType {
   GetUsers = '[Users] GetUsers',
   GetUsersError = '[Users] GetUsersError',
   GetUsersSuccess = '[Users] GetUsersSuccess',
-  RemoveUser = '[Users] RemoveUser',
-  RemoveUserError = '[Users] RemoveUserError',
-  RemoveUserSuccess = '[Users] RemoveUserSuccess',
+  InactivateUser = '[Users] InactivateUser',
+  InactivateUserError = '[Users] InactivateUserError',
+  InactivateUserSuccess = '[Users] InactivateUserSuccess',
   SetUsersQuery = '[Users] SetUsersQuery',
 }
 
@@ -49,17 +49,17 @@ export class CreateUserError implements Action<UsersActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export class RemoveUser implements Action<UsersActionType> {
-  readonly type = UsersActionType.RemoveUser;
-  constructor(public user: IUser, public confirmed?: boolean) {}
+export class InactivateUser implements Action<UsersActionType> {
+  readonly type = UsersActionType.InactivateUser;
+  constructor(public payload: { confirmed?: boolean; user: IUser }) {}
 }
 
-export class RemoveUserSuccess implements Action<UsersActionType> {
-  readonly type = UsersActionType.RemoveUserSuccess;
+export class InactivateUserSuccess implements Action<UsersActionType> {
+  readonly type = UsersActionType.InactivateUserSuccess;
 }
 
-export class RemoveUserError implements Action<UsersActionType> {
-  readonly type = UsersActionType.RemoveUserError;
+export class InactivateUserError implements Action<UsersActionType> {
+  readonly type = UsersActionType.InactivateUserError;
   constructor(public payload: { error: ApiError }) {}
 }
 
@@ -71,6 +71,6 @@ export type UsersAction =
   | CreateUser
   | CreateUserSuccess
   | CreateUserError
-  | RemoveUser
-  | RemoveUserSuccess
-  | RemoveUserError;
+  | InactivateUser
+  | InactivateUserSuccess
+  | InactivateUserError;

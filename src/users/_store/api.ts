@@ -11,6 +11,6 @@ export function createUser(body: IUserForm): Promise<void> {
   return HttpClient.post('users', body);
 }
 
-export function removeUser(user: IUser): Promise<void> {
-  return HttpClient.delete(`users/${user.id}`);
+export function inactivateUser(user: IUser): Promise<void> {
+  return HttpClient.post(`users/${user.id}/inactivate`);
 }

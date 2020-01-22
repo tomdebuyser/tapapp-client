@@ -1,19 +1,18 @@
 import { Action } from 'redux';
-
 import { IConfirmationModalData } from '../_models';
 
-export enum ActionType {
-  ShowConfirmationModal = '[Modal] ShowConfirmationModal',
+export enum ModalActionType {
   CloseModal = '[Modal] CloseModal',
+  ShowConfirmationModal = '[Modal] ShowConfirmationModal',
 }
 
-export class ShowConfirmationModalAction implements Action<ActionType> {
-  readonly type = ActionType.ShowConfirmationModal;
-  constructor(public payload: { data: IConfirmationModalData }) {}
+export class ShowConfirmationModal implements Action<ModalActionType> {
+  readonly type = ModalActionType.ShowConfirmationModal;
+  constructor(public payload: IConfirmationModalData) {}
 }
 
-export class CloseModalAction implements Action<ActionType> {
-  readonly type = ActionType.CloseModal;
+export class CloseModal implements Action<ModalActionType> {
+  readonly type = ModalActionType.CloseModal;
 }
 
-export type Actions = ShowConfirmationModalAction | CloseModalAction;
+export type ModalAction = ShowConfirmationModal | CloseModal;

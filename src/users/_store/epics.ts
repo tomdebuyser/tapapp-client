@@ -5,7 +5,7 @@ import { push } from 'connected-react-router';
 import { usersActions, modalActions } from '../../_store/actions';
 import { usersSelectors } from '../../_store/selectors';
 import { translations } from '../../_translations';
-import { UsersActionType, GetUsers } from './actions';
+import { UsersActionType } from './actions';
 import * as usersApi from './api';
 
 export const getUsersEpic$: Epic = (action$, state$) =>
@@ -35,43 +35,41 @@ export const createUserEpic$: Epic = action$ =>
 export const createUserSuccessEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
 
-export const removeUserWithConfirmationEpic$: Epic = action$ =>
-  action$.ofType(UsersActionType.RemoveUser).pipe(
-    filter((action: usersActions.RemoveUser) => !action.confirmed),
-    map(({ user }: usersActions.RemoveUser) => {
-      return new modalActions.ShowConfirmationModalAction({
-        data: {
-          title: translations.getLabel('USERS.REMOVE.TITLE'),
-          content: translations.getLabel('USERS.REMOVE.CONTENT', { user: user.email }),
-          confirmText: translations.getLabel('USERS.REMOVE.CONFIRM'),
-          confirmAction: () => new usersActions.RemoveUser(user, true),
-        },
+export const inactivateUserWithConfirmationEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.InactivateUser).pipe(
+    filter(({ payload }: usersActions.InactivateUser) => !payload.confirmed),
+    map(({ payload }: usersActions.InactivateUser) => {
+      return new modalActions.ShowConfirmationModal({
+        title: translations.getLabel('USERS.REMOVE.TITLE'),
+        content: translations.getLabel('USERS.REMOVE.CONTENT', { user: payload.user.email }),
+        confirmText: translations.getLabel('USERS.REMOVE.CONFIRM'),
+        confirmAction: () => new usersActions.InactivateUser({ user: payload.user, confirmed: true }),
       });
     }),
   );
 
-export const removeUserEpic$: Epic = action$ =>
-  action$.ofType(UsersActionType.RemoveUser).pipe(
-    filter((action: usersActions.RemoveUser) => action.confirmed),
-    exhaustMap(({ user }: usersActions.RemoveUser) =>
-      from(usersApi.removeUser(user)).pipe(
-        map(() => new usersActions.RemoveUserSuccess()),
-        catchError(error => of(new usersActions.RemoveUserError(error))),
+export const inactivateUserEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.InactivateUser).pipe(
+    filter(({ payload }: usersActions.InactivateUser) => payload.confirmed),
+    exhaustMap(({ payload }: usersActions.InactivateUser) =>
+      from(usersApi.inactivateUser(payload.user)).pipe(
+        map(() => new usersActions.InactivateUserSuccess()),
+        catchError(error => of(new usersActions.InactivateUserError({ error }))),
       ),
     ),
   );
 
-export const removeUserSuccessEpic$: Epic = action$ =>
-  action$.ofType(UsersActionType.RemoveUserSuccess).pipe(switchMap(() => of(new usersActions.GetUsers())));
+export const inactivateUserSuccessEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.InactivateUserSuccess).pipe(switchMap(() => of(new usersActions.GetUsers())));
 
 const UsersEpics = [
   getUsersEpic$,
   setUsersQueryEpic$,
   createUserEpic$,
   createUserSuccessEpic$,
-  removeUserWithConfirmationEpic$,
-  removeUserEpic$,
-  removeUserSuccessEpic$,
+  inactivateUserWithConfirmationEpic$,
+  inactivateUserEpic$,
+  inactivateUserSuccessEpic$,
 ];
 
 export default UsersEpics;

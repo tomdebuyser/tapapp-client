@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
-
-import { CloseModalAction } from '../_store/actions';
 import { IConfirmationModalData } from '../_models';
 import { Button, Modal } from '../../_shared';
 import { translations } from '../../_translations';
+import { modalActions } from '../../_store/actions';
 
 interface Props {
   data?: IConfirmationModalData;
@@ -15,12 +14,12 @@ const ConfirmationModal: FC<Props> = ({ data }) => {
 
   const cancelModal = () => {
     if (data.cancelAction) dispatch(data.cancelAction());
-    dispatch(new CloseModalAction());
+    dispatch(new modalActions.CloseModal());
   };
 
   const confirmModal = () => {
     dispatch(data.confirmAction());
-    dispatch(new CloseModalAction());
+    dispatch(new modalActions.CloseModal());
   };
 
   return (
