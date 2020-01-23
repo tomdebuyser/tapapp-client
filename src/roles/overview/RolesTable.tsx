@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http/HttpMetadata';
 import Table, { TableColumn } from '../../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
@@ -15,10 +16,10 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'name', label: 'ROLES.OVERVIEW.NAME', sortable: true },
+  { name: 'name', label: 'ROLES.NAME', sortable: true },
   { name: 'createdAt', label: 'ROLES.OVERVIEW.CREATED_AT', sortable: true },
   { name: 'updatedAt', label: 'ROLES.OVERVIEW.UPDATED_AT', sortable: true },
-  { name: 'permissions', label: 'ROLES.OVERVIEW.PERMISSIONS' },
+  { name: 'permissions', label: 'ROLES.PERMISSIONS.TITLE' },
 ];
 
 const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
@@ -32,7 +33,9 @@ const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   function renderRow(role: IRole): JSX.Element {
     return (
       <Table.Row key={role.id}>
-        <Table.Cell>{role.name}</Table.Cell>
+        <Table.Cell>
+          <Link to={{ pathname: `/roles/${role.id}` }}>{role.name}</Link>
+        </Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(role.createdAt))}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(role.updatedAt))}</Table.Cell>
         <Table.Cell>

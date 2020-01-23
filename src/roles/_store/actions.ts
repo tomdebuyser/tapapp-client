@@ -11,6 +11,9 @@ export enum RolesActionType {
   GetRolesError = '[Roles] GetRolesError',
   GetRolesSuccess = '[Roles] GetRolesSuccess',
   SetRolesQuery = '[Roles] SetRolesQuery',
+  UpdateRole = '[Roles] UpdateRole',
+  UpdateRoleError = '[Roles] UpdateRoleError',
+  UpdateRoleSuccess = '[Roles] UpdateRoleSuccess',
 }
 
 export class GetRoles implements Action<RolesActionType> {
@@ -46,6 +49,21 @@ export class CreateRoleError implements Action<RolesActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
+export class UpdateRole implements Action<RolesActionType> {
+  readonly type = RolesActionType.UpdateRole;
+  constructor(public payload: { form: IRoleForm; roleId: string }) {}
+}
+
+export class UpdateRoleSuccess implements Action<RolesActionType> {
+  readonly type = RolesActionType.UpdateRoleSuccess;
+  constructor(public payload: { updatedRole: IRole }) {}
+}
+
+export class UpdateRoleError implements Action<RolesActionType> {
+  readonly type = RolesActionType.UpdateRoleError;
+  constructor(public payload: { error: ApiError }) {}
+}
+
 export type RolesAction =
   | GetRoles
   | GetRolesSuccess
@@ -53,4 +71,7 @@ export type RolesAction =
   | SetRolesQuery
   | CreateRole
   | CreateRoleSuccess
-  | CreateRoleError;
+  | CreateRoleError
+  | UpdateRole
+  | UpdateRoleSuccess
+  | UpdateRoleError;

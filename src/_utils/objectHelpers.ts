@@ -12,3 +12,8 @@ export function removeEmptyKeys<T>(object: T): Partial<T> {
     return acc;
   }, {});
 }
+
+export function insertUpdatedData<T extends { id: string }>(currentData: T[], updatedData: T[]): T[] {
+  const ids = updatedData.map(value => value.id);
+  return [...(currentData || []).filter(value => !ids.includes(value.id)), ...updatedData];
+}

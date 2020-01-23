@@ -24,7 +24,7 @@ const CreateUser: FC = () => {
     <Container as="main">
       <h1>{translations.getLabel('USERS.CREATE.TITLE')}</h1>
       <UserForm
-        cancelButton={
+        buttons={
           <Button href="/users" isTextLink>
             {translations.getLabel('SHARED.BUTTONS.CANCEL')}
           </Button>

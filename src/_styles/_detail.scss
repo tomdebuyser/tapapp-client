@@ -1,22 +1,9 @@
 @import './colors';
 
 main {
-  a.go-back {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    margin-bottom: 2rem;
-  }
-
   header {
     h1 {
       margin-bottom: 0;
-    }
-    .timestamps {
-      margin-top: 0.5rem;
-      font-style: italic;
-      color: $grey;
-      font-size: 1.4rem;
     }
   }
 

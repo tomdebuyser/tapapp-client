@@ -20,8 +20,8 @@ const columns: TableColumn[] = [
   { name: 'email', label: 'USERS.EMAIL', sortable: true, className: 'email-column' },
   { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
   { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
-  { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
+  { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'USERS.OVERVIEW.UPDATED_AT', sortable: true },
   { name: 'state', label: 'USERS.STATE.TITLE', sortable: true },
 ];
 
@@ -37,7 +37,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
     return (
       <Table.Row key={user.email}>
         <Table.Cell>
-          <Link to={{ pathname: `/users/${user.id}`, state: { user } }}>{user.email}</Link>
+          <Link to={{ pathname: `/users/${user.id}` }}>{user.email}</Link>
         </Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
         <Table.Cell>{user.lastName}</Table.Cell>

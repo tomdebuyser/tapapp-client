@@ -29,23 +29,30 @@
     }
   },
   "ROLES": {
+    "NAME": "Name",
+    "PERMISSIONS": {
+      "TITLE": "Permissions",
+      "FEATURES": {
+        "ROLES": "Roles",
+        "USERS": "Users"
+      },
+      "RIGHTS": {
+        "EDIT": "Edit",
+        "VIEW": "View"
+      }
+    },
     "OVERVIEW": {
       "CREATE_ROLE": "Create role",
       "CREATED_AT": "Created at",
       "EMPTY": "No roles found",
-      "NAME": "Name",
-      "PERMISSIONS": "Permissions",
       "TITLE": "Roles",
       "UPDATED_AT": "Updated at"
     },
     "CREATE": {
-      "EDIT": "Edit",
-      "NAME": "Name",
-      "PERMISSIONS": "Permissions",
-      "ROLES": "Roles",
-      "TITLE": "Create role",
-      "USERS": "Users",
-      "VIEW": "View"
+      "TITLE": "Create role"
+    },
+    "DETAIL": {
+      "BACK": "Back to roles"
     }
   },
   "SHARED": {
@@ -58,21 +65,19 @@
       "ROLES": "Roles",
       "USERS": "Users"
     },
-    "SEARCH_PLACEHOLDER": "Search..."
+    "SEARCH_PLACEHOLDER": "Search...",
+    "DETAIL": {
+      "CREATED_AT_BY": "Created at {{date}} by {{name}}",
+      "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}"
+    }
   },
   "USERS": {
-    "CREATED_AT": "Created at",
-    "CREATED_BY": "Created by",
     "EMAIL": "Email",
     "FIRST_NAME": "First name",
     "LAST_NAME": "Last name",
     "ROLE": "Roles",
-    "UPDATED_AT": "Updated at",
-    "UPDATED_BY": "Updated by",
     "DETAIL": {
       "BACK": "Back to users",
-      "CREATED_AT_BY": "Created at {{date}} by {{name}}",
-      "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}",
       "DETAILS": {
         "TITLE": "Details"
       },
@@ -94,7 +99,11 @@
     "OVERVIEW": {
       "CREATE_USER": "Create user",
       "EMPTY": "No users found",
-      "TITLE": "Users"
+      "TITLE": "Users",
+      "CREATED_AT": "Created at",
+      "CREATED_BY": "Created by",
+      "UPDATED_AT": "Updated at",
+      "UPDATED_BY": "Updated by"
     },
     "CREATE": {
       "TITLE": "Create user"
