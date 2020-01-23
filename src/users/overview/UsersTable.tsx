@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Table, { TableColumn } from '../_shared/table/Table';
-import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
-import { FillMetadataQueryFunction, HttpSortDirection } from '../_http/HttpMetadata';
-import { translations } from '../_translations';
-import { useTableSort, useInfiniteScroll } from '../_hooks';
-import { usersSelectors } from '../_store/selectors';
-import { IUser } from './_models/User';
-import { labelForUserState } from './_utils';
+import Table, { TableColumn } from '../../_shared/table/Table';
+import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
+import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http/HttpMetadata';
+import { translations } from '../../_translations';
+import { useTableSort, useInfiniteScroll } from '../../_hooks';
+import { usersSelectors } from '../../_store/selectors';
+import { IUser } from '../_models/User';
+import { labelForUserState } from '../_utils';
 
 interface Props {
   data?: IUser[];

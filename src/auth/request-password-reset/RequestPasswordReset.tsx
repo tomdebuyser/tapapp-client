@@ -1,16 +1,15 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, InputField } from '../_shared';
-import { useForm } from '../_hooks';
-import { translations } from '../_translations';
-import { authActions } from '../_store/actions';
-import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
-import { authSelectors } from '../_store/selectors';
-import './auth.scss';
-import { FormValidationErrors } from '../_hooks/useForm';
-import { FormValidator } from '../_utils/form-validation';
-import { IRequestPasswordResetForm } from './_models/RequestPasswordReset';
+import { Button, InputField } from '../../_shared';
+import { useForm } from '../../_hooks';
+import { translations } from '../../_translations';
+import { authActions } from '../../_store/actions';
+import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
+import { authSelectors } from '../../_store/selectors';
+import { FormValidationErrors } from '../../_hooks/useForm';
+import { FormValidator } from '../../_utils/form-validation';
+import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
 
 const initialForm: IRequestPasswordResetForm = {
   email: '',
