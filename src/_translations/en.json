@@ -5,10 +5,7 @@
       "LOGIN": "Login",
       "PASSWORD": "Password",
       "TITLE": "Welcome!",
-      "USERNAME": "Username",
-      "ERROR": {
-        "UNAUTHORIZED": "Incorrect username or password"
-      }
+      "USERNAME": "Username"
     },
     "LOGOUT": "Logout",
     "REGISTER": {
@@ -26,6 +23,12 @@
       "EMAIL": "Email",
       "RESET": "Send reset instructions",
       "TITLE": "Forgot your password?"
+    },
+    "ERRORS": {
+      "UNAUTHORIZED": "Incorrect username or password",
+      "USER_STATE_NOT_ALLOWED": "This account is not active, hence you cannot login. Contact your administrator.",
+      "RESET_TOKEN_INVALID": "The link you are using is invalid.",
+      "RESET_TOKEN_EXPIRED": "The link you are using is expired."
     }
   },
   "ROLES": {

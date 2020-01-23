@@ -11,6 +11,7 @@ import { authSelectors } from '../../_store/selectors';
 import { FormValidator } from '../../_utils/form-validation';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { IChangePasswordForm } from '../_models/ChoosePassword';
+import { ApiError } from '../../_http';
 
 interface Props {
   isPasswordReset?: boolean;
@@ -25,6 +26,12 @@ function validateForm(form: IChangePasswordForm): FormValidationErrors<IChangePa
   return {
     newPassword: FormValidator.isPassword(form.newPassword),
   };
+}
+
+function errorAsString(error?: ApiError): string {
+  if (error?.error === 'RESET_TOKEN_INVALID') return translations.getLabel(`AUTH.ERRORS.RESET_TOKEN_INVALID`);
+  if (error?.error === 'RESET_TOKEN_EXPIRED') return translations.getLabel(`AUTH.ERRORS.RESET_TOKEN_EXPIRED`);
+  return null;
 }
 
 const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
@@ -43,6 +50,8 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const errorMessage = errorAsString(error);
+
   return (
     <Container as="main" className="choose-password">
       <h1>{translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.TITLE' : 'AUTH.REGISTER.TITLE')}</h1>
@@ -57,7 +66,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
           value={Form.values.newPassword}
         />
         <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
-        <ErrorMessage isVisible={!!error}>{translations.getLabel('ERRORS.GENERAL')}</ErrorMessage>
+        <ErrorMessage isVisible={!!errorMessage}>{errorMessage}</ErrorMessage>
         <div>
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}

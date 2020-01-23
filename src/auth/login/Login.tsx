@@ -18,17 +18,17 @@ const initialForm: ILoginForm = {
   username: '',
 };
 
-const getErrorMessage = (error: ApiError): string => {
-  if (!error) return '';
-  if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel('AUTH.LOGIN.ERROR.UNAUTHORIZED');
-  return translations.getLabel('ERRORS.GENERAL');
-};
-
 function validateForm(form: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
     username: FormValidator.isRequired(form.username),
     password: FormValidator.isRequired(form.password),
   };
+}
+
+function errorAsString(error?: ApiError): string {
+  if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel(`AUTH.ERRORS.UNAUTHORIZED`);
+  if (error?.error === 'USER_STATE_NOT_ALLOWED') return translations.getLabel(`AUTH.ERRORS.USER_STATE_NOT_ALLOWED`);
+  return null;
 }
 
 const Login = () => {
@@ -41,6 +41,8 @@ const Login = () => {
     submitForm: form => dispatch(new authActions.Login(form, state?.pathname)),
     validateForm,
   });
+
+  const errorMessage = errorAsString(error);
 
   return (
     <Container as="main" className="login">
@@ -64,7 +66,7 @@ const Login = () => {
           type="password"
           value={Form.values.password}
         />
-        <ErrorMessage isVisible={!!error}>{getErrorMessage(error)}</ErrorMessage>
+        <ErrorMessage isVisible={!!errorMessage}>{errorMessage}</ErrorMessage>
         <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
         <div>
           <Button loading={isSubmitting} primary type="submit">
