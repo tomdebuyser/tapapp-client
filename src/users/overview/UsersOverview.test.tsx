@@ -5,9 +5,9 @@ import { translations } from '../../_translations';
 import { userBuilder } from '../../_mocks/users';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
 import { HttpMetadataPagingResponse } from '../../_http/HttpMetadata';
-import UsersOverview from './UsersOverview';
 import { getUsers } from '../_store/api';
 import { labelForUserState } from '../_utils';
+import UsersOverview from './UsersOverview';
 
 jest.mock('../_store/api');
 

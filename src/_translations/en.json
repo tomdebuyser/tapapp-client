@@ -46,6 +46,9 @@
       "TITLE": "Create role",
       "USERS": "Users",
       "VIEW": "View"
+    },
+    "DETAIL": {
+      "BACK": "Back to roles"
     }
   },
   "SHARED": {
@@ -58,7 +61,11 @@
       "ROLES": "Roles",
       "USERS": "Users"
     },
-    "SEARCH_PLACEHOLDER": "Search..."
+    "SEARCH_PLACEHOLDER": "Search...",
+    "DETAIL": {
+      "CREATED_AT_BY": "Created at {{date}} by {{name}}",
+      "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}"
+    }
   },
   "USERS": {
     "CREATED_AT": "Created at",
@@ -71,8 +78,6 @@
     "UPDATED_BY": "Updated by",
     "DETAIL": {
       "BACK": "Back to users",
-      "CREATED_AT_BY": "Created at {{date}} by {{name}}",
-      "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}",
       "DETAILS": {
         "TITLE": "Details"
       },

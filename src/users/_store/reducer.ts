@@ -1,6 +1,7 @@
 import { IUser } from '../_models/User';
 import { ApiError } from '../../_http';
 import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { UsersAction, UsersActionType } from './actions';
 
 export interface UsersState {
@@ -28,11 +29,6 @@ const initialState: UsersState = {
 };
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
-  function keepUpdatedUsers(updatedUsers: IUser[], currentUsers?: IUser[]): IUser[] {
-    const ids = updatedUsers.map(value => value.id);
-    return [...(currentUsers || state.users || []).filter(value => !ids.includes(value.id)), ...updatedUsers];
-  }
-
   switch (action.type) {
     case UsersActionType.GetUsers:
       return {
@@ -47,7 +43,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isGetUsersLoading: false,
-        users: keepUpdatedUsers(action.payload.data, currentData),
+        users: insertUpdatedData(currentData, action.payload.data),
         metadata: action.payload.meta,
       };
     }
@@ -89,7 +85,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isUpdateUserLoading: false,
-        users: keepUpdatedUsers([action.payload.updatedUser]),
+        users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
     case UsersActionType.UpdateUserError:
       return {
@@ -107,7 +103,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isInactivateUserLoading: false,
-        users: keepUpdatedUsers([action.payload.updatedUser]),
+        users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
     case UsersActionType.InactivateUserError:
       return {
@@ -125,7 +121,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isResendRegisterEmailLoading: false,
-        users: keepUpdatedUsers([action.payload.updatedUser]),
+        users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
     case UsersActionType.ResendRegisterEmailError:
       return {

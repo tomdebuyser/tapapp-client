@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http/HttpMetadata';
 import Table, { TableColumn } from '../../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
@@ -32,7 +33,9 @@ const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   function renderRow(role: IRole): JSX.Element {
     return (
       <Table.Row key={role.id}>
-        <Table.Cell>{role.name}</Table.Cell>
+        <Table.Cell>
+          <Link to={{ pathname: `/roles/${role.id}` }}>{role.name}</Link>
+        </Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(role.createdAt))}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(role.updatedAt))}</Table.Cell>
         <Table.Cell>

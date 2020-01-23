@@ -1,13 +1,16 @@
 import { IRole } from '../_models/Role';
 import { ApiError } from '../../_http';
 import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { RolesAction, RolesActionType } from './actions';
 
 export interface RolesState {
   errorCreateRole?: ApiError;
   errorGetRoles?: ApiError;
+  errorUpdateRole?: ApiError;
   isCreateRoleLoading: boolean;
   isGetRolesLoading: boolean;
+  isUpdateRoleLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   roles?: IRole[];
@@ -16,6 +19,7 @@ export interface RolesState {
 const initialState: RolesState = {
   isGetRolesLoading: false,
   isCreateRoleLoading: false,
+  isUpdateRoleLoading: false,
 };
 
 export default function reducer(state = initialState, action: RolesAction): RolesState {
@@ -30,11 +34,10 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.GetRolesSuccess: {
       let currentData = state.roles || [];
       if (!action.payload.meta.skip) currentData = []; // Start overnew when the offset was reset
-      const updatedIds = action.payload.data.map(value => value.id);
       return {
         ...state,
         isGetRolesLoading: false,
-        roles: [...currentData.filter(value => !updatedIds.includes(value.id)), ...action.payload.data],
+        roles: insertUpdatedData(currentData, action.payload.data),
         metadata: action.payload.meta,
       };
     }
@@ -65,6 +68,24 @@ export default function reducer(state = initialState, action: RolesAction): Role
         ...state,
         isCreateRoleLoading: false,
         errorCreateRole: action.payload.error,
+      };
+    case RolesActionType.UpdateRole:
+      return {
+        ...state,
+        isUpdateRoleLoading: true,
+        errorUpdateRole: null,
+      };
+    case RolesActionType.UpdateRoleSuccess:
+      return {
+        ...state,
+        isUpdateRoleLoading: false,
+        roles: insertUpdatedData(state.roles, [action.payload.updatedRole]),
+      };
+    case RolesActionType.UpdateRoleError:
+      return {
+        ...state,
+        isUpdateRoleLoading: false,
+        errorUpdateRole: action.payload.error,
       };
     default:
       return state;

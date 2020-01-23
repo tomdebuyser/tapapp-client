@@ -37,7 +37,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
     return (
       <Table.Row key={user.email}>
         <Table.Cell>
-          <Link to={{ pathname: `/users/${user.id}`, state: { user } }}>{user.email}</Link>
+          <Link to={{ pathname: `/users/${user.id}` }}>{user.email}</Link>
         </Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
         <Table.Cell>{user.lastName}</Table.Cell>

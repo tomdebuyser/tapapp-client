@@ -3,7 +3,7 @@ import { IUserForm } from '../_models/User';
 import { InputField, Button } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { translations } from '../../_translations';
-import RolesDropdown from '../../roles/rolesDropdown/RolesDropdown';
+import RolesDropdown from '../../roles/edit/RolesDropdown';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { ApiError } from '../../_http';
 import './userForm.scss';
@@ -11,7 +11,7 @@ import { FormValidationErrors } from '../../_hooks/useForm';
 import { FormValidator } from '../../_utils/form-validation';
 
 interface Props {
-  cancelButton?: JSX.Element;
+  buttons?: JSX.Element | JSX.Element[];
   error?: ApiError;
   initialForm: IUserForm;
   isSubmitting?: boolean;
@@ -19,7 +19,7 @@ interface Props {
   userId?: string;
 }
 
-const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, cancelButton }) => {
+const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   function validateForm(form: IUserForm): FormValidationErrors<IUserForm> {
     const errors: FormValidationErrors<IUserForm> = {};
     if (form.email) errors.email = FormValidator.isEmail(form.email);
@@ -28,11 +28,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
     return errors;
   }
 
-  const { Form } = useForm<IUserForm>({
-    initialForm,
-    submitForm,
-    validateForm,
-  });
+  const { Form } = useForm<IUserForm>({ initialForm, submitForm, validateForm });
 
   return (
     <form className="form-container" onSubmit={Form.submit}>
@@ -77,7 +73,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
       </div>
       <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
       <div className="actions">
-        {cancelButton}
+        {buttons}
         <Button loading={isSubmitting} primary type="submit">
           {translations.getLabel(userId ? 'SHARED.BUTTONS.SAVE' : 'SHARED.BUTTONS.CREATE')}
         </Button>

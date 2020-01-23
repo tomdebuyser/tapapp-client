@@ -34,4 +34,14 @@ const createRoleEpic$: Epic = action$ =>
 const createRoleSuccessEpic$: Epic = action$ =>
   action$.ofType(rolesActions.RolesActionType.CreateRoleSuccess).pipe(switchMap(() => of(push('/roles'))));
 
-export default [getRolesEpic$, setRolesQueryEpic$, createRoleEpic$, createRoleSuccessEpic$];
+const updateRoleEpic$: Epic = action$ =>
+  action$.ofType(RolesActionType.UpdateRole).pipe(
+    exhaustMap(({ payload }: rolesActions.UpdateRole) =>
+      from(rolesApi.updateRole(payload.roleId, payload.form)).pipe(
+        map(updatedRole => new rolesActions.UpdateRoleSuccess({ updatedRole })),
+        catchError(error => of(new rolesActions.UpdateRoleError({ error }))),
+      ),
+    ),
+  );
+
+export default [getRolesEpic$, setRolesQueryEpic$, createRoleEpic$, createRoleSuccessEpic$, updateRoleEpic$];
