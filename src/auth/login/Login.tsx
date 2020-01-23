@@ -2,17 +2,16 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { translations } from '../_translations';
-import { InputField, Button } from '../_shared';
-import { useForm } from '../_hooks';
-import { authSelectors } from '../_store/selectors';
-import { authActions } from '../_store/actions';
-import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
-import { FormValidationErrors } from '../_hooks/useForm';
-import { ApiError, HttpStatus } from '../_http';
-import { FormValidator } from '../_utils/form-validation';
-import { ILoginForm } from './_models/Login';
-import './auth.scss';
+import { translations } from '../../_translations';
+import { InputField, Button } from '../../_shared';
+import { useForm } from '../../_hooks';
+import { authSelectors } from '../../_store/selectors';
+import { authActions } from '../../_store/actions';
+import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
+import { FormValidationErrors } from '../../_hooks/useForm';
+import { ApiError, HttpStatus } from '../../_http';
+import { FormValidator } from '../../_utils/form-validation';
+import { ILoginForm } from '../_models/Login';
 
 const initialForm: ILoginForm = {
   password: '',

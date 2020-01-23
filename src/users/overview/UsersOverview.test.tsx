@@ -1,15 +1,15 @@
 import React from 'react';
 import { wait } from '@testing-library/react';
-import { render } from '../_utils/testHelpers';
-import { translations } from '../_translations';
-import { userBuilder } from '../_mocks/users';
-import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
-import { HttpMetadataPagingResponse } from '../_http/HttpMetadata';
-import Users from './Users';
-import { getUsers } from './_store/api';
-import { labelForUserState } from './_utils';
+import { render } from '../../_utils/testHelpers';
+import { translations } from '../../_translations';
+import { userBuilder } from '../../_mocks/users';
+import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
+import { HttpMetadataPagingResponse } from '../../_http/HttpMetadata';
+import UsersOverview from './UsersOverview';
+import { getUsers } from '../_store/api';
+import { labelForUserState } from '../_utils';
 
-jest.mock('./_store/api');
+jest.mock('../_store/api');
 
 const fakeUser = userBuilder();
 const dummyMeta: HttpMetadataPagingResponse = {
@@ -26,7 +26,7 @@ describe('Users component', () => {
   it('Should show a table of all users', async () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [fakeUser], meta: dummyMeta })));
 
-    const { getByText } = render(<Users />);
+    const { getByText } = render(<UsersOverview />);
 
     await wait(() => {
       expect(getUsers).toHaveBeenCalledTimes(1);
@@ -63,7 +63,7 @@ describe('Users component', () => {
   it('Should display a message when there are no users', () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
 
-    const { queryByText, getByText } = render(<Users />);
+    const { queryByText, getByText } = render(<UsersOverview />);
     const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
     const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
     const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
@@ -91,7 +91,7 @@ describe('Users component', () => {
   });
 
   it('Should have a create user button', async () => {
-    const { getByText } = render(<Users />);
+    const { getByText } = render(<UsersOverview />);
     const createUserButton = getByText(translations.getLabel('USERS.OVERVIEW.CREATE_USER'));
     expect(createUserButton).toBeInTheDocument();
   });

@@ -1,40 +1,17 @@
-import React, { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Container } from 'semantic-ui-react';
-import { Icon, Button, SearchInput } from '../_shared';
-import { translations } from '../_translations';
-import { usersSelectors } from '../_store/selectors';
-import { usersActions } from '../_store/actions';
-import { HttpMetadataQuery, FillMetadataQueryFunction } from '../_http/HttpMetadata';
-import UsersTable from './UsersTable';
-import './users.scss';
+import React from 'react';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import CreateUser from '../users/create/CreateUser';
+import UserDetail from '../users/detail/UserDetail';
+import UsersOverview from '../users/overview/UsersOverview';
 
-const Users: FC = () => {
-  const users = useSelector(usersSelectors.users);
-  const isLoading = useSelector(usersSelectors.isGetUsersLoading);
-  const query = useSelector(usersSelectors.query);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(new usersActions.GetUsers());
-  }, [dispatch]);
-
-  const setQuery: FillMetadataQueryFunction = (partialQuery: HttpMetadataQuery) => {
-    dispatch(new usersActions.SetUsersQuery({ query: { ...query, ...partialQuery } }));
-  };
-
+const Users: React.FC = () => {
+  const { url } = useRouteMatch();
   return (
-    <Container as="main" className="users">
-      <h1>{translations.getLabel('USERS.OVERVIEW.TITLE')}</h1>
-      <div className="header">
-        <SearchInput query={query} setQuery={setQuery} />
-        <Button href="/users/create" isTextLink primary>
-          <Icon name="SvgAdd" size={1.6} />
-          {translations.getLabel('USERS.OVERVIEW.CREATE_USER')}
-        </Button>
-      </div>
-      <UsersTable data={users} isLoading={isLoading} setQuery={setQuery} />
-    </Container>
+    <Switch>
+      <Route component={UsersOverview} exact path={url} />
+      <Route component={CreateUser} exact path={`${url}/create`} />
+      <Route component={UserDetail} exact path={`${url}/:id`} />
+    </Switch>
   );
 };
 

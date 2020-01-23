@@ -2,16 +2,15 @@ import React, { useEffect, FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, InputField } from '../_shared';
-import { useForm } from '../_hooks';
-import { translations } from '../_translations';
-import { authActions } from '../_store/actions';
-import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
-import { authSelectors } from '../_store/selectors';
-import { FormValidator } from '../_utils/form-validation';
-import { FormValidationErrors } from '../_hooks/useForm';
-import { IChangePasswordForm } from './_models/ChoosePassword';
-import './auth.scss';
+import { Button, InputField } from '../../_shared';
+import { useForm } from '../../_hooks';
+import { translations } from '../../_translations';
+import { authActions } from '../../_store/actions';
+import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
+import { authSelectors } from '../../_store/selectors';
+import { FormValidator } from '../../_utils/form-validation';
+import { FormValidationErrors } from '../../_hooks/useForm';
+import { IChangePasswordForm } from '../_models/ChoosePassword';
 
 interface Props {
   isPasswordReset?: boolean;
