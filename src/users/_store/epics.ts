@@ -71,8 +71,8 @@ const inactivateUserEpic$: Epic = action$ =>
 
 const resendRegisterEmailEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.ResendRegisterEmail).pipe(
-    exhaustMap(({ payload }: usersActions.InactivateUser) =>
-      from(usersApi.resendRegisterEmail(payload.user.id)).pipe(
+    exhaustMap(({ payload }: usersActions.ResendRegisterEmail) =>
+      from(usersApi.resendRegisterEmail(payload.userId)).pipe(
         map(updatedUser => new usersActions.ResendRegisterEmailSuccess({ updatedUser })),
         catchError(error => of(new usersActions.ResendRegisterEmailError({ error }))),
       ),

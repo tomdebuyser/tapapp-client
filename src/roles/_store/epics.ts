@@ -1,9 +1,10 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, switchMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap, switchMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
-import { rolesActions } from '../../_store/actions';
+import { rolesActions, modalActions } from '../../_store/actions';
 import { rolesSelectors } from '../../_store/selectors';
+import { translations } from '../../_translations';
 import { RolesActionType } from './actions';
 import * as rolesApi from './api';
 
@@ -31,8 +32,8 @@ const createRoleEpic$: Epic = action$ =>
     ),
   );
 
-const createRoleSuccessEpic$: Epic = action$ =>
-  action$.ofType(rolesActions.RolesActionType.CreateRoleSuccess).pipe(switchMap(() => of(push('/roles'))));
+const createDeleteRoleSuccessEpic$: Epic = action$ =>
+  action$.ofType(RolesActionType.CreateRoleSuccess, RolesActionType.DeleteRoleSuccess).pipe(switchMap(() => of(push('/roles'))));
 
 const updateRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.UpdateRole).pipe(
@@ -44,4 +45,36 @@ const updateRoleEpic$: Epic = action$ =>
     ),
   );
 
-export default [getRolesEpic$, setRolesQueryEpic$, createRoleEpic$, createRoleSuccessEpic$, updateRoleEpic$];
+const deleteRoleWithConfirmationEpic$: Epic = action$ =>
+  action$.ofType(RolesActionType.DeleteRole).pipe(
+    filter(({ payload }: rolesActions.DeleteRole) => !payload.confirmed),
+    map(({ payload }: rolesActions.DeleteRole) => {
+      return new modalActions.ShowConfirmationModal({
+        title: payload.role.name,
+        content: translations.getLabel('ROLES.DELETE.CONTENT'),
+        confirmText: translations.getLabel('ROLES.DELETE.CONFIRM'),
+        confirmAction: () => new rolesActions.DeleteRole({ role: payload.role, confirmed: true }),
+      });
+    }),
+  );
+
+const deleteRoleEpic$: Epic = action$ =>
+  action$.ofType(RolesActionType.DeleteRole).pipe(
+    filter(({ payload }: rolesActions.DeleteRole) => payload.confirmed),
+    exhaustMap(({ payload }: rolesActions.DeleteRole) =>
+      from(rolesApi.deleteRole(payload.role.id)).pipe(
+        map(() => new rolesActions.DeleteRoleSuccess({ roleId: payload.role.id })),
+        catchError(error => of(new rolesActions.DeleteRoleError({ error }))),
+      ),
+    ),
+  );
+
+export default [
+  getRolesEpic$,
+  setRolesQueryEpic$,
+  createRoleEpic$,
+  createDeleteRoleSuccessEpic$,
+  updateRoleEpic$,
+  deleteRoleEpic$,
+  deleteRoleWithConfirmationEpic$,
+];
