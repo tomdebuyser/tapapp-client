@@ -19,6 +19,11 @@ interface Props {
   userId?: string;
 }
 
+function errorAsString(error?: ApiError): string {
+  if (error?.error === 'EMAIL_ALREADY_IN_USE') return translations.getLabel(`USERS.ERRORS.EMAIL_ALREADY_IN_USE`);
+  return null;
+}
+
 const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   function validateForm(form: IUserForm): FormValidationErrors<IUserForm> {
     const errors: FormValidationErrors<IUserForm> = {};
@@ -29,6 +34,8 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
   }
 
   const { Form } = useForm<IUserForm>({ initialForm, submitForm, validateForm });
+
+  const errorMessage = errorAsString(error);
 
   return (
     <form className="form-container" onSubmit={Form.submit}>
@@ -71,7 +78,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
         />
         <div />
       </div>
-      <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
+      <ErrorMessage isVisible={!!errorMessage}>{errorMessage}</ErrorMessage>
       <div className="actions">
         {buttons}
         <Button loading={isSubmitting} primary type="submit">
