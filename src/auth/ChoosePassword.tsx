@@ -1,14 +1,15 @@
-import React, { useEffect, FormEvent, FC } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, InputField } from '../_shared';
-import { useForm, useToggle } from '../_hooks';
+import { useForm } from '../_hooks';
 import { translations } from '../_translations';
 import { authActions } from '../_store/actions';
 import ErrorMessage from '../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../_store/selectors';
-import { validatePassword } from '../_utils/validators';
+import { FormValidator } from '../_utils/form-validation';
+import { FormValidationErrors } from '../_hooks/useForm';
 import { IChangePasswordForm } from './_models/ChoosePassword';
 import './auth.scss';
 
@@ -21,47 +22,45 @@ const initialForm: IChangePasswordForm = {
   resetToken: '',
 };
 
+function validateForm(form: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
+  return {
+    newPassword: FormValidator.isPassword(form.newPassword),
+  };
+}
+
 const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(authSelectors.isChoosePasswordLoading);
+  const isSubmitting = useSelector(authSelectors.isChoosePasswordLoading);
   const error = useSelector(authSelectors.errorChoosePassword);
-  const [validationError, setValidationError] = useToggle(false);
   const { token } = useParams();
-  const { form, setFormAttribute } = useForm(initialForm);
+  const { Form } = useForm<IChangePasswordForm>({
+    initialForm,
+    submitForm: form => dispatch(new authActions.ChoosePassword(form)),
+    validateForm,
+  });
 
   useEffect(() => {
-    setFormAttribute(token, 'resetToken');
+    Form.setAttribute(token, 'resetToken');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const submitNewPassword = (event: FormEvent) => {
-    event.preventDefault();
-    if (validatePassword(form.newPassword)) {
-      setValidationError(false);
-      dispatch(new authActions.ChoosePassword(form));
-    } else {
-      setValidationError(true);
-    }
-  };
 
   return (
     <Container as="main" className="choose-password">
       <h1>{translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.TITLE' : 'AUTH.REGISTER.TITLE')}</h1>
-      <form onSubmit={submitNewPassword}>
+      <form onSubmit={Form.submit}>
         <InputField
-          type="password"
           autoComplete="new-password"
-          name="newPassword"
+          errorMessage={Form.validationErrors.newPassword}
           label={translations.getLabel('AUTH.REGISTER.CHOOSE_PASSWORD')}
-          value={form.newPassword}
-          onChange={setFormAttribute}
-          error={validationError}
-          errorMessage={translations.getLabel('AUTH.REGISTER.ERROR.UNSAFE_PASSWORD')}
+          name="newPassword"
+          onChange={Form.setAttribute}
+          type="password"
+          value={Form.values.newPassword}
         />
         <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
-        <ErrorMessage isVisible={!!error}>{translations.getLabel('AUTH.REGISTER.ERROR.GENERAL')}</ErrorMessage>
+        <ErrorMessage isVisible={!!error}>{translations.getLabel('ERRORS.GENERAL')}</ErrorMessage>
         <div>
-          <Button primary type="submit" loading={isLoading}>
+          <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}
           </Button>
         </div>

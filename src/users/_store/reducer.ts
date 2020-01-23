@@ -7,9 +7,13 @@ export interface UsersState {
   errorCreateUser?: ApiError;
   errorGetUsers?: ApiError;
   errorInactivateUser?: ApiError;
+  errorResendRegisterEmail?: ApiError;
+  errorUpdateUser?: ApiError;
   isCreateUserLoading: boolean;
   isGetUsersLoading: boolean;
   isInactivateUserLoading: boolean;
+  isResendRegisterEmailLoading: boolean;
+  isUpdateUserLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   users?: IUser[];
@@ -19,9 +23,16 @@ const initialState: UsersState = {
   isGetUsersLoading: false,
   isCreateUserLoading: false,
   isInactivateUserLoading: false,
+  isResendRegisterEmailLoading: false,
+  isUpdateUserLoading: false,
 };
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
+  function keepUpdatedUsers(updatedUsers: IUser[], currentUsers?: IUser[]): IUser[] {
+    const ids = updatedUsers.map(value => value.id);
+    return [...(currentUsers || state.users || []).filter(value => !ids.includes(value.id)), ...updatedUsers];
+  }
+
   switch (action.type) {
     case UsersActionType.GetUsers:
       return {
@@ -33,11 +44,10 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.GetUsersSuccess: {
       let currentData = state.users || [];
       if (!action.payload.meta.skip) currentData = []; // Start overnew when the offset was reset
-      const updatedIds = action.payload.data.map(value => value.id);
       return {
         ...state,
         isGetUsersLoading: false,
-        users: [...currentData.filter(value => !updatedIds.includes(value.id)), ...action.payload.data],
+        users: keepUpdatedUsers(action.payload.data, currentData),
         metadata: action.payload.meta,
       };
     }
@@ -69,24 +79,58 @@ export default function reducer(state = initialState, action: UsersAction): User
         isCreateUserLoading: false,
         errorCreateUser: action.payload.error,
       };
+    case UsersActionType.UpdateUser:
+      return {
+        ...state,
+        isUpdateUserLoading: true,
+        errorUpdateUser: null,
+      };
+    case UsersActionType.UpdateUserSuccess:
+      return {
+        ...state,
+        isUpdateUserLoading: false,
+        users: keepUpdatedUsers([action.payload.updatedUser]),
+      };
+    case UsersActionType.UpdateUserError:
+      return {
+        ...state,
+        isUpdateUserLoading: false,
+        errorUpdateUser: action.payload.error,
+      };
     case UsersActionType.InactivateUser:
       return {
         ...state,
         isInactivateUserLoading: action.payload.confirmed,
-        errorCreateUser: null,
+        errorInactivateUser: null,
       };
-    case UsersActionType.InactivateUserSuccess: {
-      const { updatedUser } = action.payload;
+    case UsersActionType.InactivateUserSuccess:
       return {
         ...state,
         isInactivateUserLoading: false,
-        users: [...state.users.filter(user => user.id !== updatedUser.id), updatedUser],
+        users: keepUpdatedUsers([action.payload.updatedUser]),
       };
-    }
     case UsersActionType.InactivateUserError:
       return {
         ...state,
         isInactivateUserLoading: false,
+        errorInactivateUser: action.payload.error,
+      };
+    case UsersActionType.ResendRegisterEmail:
+      return {
+        ...state,
+        isResendRegisterEmailLoading: true,
+        errorCreateUser: null,
+      };
+    case UsersActionType.ResendRegisterEmailSuccess:
+      return {
+        ...state,
+        isResendRegisterEmailLoading: false,
+        users: keepUpdatedUsers([action.payload.updatedUser]),
+      };
+    case UsersActionType.ResendRegisterEmailError:
+      return {
+        ...state,
+        isResendRegisterEmailLoading: false,
         errorInactivateUser: action.payload.error,
       };
     default:

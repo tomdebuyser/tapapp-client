@@ -35,14 +35,24 @@ const createUserEpic$: Epic = action$ =>
 const createUserSuccessEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
 
+const updateUserEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.UpdateUser).pipe(
+    exhaustMap(({ payload }: usersActions.UpdateUser) =>
+      from(usersApi.updateUser(payload.userId, payload.form)).pipe(
+        map(updatedUser => new usersActions.UpdateUserSuccess({ updatedUser })),
+        catchError(error => of(new usersActions.UpdateUserError({ error }))),
+      ),
+    ),
+  );
+
 const inactivateUserWithConfirmationEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.InactivateUser).pipe(
     filter(({ payload }: usersActions.InactivateUser) => !payload.confirmed),
     map(({ payload }: usersActions.InactivateUser) => {
       return new modalActions.ShowConfirmationModal({
-        title: translations.getLabel('USERS.REMOVE.TITLE'),
-        content: translations.getLabel('USERS.REMOVE.CONTENT', { user: payload.user.email }),
-        confirmText: translations.getLabel('USERS.REMOVE.CONFIRM'),
+        title: payload.user.email,
+        content: translations.getLabel('USERS.INACTIVATE.CONTENT'),
+        confirmText: translations.getLabel('USERS.INACTIVATE.CONFIRM'),
         confirmAction: () => new usersActions.InactivateUser({ user: payload.user, confirmed: true }),
       });
     }),
@@ -52,9 +62,19 @@ const inactivateUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.InactivateUser).pipe(
     filter(({ payload }: usersActions.InactivateUser) => payload.confirmed),
     exhaustMap(({ payload }: usersActions.InactivateUser) =>
-      from(usersApi.inactivateUser(payload.user)).pipe(
+      from(usersApi.inactivateUser(payload.user.id)).pipe(
         map(updatedUser => new usersActions.InactivateUserSuccess({ updatedUser })),
         catchError(error => of(new usersActions.InactivateUserError({ error }))),
+      ),
+    ),
+  );
+
+const resendRegisterEmailEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.ResendRegisterEmail).pipe(
+    exhaustMap(({ payload }: usersActions.InactivateUser) =>
+      from(usersApi.resendRegisterEmail(payload.user.id)).pipe(
+        map(updatedUser => new usersActions.ResendRegisterEmailSuccess({ updatedUser })),
+        catchError(error => of(new usersActions.ResendRegisterEmailError({ error }))),
       ),
     ),
   );
@@ -64,6 +84,8 @@ export default [
   setUsersQueryEpic$,
   createUserEpic$,
   createUserSuccessEpic$,
+  updateUserEpic$,
   inactivateUserWithConfirmationEpic$,
   inactivateUserEpic$,
+  resendRegisterEmailEpic$,
 ];

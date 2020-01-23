@@ -23,14 +23,14 @@ const ConfirmationModal: FC<Props> = ({ data }) => {
   };
 
   return (
-    <Modal open onClose={cancelModal}>
+    <Modal onClose={cancelModal} open>
       <Modal.Header>{data.title}</Modal.Header>
       <Modal.Content>
         <p>{data.content}</p>
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={cancelModal}>{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>
-        <Button primary onClick={confirmModal}>
+        <Button onClick={confirmModal} primary>
           {data.confirmText}
         </Button>
       </Modal.Actions>

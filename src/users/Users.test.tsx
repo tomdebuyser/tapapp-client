@@ -7,6 +7,7 @@ import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import { HttpMetadataPagingResponse } from '../_http/HttpMetadata';
 import Users from './Users';
 import { getUsers } from './_store/api';
+import { labelForUserState } from './_utils';
 
 jest.mock('./_store/api');
 
@@ -29,19 +30,19 @@ describe('Users component', () => {
 
     await wait(() => {
       expect(getUsers).toHaveBeenCalledTimes(1);
-      const emailColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.EMAIL'));
-      const firstNameHeader = getByText(translations.getLabel('USERS.OVERVIEW.FIRST_NAME'));
-      const lastNameHeader = getByText(translations.getLabel('USERS.OVERVIEW.LAST_NAME'));
-      const createdAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.CREATED_AT'));
-      const updatedAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.UPDATED_AT'));
-      const stateColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.STATE'));
+      const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
+      const firstNameHeader = getByText(translations.getLabel('USERS.FIRST_NAME'));
+      const lastNameHeader = getByText(translations.getLabel('USERS.LAST_NAME'));
+      const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
+      const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
+      const stateColumnHeader = getByText(translations.getLabel('USERS.STATE.TITLE'));
 
       const email = getByText(fakeUser.email);
       const firstName = getByText(fakeUser.firstName);
       const lastName = getByText(fakeUser.lastName);
       const createdAt = getByText(formatDate(dateFromISOString(fakeUser.createdAt)));
       const updatedAt = getByText(formatDate(dateFromISOString(fakeUser.updatedAt)));
-      const userState = getByText(fakeUser.state);
+      const userState = getByText(labelForUserState(fakeUser.state));
 
       expect(emailColumnHeader).toBeInTheDocument();
       expect(firstNameHeader).toBeInTheDocument();
@@ -63,10 +64,10 @@ describe('Users component', () => {
     (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
 
     const { queryByText, getByText } = render(<Users />);
-    const emailColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.EMAIL'));
-    const createdAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.CREATED_AT'));
-    const updatedAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.UPDATED_AT'));
-    const stateColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.STATE'));
+    const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
+    const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
+    const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
+    const stateColumnHeader = getByText(translations.getLabel('USERS.STATE.TITLE'));
 
     expect(emailColumnHeader).toBeInTheDocument();
     expect(createdAtColumnHeader).toBeInTheDocument();
@@ -90,7 +91,6 @@ describe('Users component', () => {
   });
 
   it('Should have a create user button', async () => {
-    (getUsers as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: [], meta: dummyMeta })));
     const { getByText } = render(<Users />);
     const createUserButton = getByText(translations.getLabel('USERS.OVERVIEW.CREATE_USER'));
     expect(createUserButton).toBeInTheDocument();

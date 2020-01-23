@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Table, { TableColumn } from '../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../_http/HttpMetadata';
@@ -7,6 +8,7 @@ import { translations } from '../_translations';
 import { useTableSort, useInfiniteScroll } from '../_hooks';
 import { usersSelectors } from '../_store/selectors';
 import { IUser } from './_models/User';
+import { labelForUserState } from './_utils';
 
 interface Props {
   data?: IUser[];
@@ -15,12 +17,12 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'email', label: 'USERS.OVERVIEW.EMAIL', sortable: true, className: 'email-column' },
-  { name: 'firstName', label: 'USERS.OVERVIEW.FIRST_NAME', sortable: true },
-  { name: 'lastName', label: 'USERS.OVERVIEW.LAST_NAME', sortable: true },
-  { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'USERS.OVERVIEW.UPDATED_AT', sortable: true },
-  { name: 'state', label: 'USERS.OVERVIEW.STATE', sortable: true },
+  { name: 'email', label: 'USERS.EMAIL', sortable: true, className: 'email-column' },
+  { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
+  { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
+  { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
+  { name: 'state', label: 'USERS.STATE.TITLE', sortable: true },
 ];
 
 const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
@@ -34,12 +36,14 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   function renderRow(user: IUser): JSX.Element {
     return (
       <Table.Row key={user.email}>
-        <Table.Cell>{user.email}</Table.Cell>
+        <Table.Cell>
+          <Link to={{ pathname: `/users/${user.id}`, state: { user } }}>{user.email}</Link>
+        </Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
         <Table.Cell>{user.lastName}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
         <Table.Cell>{formatDate(dateFromISOString(user.updatedAt))}</Table.Cell>
-        <Table.Cell>{user.state}</Table.Cell>
+        <Table.Cell>{labelForUserState(user.state)}</Table.Cell>
       </Table.Row>
     );
   }
@@ -47,10 +51,10 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   return (
     <Table
       columns={columns}
-      renderRow={renderRow}
       data={data}
+      emptyLabel={translations.getLabel('USERS.OVERVIEW.EMPTY')}
       isLoading={isLoading}
-      emptyLabel={translations.getLabel('USERS.EMPTY')}
+      renderRow={renderRow}
       sortFunctions={sortFunctions}
     />
   );

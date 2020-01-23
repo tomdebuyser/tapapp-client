@@ -6,10 +6,15 @@ interface Response {
   showError: boolean;
 }
 
-export default function useInputError(error: boolean): Response {
+export default function useInputError(message: string): Response {
   const [isDirty, setIsDirty] = useToggle(false);
 
-  useEffect(() => setIsDirty(false), [error, setIsDirty]);
+  useEffect(() => {
+    setIsDirty(false);
+  }, [message, setIsDirty]);
 
-  return { showError: error && !isDirty, setDirty: () => setIsDirty(true) };
+  return {
+    showError: message && !isDirty,
+    setDirty: () => setIsDirty(true),
+  };
 }

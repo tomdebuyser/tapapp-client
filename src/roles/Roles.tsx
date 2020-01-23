@@ -28,7 +28,7 @@ const Roles: FC = () => {
       <h1>{translations.getLabel('ROLES.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
-        <Button isTextLink href="/roles/create" primary>
+        <Button href="/roles/create" isTextLink primary>
           <Icon name="SvgAdd" size={1.6} />
           {translations.getLabel('ROLES.OVERVIEW.CREATE_ROLE')}
         </Button>

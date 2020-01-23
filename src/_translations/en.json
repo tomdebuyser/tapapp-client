@@ -7,9 +7,6 @@
       "TITLE": "Welcome!",
       "USERNAME": "Username",
       "ERROR": {
-        "EMPTY_USERNAME": "Username is required",
-        "EMPTY_PASSWORD": "Password is required",
-        "GENERAL": "Something went wrong while trying to login. Please try again.",
         "UNAUTHORIZED": "Incorrect username or password"
       }
     },
@@ -18,11 +15,7 @@
       "CHOOSE_PASSWORD": "Password",
       "PASSWORD_GUIDELINES": "Password requirements: min. 8 characters, at least one uppercase letter, one lowercase letter, and one number.",
       "REGISTER": "Set password",
-      "TITLE": "Welcome!",
-      "ERROR": {
-        "GENERAL": "Something went wrong. Please try again.",
-        "UNSAFE_PASSWORD": "Your password doesn't fit the requirements"
-      }
+      "TITLE": "Welcome!"
     },
     "RESET_PASSWORD": {
       "RESET": "Reset password",
@@ -58,7 +51,8 @@
   "SHARED": {
     "BUTTONS": {
       "CANCEL": "Cancel",
-      "CREATE": "Create"
+      "CREATE": "Create",
+      "SAVE": "Save changes"
     },
     "NAVIGATION": {
       "ROLES": "Roles",
@@ -67,28 +61,68 @@
     "SEARCH_PLACEHOLDER": "Search..."
   },
   "USERS": {
+    "CREATED_AT": "Created at",
+    "CREATED_BY": "Created by",
+    "EMAIL": "Email",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "ROLE": "Roles",
+    "UPDATED_AT": "Updated at",
+    "UPDATED_BY": "Updated by",
+    "DETAIL": {
+      "BACK": "Back to users",
+      "CREATED_AT_BY": "Created at {{date}} by {{name}}",
+      "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}",
+      "DETAILS": {
+        "TITLE": "Details"
+      },
+      "STATUS": {
+        "TITLE": "Status",
+        "SUBTITLE": "This user is currently",
+        "DESCRIPTION": {
+          "ACTIVE": "The user is able to login.",
+          "INACTIVE": "The user is not able to login.",
+          "REGISTERING": "An email has been sent to this user to activate his/her accound by choosing a password."
+        },
+        "BUTTON": {
+          "ACTIVATE": "Activate user",
+          "INACTIVATE": "Inactivate user",
+          "RESEND_REGISTER_MAIL": "Resend email"
+        }
+      }
+    },
     "OVERVIEW": {
       "CREATE_USER": "Create user",
-      "CREATED_AT": "Created at",
-      "EMAIL": "Email",
       "EMPTY": "No users found",
-      "FIRST_NAME": "First name",
-      "LAST_NAME": "Last name",
-      "STATE": "State",
-      "TITLE": "Users",
-      "UPDATED_AT": "Updated at"
+      "TITLE": "Users"
     },
     "CREATE": {
-      "EMAIL": "Email",
-      "FIRST_NAME": "First name",
-      "LAST_NAME": "Last name",
-      "ROLE": "Role",
       "TITLE": "Create user"
     },
-    "REMOVE": {
-      "TITLE": "Remove user",
-      "CONTENT": "Are you sure you want to remove {{user}}?",
-      "CONFIRM": "Remove"
+    "INACTIVATE": {
+      "CONTENT": "Are you sure you want to inactivate this user? By doing this, the user will not be able to login anymore.",
+      "CONFIRM": "Inactivate user"
+    },
+    "STATE": {
+      "TITLE": "State",
+      "OPTIONS": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "REGISTERING": "Registering"
+      }
+    }
+  },
+  "ERRORS": {
+    "GENERAL": "Something went wrong. Please try again.",
+    "VALIDATION": {
+      "REQUIRED": "Required",
+      "INVALID": "Value is not correct",
+      "PASSWORD_TOO_SHORT": "This password is too short",
+      "PASSWORD_UNSAFE": "This password doesn't fit the requirements",
+      "MAX_LENGTH": "Value should have at least {{length}} characters",
+      "MIN_LENGTH": "Value should have maximum {{length}} characters",
+      "NOT_A_NUMBER": "Value is not a number",
+      "EMPTY_ARRAY": "Choose at least one"
     }
   }
 }

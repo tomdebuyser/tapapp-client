@@ -1,5 +1,6 @@
 import React, { FC, ChangeEvent } from 'react';
 import { Input, InputOnChangeData } from 'semantic-ui-react';
+import classnames from 'classnames';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Icon from '../icon/Icon';
 import { useInputError } from '../../_hooks';
@@ -10,7 +11,6 @@ export interface InputFieldProps {
   autoFocus?: boolean;
   className?: string;
   disabled?: boolean;
-  error?: boolean;
   errorMessage?: string;
   fluid?: boolean;
   icon?: string;
@@ -30,7 +30,6 @@ const InputField: FC<InputFieldProps> = ({
   className,
   label,
   labelIcon,
-  error,
   errorMessage,
   onChange,
   normalize,
@@ -38,10 +37,10 @@ const InputField: FC<InputFieldProps> = ({
   ...props
 }) => {
   const inputWrapperRef = React.createRef<HTMLDivElement>();
-  const { showError, setDirty } = useInputError(error);
+  const { showError, setDirty } = useInputError(errorMessage);
 
   return (
-    <div className={`input-wrapper ${className}`} ref={inputWrapperRef}>
+    <div className={classnames('input-wrapper', className)} ref={inputWrapperRef}>
       {!!label && (
         <label htmlFor={props.name}>
           {!!labelIcon && <Icon name={labelIcon} />}
@@ -50,12 +49,12 @@ const InputField: FC<InputFieldProps> = ({
       )}
       <Input
         {...props}
-        icon={icon}
         autoComplete={autoComplete}
-        id={props?.name}
         autoFocus={autoFocus}
         error={showError}
-        onChange={(event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
+        icon={icon}
+        id={props?.name}
+        onChange={(_: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
           const normalizedValue = normalize(data?.value);
           onChange(normalizedValue, data?.name);
           setDirty();

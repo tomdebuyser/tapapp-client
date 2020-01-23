@@ -28,7 +28,7 @@ const Users: FC = () => {
       <h1>{translations.getLabel('USERS.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
-        <Button isTextLink href="/users/create" primary>
+        <Button href="/users/create" isTextLink primary>
           <Icon name="SvgAdd" size={1.6} />
           {translations.getLabel('USERS.OVERVIEW.CREATE_USER')}
         </Button>

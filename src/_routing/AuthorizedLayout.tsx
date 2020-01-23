@@ -1,20 +1,22 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Menu } from '../_shared';
-import Users from '../users/Users';
-import CreateUser from '../users/createUser/CreateUser';
-import Roles from '../roles/Roles';
 import CreateRole from '../roles/createRole/CreateRole';
+import CreateUser from '../users/create/CreateUser';
+import Roles from '../roles/Roles';
+import UserDetail from '../users/detail/UserDetail';
+import Users from '../users/Users';
 
 const AuthorizedLayout: React.FC = () => {
   return (
     <div className="App">
       <Menu />
       <Switch>
-        <Route exact path="/users" component={Users} />
-        <Route exact path="/users/create" component={CreateUser} />
-        <Route exact path="/roles" component={Roles} />
-        <Route exact path="/roles/create" component={CreateRole} />
+        <Route component={Users} exact path="/users" />
+        <Route component={CreateUser} exact path="/users/create" />
+        <Route component={UserDetail} exact path="/users/:id" />
+        <Route component={Roles} exact path="/roles" />
+        <Route component={CreateRole} exact path="/roles/create" />
         <Redirect to="/users" />
       </Switch>
     </div>

@@ -22,23 +22,23 @@ interface Props {
   value: string | string[];
 }
 
-const Dropdown: FC<Props> = ({ name, label, normalize, onChange, error, errorMessage, options, ...props }) => {
-  const { showError, setDirty } = useInputError(error);
+const Dropdown: FC<Props> = ({ name, label, normalize, onChange, errorMessage, options, ...props }) => {
+  const { showError, setDirty } = useInputError(errorMessage);
 
   return (
     <div className="dropdown-wrapper">
       <label htmlFor={name}>{label}</label>
       <SemanticDropdown
+        error={showError}
         id={name}
         name={name}
-        selection
-        onChange={(event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
+        onChange={(_: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
           const normalizedValue = normalize(data?.value);
           onChange(normalizedValue, data?.name);
           setDirty();
         }}
-        error={showError}
         options={options || []}
+        selection
         {...props}
       />
       <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>

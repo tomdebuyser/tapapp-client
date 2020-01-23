@@ -1,5 +1,6 @@
 export interface IUser {
-  createdAt: string;
+  createdAt?: string;
+  createdBy?: string;
   email: string;
   firstName?: string;
   id: string;
@@ -9,17 +10,19 @@ export interface IUser {
     name: string;
   }[];
   state: UserState;
-  updatedAt: string;
+  updatedAt?: string;
+  updatedBy?: string;
 }
 
 export interface IUserForm {
-  email: string;
+  email?: string;
   firstName?: string;
   lastName?: string;
-  roleIds: string[];
+  roleIds?: string[];
 }
 
 export enum UserState {
-  ACTIVE = 'ACTIVE',
-  REGISTERING = 'REGISTERING',
+  Active = 'ACTIVE',
+  Inactive = 'INACTIVE',
+  Registering = 'REGISTERING',
 }

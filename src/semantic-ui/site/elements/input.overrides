@@ -6,6 +6,14 @@
   min-width: 30rem;
 
   input::placeholder {
-  color: #333f4833;
+    color: #333f4833;
+  }
 }
+
+.ui.disabled.input {
+  opacity: 0.8;
+  
+  > input {
+    background: #eee;
+  } 
 }
