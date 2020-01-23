@@ -65,8 +65,8 @@ describe('Users component', () => {
 
     const { queryByText, getByText } = render(<UsersOverview />);
     const emailColumnHeader = getByText(translations.getLabel('USERS.EMAIL'));
-    const createdAtColumnHeader = getByText(translations.getLabel('USERS.CREATED_AT'));
-    const updatedAtColumnHeader = getByText(translations.getLabel('USERS.UPDATED_AT'));
+    const createdAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.CREATED_AT'));
+    const updatedAtColumnHeader = getByText(translations.getLabel('USERS.OVERVIEW.UPDATED_AT'));
     const stateColumnHeader = getByText(translations.getLabel('USERS.STATE.TITLE'));
 
     expect(emailColumnHeader).toBeInTheDocument();
