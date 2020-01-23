@@ -56,7 +56,7 @@ const UserDetail: FC = () => {
     let button = (
       <Button
         loading={isResendRegisterMailLoading}
-        onClick={() => dispatch(new usersActions.ResendRegisterEmail({ user }))}
+        onClick={() => dispatch(new usersActions.ResendRegisterEmail({ userId: user.id }))}
         primary
       >
         {translations.getLabel(
@@ -68,7 +68,7 @@ const UserDetail: FC = () => {
     );
     if (user.state === UserState.Active) {
       button = (
-        <Button loading={isInactivateLoading} onClick={() => dispatch(new usersActions.InactivateUser({ user }))} primary>
+        <Button loading={isInactivateLoading} negative onClick={() => dispatch(new usersActions.InactivateUser({ user }))}>
           {translations.getLabel('USERS.DETAIL.STATUS.BUTTON.INACTIVATE')}
         </Button>
       );

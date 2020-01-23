@@ -52,7 +52,12 @@
       "TITLE": "Create role"
     },
     "DETAIL": {
-      "BACK": "Back to roles"
+      "BACK": "Back to roles",
+      "BUTTON_DELETE": "Delete role"
+    },
+    "DELETE": {
+      "CONTENT": "Are you sure you want to delete this role? This may fail if the role is still in use.",
+      "CONFIRM": "Delete role"
     }
   },
   "SHARED": {

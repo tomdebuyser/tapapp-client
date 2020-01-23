@@ -9,6 +9,7 @@ interface Props {
   href?: string;
   isTextLink?: boolean;
   loading?: boolean;
+  negative?: boolean;
   onClick?: () => void;
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -17,7 +18,7 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
-const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop, disabled, loading, href }) => {
+const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop, disabled, loading, href, negative }) => {
   if (isTextLink) {
     return (
       <Link to={href}>
@@ -28,7 +29,14 @@ const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop
     );
   }
   return (
-    <SemanticButton disabled={disabled || loading} loading={loading} onClick={onClick} primary={primary} type={type}>
+    <SemanticButton
+      disabled={disabled || loading}
+      loading={loading}
+      negative={negative}
+      onClick={onClick}
+      primary={primary}
+      type={type}
+    >
       {children}
     </SemanticButton>
   );

@@ -6,9 +6,11 @@ import { RolesAction, RolesActionType } from './actions';
 
 export interface RolesState {
   errorCreateRole?: ApiError;
+  errorDeleteRole?: ApiError;
   errorGetRoles?: ApiError;
   errorUpdateRole?: ApiError;
   isCreateRoleLoading: boolean;
+  isDeleteRoleLoading: boolean;
   isGetRolesLoading: boolean;
   isUpdateRoleLoading: boolean;
   metadata?: HttpMetadataPagingResponse;
@@ -17,8 +19,9 @@ export interface RolesState {
 }
 
 const initialState: RolesState = {
-  isGetRolesLoading: false,
   isCreateRoleLoading: false,
+  isDeleteRoleLoading: false,
+  isGetRolesLoading: false,
   isUpdateRoleLoading: false,
 };
 
@@ -86,6 +89,24 @@ export default function reducer(state = initialState, action: RolesAction): Role
         ...state,
         isUpdateRoleLoading: false,
         errorUpdateRole: action.payload.error,
+      };
+    case RolesActionType.DeleteRole:
+      return {
+        ...state,
+        isDeleteRoleLoading: action.payload.confirmed,
+        errorDeleteRole: null,
+      };
+    case RolesActionType.DeleteRoleSuccess:
+      return {
+        ...state,
+        isDeleteRoleLoading: false,
+        roles: [...state.roles.filter(role => role.id !== action.payload.roleId)],
+      };
+    case RolesActionType.DeleteRoleError:
+      return {
+        ...state,
+        isDeleteRoleLoading: false,
+        errorDeleteRole: action.payload.error,
       };
     default:
       return state;

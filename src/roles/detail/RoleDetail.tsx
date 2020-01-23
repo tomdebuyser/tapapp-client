@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { GoBackLink, Timestamps } from '../../_shared';
+import { GoBackLink, Timestamps, Button } from '../../_shared';
 import { translations } from '../../_translations';
 import { rolesSelectors } from '../../_store/selectors';
 import { IRoleForm } from '../_models/Role';
@@ -12,7 +12,9 @@ import { rolesActions } from '../../_store/actions';
 const RoleDetail: FC = () => {
   const { id } = useParams();
   const role = useSelector(rolesSelectors.role(id));
+  const isDeleteLoading = useSelector(rolesSelectors.isDeleteRoleLoading);
   const isUpdateLoading = useSelector(rolesSelectors.isUpdateRoleLoading);
+  const errorDeleteRole = useSelector(rolesSelectors.errorDeleteRole);
   const errorUpdateRole = useSelector(rolesSelectors.errorUpdateRole);
   const dispatch = useDispatch();
 
@@ -35,7 +37,12 @@ const RoleDetail: FC = () => {
     return (
       <section>
         <RoleForm
-          error={errorUpdateRole}
+          buttons={
+            <Button loading={isDeleteLoading} negative onClick={() => dispatch(new rolesActions.DeleteRole({ role }))}>
+              {translations.getLabel('ROLES.DETAIL.BUTTON_DELETE')}
+            </Button>
+          }
+          error={errorUpdateRole || errorDeleteRole}
           initialForm={initialForm}
           isSubmitting={isUpdateLoading}
           roleId={role.id}

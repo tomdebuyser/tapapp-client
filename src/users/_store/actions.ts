@@ -87,7 +87,7 @@ export class InactivateUserError implements Action<UsersActionType> {
 
 export class ResendRegisterEmail implements Action<UsersActionType> {
   readonly type = UsersActionType.ResendRegisterEmail;
-  constructor(public payload: { user: IUser }) {}
+  constructor(public payload: { userId: string }) {}
 }
 
 export class ResendRegisterEmailSuccess implements Action<UsersActionType> {
