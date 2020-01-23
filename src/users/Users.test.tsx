@@ -7,6 +7,7 @@ import { formatDate, dateFromISOString } from '../_utils/timeHelpers';
 import { HttpMetadataPagingResponse } from '../_http/HttpMetadata';
 import Users from './Users';
 import { getUsers } from './_store/api';
+import { labelForUserState } from './_utils';
 
 jest.mock('./_store/api');
 
@@ -41,7 +42,7 @@ describe('Users component', () => {
       const lastName = getByText(fakeUser.lastName);
       const createdAt = getByText(formatDate(dateFromISOString(fakeUser.createdAt)));
       const updatedAt = getByText(formatDate(dateFromISOString(fakeUser.updatedAt)));
-      const userState = getByText(fakeUser.state);
+      const userState = getByText(labelForUserState(fakeUser.state));
 
       expect(emailColumnHeader).toBeInTheDocument();
       expect(firstNameHeader).toBeInTheDocument();
