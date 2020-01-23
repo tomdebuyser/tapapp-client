@@ -42,7 +42,7 @@ const RoleDetail: FC = () => {
               {translations.getLabel('ROLES.DETAIL.BUTTON_DELETE')}
             </Button>
           }
-          error={errorUpdateRole || errorDeleteRole}
+          error={errorDeleteRole || errorUpdateRole}
           initialForm={initialForm}
           isSubmitting={isUpdateLoading}
           roleId={role.id}

@@ -57,7 +57,11 @@
     },
     "DELETE": {
       "CONTENT": "Are you sure you want to delete this role? This may fail if the role is still in use.",
-      "CONFIRM": "Delete role"
+      "CONFIRM": "Delete role",
+      "ERRORS": {
+        "ROLE_IN_USE": "This role is still in use, hence it is not possible to delete it.",
+        "ROLE_NAME_ALREADY_IN_USE": "A role with the given name already exists."
+      }
     }
   },
   "SHARED": {
