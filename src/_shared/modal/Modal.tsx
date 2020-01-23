@@ -16,11 +16,11 @@ const Modal: FC<Props> & { Actions; Content; Header } = ({ className, open, onOp
   return (
     <SemanticModal
       className={`base-modal ${className}`}
-      open={open}
-      onOpen={onOpen}
-      onClose={onClose}
-      trigger={trigger}
       closeIcon={<Icon className="close-icon" name="SvgClose" size={2.4} />}
+      onClose={onClose}
+      onOpen={onOpen}
+      open={open}
+      trigger={trigger}
     >
       {children}
     </SemanticModal>

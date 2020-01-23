@@ -28,7 +28,7 @@
       "parserOptions": {
         "project": "./tsconfig.json"
       },
-      "plugins": ["@typescript-eslint/eslint-plugin", "react-hooks", "typescript-sort-keys"],
+      "plugins": ["@typescript-eslint/eslint-plugin", "react-hooks", "typescript-sort-keys", "sort-keys-fix"],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
@@ -39,7 +39,9 @@
         "@typescript-eslint/interface-name-prefix": 0,
         "@typescript-eslint/no-empty-function": 0,
         "typescript-sort-keys/interface": 1,
-        "typescript-sort-keys/string-enum": 1
+        "typescript-sort-keys/string-enum": 1,
+        "react/jsx-sort-props": 1,
+        "sort-keys-fix/sort-keys-fix": 0
       }
     }
   ]

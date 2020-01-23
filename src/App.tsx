@@ -21,15 +21,15 @@ const App: React.FC = () => {
   if (isLoading)
     return (
       <div>
-        <Loader size="large" active={isLoading} />
+        <Loader active={isLoading} size="large" />
       </div>
     );
 
   return (
     <>
       <Switch>
-        <UnauthorizedRoute path="/auth" component={UnauthorizedLayout} />
-        <AuthorizedRoute path="/" component={AuthorizedLayout} />
+        <UnauthorizedRoute component={UnauthorizedLayout} path="/auth" />
+        <AuthorizedRoute component={AuthorizedLayout} path="/" />
         <Redirect to="/" />
       </Switch>
       <ReduxDelegatedModal />

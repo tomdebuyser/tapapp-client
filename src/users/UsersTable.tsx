@@ -51,10 +51,10 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   return (
     <Table
       columns={columns}
-      renderRow={renderRow}
       data={data}
-      isLoading={isLoading}
       emptyLabel={translations.getLabel('USERS.OVERVIEW.EMPTY')}
+      isLoading={isLoading}
+      renderRow={renderRow}
       sortFunctions={sortFunctions}
     />
   );

@@ -10,13 +10,13 @@ const UnauthorizedLayout: React.FC = () => {
   return (
     <div className="auth">
       <aside>
-        <img src={slash} alt="Silvernext" />
+        <img alt="Silvernext" src={slash} />
       </aside>
       <Switch>
-        <Route path="/auth/login" component={Login} />
-        <Route path="/auth/register/:token" component={ChoosePassword} />
+        <Route component={Login} path="/auth/login" />
+        <Route component={ChoosePassword} path="/auth/register/:token" />
         <Route path="/auth/choose-password/:token" render={() => <ChoosePassword isPasswordReset />} />
-        <Route path="/auth/request-password-reset" component={RequestPasswordReset} />
+        <Route component={RequestPasswordReset} path="/auth/request-password-reset" />
         <Redirect to="/auth/login" />
       </Switch>
     </div>

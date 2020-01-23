@@ -10,6 +10,8 @@ import { IRoleForm } from '../_models/Role';
 import { rolesActions } from '../../_store/actions';
 import { setInObject } from '../../_utils/objectHelpers';
 import './createRole.scss';
+import { FormValidationErrors } from '../../_hooks/useForm';
+import { FormValidator } from '../../_utils/form-validation';
 
 const initialForm: IRoleForm = {
   name: '',
@@ -19,46 +21,53 @@ const initialForm: IRoleForm = {
   },
 };
 
+function validateForm(form: IRoleForm): FormValidationErrors<IRoleForm> {
+  return {
+    name: FormValidator.isRequired(form.name),
+  };
+}
+
 const CreateRole = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(rolesSelectors.isCreateRoleLoading);
+  const isSubmitting = useSelector(rolesSelectors.isCreateRoleLoading);
   const error = useSelector(rolesSelectors.errorCreateRole);
-  const { form, setFormAttribute } = useForm(initialForm);
-  const submitUser = (event: React.FormEvent): void => {
-    event.preventDefault();
-    dispatch(new rolesActions.CreateRole(form));
-  };
+  const { Form } = useForm<IRoleForm>({
+    initialForm,
+    submitForm: form => dispatch(new rolesActions.CreateRole(form)),
+    validateForm,
+  });
 
   const setPermissions = (_: FormEvent, data: CheckboxProps) => {
-    setFormAttribute(setInObject(form.permissions, data.name, data.checked), 'permissions');
+    Form.setAttribute(setInObject(Form.values.permissions, data.name, data.checked), 'permissions');
   };
 
   return (
     <Container as="main" className="create-role">
       <h1>{translations.getLabel('ROLES.CREATE.TITLE')}</h1>
-      <form onSubmit={submitUser}>
+      <form onSubmit={Form.submit}>
         <InputField
-          type="string"
-          name="name"
-          value={form.name}
-          onChange={setFormAttribute}
+          errorMessage={Form.validationErrors.name}
           label={translations.getLabel('ROLES.CREATE.NAME')}
+          name="name"
+          onChange={Form.setAttribute}
+          type="text"
+          value={Form.values.name}
         />
         <div className="permissions">
           <h2>{translations.getLabel('ROLES.CREATE.PERMISSIONS')}</h2>
-          {Object.keys(form.permissions).map(permission => (
+          {Object.keys(Form.values.permissions).map(permission => (
             <fieldset key={permission}>
               <legend>{translations.getLabel(`ROLES.CREATE.${permission.toUpperCase()}`)}</legend>
               <div>
-                {Object.keys(form.permissions[permission]).map(option => {
+                {Object.keys(Form.values.permissions[permission]).map(option => {
                   const optionName = `${permission}.${option}`;
                   return (
                     <Checkbox
-                      key={optionName}
+                      checked={Form.values.permissions[permission][option]}
                       id={optionName}
-                      name={optionName}
+                      key={optionName}
                       label={translations.getLabel(`ROLES.CREATE.${option.toUpperCase()}`)}
-                      checked={form.permissions[permission][option]}
+                      name={optionName}
                       onChange={setPermissions}
                     />
                   );
@@ -69,10 +78,10 @@ const CreateRole = () => {
         </div>
         <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
         <div className="actions">
-          <Button primary type="submit" loading={isLoading}>
+          <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel('SHARED.BUTTONS.CREATE')}
           </Button>
-          <Button isTextLink href="/roles">
+          <Button href="/roles" isTextLink>
             {translations.getLabel('SHARED.BUTTONS.CANCEL')}
           </Button>
         </div>

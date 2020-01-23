@@ -5,3 +5,10 @@ export const setInObject = (object: {}, path: string, value: string | number | b
   newObject[keys[0]][keys[1]] = value;
   return newObject;
 };
+
+export function removeEmptyKeys<T>(object: T): Partial<T> {
+  return Object.keys(object).reduce<Partial<T>>((acc, key: string) => {
+    if (object[key]) return { ...acc, [key]: object[key] };
+    return acc;
+  }, {});
+}

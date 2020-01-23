@@ -26,13 +26,13 @@ const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clic
   if (!clickable && !onClick) return IconComponent;
   return (
     <button
-      id={id}
-      type="button"
       aria-label={label}
-      disabled={disabled}
       className="icon-button"
+      disabled={disabled}
+      id={id}
       onClick={value => onClick && onClick(value)}
       style={sizeObject}
+      type="button"
     >
       {IconComponent}
     </button>

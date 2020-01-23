@@ -1,38 +1,65 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ApiError } from '../_http';
 
-function useForm<T>(initial: T, shouldClear?: boolean) {
-  const [form, setForm] = useState<T>(initial);
-  const [error, setError] = useState<ApiError>(null);
+export type FormValidationErrors<T> = {
+  [K in keyof T]?: string;
+};
 
-  const setFormAttribute = useCallback(
+interface Params<T> {
+  initialForm: T;
+  submitForm: (values: T) => void;
+  validateForm: (values: T) => FormValidationErrors<T>;
+}
+
+interface Response<T> {
+  setAttribute: (value: unknown, name: string) => void;
+  submit: (event: React.FormEvent) => void;
+  validationErrors: FormValidationErrors<T>;
+  values: T;
+}
+
+function useForm<T>(params: Params<T>): { Form: Response<T> } {
+  const { initialForm, submitForm, validateForm } = params;
+  const [values, setValues] = useState<T>(initialForm);
+  const [validationErrors, setValidationErrors] = useState<FormValidationErrors<T>>({});
+
+  const submit = (event: React.FormEvent): void => {
+    event.preventDefault();
+    const errors = validateForm(values);
+    const hasError = Object.keys(errors || {}).some(key => !!errors[key]);
+    if (!hasError) {
+      submitForm(values);
+    }
+    setValidationErrors(errors);
+  };
+
+  const setAttribute = useCallback(
     (value: unknown, name: string) => {
-      setForm({ ...form, [name]: value });
+      setValues({ ...values, [name]: value });
     },
-    [form],
+    [values],
   );
-  const clearForm = useCallback(() => {
-    setForm(initial);
-  }, [initial]);
 
-  const clearError = useCallback(() => {
-    setError(null);
-  }, []);
+  const clearValues = useCallback(() => {
+    setValues(initialForm);
+  }, [initialForm]);
 
   useEffect(() => {
+    // Clear all if the component unmounts
     return () => {
-      clearForm();
-      clearError();
+      clearValues();
+      setValidationErrors({});
     };
-  }, [shouldClear, clearForm, clearError]);
+  }, [clearValues]);
+
+  useEffect(() => setValues(initialForm), [initialForm]);
 
   return {
-    form,
-    setForm,
-    setFormAttribute,
-    error,
-    setError,
-    clearForm,
+    Form: {
+      values,
+      setAttribute,
+      submit,
+      validationErrors,
+    },
   };
 }
 

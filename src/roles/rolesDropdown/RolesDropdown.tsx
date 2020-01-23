@@ -5,13 +5,14 @@ import { rolesSelectors } from '../../_store/selectors';
 import { rolesActions } from '../../_store/actions';
 
 interface Props {
+  errorMessage?: string;
   label: string;
   name: string;
   onChange: (value: string[], name: string) => void;
   value: string[];
 }
 
-const RolesDropdown: FC<Props> = ({ label, name, value, onChange }) => {
+const RolesDropdown: FC<Props> = ({ label, name, value, onChange, errorMessage }) => {
   const dispatch = useDispatch();
   const roles = useSelector(rolesSelectors.roles);
 
@@ -27,7 +28,17 @@ const RolesDropdown: FC<Props> = ({ label, name, value, onChange }) => {
       })),
     [roles],
   );
-  return <Dropdown label={label} name={name} multiple value={value} onChange={onChange} options={options} />;
+  return (
+    <Dropdown
+      errorMessage={errorMessage}
+      label={label}
+      multiple
+      name={name}
+      onChange={onChange}
+      options={options}
+      value={value}
+    />
+  );
 };
 
 export default RolesDropdown;
