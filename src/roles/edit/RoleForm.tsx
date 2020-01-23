@@ -38,7 +38,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
       <div role="group">
         <InputField
           errorMessage={Form.validationErrors.name}
-          label={translations.getLabel('ROLES.CREATE.NAME')}
+          label={translations.getLabel('ROLES.NAME')}
           name="name"
           onChange={Form.setAttribute}
           type="text"
@@ -47,10 +47,10 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
         <div />
       </div>
       <div className="permissions">
-        <h3>{translations.getLabel('ROLES.CREATE.PERMISSIONS')}</h3>
+        <h3>{translations.getLabel('ROLES.PERMISSIONS.TITLE')}</h3>
         {Object.keys(Form.values.permissions).map(permission => (
           <fieldset key={permission}>
-            <legend>{translations.getLabel(`ROLES.CREATE.${permission.toUpperCase()}`)}</legend>
+            <legend>{translations.getLabel(`ROLES.PERMISSIONS.FEATURES.${permission.toUpperCase()}`)}</legend>
             <div>
               {Object.keys(Form.values.permissions[permission]).map(option => {
                 const optionName = `${permission}.${option}`;
@@ -59,7 +59,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
                     checked={Form.values.permissions[permission][option]}
                     id={optionName}
                     key={optionName}
-                    label={translations.getLabel(`ROLES.CREATE.${option.toUpperCase()}`)}
+                    label={translations.getLabel(`ROLES.PERMISSIONS.RIGHTS.${option.toUpperCase()}`)}
                     name={optionName}
                     onChange={setPermission}
                   />

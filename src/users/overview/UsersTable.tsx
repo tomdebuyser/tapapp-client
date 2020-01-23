@@ -20,8 +20,8 @@ const columns: TableColumn[] = [
   { name: 'email', label: 'USERS.EMAIL', sortable: true, className: 'email-column' },
   { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
   { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
-  { name: 'createdAt', label: 'USERS.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'USERS.UPDATED_AT', sortable: true },
+  { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
+  { name: 'updatedAt', label: 'USERS.OVERVIEW.UPDATED_AT', sortable: true },
   { name: 'state', label: 'USERS.STATE.TITLE', sortable: true },
 ];
 
