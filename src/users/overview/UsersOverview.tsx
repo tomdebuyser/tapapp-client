@@ -5,7 +5,7 @@ import { Icon, Button, SearchInput } from '../../_shared';
 import { translations } from '../../_translations';
 import { usersSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
-import { HttpMetadataQuery, FillMetadataQueryFunction } from '../../_http/HttpMetadata';
+import { HttpMetadataQuery, FillMetadataQueryFunction } from '../../_http';
 import UsersTable from './UsersTable';
 import './usersOverview.scss';
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
 import { usersSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
-import { IUserForm } from '../_models/User';
+import { IUserForm } from '../_models';
 import UserForm from '../edit/UserForm';
 import { Button } from '../../_shared';
 

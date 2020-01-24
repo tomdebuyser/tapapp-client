@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IUserForm } from '../_models/User';
+import { IUserForm } from '../_models';
 import { InputField, Button } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { translations } from '../../_translations';

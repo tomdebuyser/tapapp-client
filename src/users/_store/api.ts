@@ -1,6 +1,5 @@
-import { IUser, IUserForm } from '../_models/User';
-import { HttpClient } from '../../_http';
-import { HttpPagedResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { IUser, IUserForm } from '../_models';
+import { HttpClient, HttpPagedResponse, HttpMetadataQuery } from '../../_http';
 import { getQueryParams } from '../../_utils/queryHelpers';
 import { removeEmptyKeys } from '../../_utils/objectHelpers';
 

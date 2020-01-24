@@ -1,4 +1,4 @@
-import { UserState } from '../_models/User';
+import { UserState } from '../_models';
 import { translations } from '../../_translations';
 
 export function labelForUserState(state: UserState): string {

@@ -1,9 +1,7 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
-import { IChangePasswordForm } from '../_models/ChoosePassword';
-import { ILoginForm } from '../_models/Login';
-import { IUser } from '../../users/_models/User';
-import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
+import { IChangePasswordForm, IRequestPasswordResetForm, ILoginForm } from '../_models';
+import { IUser } from '../../users/_models';
 
 export enum AuthActionType {
   Authenticate = '[Auth] Authenticate',

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { GoBackLink, Timestamps, Button } from '../../_shared';
 import { translations } from '../../_translations';
 import { rolesSelectors } from '../../_store/selectors';
-import { IRoleForm } from '../_models/Role';
+import { IRoleForm } from '../_models';
 import RoleForm from '../edit/RoleForm';
 import { rolesActions } from '../../_store/actions';
 

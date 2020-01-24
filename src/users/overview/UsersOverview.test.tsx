@@ -4,7 +4,7 @@ import { render } from '../../_utils/testHelpers';
 import { translations } from '../../_translations';
 import { userBuilder } from '../../_mocks/users';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
-import { HttpMetadataPagingResponse } from '../../_http/HttpMetadata';
+import { HttpMetadataPagingResponse } from '../../_http';
 import { getUsers } from '../_store/api';
 import { labelForUserState } from '../_utils';
 import UsersOverview from './UsersOverview';

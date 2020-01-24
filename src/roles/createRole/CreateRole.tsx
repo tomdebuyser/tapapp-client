@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { translations } from '../../_translations';
 import { Button } from '../../_shared';
 import { rolesSelectors } from '../../_store/selectors';
-import { IRoleForm } from '../_models/Role';
+import { IRoleForm } from '../_models';
 import { rolesActions } from '../../_store/actions';
 import RoleForm from '../edit/RoleForm';
 

@@ -10,7 +10,7 @@ import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../../_store/selectors';
 import { FormValidator } from '../../_utils/form-validation';
 import { FormValidationErrors } from '../../_hooks/useForm';
-import { IChangePasswordForm } from '../_models/ChoosePassword';
+import { IChangePasswordForm } from '../_models';
 import { ApiError } from '../../_http';
 
 interface Props {
