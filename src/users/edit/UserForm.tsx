@@ -21,6 +21,7 @@ interface Props {
 
 function errorAsString(error?: ApiError): string {
   if (error?.error === 'EMAIL_ALREADY_IN_USE') return translations.getLabel(`USERS.ERRORS.EMAIL_ALREADY_IN_USE`);
+  if (error?.error === 'PERMISSION_DENIED') return translations.getLabel(`ERRORS.PERMISSION_DENIED`);
   return null;
 }
 

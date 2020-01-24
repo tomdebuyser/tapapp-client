@@ -138,6 +138,7 @@
   },
   "ERRORS": {
     "GENERAL": "Something went wrong. Please try again.",
+    "PERMISSION_DENIED": "You do not have permissions to perform this action. Contact your administrator.",
     "VALIDATION": {
       "FORM": "The following input fields are not filled in (correctly): {{fields}}",
       "REQUIRED": "Required",

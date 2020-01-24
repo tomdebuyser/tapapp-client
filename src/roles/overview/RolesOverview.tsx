@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { translations } from '../../_translations';
 import { Icon, Button, SearchInput } from '../../_shared';
-import { rolesSelectors } from '../../_store/selectors';
+import { rolesSelectors, profileSelectors } from '../../_store/selectors';
 import { rolesActions } from '../../_store/actions';
 import { HttpMetadataQuery, FillMetadataQueryFunction } from '../../_http';
 import RolesTable from './RolesTable';
@@ -13,6 +13,7 @@ const RolesOverview: FC = () => {
   const roles = useSelector(rolesSelectors.roles);
   const isLoading = useSelector(rolesSelectors.isGetRolesLoading);
   const query = useSelector(rolesSelectors.query);
+  const permissions = useSelector(profileSelectors.permissions);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +29,12 @@ const RolesOverview: FC = () => {
       <h1>{translations.getLabel('ROLES.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
-        <Button href="/roles/create" isTextLink primary>
-          <Icon name="SvgAdd" size={1.6} />
-          {translations.getLabel('ROLES.OVERVIEW.CREATE_ROLE')}
-        </Button>
+        {permissions?.roles.edit && (
+          <Button href="/roles/create" isTextLink primary>
+            <Icon name="SvgAdd" size={1.6} />
+            {translations.getLabel('ROLES.OVERVIEW.CREATE_ROLE')}
+          </Button>
+        )}
       </div>
       <RolesTable data={roles} isLoading={isLoading} setQuery={setQuery} />
     </Container>

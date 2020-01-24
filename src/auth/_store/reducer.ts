@@ -1,6 +1,5 @@
 import { ApiError } from '../../_http';
-import { IUser } from '../../users/_models';
-import { AuthActions, AuthActionType } from './actions';
+import { AuthAction, AuthActionType } from './actions';
 
 export interface AuthState {
   errorChoosePassword?: ApiError;
@@ -12,7 +11,6 @@ export interface AuthState {
   isLoginLoading: boolean;
   isLogoutLoading: boolean;
   isRequestPasswordResetLoading: boolean;
-  user?: IUser;
 }
 
 const initialState: AuthState = {
@@ -23,7 +21,7 @@ const initialState: AuthState = {
   isRequestPasswordResetLoading: false,
 };
 
-export default function reducer(state = initialState, action: AuthActions): AuthState {
+export default function reducer(state = initialState, action: AuthAction): AuthState {
   switch (action.type) {
     case AuthActionType.ChoosePassword:
       return {
@@ -47,20 +45,17 @@ export default function reducer(state = initialState, action: AuthActions): Auth
         ...state,
         isLoginLoading: true,
         errorLogin: null,
-        user: null,
       };
     case AuthActionType.Authenticate:
       return {
         ...state,
         isAuthenticateLoading: true,
-        user: null,
       };
     case AuthActionType.AuthenticateSuccess:
       return {
         ...state,
         isLoginLoading: false,
         isAuthenticateLoading: false,
-        user: action.payload.user,
       };
     case AuthActionType.AuthenticateError:
       return {
@@ -79,7 +74,6 @@ export default function reducer(state = initialState, action: AuthActions): Auth
       return {
         ...state,
         isLogoutLoading: false,
-        user: null,
       };
     case AuthActionType.LogoutError:
       return {

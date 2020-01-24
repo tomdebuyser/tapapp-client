@@ -29,6 +29,7 @@ function validateForm(form: IRoleForm): FormValidationErrors<IRoleForm> {
 function errorAsString(error?: ApiError): string {
   if (error?.error === 'ROLE_IN_USE') return translations.getLabel(`ROLES.ERRORS.ROLE_IN_USE`);
   if (error?.error === 'ROLE_NAME_ALREADY_IN_USE') return translations.getLabel(`ROLES.ERRORS.ROLE_NAME_ALREADY_IN_USE`);
+  if (error?.error === 'PERMISSION_DENIED') return translations.getLabel(`ERRORS.PERMISSION_DENIED`);
   return null;
 }
 

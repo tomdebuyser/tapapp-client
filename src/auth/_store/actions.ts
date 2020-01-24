@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
 import { IChangePasswordForm, IRequestPasswordResetForm, ILoginForm } from '../_models';
-import { IUser } from '../../users/_models';
+import { IProfile } from '../../profile/_models';
 
 export enum AuthActionType {
   Authenticate = '[Auth] Authenticate',
@@ -26,7 +26,7 @@ export class Authenticate implements Action<AuthActionType> {
 
 export class AuthenticateSuccess implements Action<AuthActionType> {
   readonly type = AuthActionType.AuthenticateSuccess;
-  constructor(public payload: { pathname?: string; user: IUser }) {}
+  constructor(public payload: { pathname?: string; profile: IProfile }) {}
 }
 
 export class AuthenticateError implements Action<AuthActionType> {
@@ -84,7 +84,7 @@ export class RequestPasswordResetError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export type AuthActions =
+export type AuthAction =
   | Authenticate
   | AuthenticateSuccess
   | AuthenticateError

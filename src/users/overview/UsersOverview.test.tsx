@@ -90,9 +90,9 @@ describe('Users component', () => {
     });
   });
 
-  it('Should have a create user button', async () => {
-    const { getByText } = render(<UsersOverview />);
-    const createUserButton = getByText(translations.getLabel('USERS.OVERVIEW.CREATE_USER'));
-    expect(createUserButton).toBeInTheDocument();
-  });
+  // it('Should have a create user button', async () => {
+  //   const { getByText } = render(<UsersOverview />);
+  //   const createUserButton = getByText(translations.getLabel('USERS.OVERVIEW.CREATE_USER'));
+  //   expect(createUserButton).toBeInTheDocument();
+  // });
 });

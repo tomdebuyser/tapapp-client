@@ -19,7 +19,7 @@ const initialForm: IRoleForm = {
 const CreateRole: FC = () => {
   const dispatch = useDispatch();
   const isSubmitting = useSelector(rolesSelectors.isCreateRoleLoading);
-  const error = useSelector(rolesSelectors.errorCreateRole);
+  const error = useSelector(rolesSelectors.errorCrudRoles);
 
   return (
     <Container as="main" className="create-role">
