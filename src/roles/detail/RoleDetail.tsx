@@ -45,14 +45,14 @@ const RoleDetail: FC = () => {
           initialForm={initialForm}
           isSubmitting={isUpdateLoading}
           roleId={role.id}
-          submitForm={(form: IRoleForm) => dispatch(new rolesActions.UpdateRole({ roleId: role.id, form }))}
+          submitForm={(values: IRoleForm) => dispatch(new rolesActions.UpdateRole({ roleId: role.id, values }))}
         />
       </section>
     );
   }
 
   return (
-    <Container as="main" className="form-container">
+    <Container as="main" className="left-container">
       <GoBackLink label={translations.getLabel('ROLES.DETAIL.BACK')} to="/roles" />
       {renderHeader()}
       {renderDetailsSection()}

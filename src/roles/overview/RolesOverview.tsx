@@ -26,7 +26,6 @@ const RolesOverview: FC = () => {
 
   return (
     <Container as="main" className="roles">
-      <h1>{translations.getLabel('ROLES.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
         {permissions?.roles.edit && (

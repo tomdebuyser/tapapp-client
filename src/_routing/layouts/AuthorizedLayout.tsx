@@ -7,11 +7,12 @@ import Users from '../../users/Users';
 import { profileSelectors } from '../../_store/selectors';
 import { hasUsersPermissions, hasRolesPermissions } from '../../profile/_utils';
 import Profile from '../../profile/Profile';
+import './authorizedLayout.scss';
 
 const AuthorizedLayout: React.FC = () => {
   const permissions = useSelector(profileSelectors.permissions);
   return (
-    <div>
+    <div className="authorized-layout">
       <Menu />
       <Switch>
         <Route component={Profile} path="/profile" />

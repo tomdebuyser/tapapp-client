@@ -10,18 +10,19 @@ import { authActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { ApiError, HttpStatus } from '../../_http';
-import { FormValidator } from '../../_utils/form-validation';
+import { formValidator } from '../../_utils/formValidation';
 import { ILoginForm } from '../_models';
+import './login.scss';
 
 const initialForm: ILoginForm = {
   password: '',
   username: '',
 };
 
-function validateForm(form: ILoginForm): FormValidationErrors<ILoginForm> {
+function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
-    username: FormValidator.isRequired(form.username),
-    password: FormValidator.isRequired(form.password),
+    username: formValidator.isRequired(values.username),
+    password: formValidator.isRequired(values.password),
   };
 }
 
@@ -36,38 +37,38 @@ const Login = () => {
   const { state } = useLocation();
   const isSubmitting = useSelector(authSelectors.isLoginLoading);
   const error = useSelector(authSelectors.errorLogin);
-  const { Form } = useForm<ILoginForm>({
+  const form = useForm<ILoginForm>({
     error,
     initialForm,
-    submitForm: form => dispatch(new authActions.Login(form, state?.pathname)),
+    submitForm: values => dispatch(new authActions.Login({ values, pathname: state?.pathname })),
     validateForm,
   });
 
   return (
     <Container as="main" className="login">
       <h1>{translations.getLabel('AUTH.LOGIN.TITLE')}</h1>
-      <form onSubmit={Form.submit}>
+      <form onSubmit={form.submit}>
         <InputField
           autoComplete="username"
-          errorMessage={Form.validationErrors.username}
+          errorMessage={form.validationErrors.username}
           label={translations.getLabel('AUTH.LOGIN.USERNAME')}
           name="username"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="text"
-          value={Form.values.username}
+          value={form.values.username}
         />
         <InputField
           autoComplete="current-password"
-          errorMessage={Form.validationErrors.password}
+          errorMessage={form.validationErrors.password}
           label={translations.getLabel('AUTH.LOGIN.PASSWORD')}
           name="password"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="password"
-          value={Form.values.password}
+          value={form.values.password}
         />
         <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
-        <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
-        <div>
+        <div className="actions">
+          <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel('AUTH.LOGIN.LOGIN')}
           </Button>

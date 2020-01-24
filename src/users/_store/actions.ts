@@ -6,12 +6,12 @@ export enum UsersActionType {
   CreateUser = '[Users] CreateUser',
   CreateUserError = '[Users] CreateUserError',
   CreateUserSuccess = '[Users] CreateUserSuccess',
+  DeactivateUser = '[Users] DeactivateUser',
+  DeactivateUserError = '[Users] DeactivateUserError',
+  DeactivateUserSuccess = '[Users] DeactivateUserSuccess',
   GetUsers = '[Users] GetUsers',
   GetUsersError = '[Users] GetUsersError',
   GetUsersSuccess = '[Users] GetUsersSuccess',
-  InactivateUser = '[Users] InactivateUser',
-  InactivateUserError = '[Users] InactivateUserError',
-  InactivateUserSuccess = '[Users] InactivateUserSuccess',
   ResendRegisterEmail = '[Users] ResendRegisterEmail',
   ResendRegisterEmailError = '[Users] ResendRegisterEmailError',
   ResendRegisterEmailSuccess = '[Users] ResendRegisterEmailSuccess',
@@ -42,7 +42,7 @@ export class SetUsersQuery implements Action<UsersActionType> {
 
 export class CreateUser implements Action<UsersActionType> {
   readonly type = UsersActionType.CreateUser;
-  constructor(public payload: IUserForm) {}
+  constructor(public payload: { values: IUserForm }) {}
 }
 
 export class CreateUserSuccess implements Action<UsersActionType> {
@@ -56,7 +56,7 @@ export class CreateUserError implements Action<UsersActionType> {
 
 export class UpdateUser implements Action<UsersActionType> {
   readonly type = UsersActionType.UpdateUser;
-  constructor(public payload: { form: IUserForm; userId: string }) {}
+  constructor(public payload: { userId: string; values: IUserForm }) {}
 }
 
 export class UpdateUserSuccess implements Action<UsersActionType> {
@@ -69,18 +69,18 @@ export class UpdateUserError implements Action<UsersActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-export class InactivateUser implements Action<UsersActionType> {
-  readonly type = UsersActionType.InactivateUser;
+export class DeactivateUser implements Action<UsersActionType> {
+  readonly type = UsersActionType.DeactivateUser;
   constructor(public payload: { confirmed?: boolean; user: IUser }) {}
 }
 
-export class InactivateUserSuccess implements Action<UsersActionType> {
-  readonly type = UsersActionType.InactivateUserSuccess;
+export class DeactivateUserSuccess implements Action<UsersActionType> {
+  readonly type = UsersActionType.DeactivateUserSuccess;
   constructor(public payload: { updatedUser: IUser }) {}
 }
 
-export class InactivateUserError implements Action<UsersActionType> {
-  readonly type = UsersActionType.InactivateUserError;
+export class DeactivateUserError implements Action<UsersActionType> {
+  readonly type = UsersActionType.DeactivateUserError;
   constructor(public payload: { error: ApiError }) {}
 }
 
@@ -110,9 +110,9 @@ export type UsersAction =
   | UpdateUser
   | UpdateUserSuccess
   | UpdateUserError
-  | InactivateUser
-  | InactivateUserSuccess
-  | InactivateUserError
+  | DeactivateUser
+  | DeactivateUserSuccess
+  | DeactivateUserError
   | ResendRegisterEmail
   | ResendRegisterEmailSuccess
   | ResendRegisterEmailError;

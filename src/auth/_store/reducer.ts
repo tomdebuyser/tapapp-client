@@ -6,14 +6,16 @@ export interface AuthState {
   errorLogin?: ApiError;
   errorLogout?: ApiError;
   errorRequestPasswordReset?: ApiError;
-  isAuthenticateLoading?: boolean;
+  isAuthenticateLoading: boolean;
   isChoosePasswordLoading?: boolean;
   isLoginLoading?: boolean;
   isLogoutLoading?: boolean;
   isRequestPasswordResetLoading?: boolean;
 }
 
-const initialState: AuthState = {};
+const initialState: AuthState = {
+  isAuthenticateLoading: true,
+};
 
 export default function reducer(state = initialState, action: AuthAction): AuthState {
   switch (action.type) {
@@ -68,6 +70,7 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
       return {
         ...state,
         isLogoutLoading: false,
+        isAuthenticateLoading: false,
       };
     case AuthActionType.LogoutError:
       return {

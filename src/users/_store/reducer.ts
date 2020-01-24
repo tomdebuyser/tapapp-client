@@ -5,11 +5,11 @@ import { UsersAction, UsersActionType } from './actions';
 
 export interface UsersState {
   errorCrudUser?: ApiError;
-  errorInactivateUser?: ApiError;
+  errorDeactivateUser?: ApiError;
   errorResendRegisterEmail?: ApiError;
   isCreateUserLoading?: boolean;
+  isDeactivateUserLoading?: boolean;
   isGetUsersLoading?: boolean;
-  isInactivateUserLoading?: boolean;
   isResendRegisterEmailLoading?: boolean;
   isUpdateUserLoading?: boolean;
   metadata?: HttpMetadataPagingResponse;
@@ -84,23 +84,23 @@ export default function reducer(state = initialState, action: UsersAction): User
         isUpdateUserLoading: false,
         errorCrudUser: action.payload.error,
       };
-    case UsersActionType.InactivateUser:
+    case UsersActionType.DeactivateUser:
       return {
         ...state,
-        isInactivateUserLoading: action.payload.confirmed,
-        errorInactivateUser: null,
+        isDeactivateUserLoading: action.payload.confirmed,
+        errorDeactivateUser: null,
       };
-    case UsersActionType.InactivateUserSuccess:
+    case UsersActionType.DeactivateUserSuccess:
       return {
         ...state,
-        isInactivateUserLoading: false,
+        isDeactivateUserLoading: false,
         users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
-    case UsersActionType.InactivateUserError:
+    case UsersActionType.DeactivateUserError:
       return {
         ...state,
-        isInactivateUserLoading: false,
-        errorInactivateUser: action.payload.error,
+        isDeactivateUserLoading: false,
+        errorDeactivateUser: action.payload.error,
       };
     case UsersActionType.ResendRegisterEmail:
       return {
@@ -118,7 +118,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isResendRegisterEmailLoading: false,
-        errorInactivateUser: action.payload.error,
+        errorDeactivateUser: action.payload.error,
       };
     default:
       return state;

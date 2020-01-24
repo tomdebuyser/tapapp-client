@@ -99,12 +99,8 @@ class HttpClient {
     headers: Headers = {},
     responseType: ResponseType = 'json',
   ): Promise<T> {
-    try {
-      const result = await this.getRaw<T>(route, params, headers, responseType);
-      return result.data;
-    } catch (error) {
-      throw this.createApiError(error);
-    }
+    const result = await this.getRaw<T>(route, params, headers, responseType);
+    return result.data;
   }
 
   static async put<T>(route: string, body: object = {}, headers: Headers = {}, params: Params = {}): Promise<T> {

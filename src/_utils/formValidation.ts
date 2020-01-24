@@ -51,7 +51,7 @@ function isNotEmptyArray(array: unknown[]): string {
   return !isValid && translations.getLabel('ERRORS.VALIDATION.EMPTY_ARRAY');
 }
 
-export const FormValidator = {
+export const formValidator = {
   isRequired,
   hasMaxLength,
   hasMinLength,

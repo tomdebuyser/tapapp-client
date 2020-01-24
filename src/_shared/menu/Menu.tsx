@@ -11,6 +11,7 @@ import './menu.scss';
 
 const Menu: FC = () => {
   const dispatch = useDispatch();
+  const profile = useSelector(profileSelectors.profile);
   const permissions = useSelector(profileSelectors.permissions);
 
   return (
@@ -19,8 +20,14 @@ const Menu: FC = () => {
         <img alt="Silvernext" src={slash} />
       </NavLink>
       <nav>
-        {hasUsersPermissions(permissions) && <NavLink to="/users">{translations.getLabel('SHARED.NAVIGATION.USERS')}</NavLink>}
-        {hasRolesPermissions(permissions) && <NavLink to="/roles">{translations.getLabel('SHARED.NAVIGATION.ROLES')}</NavLink>}
+        <div>
+          {hasUsersPermissions(permissions) && <NavLink to="/users">{translations.getLabel('SHARED.NAVIGATION.USERS')}</NavLink>}
+          {hasRolesPermissions(permissions) && <NavLink to="/roles">{translations.getLabel('SHARED.NAVIGATION.ROLES')}</NavLink>}
+        </div>
+        <NavLink to="/profile">
+          <Icon name="SvgUser" size={2} />
+          <span>{profile.email}</span>
+        </NavLink>
       </nav>
       <Icon
         label={translations.getLabel('AUTH.LOGOUT')}

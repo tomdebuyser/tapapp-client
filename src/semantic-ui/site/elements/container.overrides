@@ -13,7 +13,6 @@
   }
 }
 
-.ui.container.form-container {
-  width: 98rem;
+.ui.container.left-container {
   margin-left: 0 !important;
 }

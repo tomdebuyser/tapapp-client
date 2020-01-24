@@ -21,7 +21,7 @@ const CreateUser: FC = () => {
   const error = useSelector(usersSelectors.errorCrudUser);
 
   return (
-    <Container as="main">
+    <Container as="main" className="left-container">
       <h1>{translations.getLabel('USERS.CREATE.TITLE')}</h1>
       <UserForm
         buttons={
@@ -32,7 +32,7 @@ const CreateUser: FC = () => {
         error={error}
         initialForm={initialForm}
         isSubmitting={isSubmitting}
-        submitForm={(form: IUserForm) => dispatch(new usersActions.CreateUser(form))}
+        submitForm={(values: IUserForm) => dispatch(new usersActions.CreateUser({ values }))}
       />
     </Container>
   );

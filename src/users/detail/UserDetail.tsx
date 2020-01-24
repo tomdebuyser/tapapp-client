@@ -16,7 +16,7 @@ const UserDetail: FC = () => {
   const { id } = useParams();
   const user = useSelector(usersSelectors.user(id));
   const isUpdateLoading = useSelector(usersSelectors.isUpdateUserLoading);
-  const isInactivateLoading = useSelector(usersSelectors.isInactivateUserLoading);
+  const isDeactivateLoading = useSelector(usersSelectors.isDeactivateUserLoading);
   const isResendRegisterMailLoading = useSelector(usersSelectors.isResendRegisterEmailLoading);
   const error = useSelector(usersSelectors.errorCrudUser);
   const permissions = useSelector(profileSelectors.permissions);
@@ -46,7 +46,7 @@ const UserDetail: FC = () => {
           error={error}
           initialForm={initialForm}
           isSubmitting={isUpdateLoading}
-          submitForm={(form: IUserForm) => dispatch(new usersActions.UpdateUser({ userId: user.id, form }))}
+          submitForm={(values: IUserForm) => dispatch(new usersActions.UpdateUser({ userId: user.id, values }))}
           userId={user.id}
         />
       </section>
@@ -69,8 +69,8 @@ const UserDetail: FC = () => {
     );
     if (user.state === UserState.Active) {
       button = (
-        <Button loading={isInactivateLoading} negative onClick={() => dispatch(new usersActions.InactivateUser({ user }))}>
-          {translations.getLabel('USERS.DETAIL.STATUS.BUTTON.INACTIVATE')}
+        <Button loading={isDeactivateLoading} negative onClick={() => dispatch(new usersActions.DeactivateUser({ user }))}>
+          {translations.getLabel('USERS.DETAIL.STATUS.BUTTON.DEACTIVATE')}
         </Button>
       );
     }
@@ -90,7 +90,7 @@ const UserDetail: FC = () => {
   }
 
   return (
-    <Container as="main" className="form-container">
+    <Container as="main" className="left-container">
       <GoBackLink label={translations.getLabel('USERS.DETAIL.BACK')} to="/users" />
       {renderHeader()}
       {renderDetailsSection()}

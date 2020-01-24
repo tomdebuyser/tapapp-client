@@ -25,7 +25,7 @@ const setRolesQueryEpic$: Epic = action$ =>
 const createRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.CreateRole).pipe(
     switchMap(({ payload }: rolesActions.CreateRole) =>
-      from(rolesApi.createRole(payload)).pipe(
+      from(rolesApi.createRole(payload.values)).pipe(
         map(() => new rolesActions.CreateRoleSuccess()),
         catchError(error => of(new rolesActions.CreateRoleError({ error }))),
       ),
@@ -38,7 +38,7 @@ const createDeleteRoleSuccessEpic$: Epic = action$ =>
 const updateRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.UpdateRole).pipe(
     exhaustMap(({ payload }: rolesActions.UpdateRole) =>
-      from(rolesApi.updateRole(payload.roleId, payload.form)).pipe(
+      from(rolesApi.updateRole(payload.roleId, payload.values)).pipe(
         map(updatedRole => new rolesActions.UpdateRoleSuccess({ updatedRole })),
         catchError(error => of(new rolesActions.UpdateRoleError({ error }))),
       ),

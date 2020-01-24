@@ -3,6 +3,7 @@ import { Switch, Redirect, Route, useRouteMatch } from 'react-router-dom';
 import Login from '../auth/login/Login';
 import ChoosePassword from '../auth/choose-password/ChoosePassword';
 import RequestPasswordReset from '../auth/request-password-reset/RequestPasswordReset';
+import './auth.scss';
 
 const Auth: React.FC = () => {
   const { url } = useRouteMatch();

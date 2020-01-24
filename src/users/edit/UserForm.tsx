@@ -8,14 +8,14 @@ import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { ApiError } from '../../_http';
 import './userForm.scss';
 import { FormValidationErrors } from '../../_hooks/useForm';
-import { FormValidator } from '../../_utils/form-validation';
+import { formValidator } from '../../_utils/formValidation';
 
 interface Props {
   buttons?: JSX.Element | JSX.Element[];
   error?: ApiError;
   initialForm: IUserForm;
   isSubmitting?: boolean;
-  submitForm: (form: IUserForm) => void;
+  submitForm: (values: IUserForm) => void;
   userId?: string;
 }
 
@@ -26,56 +26,56 @@ function errorAsString(error?: ApiError): string {
 }
 
 const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
-  function validateForm(form: IUserForm): FormValidationErrors<IUserForm> {
+  function validateForm(values: IUserForm): FormValidationErrors<IUserForm> {
     const errors: FormValidationErrors<IUserForm> = {};
-    if (form.email) errors.email = FormValidator.isEmail(form.email);
-    else if (!userId) errors.email = FormValidator.isRequired(form.email);
-    errors.roleIds = FormValidator.isNotEmptyArray(form.roleIds);
+    if (values.email) errors.email = formValidator.isEmail(values.email);
+    else if (!userId) errors.email = formValidator.isRequired(values.email);
+    errors.roleIds = formValidator.isNotEmptyArray(values.roleIds);
     return errors;
   }
 
-  const { Form } = useForm<IUserForm>({ error, initialForm, submitForm, validateForm });
+  const form = useForm<IUserForm>({ error, initialForm, submitForm, validateForm });
 
   return (
-    <form className="form-container" onSubmit={Form.submit}>
+    <form onSubmit={form.submit}>
       {!userId && (
         <div role="group">
           <InputField
-            errorMessage={Form.validationErrors.email}
+            errorMessage={form.validationErrors.email}
             label={translations.getLabel('USERS.EMAIL')}
             name="email"
-            onChange={Form.setAttribute}
+            onChange={form.setAttribute}
             type="email"
-            value={Form.values.email}
+            value={form.values.email}
           />
           <div />
         </div>
       )}
       <div role="group">
         <InputField
-          errorMessage={Form.validationErrors.firstName}
+          errorMessage={form.validationErrors.firstName}
           label={translations.getLabel('USERS.FIRST_NAME')}
           name="firstName"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="text"
-          value={Form.values.firstName}
+          value={form.values.firstName}
         />
         <InputField
-          errorMessage={Form.validationErrors.lastName}
+          errorMessage={form.validationErrors.lastName}
           label={translations.getLabel('USERS.LAST_NAME')}
           name="lastName"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="text"
-          value={Form.values.lastName}
+          value={form.values.lastName}
         />
       </div>
       <div role="group">
         <RolesDropdown
-          errorMessage={Form.validationErrors.roleIds}
+          errorMessage={form.validationErrors.roleIds}
           label={translations.getLabel('USERS.ROLE')}
           name="roleIds"
-          onChange={Form.setAttribute}
-          value={Form.values.roleIds}
+          onChange={form.setAttribute}
+          value={form.values.roleIds}
         />
         <div />
       </div>
