@@ -1,5 +1,5 @@
 import { ApiError } from '../../_http';
-import { IUser } from '../../users/_models/User';
+import { IUser } from '../../users/_models';
 import { AuthActions, AuthActionType } from './actions';
 
 export interface AuthState {

@@ -1,6 +1,5 @@
-import { IRole } from '../_models/Role';
-import { ApiError } from '../../_http';
-import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { IRole } from '../_models';
+import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http';
 import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { RolesAction, RolesActionType } from './actions';
 

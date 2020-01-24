@@ -5,7 +5,7 @@ import { translations } from '../../_translations';
 import { Icon, Button, SearchInput } from '../../_shared';
 import { rolesSelectors } from '../../_store/selectors';
 import { rolesActions } from '../../_store/actions';
-import { HttpMetadataQuery, FillMetadataQueryFunction } from '../../_http/HttpMetadata';
+import { HttpMetadataQuery, FillMetadataQueryFunction } from '../../_http';
 import RolesTable from './RolesTable';
 import './rolesOverview.scss';
 

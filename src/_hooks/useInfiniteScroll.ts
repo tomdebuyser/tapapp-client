@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { HttpMetadataPagingResponse } from '../_http/HttpMetadata';
+import { HttpMetadataPagingResponse } from '../_http';
 
 const SCROLL_OFFSET = 150;
 

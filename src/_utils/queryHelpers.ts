@@ -1,4 +1,4 @@
-import { HttpMetadataQuery } from '../_http/HttpMetadata';
+import { HttpMetadataQuery } from '../_http';
 
 export const getQueryParams = (query?: HttpMetadataQuery): string => {
   return query

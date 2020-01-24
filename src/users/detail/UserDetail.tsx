@@ -9,7 +9,7 @@ import { usersSelectors } from '../../_store/selectors';
 import './userDetail.scss';
 import { usersActions } from '../../_store/actions';
 import { labelForUserState } from '../_utils';
-import { UserState, IUserForm } from '../_models/User';
+import { UserState, IUserForm } from '../_models';
 import UserForm from '../edit/UserForm';
 
 const UserDetail: FC = () => {

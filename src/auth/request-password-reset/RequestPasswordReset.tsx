@@ -8,7 +8,7 @@ import { authActions } from '../../_store/actions';
 import { authSelectors } from '../../_store/selectors';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { FormValidator } from '../../_utils/form-validation';
-import { IRequestPasswordResetForm } from '../_models/RequestPasswordReset';
+import { IRequestPasswordResetForm } from '../_models';
 
 const initialForm: IRequestPasswordResetForm = {
   email: '',

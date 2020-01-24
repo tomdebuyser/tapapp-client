@@ -1,6 +1,5 @@
-import { IUser } from '../_models/User';
-import { ApiError } from '../../_http';
-import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { IUser } from '../_models';
+import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http';
 import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { UsersAction, UsersActionType } from './actions';
 

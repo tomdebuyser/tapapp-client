@@ -1,7 +1,6 @@
 import { Action } from 'redux';
-import { ApiError } from '../../_http';
-import { IRole, IRoleForm } from '../_models/Role';
-import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http';
+import { IRole, IRoleForm } from '../_models';
 
 export enum RolesActionType {
   CreateRole = '[Roles] CreateRole',

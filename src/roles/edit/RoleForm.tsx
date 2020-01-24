@@ -4,7 +4,7 @@ import { translations } from '../../_translations';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { Button, InputField } from '../../_shared';
 import { useForm } from '../../_hooks';
-import { IRoleForm } from '../_models/Role';
+import { IRoleForm } from '../_models';
 import { setInObject } from '../../_utils/objectHelpers';
 import './roleForm.scss';
 import { FormValidationErrors } from '../../_hooks/useForm';

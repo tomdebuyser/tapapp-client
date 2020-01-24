@@ -1,7 +1,6 @@
 import { Action } from 'redux';
-import { ApiError } from '../../_http';
-import { IUser, IUserForm } from '../_models/User';
-import { HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http';
+import { IUser, IUserForm } from '../_models';
 
 export enum UsersActionType {
   CreateUser = '[Users] CreateUser',

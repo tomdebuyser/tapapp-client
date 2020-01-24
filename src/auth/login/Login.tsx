@@ -11,7 +11,7 @@ import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { ApiError, HttpStatus } from '../../_http';
 import { FormValidator } from '../../_utils/form-validation';
-import { ILoginForm } from '../_models/Login';
+import { ILoginForm } from '../_models';
 
 const initialForm: ILoginForm = {
   password: '',

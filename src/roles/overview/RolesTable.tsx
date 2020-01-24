@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http/HttpMetadata';
+import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http';
 import Table, { TableColumn } from '../../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
 import { useTableSort, useInfiniteScroll } from '../../_hooks';
 import { translations } from '../../_translations';
 import { rolesSelectors } from '../../_store/selectors';
-import { IRole } from '../_models/Role';
+import { IRole } from '../_models';
 
 interface Props {
   data?: IRole[];

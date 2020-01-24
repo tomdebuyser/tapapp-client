@@ -1,5 +1,5 @@
 import { build, fake, sequence, oneOf } from 'test-data-bot';
-import { UserState, IUser } from '../users/_models/User';
+import { UserState, IUser } from '../users/_models';
 
 export const userBuilder: () => IUser = build('User').fields({
   id: sequence(x => `user-${x}`),

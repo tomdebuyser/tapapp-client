@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from 'react';
 import { translations } from '../../_translations';
 import { useDebounce } from '../../_hooks';
-import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http/HttpMetadata';
+import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http';
 import { InputField } from '..';
 
 interface Props {

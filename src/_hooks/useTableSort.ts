@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HttpSortDirection } from '../_http/HttpMetadata';
+import { HttpSortDirection } from '../_http';
 
 type SemanticSortDirection = 'ascending' | 'descending';
 
