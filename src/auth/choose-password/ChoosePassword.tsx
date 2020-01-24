@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import { authSelectors } from '../../_store/selectors';
 import { FormValidator } from '../../_utils/form-validation';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { IChangePasswordForm } from '../_models/ChoosePassword';
+import { ApiError } from '../../_http';
 
 interface Props {
   isPasswordReset?: boolean;
@@ -18,7 +19,6 @@ interface Props {
 
 const initialForm: IChangePasswordForm = {
   newPassword: '',
-  resetToken: '',
 };
 
 function validateForm(form: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
@@ -27,21 +27,23 @@ function validateForm(form: IChangePasswordForm): FormValidationErrors<IChangePa
   };
 }
 
+function errorAsString(error?: ApiError): string {
+  if (error?.error === 'RESET_TOKEN_INVALID') return translations.getLabel(`AUTH.ERRORS.RESET_TOKEN_INVALID`);
+  if (error?.error === 'RESET_TOKEN_EXPIRED') return translations.getLabel(`AUTH.ERRORS.RESET_TOKEN_EXPIRED`);
+  return null;
+}
+
 const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const dispatch = useDispatch();
   const isSubmitting = useSelector(authSelectors.isChoosePasswordLoading);
   const error = useSelector(authSelectors.errorChoosePassword);
   const { token } = useParams();
   const { Form } = useForm<IChangePasswordForm>({
+    error,
     initialForm,
-    submitForm: form => dispatch(new authActions.ChoosePassword(form)),
+    submitForm: form => dispatch(new authActions.ChoosePassword({ form, token })),
     validateForm,
   });
-
-  useEffect(() => {
-    Form.setAttribute(token, 'resetToken');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Container as="main" className="choose-password">
@@ -57,7 +59,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
           value={Form.values.newPassword}
         />
         <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
-        <ErrorMessage isVisible={!!error}>{translations.getLabel('ERRORS.GENERAL')}</ErrorMessage>
+        <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
         <div>
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}

@@ -20,7 +20,7 @@ export function getValidationError(error: ApiError, property: string): Validatio
 }
 
 export function getValidationErrorMessage(error: ApiError, labelMapper?: (name: string) => string): string {
-  return translations.getLabel('FORM_ERROR', {
+  return translations.getLabel('ERRORS.VALIDATION.FORM', {
     fields: Object.keys(error.validationErrors)
       .map((name: string) => (labelMapper ? labelMapper(name) : name))
       .join(', '),

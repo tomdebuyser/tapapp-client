@@ -26,8 +26,14 @@ function validateForm(form: IRoleForm): FormValidationErrors<IRoleForm> {
   };
 }
 
+function errorAsString(error?: ApiError): string {
+  if (error?.error === 'ROLE_IN_USE') return translations.getLabel(`ROLES.ERRORS.ROLE_IN_USE`);
+  if (error?.error === 'ROLE_NAME_ALREADY_IN_USE') return translations.getLabel(`ROLES.ERRORS.ROLE_NAME_ALREADY_IN_USE`);
+  return null;
+}
+
 const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, error, buttons }) => {
-  const { Form } = useForm<IRoleForm>({ initialForm, submitForm, validateForm });
+  const { Form } = useForm<IRoleForm>({ error, initialForm, submitForm, validateForm });
 
   const setPermission = (_: FormEvent, data: CheckboxProps) => {
     Form.setAttribute(setInObject(Form.values.permissions, data.name, data.checked), 'permissions');
@@ -69,7 +75,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
           </fieldset>
         ))}
       </div>
-      <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
+      <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
       <div className="actions">
         {buttons}
         <Button loading={isSubmitting} primary type="submit">

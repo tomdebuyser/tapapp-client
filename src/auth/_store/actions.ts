@@ -45,7 +45,7 @@ export class Login implements Action<AuthActionType> {
 // CHOOSE PASSWORD
 export class ChoosePassword implements Action<AuthActionType> {
   readonly type = AuthActionType.ChoosePassword;
-  constructor(public payload: IChangePasswordForm) {}
+  constructor(public payload: { form: IChangePasswordForm; token: string }) {}
 }
 
 export class ChoosePasswordSuccess implements Action<AuthActionType> {

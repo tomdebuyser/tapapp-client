@@ -19,6 +19,11 @@ interface Props {
   userId?: string;
 }
 
+function errorAsString(error?: ApiError): string {
+  if (error?.error === 'EMAIL_ALREADY_IN_USE') return translations.getLabel(`USERS.ERRORS.EMAIL_ALREADY_IN_USE`);
+  return null;
+}
+
 const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   function validateForm(form: IUserForm): FormValidationErrors<IUserForm> {
     const errors: FormValidationErrors<IUserForm> = {};
@@ -28,7 +33,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
     return errors;
   }
 
-  const { Form } = useForm<IUserForm>({ initialForm, submitForm, validateForm });
+  const { Form } = useForm<IUserForm>({ error, initialForm, submitForm, validateForm });
 
   return (
     <form className="form-container" onSubmit={Form.submit}>
@@ -47,6 +52,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
       )}
       <div role="group">
         <InputField
+          errorMessage={Form.validationErrors.firstName}
           label={translations.getLabel('USERS.FIRST_NAME')}
           name="firstName"
           onChange={Form.setAttribute}
@@ -54,6 +60,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
           value={Form.values.firstName}
         />
         <InputField
+          errorMessage={Form.validationErrors.lastName}
           label={translations.getLabel('USERS.LAST_NAME')}
           name="lastName"
           onChange={Form.setAttribute}
@@ -71,7 +78,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
         />
         <div />
       </div>
-      <ErrorMessage isVisible={!!error}>{error?.message}</ErrorMessage>
+      <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
       <div className="actions">
         {buttons}
         <Button loading={isSubmitting} primary type="submit">

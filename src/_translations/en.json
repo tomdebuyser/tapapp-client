@@ -5,10 +5,7 @@
       "LOGIN": "Login",
       "PASSWORD": "Password",
       "TITLE": "Welcome!",
-      "USERNAME": "Username",
-      "ERROR": {
-        "UNAUTHORIZED": "Incorrect username or password"
-      }
+      "USERNAME": "Username"
     },
     "LOGOUT": "Logout",
     "REGISTER": {
@@ -26,6 +23,12 @@
       "EMAIL": "Email",
       "RESET": "Send reset instructions",
       "TITLE": "Forgot your password?"
+    },
+    "ERRORS": {
+      "UNAUTHORIZED": "Incorrect username or password",
+      "USER_STATE_NOT_ALLOWED": "This account is not active, hence you cannot login. Contact your administrator.",
+      "RESET_TOKEN_INVALID": "The link you are using is invalid.",
+      "RESET_TOKEN_EXPIRED": "The link you are using is expired."
     }
   },
   "ROLES": {
@@ -58,6 +61,10 @@
     "DELETE": {
       "CONTENT": "Are you sure you want to delete this role? This may fail if the role is still in use.",
       "CONFIRM": "Delete role"
+    },
+    "ERRORS": {
+      "ROLE_IN_USE": "This role is still in use, hence it is not possible to delete it.",
+      "ROLE_NAME_ALREADY_IN_USE": "A role with the given name already exists."
     }
   },
   "SHARED": {
@@ -124,11 +131,15 @@
         "INACTIVE": "Inactive",
         "REGISTERING": "Registering"
       }
+    },
+    "ERRORS": {
+      "EMAIL_ALREADY_IN_USE": "A user with the given email already exists."
     }
   },
   "ERRORS": {
     "GENERAL": "Something went wrong. Please try again.",
     "VALIDATION": {
+      "FORM": "The following input fields are not filled in (correctly): {{fields}}",
       "REQUIRED": "Required",
       "INVALID": "Value is not correct",
       "PASSWORD_TOO_SHORT": "This password is too short",
