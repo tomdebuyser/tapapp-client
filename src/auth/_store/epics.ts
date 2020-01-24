@@ -24,7 +24,7 @@ const authenticateSuccessEpic$: Epic = action$ =>
 const choosePasswordEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.ChoosePassword).pipe(
     switchMap(({ payload }: authActions.ChoosePassword) =>
-      from(authApi.choosePassword(payload)).pipe(
+      from(authApi.choosePassword(payload.form, payload.token)).pipe(
         map(() => new authActions.ChoosePasswordSuccess()),
         catchError(error => of(new authActions.ChoosePasswordError({ error }))),
       ),

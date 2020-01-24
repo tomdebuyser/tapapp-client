@@ -33,13 +33,11 @@ function errorAsString(error?: ApiError): string {
 }
 
 const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, error, buttons }) => {
-  const { Form } = useForm<IRoleForm>({ initialForm, submitForm, validateForm });
+  const { Form } = useForm<IRoleForm>({ error, initialForm, submitForm, validateForm });
 
   const setPermission = (_: FormEvent, data: CheckboxProps) => {
     Form.setAttribute(setInObject(Form.values.permissions, data.name, data.checked), 'permissions');
   };
-
-  const errorMessage = errorAsString(error);
 
   return (
     <form className="form-container" onSubmit={Form.submit}>
@@ -77,7 +75,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
           </fieldset>
         ))}
       </div>
-      <ErrorMessage isVisible={!!errorMessage}>{errorMessage}</ErrorMessage>
+      <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
       <div className="actions">
         {buttons}
         <Button loading={isSubmitting} primary type="submit">

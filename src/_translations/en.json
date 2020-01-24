@@ -139,6 +139,7 @@
   "ERRORS": {
     "GENERAL": "Something went wrong. Please try again.",
     "VALIDATION": {
+      "FORM": "The following input fields are not filled in (correctly): {{fields}}",
       "REQUIRED": "Required",
       "INVALID": "Value is not correct",
       "PASSWORD_TOO_SHORT": "This password is too short",

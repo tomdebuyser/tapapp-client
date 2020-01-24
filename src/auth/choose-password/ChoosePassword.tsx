@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,6 @@ interface Props {
 
 const initialForm: IChangePasswordForm = {
   newPassword: '',
-  resetToken: '',
 };
 
 function validateForm(form: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
@@ -40,17 +39,11 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const error = useSelector(authSelectors.errorChoosePassword);
   const { token } = useParams();
   const { Form } = useForm<IChangePasswordForm>({
+    error,
     initialForm,
-    submitForm: form => dispatch(new authActions.ChoosePassword(form)),
+    submitForm: form => dispatch(new authActions.ChoosePassword({ form, token })),
     validateForm,
   });
-
-  useEffect(() => {
-    Form.setAttribute(token, 'resetToken');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const errorMessage = errorAsString(error);
 
   return (
     <Container as="main" className="choose-password">
@@ -66,7 +59,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
           value={Form.values.newPassword}
         />
         <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
-        <ErrorMessage isVisible={!!errorMessage}>{errorMessage}</ErrorMessage>
+        <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
         <div>
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}

@@ -37,12 +37,11 @@ const Login = () => {
   const isSubmitting = useSelector(authSelectors.isLoginLoading);
   const error = useSelector(authSelectors.errorLogin);
   const { Form } = useForm<ILoginForm>({
+    error,
     initialForm,
     submitForm: form => dispatch(new authActions.Login(form, state?.pathname)),
     validateForm,
   });
-
-  const errorMessage = errorAsString(error);
 
   return (
     <Container as="main" className="login">
@@ -66,7 +65,7 @@ const Login = () => {
           type="password"
           value={Form.values.password}
         />
-        <ErrorMessage isVisible={!!errorMessage}>{errorMessage}</ErrorMessage>
+        <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
         <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
         <div>
           <Button loading={isSubmitting} primary type="submit">
