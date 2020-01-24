@@ -18,7 +18,7 @@ const initialForm: IUserForm = {
 const CreateUser: FC = () => {
   const dispatch = useDispatch();
   const isSubmitting = useSelector(usersSelectors.isCreateUserLoading);
-  const error = useSelector(usersSelectors.errorCreateUser);
+  const error = useSelector(usersSelectors.errorCrudUser);
 
   return (
     <Container as="main">

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { Button, GoBackLink, Timestamps } from '../../_shared';
 import { translations } from '../../_translations';
-import { usersSelectors } from '../../_store/selectors';
+import { usersSelectors, profileSelectors } from '../../_store/selectors';
 import './userDetail.scss';
 import { usersActions } from '../../_store/actions';
 import { labelForUserState } from '../_utils';
@@ -18,7 +18,8 @@ const UserDetail: FC = () => {
   const isUpdateLoading = useSelector(usersSelectors.isUpdateUserLoading);
   const isInactivateLoading = useSelector(usersSelectors.isInactivateUserLoading);
   const isResendRegisterMailLoading = useSelector(usersSelectors.isResendRegisterEmailLoading);
-  const errorUpdateUser = useSelector(usersSelectors.errorUpdateUser);
+  const error = useSelector(usersSelectors.errorCrudUser);
+  const permissions = useSelector(profileSelectors.permissions);
   const dispatch = useDispatch();
 
   if (!user) return <Redirect to="/users" />;
@@ -42,7 +43,7 @@ const UserDetail: FC = () => {
       <section>
         <h2>{translations.getLabel('USERS.DETAIL.DETAILS.TITLE')}</h2>
         <UserForm
-          error={errorUpdateUser}
+          error={error}
           initialForm={initialForm}
           isSubmitting={isUpdateLoading}
           submitForm={(form: IUserForm) => dispatch(new usersActions.UpdateUser({ userId: user.id, form }))}
@@ -83,7 +84,7 @@ const UserDetail: FC = () => {
         <div className="description">
           <span>{translations.getLabel(`USERS.DETAIL.STATUS.DESCRIPTION.${user.state}`)}</span>
         </div>
-        <div className="actions">{button}</div>
+        <div className="actions">{permissions?.roles.edit && button}</div>
       </section>
     );
   }

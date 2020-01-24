@@ -10,7 +10,7 @@ const authenticateEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Authenticate).pipe(
     exhaustMap(() =>
       from(authApi.authenticate()).pipe(
-        map(user => new authActions.AuthenticateSuccess({ user })),
+        map(profile => new authActions.AuthenticateSuccess({ profile })),
         catchError(() => of(new authActions.AuthenticateError({}))),
       ),
     ),
@@ -38,7 +38,7 @@ const loginEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Login).pipe(
     exhaustMap(({ payload, pathname }: authActions.Login) =>
       from(authApi.login(payload)).pipe(
-        map(user => new authActions.AuthenticateSuccess({ pathname, user })),
+        map(profile => new authActions.AuthenticateSuccess({ pathname, profile })),
         catchError(error => of(new authActions.AuthenticateError({ error }))),
       ),
     ),

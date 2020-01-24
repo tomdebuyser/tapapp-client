@@ -1,13 +1,13 @@
 import { IChangePasswordForm, ILoginForm, IRequestPasswordResetForm } from '../_models';
 import { HttpClient } from '../../_http';
-import { IUser } from '../../users/_models';
+import { IProfile } from '../../profile/_models';
 
 export function choosePassword(body: IChangePasswordForm, token: string): Promise<void> {
   return HttpClient.post('auth/reset-password', { ...body, token });
 }
 
-export function login(body: ILoginForm): Promise<IUser> {
-  return HttpClient.post<IUser>('auth/login', body);
+export function login(body: ILoginForm): Promise<IProfile> {
+  return HttpClient.post<IProfile>('auth/login', body);
 }
 
 export function logout(): Promise<void> {
@@ -18,6 +18,6 @@ export function requestPasswordReset(body: IRequestPasswordResetForm): Promise<v
   return HttpClient.post('auth/request-password-reset', body);
 }
 
-export function authenticate(): Promise<IUser> {
-  return HttpClient.get('auth/authenticate');
+export function authenticate(): Promise<IProfile> {
+  return HttpClient.get<IProfile>('auth/authenticate');
 }

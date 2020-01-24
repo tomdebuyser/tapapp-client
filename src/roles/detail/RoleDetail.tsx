@@ -14,8 +14,7 @@ const RoleDetail: FC = () => {
   const role = useSelector(rolesSelectors.role(id));
   const isDeleteLoading = useSelector(rolesSelectors.isDeleteRoleLoading);
   const isUpdateLoading = useSelector(rolesSelectors.isUpdateRoleLoading);
-  const errorDeleteRole = useSelector(rolesSelectors.errorDeleteRole);
-  const errorUpdateRole = useSelector(rolesSelectors.errorUpdateRole);
+  const error = useSelector(rolesSelectors.errorCrudRoles);
   const dispatch = useDispatch();
 
   if (!role) return <Redirect to="/roles" />;
@@ -42,7 +41,7 @@ const RoleDetail: FC = () => {
               {translations.getLabel('ROLES.DETAIL.BUTTON_DELETE')}
             </Button>
           }
-          error={errorDeleteRole || errorUpdateRole}
+          error={error}
           initialForm={initialForm}
           isSubmitting={isUpdateLoading}
           roleId={role.id}
