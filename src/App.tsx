@@ -18,12 +18,13 @@ const App: React.FC = () => {
     dispatch(new authActions.Authenticate());
   }, [dispatch]);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div>
         <Loader active={isLoading} size="large" />
       </div>
     );
+  }
 
   return (
     <>

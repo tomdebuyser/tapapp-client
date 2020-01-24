@@ -22,7 +22,7 @@ const CreateRole: FC = () => {
   const error = useSelector(rolesSelectors.errorCrudRoles);
 
   return (
-    <Container as="main" className="create-role">
+    <Container as="main" className="left-container">
       <h1>{translations.getLabel('ROLES.CREATE.TITLE')}</h1>
       <RoleForm
         buttons={
@@ -33,7 +33,7 @@ const CreateRole: FC = () => {
         error={error}
         initialForm={initialForm}
         isSubmitting={isSubmitting}
-        submitForm={(form: IRoleForm) => dispatch(new rolesActions.CreateRole(form))}
+        submitForm={(values: IRoleForm) => dispatch(new rolesActions.CreateRole({ values }))}
       />
     </Container>
   );

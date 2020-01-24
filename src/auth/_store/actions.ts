@@ -37,13 +37,13 @@ export class AuthenticateError implements Action<AuthActionType> {
 // LOGIN
 export class Login implements Action<AuthActionType> {
   readonly type = AuthActionType.Login;
-  constructor(public payload: ILoginForm, public pathname: string) {}
+  constructor(public payload: { pathname?: string; values: ILoginForm }) {}
 }
 
 // CHOOSE PASSWORD
 export class ChoosePassword implements Action<AuthActionType> {
   readonly type = AuthActionType.ChoosePassword;
-  constructor(public payload: { form: IChangePasswordForm; token: string }) {}
+  constructor(public payload: { token: string; values: IChangePasswordForm }) {}
 }
 
 export class ChoosePasswordSuccess implements Action<AuthActionType> {
@@ -72,7 +72,7 @@ export class LogoutError implements Action<AuthActionType> {
 // REQUEST PASSWORD RESET
 export class RequestPasswordReset implements Action<AuthActionType> {
   readonly type = AuthActionType.RequestPasswordReset;
-  constructor(public payload: IRequestPasswordResetForm) {}
+  constructor(public payload: { values: IRequestPasswordResetForm }) {}
 }
 
 export class RequestPasswordResetSuccess implements Action<AuthActionType> {

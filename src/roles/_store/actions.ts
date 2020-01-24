@@ -39,7 +39,7 @@ export class SetRolesQuery implements Action<RolesActionType> {
 
 export class CreateRole implements Action<RolesActionType> {
   readonly type = RolesActionType.CreateRole;
-  constructor(public payload: IRoleForm) {}
+  constructor(public payload: { values: IRoleForm }) {}
 }
 
 export class CreateRoleSuccess implements Action<RolesActionType> {
@@ -53,7 +53,7 @@ export class CreateRoleError implements Action<RolesActionType> {
 
 export class UpdateRole implements Action<RolesActionType> {
   readonly type = RolesActionType.UpdateRole;
-  constructor(public payload: { form: IRoleForm; roleId: string }) {}
+  constructor(public payload: { roleId: string; values: IRoleForm }) {}
 }
 
 export class UpdateRoleSuccess implements Action<RolesActionType> {

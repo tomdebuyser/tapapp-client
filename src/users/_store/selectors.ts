@@ -10,10 +10,10 @@ export const user = (userId: string) =>
 export const metadata = createSelector(selectNode, (state: UsersState) => state.metadata);
 export const query = createSelector(selectNode, (state: UsersState) => state.query);
 export const errorCrudUser = createSelector(selectNode, (state: UsersState) => state.errorCrudUser);
-export const errorInactivateUser = createSelector(selectNode, (state: UsersState) => state.errorInactivateUser);
+export const errorDeactivateUser = createSelector(selectNode, (state: UsersState) => state.errorDeactivateUser);
 export const errorResendRegisterEmail = createSelector(selectNode, (state: UsersState) => state.errorResendRegisterEmail);
 export const isCreateUserLoading = createSelector(selectNode, (state: UsersState) => state.isCreateUserLoading);
 export const isGetUsersLoading = createSelector(selectNode, (state: UsersState) => state.isGetUsersLoading);
-export const isInactivateUserLoading = createSelector(selectNode, (state: UsersState) => state.isInactivateUserLoading);
+export const isDeactivateUserLoading = createSelector(selectNode, (state: UsersState) => state.isDeactivateUserLoading);
 export const isResendRegisterEmailLoading = createSelector(selectNode, (state: UsersState) => state.isResendRegisterEmailLoading);
 export const isUpdateUserLoading = createSelector(selectNode, (state: UsersState) => state.isUpdateUserLoading);

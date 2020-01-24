@@ -26,7 +26,6 @@ const UsersOverview: FC = () => {
 
   return (
     <Container as="main" className="users">
-      <h1>{translations.getLabel('USERS.OVERVIEW.TITLE')}</h1>
       <div className="header">
         <SearchInput query={query} setQuery={setQuery} />
         {permissions?.users.edit && (

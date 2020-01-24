@@ -28,7 +28,7 @@ function mapToFormValidationErrors<T>(error: ApiError): FormValidationErrors<T> 
   }, {});
 }
 
-function useForm<T>(params: Params<T>): { Form: Response<T> } {
+function useForm<T>(params: Params<T>): Response<T> {
   const { error, initialForm, submitForm, validateForm } = params;
   const [values, setValues] = useState<T>(initialForm);
   const [validationErrors, setValidationErrors] = useState<FormValidationErrors<T>>({});
@@ -72,12 +72,10 @@ function useForm<T>(params: Params<T>): { Form: Response<T> } {
   useEffect(() => setValues(initialForm), [initialForm]);
 
   return {
-    Form: {
-      values,
-      setAttribute,
-      submit,
-      validationErrors,
-    },
+    values,
+    setAttribute,
+    submit,
+    validationErrors,
   };
 }
 

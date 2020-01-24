@@ -8,10 +8,11 @@ import { translations } from '../../_translations';
 import { authActions } from '../../_store/actions';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../../_store/selectors';
-import { FormValidator } from '../../_utils/form-validation';
+import { formValidator } from '../../_utils/formValidation';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { IChangePasswordForm } from '../_models';
 import { ApiError } from '../../_http';
+import './choosePassword.scss';
 
 interface Props {
   isPasswordReset?: boolean;
@@ -21,9 +22,9 @@ const initialForm: IChangePasswordForm = {
   newPassword: '',
 };
 
-function validateForm(form: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
+function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
   return {
-    newPassword: FormValidator.isPassword(form.newPassword),
+    newPassword: formValidator.isPassword(values.newPassword),
   };
 }
 
@@ -38,29 +39,28 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const isSubmitting = useSelector(authSelectors.isChoosePasswordLoading);
   const error = useSelector(authSelectors.errorChoosePassword);
   const { token } = useParams();
-  const { Form } = useForm<IChangePasswordForm>({
+  const form = useForm<IChangePasswordForm>({
     error,
     initialForm,
-    submitForm: form => dispatch(new authActions.ChoosePassword({ form, token })),
+    submitForm: values => dispatch(new authActions.ChoosePassword({ values, token })),
     validateForm,
   });
 
   return (
     <Container as="main" className="choose-password">
       <h1>{translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.TITLE' : 'AUTH.REGISTER.TITLE')}</h1>
-      <form onSubmit={Form.submit}>
+      <p>{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
+      <form onSubmit={form.submit}>
         <InputField
           autoComplete="new-password"
-          errorMessage={Form.validationErrors.newPassword}
-          label={translations.getLabel('AUTH.REGISTER.CHOOSE_PASSWORD')}
+          errorMessage={form.validationErrors.newPassword}
           name="newPassword"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="password"
-          value={Form.values.newPassword}
+          value={form.values.newPassword}
         />
-        <p className="guidelines">{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
         <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
-        <div>
+        <div className="actions">
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}
           </Button>

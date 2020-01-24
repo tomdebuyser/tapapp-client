@@ -9,7 +9,6 @@
     },
     "LOGOUT": "Logout",
     "REGISTER": {
-      "CHOOSE_PASSWORD": "Password",
       "PASSWORD_GUIDELINES": "Password requirements: min. 8 characters, at least one uppercase letter, one lowercase letter, and one number.",
       "REGISTER": "Set password",
       "TITLE": "Welcome!"
@@ -20,7 +19,6 @@
     },
     "REQUEST_PASSWORD_RESET": {
       "DESCRIPTION": "Enter the email address you used to register and we'll email you the password reset instructions.",
-      "EMAIL": "Email",
       "RESET": "Send reset instructions",
       "TITLE": "Forgot your password?"
     },
@@ -103,7 +101,7 @@
         },
         "BUTTON": {
           "ACTIVATE": "Activate user",
-          "INACTIVATE": "Inactivate user",
+          "DEACTIVATE": "Deactivate user",
           "RESEND_REGISTER_MAIL": "Resend email"
         }
       }
@@ -120,9 +118,9 @@
     "CREATE": {
       "TITLE": "Create user"
     },
-    "INACTIVATE": {
-      "CONTENT": "Are you sure you want to inactivate this user? By doing this, the user will not be able to login anymore.",
-      "CONFIRM": "Inactivate user"
+    "DEACTIVATE": {
+      "CONTENT": "Are you sure you want to deactivate this user? By doing this, the user will not be able to login anymore.",
+      "CONFIRM": "Deactivate user"
     },
     "STATE": {
       "TITLE": "State",

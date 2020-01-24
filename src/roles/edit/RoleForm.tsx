@@ -8,7 +8,7 @@ import { IRoleForm } from '../_models';
 import { setInObject } from '../../_utils/objectHelpers';
 import './roleForm.scss';
 import { FormValidationErrors } from '../../_hooks/useForm';
-import { FormValidator } from '../../_utils/form-validation';
+import { formValidator } from '../../_utils/formValidation';
 import { ApiError } from '../../_http';
 
 interface Props {
@@ -17,12 +17,12 @@ interface Props {
   initialForm: IRoleForm;
   isSubmitting?: boolean;
   roleId?: string;
-  submitForm: (form: IRoleForm) => void;
+  submitForm: (values: IRoleForm) => void;
 }
 
-function validateForm(form: IRoleForm): FormValidationErrors<IRoleForm> {
+function validateForm(values: IRoleForm): FormValidationErrors<IRoleForm> {
   return {
-    name: FormValidator.isRequired(form.name),
+    name: formValidator.isRequired(values.name),
   };
 }
 
@@ -34,36 +34,36 @@ function errorAsString(error?: ApiError): string {
 }
 
 const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, error, buttons }) => {
-  const { Form } = useForm<IRoleForm>({ error, initialForm, submitForm, validateForm });
+  const form = useForm<IRoleForm>({ error, initialForm, submitForm, validateForm });
 
   const setPermission = (_: FormEvent, data: CheckboxProps) => {
-    Form.setAttribute(setInObject(Form.values.permissions, data.name, data.checked), 'permissions');
+    form.setAttribute(setInObject(form.values.permissions, data.name, data.checked), 'permissions');
   };
 
   return (
-    <form className="form-container" onSubmit={Form.submit}>
+    <form onSubmit={form.submit}>
       <div role="group">
         <InputField
-          errorMessage={Form.validationErrors.name}
+          errorMessage={form.validationErrors.name}
           label={translations.getLabel('ROLES.NAME')}
           name="name"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="text"
-          value={Form.values.name}
+          value={form.values.name}
         />
         <div />
       </div>
       <div className="permissions">
         <h3>{translations.getLabel('ROLES.PERMISSIONS.TITLE')}</h3>
-        {Object.keys(Form.values.permissions).map(permission => (
+        {Object.keys(form.values.permissions).map(permission => (
           <fieldset key={permission}>
             <legend>{translations.getLabel(`ROLES.PERMISSIONS.FEATURES.${permission.toUpperCase()}`)}</legend>
             <div>
-              {Object.keys(Form.values.permissions[permission]).map(option => {
+              {Object.keys(form.values.permissions[permission]).map(option => {
                 const optionName = `${permission}.${option}`;
                 return (
                   <Checkbox
-                    checked={Form.values.permissions[permission][option]}
+                    checked={form.values.permissions[permission][option]}
                     id={optionName}
                     key={optionName}
                     label={translations.getLabel(`ROLES.PERMISSIONS.RIGHTS.${option.toUpperCase()}`)}

@@ -7,25 +7,26 @@ import { translations } from '../../_translations';
 import { authActions } from '../../_store/actions';
 import { authSelectors } from '../../_store/selectors';
 import { FormValidationErrors } from '../../_hooks/useForm';
-import { FormValidator } from '../../_utils/form-validation';
+import { formValidator } from '../../_utils/formValidation';
 import { IRequestPasswordResetForm } from '../_models';
+import './requestPasswordReset.scss';
 
 const initialForm: IRequestPasswordResetForm = {
   email: '',
 };
 
-function validateForm(form: IRequestPasswordResetForm): FormValidationErrors<IRequestPasswordResetForm> {
+function validateForm(values: IRequestPasswordResetForm): FormValidationErrors<IRequestPasswordResetForm> {
   return {
-    email: FormValidator.isEmail(form.email),
+    email: formValidator.isEmail(values.email),
   };
 }
 
 const RequestPasswordReset = () => {
   const dispatch = useDispatch();
   const isSubmitting = useSelector(authSelectors.isRequestPasswordResetLoading);
-  const { Form } = useForm<IRequestPasswordResetForm>({
+  const form = useForm<IRequestPasswordResetForm>({
     initialForm,
-    submitForm: form => dispatch(new authActions.RequestPasswordReset(form)),
+    submitForm: values => dispatch(new authActions.RequestPasswordReset({ values })),
     validateForm,
   });
 
@@ -33,17 +34,16 @@ const RequestPasswordReset = () => {
     <Container as="main" className="request-password-reset">
       <h1>{translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.TITLE')}</h1>
       <p>{translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.DESCRIPTION')}</p>
-      <form onSubmit={Form.submit}>
+      <form onSubmit={form.submit}>
         <InputField
           autoComplete="email"
-          errorMessage={Form.validationErrors.email}
-          label={translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.EMAIL')}
+          errorMessage={form.validationErrors.email}
           name="email"
-          onChange={Form.setAttribute}
+          onChange={form.setAttribute}
           type="email"
-          value={Form.values.email}
+          value={form.values.email}
         />
-        <div>
+        <div className="actions">
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel('AUTH.REQUEST_PASSWORD_RESET.RESET')}
           </Button>

@@ -15,8 +15,8 @@ export function updateUser(userId: string, body: IUserForm): Promise<IUser> {
   return HttpClient.patch<IUser>(`users/${userId}`, removeEmptyKeys(body));
 }
 
-export function inactivateUser(userId: string): Promise<IUser> {
-  return HttpClient.post<IUser>(`users/${userId}/inactivate`);
+export function deactivateUser(userId: string): Promise<IUser> {
+  return HttpClient.post<IUser>(`users/${userId}/deactivate`);
 }
 
 export function resendRegisterEmail(userId: string): Promise<IUser> {
