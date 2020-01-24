@@ -5,21 +5,16 @@ import { RolesAction, RolesActionType } from './actions';
 
 export interface RolesState {
   errorCrudRoles?: ApiError;
-  isCreateRoleLoading: boolean;
-  isDeleteRoleLoading: boolean;
-  isGetRolesLoading: boolean;
-  isUpdateRoleLoading: boolean;
+  isCreateRoleLoading?: boolean;
+  isDeleteRoleLoading?: boolean;
+  isGetRolesLoading?: boolean;
+  isUpdateRoleLoading?: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   roles?: IRole[];
 }
 
-const initialState: RolesState = {
-  isCreateRoleLoading: false,
-  isDeleteRoleLoading: false,
-  isGetRolesLoading: false,
-  isUpdateRoleLoading: false,
-};
+export const initialState: RolesState = {};
 
 export default function reducer(state = initialState, action: RolesAction): RolesState {
   switch (action.type) {

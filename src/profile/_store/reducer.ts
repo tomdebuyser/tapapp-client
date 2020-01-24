@@ -5,7 +5,7 @@ export interface ProfileState {
   profile?: IProfile;
 }
 
-const initialState: ProfileState = {};
+export const initialState: ProfileState = {};
 
 export default function reducer(state = initialState, action: AuthAction): ProfileState {
   switch (action.type) {

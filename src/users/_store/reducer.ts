@@ -7,23 +7,17 @@ export interface UsersState {
   errorCrudUser?: ApiError;
   errorInactivateUser?: ApiError;
   errorResendRegisterEmail?: ApiError;
-  isCreateUserLoading: boolean;
-  isGetUsersLoading: boolean;
-  isInactivateUserLoading: boolean;
-  isResendRegisterEmailLoading: boolean;
-  isUpdateUserLoading: boolean;
+  isCreateUserLoading?: boolean;
+  isGetUsersLoading?: boolean;
+  isInactivateUserLoading?: boolean;
+  isResendRegisterEmailLoading?: boolean;
+  isUpdateUserLoading?: boolean;
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   users?: IUser[];
 }
 
-const initialState: UsersState = {
-  isGetUsersLoading: false,
-  isCreateUserLoading: false,
-  isInactivateUserLoading: false,
-  isResendRegisterEmailLoading: false,
-  isUpdateUserLoading: false,
-};
+export const initialState: UsersState = {};
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
   switch (action.type) {
