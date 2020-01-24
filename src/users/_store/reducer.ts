@@ -17,7 +17,7 @@ export interface UsersState {
   users?: IUser[];
 }
 
-export const initialState: UsersState = {};
+const initialState: UsersState = {};
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
   switch (action.type) {

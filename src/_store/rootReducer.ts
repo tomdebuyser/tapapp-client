@@ -1,11 +1,11 @@
 import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
 import { combineReducers, Reducer, Action } from 'redux';
-import rolesReducer, { RolesState, initialState as rolesInitialState } from '../roles/_store/reducer';
-import usersReducer, { UsersState, initialState as usersInitialState } from '../users/_store/reducer';
-import authReducer, { AuthState, initialState as authInitialState } from '../auth/_store/reducer';
-import modalReducer, { ModalState, initialState as modalInitialState } from '../modal/_store/reducer';
-import profileReducer, { ProfileState, initialState as profileInitialState } from '../profile/_store/reducer';
+import rolesReducer, { RolesState } from '../roles/_store/reducer';
+import usersReducer, { UsersState } from '../users/_store/reducer';
+import authReducer, { AuthState } from '../auth/_store/reducer';
+import modalReducer, { ModalState } from '../modal/_store/reducer';
+import profileReducer, { ProfileState } from '../profile/_store/reducer';
 import { AuthActionType } from '../auth/_store/actions';
 
 export interface AppState {
@@ -15,17 +15,6 @@ export interface AppState {
   roles: RolesState;
   router: RouterState;
   users: UsersState;
-}
-
-function initialState(state: AppState): AppState {
-  return {
-    auth: authInitialState,
-    modal: modalInitialState,
-    profile: profileInitialState,
-    roles: rolesInitialState,
-    router: state.router,
-    users: usersInitialState,
-  };
 }
 
 function appReducer(history: History): Reducer {
@@ -41,7 +30,7 @@ function appReducer(history: History): Reducer {
 
 export default (history: History) => (state: AppState, action: Action) => {
   if (action.type === AuthActionType.LogoutSuccess) {
-    return appReducer(history)(initialState(state), action);
+    return appReducer(history)(undefined, action);
   }
   return appReducer(history)(state, action);
 };

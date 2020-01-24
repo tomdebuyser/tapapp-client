@@ -13,7 +13,7 @@ export interface AuthState {
   isRequestPasswordResetLoading?: boolean;
 }
 
-export const initialState: AuthState = {};
+const initialState: AuthState = {};
 
 export default function reducer(state = initialState, action: AuthAction): AuthState {
   switch (action.type) {

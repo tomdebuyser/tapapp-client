@@ -14,7 +14,7 @@ export interface RolesState {
   roles?: IRole[];
 }
 
-export const initialState: RolesState = {};
+const initialState: RolesState = {};
 
 export default function reducer(state = initialState, action: RolesAction): RolesState {
   switch (action.type) {

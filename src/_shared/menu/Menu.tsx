@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import slash from '../../_assets/images/slash-white.png';
@@ -9,7 +9,7 @@ import { hasUsersPermissions, hasRolesPermissions } from '../../profile/_utils';
 import { Icon } from '..';
 import './menu.scss';
 
-const Menu = () => {
+const Menu: FC = () => {
   const dispatch = useDispatch();
   const permissions = useSelector(profileSelectors.permissions);
 
