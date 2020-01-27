@@ -11,6 +11,7 @@ export enum AuthActionType {
   ChoosePasswordError = '[Auth] ChoosePasswordError',
   ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
   Login = '[Auth] Login',
+  LoginError = '[Auth] LoginError',
   Logout = '[Auth] Logout',
   LogoutError = '[Auth] LogoutError',
   LogoutSuccess = '[Auth] LogoutSuccess',
@@ -38,6 +39,11 @@ export class AuthenticateError implements Action<AuthActionType> {
 export class Login implements Action<AuthActionType> {
   readonly type = AuthActionType.Login;
   constructor(public payload: { pathname?: string; values: ILoginForm }) {}
+}
+
+export class LoginError implements Action<AuthActionType> {
+  readonly type = AuthActionType.LoginError;
+  constructor(public payload: { error?: ApiError }) {}
 }
 
 // CHOOSE PASSWORD
@@ -92,6 +98,7 @@ export type AuthAction =
   | ChoosePasswordSuccess
   | ChoosePasswordError
   | Login
+  | LoginError
   | Logout
   | LogoutSuccess
   | LogoutError
