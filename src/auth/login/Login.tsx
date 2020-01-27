@@ -21,7 +21,7 @@ const initialForm: ILoginForm = {
 
 function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
-    username: formValidator.isRequired(values.username),
+    username: formValidator.isEmail(values.username),
     password: formValidator.isRequired(values.password),
   };
 }
@@ -54,7 +54,7 @@ const Login = () => {
           label={translations.getLabel('AUTH.LOGIN.USERNAME')}
           name="username"
           onChange={form.setAttribute}
-          type="text"
+          type="email"
           value={form.values.username}
         />
         <InputField
