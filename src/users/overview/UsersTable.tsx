@@ -35,7 +35,7 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   useInfiniteScroll((skip: number) => setQuery({ skip }), metadata, isLoading);
 
   function renderRow(user: IUser): JSX.Element {
-    const className = classnames({ 'greyd-out': user.state === UserState.Inactive });
+    const className = classnames({ 'greyed-out': user.state === UserState.Inactive });
     return (
       <Table.Row className={className} key={user.email}>
         <Table.Cell>
