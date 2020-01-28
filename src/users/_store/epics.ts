@@ -28,7 +28,7 @@ const createUserEpic$: Epic = action$ =>
     switchMap(({ payload }: usersActions.CreateUser) =>
       from(usersApi.createUser(payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('USERS.TOASTER.USER_CREATED'))),
-        map(() => new usersActions.CreateUserSuccess()),
+        map(createdUser => new usersActions.CreateUserSuccess({ createdUser })),
         catchError(error => of(new usersActions.CreateUserError({ error }))),
       ),
     ),
