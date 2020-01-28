@@ -21,8 +21,8 @@ const initialForm: ILoginForm = {
 
 function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
-    username: formValidator.isEmail(values.username),
     password: formValidator.isRequired(values.password),
+    username: formValidator.isEmail(values.username),
   };
 }
 
@@ -40,7 +40,7 @@ const Login = () => {
   const form = useForm<ILoginForm>({
     error,
     initialForm,
-    submitForm: values => dispatch(new authActions.Login({ values, pathname: state?.pathname })),
+    submitForm: values => dispatch(new authActions.Login({ pathname: state?.pathname, values })),
     validateForm,
   });
 

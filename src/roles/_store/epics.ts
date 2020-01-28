@@ -53,10 +53,10 @@ const deleteRoleWithConfirmationEpic$: Epic = action$ =>
     filter(({ payload }: rolesActions.DeleteRole) => !payload.confirmed),
     map(({ payload }: rolesActions.DeleteRole) => {
       return new modalActions.ShowConfirmationModal({
-        title: payload.role.name,
-        content: translations.getLabel('ROLES.DELETE.CONTENT'),
+        confirmAction: () => new rolesActions.DeleteRole({ confirmed: true, role: payload.role }),
         confirmText: translations.getLabel('ROLES.DELETE.CONFIRM'),
-        confirmAction: () => new rolesActions.DeleteRole({ role: payload.role, confirmed: true }),
+        content: translations.getLabel('ROLES.DELETE.CONTENT'),
+        title: payload.role.name,
       });
     }),
   );

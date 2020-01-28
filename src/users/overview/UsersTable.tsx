@@ -18,19 +18,19 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'email', label: 'USERS.EMAIL', sortable: true, className: 'email-column' },
-  { name: 'firstName', label: 'USERS.FIRST_NAME', sortable: true },
-  { name: 'lastName', label: 'USERS.LAST_NAME', sortable: true },
-  { name: 'createdAt', label: 'USERS.OVERVIEW.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'USERS.OVERVIEW.UPDATED_AT', sortable: true },
-  { name: 'state', label: 'USERS.STATE.TITLE', sortable: true },
+  { className: 'email-column', label: 'USERS.EMAIL', name: 'email', sortable: true },
+  { label: 'USERS.FIRST_NAME', name: 'firstName', sortable: true },
+  { label: 'USERS.LAST_NAME', name: 'lastName', sortable: true },
+  { label: 'USERS.OVERVIEW.CREATED_AT', name: 'createdAt', sortable: true },
+  { label: 'USERS.OVERVIEW.UPDATED_AT', name: 'updatedAt', sortable: true },
+  { label: 'USERS.STATE.TITLE', name: 'state', sortable: true },
 ];
 
 const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   const metadata = useSelector(usersSelectors.metadata);
 
   const { sortFunctions } = useTableSort((column: string, direction: HttpSortDirection) =>
-    setQuery({ sortBy: column, sortDirection: direction, skip: 0 }),
+    setQuery({ skip: 0, sortBy: column, sortDirection: direction }),
   );
   useInfiniteScroll((skip: number) => setQuery({ skip }), metadata, isLoading);
 

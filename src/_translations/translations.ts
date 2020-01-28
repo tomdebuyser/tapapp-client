@@ -20,6 +20,6 @@ const translations = {
 I18n.translations = translations;
 
 export default {
-  getLabel,
   I18n,
+  getLabel,
 };

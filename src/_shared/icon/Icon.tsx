@@ -17,7 +17,7 @@ const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clic
   const Svg = ICONS[name];
   if (!Svg) return null;
 
-  const sizeObject = size ? { width: `${size}rem`, height: `${size}rem` } : {};
+  const sizeObject = size ? { height: `${size}rem`, width: `${size}rem` } : {};
   const IconComponent = (
     <i {...otherProps} className={`icon ${className}`} style={sizeObject}>
       <Svg {...sizeObject} />

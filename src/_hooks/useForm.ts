@@ -67,10 +67,10 @@ function useForm<T>(params: Params<T>): Response<T> {
   }, []);
 
   return {
-    values,
     setAttribute,
     submit,
     validationErrors,
+    values,
   };
 }
 

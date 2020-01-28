@@ -42,7 +42,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const form = useForm<IChangePasswordForm>({
     error,
     initialForm,
-    submitForm: values => dispatch(new authActions.ChoosePassword({ values, token })),
+    submitForm: values => dispatch(new authActions.ChoosePassword({ token, values })),
     validateForm,
   });
 

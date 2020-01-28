@@ -43,8 +43,8 @@ const useTableSort = (
     sortColumn,
     sortDirection,
     sortFunctions: {
-      onChangeSortColumn,
       getSortDirectionForColumn,
+      onChangeSortColumn,
     },
   };
 };

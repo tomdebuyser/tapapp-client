@@ -11,8 +11,8 @@ import RoleForm from '../edit/RoleForm';
 const initialForm: IRoleForm = {
   name: '',
   permissions: {
-    roles: { view: false, edit: false },
-    users: { view: false, edit: false },
+    roles: { edit: false, view: false },
+    users: { edit: false, view: false },
   },
 };
 
