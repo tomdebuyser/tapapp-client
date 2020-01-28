@@ -7,7 +7,7 @@ import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models';
 import { setInObject } from '../../_utils/objectHelpers';
 import './roleForm.scss';
-import { FormValidationErrors } from '../../_hooks/useForm';
+import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
 import { ApiError } from '../../_http';
 
@@ -17,7 +17,7 @@ interface Props {
   initialForm: IRoleForm;
   isSubmitting?: boolean;
   roleId?: string;
-  submitForm: (values: IRoleForm) => void;
+  submitForm: SubmitFormFunction<IRoleForm>;
 }
 
 function validateForm(values: IRoleForm): FormValidationErrors<IRoleForm> {
@@ -36,9 +36,8 @@ function errorAsString(error?: ApiError): string {
 const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   const form = useForm<IRoleForm>({ error, initialForm, submitForm, validateForm });
 
-  const setPermission = (_: FormEvent, data: CheckboxProps) => {
+  const setPermission = (_: FormEvent, data: CheckboxProps) =>
     form.setAttribute(setInObject(form.values.permissions, data.name, data.checked), 'permissions');
-  };
 
   return (
     <form onSubmit={form.submit}>

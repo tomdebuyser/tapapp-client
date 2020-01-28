@@ -7,7 +7,7 @@ import RolesDropdown from '../../roles/edit/RolesDropdown';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { ApiError } from '../../_http';
 import './userForm.scss';
-import { FormValidationErrors } from '../../_hooks/useForm';
+import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
   error?: ApiError;
   initialForm: IUserForm;
   isSubmitting?: boolean;
-  submitForm: (values: IUserForm) => void;
+  submitForm: SubmitFormFunction<IUserForm>;
   userId?: string;
 }
 
