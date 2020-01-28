@@ -54,6 +54,7 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
         isAuthenticateLoading: false,
       };
     case AuthActionType.AuthenticateError:
+    case AuthActionType.LoginError:
       return {
         ...state,
         isLoginLoading: false,

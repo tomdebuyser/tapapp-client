@@ -2,14 +2,22 @@ import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
 import { map, catchError, switchMap, exhaustMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
+import { Action } from 'redux';
 import { authActions } from '../../_store/actions';
-import { HttpStatus } from '../../_http';
+import { HttpStatus, ApiError } from '../../_http';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
+interface GenericErrorAction extends Action {
+  payload?: {
+    error?: ApiError;
+  };
+}
+
 const unauthorizedEpic$: Epic = action$ =>
   action$.pipe(
-    filter(action => action?.payload?.error?.statusCode === HttpStatus.Unauthorized),
+    filter((action: GenericErrorAction) => action.type !== AuthActionType.LoginError),
+    filter((action: GenericErrorAction) => action.payload?.error?.statusCode === HttpStatus.Unauthorized),
     map(() => new authActions.LogoutSuccess()),
   );
 
@@ -18,7 +26,7 @@ const authenticateEpic$: Epic = action$ =>
     exhaustMap(() =>
       from(authApi.authenticate()).pipe(
         map(profile => new authActions.AuthenticateSuccess({ profile })),
-        catchError(() => of(new authActions.AuthenticateError({}))),
+        catchError(error => of(new authActions.AuthenticateError({ error }))),
       ),
     ),
   );
@@ -47,7 +55,7 @@ const loginEpic$: Epic = action$ =>
     exhaustMap(({ payload }: authActions.Login) =>
       from(authApi.login(payload.values)).pipe(
         map(profile => new authActions.AuthenticateSuccess({ pathname: payload.pathname, profile })),
-        catchError(error => of(new authActions.AuthenticateError({ error }))),
+        catchError(error => of(new authActions.LoginError({ error }))),
       ),
     ),
   );
