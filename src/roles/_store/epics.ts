@@ -28,7 +28,7 @@ const createRoleEpic$: Epic = action$ =>
     switchMap(({ payload }: rolesActions.CreateRole) =>
       from(rolesApi.createRole(payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_CREATED'))),
-        map(() => new rolesActions.CreateRoleSuccess()),
+        map(createdRole => new rolesActions.CreateRoleSuccess({ createdRole })),
         catchError(error => of(new rolesActions.CreateRoleError({ error }))),
       ),
     ),

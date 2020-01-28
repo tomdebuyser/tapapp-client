@@ -47,6 +47,7 @@ export class CreateUser implements Action<UsersActionType> {
 
 export class CreateUserSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.CreateUserSuccess;
+  constructor(public payload: { createdUser: IUser }) {}
 }
 
 export class CreateUserError implements Action<UsersActionType> {

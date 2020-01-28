@@ -56,6 +56,7 @@ export default function reducer(state = initialState, action: RolesAction): Role
       return {
         ...state,
         isCreateRoleLoading: false,
+        roles: insertUpdatedData(state.roles || [], [action.payload.createdRole]),
       };
     case RolesActionType.CreateRoleError:
       return {

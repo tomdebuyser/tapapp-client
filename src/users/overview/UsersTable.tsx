@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 import Table, { TableColumn } from '../../_shared/table/Table';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http';
 import { translations } from '../../_translations';
 import { useTableSort, useInfiniteScroll } from '../../_hooks';
 import { usersSelectors } from '../../_store/selectors';
-import { IUser } from '../_models';
+import { IUser, UserState } from '../_models';
 import { labelForUserState } from '../_utils';
 
 interface Props {
@@ -34,8 +35,9 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   useInfiniteScroll((skip: number) => setQuery({ skip }), metadata, isLoading);
 
   function renderRow(user: IUser): JSX.Element {
+    const className = classnames({ 'greyd-out': user.state === UserState.Inactive });
     return (
-      <Table.Row key={user.email}>
+      <Table.Row className={className} key={user.email}>
         <Table.Cell>
           <Link to={{ pathname: `/users/${user.id}` }}>{user.email}</Link>
         </Table.Cell>
