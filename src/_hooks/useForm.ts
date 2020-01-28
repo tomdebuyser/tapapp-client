@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { ApiError } from '../_http';
 import { translations } from '../_translations';
 
@@ -6,10 +6,12 @@ export type FormValidationErrors<T> = {
   [K in keyof T]?: string;
 };
 
+export type SubmitFormFunction<T> = (values: T, setValues: (values: T) => void) => void;
+
 interface Params<T> {
   error?: ApiError;
   initialForm: T;
-  submitForm: (values: T) => void;
+  submitForm: SubmitFormFunction<T>;
   validateForm: (values: T) => FormValidationErrors<T>;
 }
 
@@ -38,17 +40,14 @@ function useForm<T>(params: Params<T>): Response<T> {
     const errors = validateForm(values);
     const hasError = Object.keys(errors || {}).some(key => !!errors[key]);
     if (!hasError) {
-      submitForm(values);
+      submitForm(values, setValues);
     }
     setValidationErrors(errors);
   };
 
-  const setAttribute = useCallback(
-    (value: unknown, name: string) => {
-      setValues({ ...values, [name]: value });
-    },
-    [values],
-  );
+  const setAttribute = (value: unknown, name: string) => setValues({ ...values, [name]: value });
+
+  const clearValues = () => setValues(initialForm);
 
   // Map server errors to form validation errors
   useEffect(() => {
@@ -57,19 +56,15 @@ function useForm<T>(params: Params<T>): Response<T> {
     }
   }, [error]);
 
-  const clearValues = useCallback(() => {
-    setValues(initialForm);
-  }, [initialForm]);
-
   useEffect(() => {
+    setValues(initialForm);
     // Clear all if the component unmounts
     return () => {
       clearValues();
       setValidationErrors({});
     };
-  }, [clearValues]);
-
-  useEffect(() => setValues(initialForm), [initialForm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     values,
