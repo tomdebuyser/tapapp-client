@@ -9,6 +9,7 @@ import UnauthorizedLayout from './_routing/layouts/UnauthorizedLayout';
 import ReduxDelegatedModal from './modal/ReduxDelegatedModal';
 import { authActions } from './_store/actions';
 import { authSelectors } from './_store/selectors';
+import Toastify from './Toastify';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const App: React.FC = () => {
         <Redirect to="/" />
       </Switch>
       <ReduxDelegatedModal />
+      <Toastify />
     </>
   );
 };
