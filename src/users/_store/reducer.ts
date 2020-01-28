@@ -59,6 +59,7 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isCreateUserLoading: false,
+        users: insertUpdatedData(state.users || [], [action.payload.createdUser]),
       };
     case UsersActionType.CreateUserError:
       return {

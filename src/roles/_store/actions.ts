@@ -44,6 +44,7 @@ export class CreateRole implements Action<RolesActionType> {
 
 export class CreateRoleSuccess implements Action<RolesActionType> {
   readonly type = RolesActionType.CreateRoleSuccess;
+  constructor(public payload: { createdRole: IRole }) {}
 }
 
 export class CreateRoleError implements Action<RolesActionType> {
