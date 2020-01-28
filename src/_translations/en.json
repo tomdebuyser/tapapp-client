@@ -27,6 +27,10 @@
       "USER_STATE_NOT_ALLOWED": "This account is not active, hence you cannot login. Contact your administrator.",
       "RESET_TOKEN_INVALID": "The link you are using is invalid.",
       "RESET_TOKEN_EXPIRED": "The link you are using is expired."
+    },
+    "TOASTER": {
+      "CHOOSE_PASSWORD": "You can now login with your new password.",
+      "REQUEST_PASSWORD_RESET": "An email with instructions was sent if it is linked to an account."
     }
   },
   "ROLES": {
@@ -63,6 +67,11 @@
     "ERRORS": {
       "ROLE_IN_USE": "This role is still in use, hence it is not possible to delete it.",
       "ROLE_NAME_ALREADY_IN_USE": "A role with the given name already exists."
+    },
+    "TOASTER": {
+      "ROLE_CREATED": "The role was created successfully.",
+      "ROLE_UPDATED": "Changes saved successfully.",
+      "ROLE_DELETED": "The role was deleted successfully."
     }
   },
   "SHARED": {
@@ -132,6 +141,10 @@
     },
     "ERRORS": {
       "EMAIL_ALREADY_IN_USE": "A user with the given email already exists."
+    },
+    "TOASTER": {
+      "USER_CREATED": "The user was created successfully.",
+      "USER_UPDATED": "Changes saved successfully."
     }
   },
   "ERRORS": {

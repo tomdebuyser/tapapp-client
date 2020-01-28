@@ -1,7 +1,8 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, switchMap, filter } from 'rxjs/operators';
+import { map, tap, catchError, exhaustMap, switchMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
+import { toast } from 'react-toastify';
 import { rolesActions, modalActions } from '../../_store/actions';
 import { rolesSelectors } from '../../_store/selectors';
 import { translations } from '../../_translations';
@@ -26,6 +27,7 @@ const createRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.CreateRole).pipe(
     switchMap(({ payload }: rolesActions.CreateRole) =>
       from(rolesApi.createRole(payload.values)).pipe(
+        tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_CREATED'))),
         map(() => new rolesActions.CreateRoleSuccess()),
         catchError(error => of(new rolesActions.CreateRoleError({ error }))),
       ),
@@ -39,6 +41,7 @@ const updateRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.UpdateRole).pipe(
     exhaustMap(({ payload }: rolesActions.UpdateRole) =>
       from(rolesApi.updateRole(payload.roleId, payload.values)).pipe(
+        tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_UPDATED'))),
         map(updatedRole => new rolesActions.UpdateRoleSuccess({ updatedRole })),
         catchError(error => of(new rolesActions.UpdateRoleError({ error }))),
       ),
@@ -63,6 +66,7 @@ const deleteRoleEpic$: Epic = action$ =>
     filter(({ payload }: rolesActions.DeleteRole) => payload.confirmed),
     exhaustMap(({ payload }: rolesActions.DeleteRole) =>
       from(rolesApi.deleteRole(payload.role.id)).pipe(
+        tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_DELETED'))),
         map(() => new rolesActions.DeleteRoleSuccess({ roleId: payload.role.id })),
         catchError(error => of(new rolesActions.DeleteRoleError({ error }))),
       ),

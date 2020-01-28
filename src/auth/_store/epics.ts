@@ -1,10 +1,12 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, switchMap, exhaustMap, filter } from 'rxjs/operators';
+import { map, tap, catchError, switchMap, exhaustMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { Action } from 'redux';
+import { toast } from 'react-toastify';
 import { authActions } from '../../_store/actions';
 import { HttpStatus, ApiError } from '../../_http';
+import { translations } from '../../_translations';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
@@ -41,6 +43,7 @@ const choosePasswordEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.ChoosePassword).pipe(
     switchMap(({ payload }: authActions.ChoosePassword) =>
       from(authApi.choosePassword(payload.values, payload.token)).pipe(
+        tap(() => toast.success(translations.getLabel('AUTH.TOASTER.CHOOSE_PASSWORD'))),
         map(() => new authActions.ChoosePasswordSuccess()),
         catchError(error => of(new authActions.ChoosePasswordError({ error }))),
       ),
@@ -77,6 +80,7 @@ const requestPasswordResetEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.RequestPasswordReset).pipe(
     exhaustMap(({ payload }: authActions.RequestPasswordReset) =>
       from(authApi.requestPasswordReset(payload.values)).pipe(
+        tap(() => toast.info(translations.getLabel('AUTH.TOASTER.REQUEST_PASSWORD_RESET'))),
         map(() => new authActions.RequestPasswordResetSuccess()),
         catchError(error => of(new authActions.RequestPasswordResetError({ error }))),
       ),

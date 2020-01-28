@@ -1,7 +1,8 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, switchMap, filter } from 'rxjs/operators';
+import { map, tap, catchError, exhaustMap, switchMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
+import { toast } from 'react-toastify';
 import { usersActions, modalActions } from '../../_store/actions';
 import { usersSelectors } from '../../_store/selectors';
 import { translations } from '../../_translations';
@@ -26,6 +27,7 @@ const createUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.CreateUser).pipe(
     switchMap(({ payload }: usersActions.CreateUser) =>
       from(usersApi.createUser(payload.values)).pipe(
+        tap(() => toast.success(translations.getLabel('USERS.TOASTER.USER_CREATED'))),
         map(() => new usersActions.CreateUserSuccess()),
         catchError(error => of(new usersActions.CreateUserError({ error }))),
       ),
@@ -39,6 +41,7 @@ const updateUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.UpdateUser).pipe(
     exhaustMap(({ payload }: usersActions.UpdateUser) =>
       from(usersApi.updateUser(payload.userId, payload.values)).pipe(
+        tap(() => toast.success(translations.getLabel('USERS.TOASTER.USER_UPDATED'))),
         map(updatedUser => new usersActions.UpdateUserSuccess({ updatedUser })),
         catchError(error => of(new usersActions.UpdateUserError({ error }))),
       ),
