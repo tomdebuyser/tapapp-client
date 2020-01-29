@@ -20,9 +20,9 @@ export default function reducer(state = initialState, action: ModalAction): Moda
     case ModalActionType.ShowConfirmationModal:
       return {
         ...state,
+        data: action.payload,
         isOpen: true,
         type: actionTypeToModalType[action.type],
-        data: action.payload,
       };
     case ModalActionType.CloseModal:
       return {

@@ -22,8 +22,8 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
     case AuthActionType.ChoosePassword:
       return {
         ...state,
-        isChoosePasswordLoading: true,
         errorChoosePassword: null,
+        isChoosePasswordLoading: true,
       };
     case AuthActionType.ChoosePasswordSuccess:
       return {
@@ -33,14 +33,14 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
     case AuthActionType.ChoosePasswordError:
       return {
         ...state,
-        isChoosePasswordLoading: false,
         errorChoosePassword: action.payload.error,
+        isChoosePasswordLoading: false,
       };
     case AuthActionType.Login:
       return {
         ...state,
-        isLoginLoading: true,
         errorLogin: null,
+        isLoginLoading: true,
       };
     case AuthActionType.Authenticate:
       return {
@@ -50,40 +50,40 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
     case AuthActionType.AuthenticateSuccess:
       return {
         ...state,
-        isLoginLoading: false,
         isAuthenticateLoading: false,
+        isLoginLoading: false,
       };
     case AuthActionType.AuthenticateError:
     case AuthActionType.LoginError:
       return {
         ...state,
-        isLoginLoading: false,
-        isAuthenticateLoading: false,
         errorLogin: action.payload.error,
+        isAuthenticateLoading: false,
+        isLoginLoading: false,
       };
     case AuthActionType.Logout:
       return {
         ...state,
-        isLogoutLoading: true,
         errorLogout: null,
+        isLogoutLoading: true,
       };
     case AuthActionType.LogoutSuccess:
       return {
         ...state,
-        isLogoutLoading: false,
         isAuthenticateLoading: false,
+        isLogoutLoading: false,
       };
     case AuthActionType.LogoutError:
       return {
         ...state,
-        isLogoutLoading: false,
         errorLogout: action.payload.error,
+        isLogoutLoading: false,
       };
     case AuthActionType.RequestPasswordReset:
       return {
         ...state,
-        isRequestPasswordResetLoading: true,
         errorRequestPasswordReset: null,
+        isRequestPasswordResetLoading: true,
       };
     case AuthActionType.RequestPasswordResetSuccess:
       return {
@@ -93,8 +93,8 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
     case AuthActionType.RequestPasswordResetError:
       return {
         ...state,
-        isRequestPasswordResetLoading: false,
         errorRequestPasswordReset: action.payload.error,
+        isRequestPasswordResetLoading: false,
       };
     default:
       return state;

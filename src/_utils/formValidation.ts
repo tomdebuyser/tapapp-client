@@ -52,11 +52,11 @@ function isNotEmptyArray(array: unknown[]): string {
 }
 
 export const formValidator = {
-  isRequired,
   hasMaxLength,
   hasMinLength,
-  isNumber,
   isEmail,
-  isPassword,
   isNotEmptyArray,
+  isNumber,
+  isPassword,
+  isRequired,
 };

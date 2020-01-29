@@ -15,7 +15,7 @@ describe('CreateUser component', () => {
   it('should create a user', async () => {
     (createUser as jest.Mock).mockImplementation(() => new Promise(resolve => resolve()));
     const dummyUser = userBuilder();
-    (getRoles as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ meta: null, data: dummyUser.roles })));
+    (getRoles as jest.Mock).mockImplementation(() => new Promise(resolve => resolve({ data: dummyUser.roles, meta: null })));
 
     const { getByLabelText, getByText } = render(<CreateUser />);
 

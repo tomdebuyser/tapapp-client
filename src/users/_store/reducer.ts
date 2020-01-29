@@ -24,8 +24,8 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.GetUsers:
       return {
         ...state,
-        isGetUsersLoading: true,
         errorCrudUser: null,
+        isGetUsersLoading: true,
         metadata: null,
       };
     case UsersActionType.GetUsersSuccess: {
@@ -34,15 +34,15 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isGetUsersLoading: false,
-        users: insertUpdatedData(currentData, action.payload.data),
         metadata: action.payload.meta,
+        users: insertUpdatedData(currentData, action.payload.data),
       };
     }
     case UsersActionType.GetUsersError:
       return {
         ...state,
-        isGetUsersLoading: false,
         errorCrudUser: action.payload.error,
+        isGetUsersLoading: false,
       };
     case UsersActionType.SetUsersQuery:
       return {
@@ -52,8 +52,8 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.CreateUser:
       return {
         ...state,
-        isCreateUserLoading: true,
         errorCrudUser: null,
+        isCreateUserLoading: true,
       };
     case UsersActionType.CreateUserSuccess:
       return {
@@ -64,14 +64,14 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.CreateUserError:
       return {
         ...state,
-        isCreateUserLoading: false,
         errorCrudUser: action.payload.error,
+        isCreateUserLoading: false,
       };
     case UsersActionType.UpdateUser:
       return {
         ...state,
-        isUpdateUserLoading: true,
         errorCrudUser: null,
+        isUpdateUserLoading: true,
       };
     case UsersActionType.UpdateUserSuccess:
       return {
@@ -82,14 +82,14 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.UpdateUserError:
       return {
         ...state,
-        isUpdateUserLoading: false,
         errorCrudUser: action.payload.error,
+        isUpdateUserLoading: false,
       };
     case UsersActionType.DeactivateUser:
       return {
         ...state,
-        isDeactivateUserLoading: action.payload.confirmed,
         errorDeactivateUser: null,
+        isDeactivateUserLoading: action.payload.confirmed,
       };
     case UsersActionType.DeactivateUserSuccess:
       return {
@@ -100,14 +100,14 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.DeactivateUserError:
       return {
         ...state,
-        isDeactivateUserLoading: false,
         errorDeactivateUser: action.payload.error,
+        isDeactivateUserLoading: false,
       };
     case UsersActionType.ResendRegisterEmail:
       return {
         ...state,
-        isResendRegisterEmailLoading: true,
         errorCrudUser: null,
+        isResendRegisterEmailLoading: true,
       };
     case UsersActionType.ResendRegisterEmailSuccess:
       return {
@@ -118,8 +118,8 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.ResendRegisterEmailError:
       return {
         ...state,
-        isResendRegisterEmailLoading: false,
         errorDeactivateUser: action.payload.error,
+        isResendRegisterEmailLoading: false,
       };
     default:
       return state;

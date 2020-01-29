@@ -16,17 +16,17 @@ interface Props {
 }
 
 const columns: TableColumn[] = [
-  { name: 'name', label: 'ROLES.NAME', sortable: true },
-  { name: 'createdAt', label: 'ROLES.OVERVIEW.CREATED_AT', sortable: true },
-  { name: 'updatedAt', label: 'ROLES.OVERVIEW.UPDATED_AT', sortable: true },
-  { name: 'permissions', label: 'ROLES.PERMISSIONS.TITLE' },
+  { label: 'ROLES.NAME', name: 'name', sortable: true },
+  { label: 'ROLES.OVERVIEW.CREATED_AT', name: 'createdAt', sortable: true },
+  { label: 'ROLES.OVERVIEW.UPDATED_AT', name: 'updatedAt', sortable: true },
+  { label: 'ROLES.PERMISSIONS.TITLE', name: 'permissions' },
 ];
 
 const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
   const metadata = useSelector(rolesSelectors.metadata);
 
   const { sortFunctions } = useTableSort((column: string, direction: HttpSortDirection) =>
-    setQuery({ sortBy: column, sortDirection: direction, skip: 0 }),
+    setQuery({ skip: 0, sortBy: column, sortDirection: direction }),
   );
   useInfiniteScroll((skip: number) => setQuery({ skip }), metadata, isLoading);
 

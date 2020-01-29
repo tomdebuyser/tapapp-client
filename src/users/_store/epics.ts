@@ -53,10 +53,10 @@ const deactivateUserWithConfirmationEpic$: Epic = action$ =>
     filter(({ payload }: usersActions.DeactivateUser) => !payload.confirmed),
     map(({ payload }: usersActions.DeactivateUser) => {
       return new modalActions.ShowConfirmationModal({
-        title: payload.user.email,
-        content: translations.getLabel('USERS.DEACTIVATE.CONTENT'),
+        confirmAction: () => new usersActions.DeactivateUser({ confirmed: true, user: payload.user }),
         confirmText: translations.getLabel('USERS.DEACTIVATE.CONFIRM'),
-        confirmAction: () => new usersActions.DeactivateUser({ user: payload.user, confirmed: true }),
+        content: translations.getLabel('USERS.DEACTIVATE.CONTENT'),
+        title: payload.user.email,
       });
     }),
   );

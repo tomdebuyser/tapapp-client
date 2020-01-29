@@ -45,8 +45,8 @@ class HttpClient {
 
   static getBasicHeaders(): Headers {
     const headers = {
-      'Content-Type': 'application/json',
       Accept: 'application/json',
+      'Content-Type': 'application/json',
     };
     return headers;
   }
@@ -85,8 +85,8 @@ class HttpClient {
     try {
       return await axios.get<T>(this.getUrlWithParams(route, params), {
         headers: { ...this.getBasicHeaders(), ...headers },
-        withCredentials: true,
         responseType,
+        withCredentials: true,
       });
     } catch (error) {
       throw this.createApiError(error);

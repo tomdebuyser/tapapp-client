@@ -14,8 +14,8 @@ jest.mock('../_store/api');
 const fakeUser = userBuilder();
 const dummyMeta: HttpMetadataPagingResponse = {
   count: 1,
-  totalCount: 1,
   skip: 0,
+  totalCount: 1,
 };
 
 describe('Users component', () => {

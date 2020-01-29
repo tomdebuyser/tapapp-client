@@ -21,8 +21,8 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.GetRoles:
       return {
         ...state,
-        isGetRolesLoading: true,
         errorCrudRoles: null,
+        isGetRolesLoading: true,
         metadata: null,
       };
     case RolesActionType.GetRolesSuccess: {
@@ -31,15 +31,15 @@ export default function reducer(state = initialState, action: RolesAction): Role
       return {
         ...state,
         isGetRolesLoading: false,
-        roles: insertUpdatedData(currentData, action.payload.data),
         metadata: action.payload.meta,
+        roles: insertUpdatedData(currentData, action.payload.data),
       };
     }
     case RolesActionType.GetRolesError:
       return {
         ...state,
-        isGetRolesLoading: false,
         errorCrudRoles: action.payload.error,
+        isGetRolesLoading: false,
       };
     case RolesActionType.SetRolesQuery:
       return {
@@ -49,8 +49,8 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.CreateRole:
       return {
         ...state,
-        isCreateRoleLoading: true,
         errorCrudRoles: null,
+        isCreateRoleLoading: true,
       };
     case RolesActionType.CreateRoleSuccess:
       return {
@@ -61,14 +61,14 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.CreateRoleError:
       return {
         ...state,
-        isCreateRoleLoading: false,
         errorCrudRoles: action.payload.error,
+        isCreateRoleLoading: false,
       };
     case RolesActionType.UpdateRole:
       return {
         ...state,
-        isUpdateRoleLoading: true,
         errorCrudRoles: null,
+        isUpdateRoleLoading: true,
       };
     case RolesActionType.UpdateRoleSuccess:
       return {
@@ -79,14 +79,14 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.UpdateRoleError:
       return {
         ...state,
-        isUpdateRoleLoading: false,
         errorCrudRoles: action.payload.error,
+        isUpdateRoleLoading: false,
       };
     case RolesActionType.DeleteRole:
       return {
         ...state,
-        isDeleteRoleLoading: action.payload.confirmed,
         errorCrudRoles: null,
+        isDeleteRoleLoading: action.payload.confirmed,
       };
     case RolesActionType.DeleteRoleSuccess:
       return {
@@ -97,8 +97,8 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.DeleteRoleError:
       return {
         ...state,
-        isDeleteRoleLoading: false,
         errorCrudRoles: action.payload.error,
+        isDeleteRoleLoading: false,
       };
     default:
       return state;
