@@ -20,11 +20,6 @@ if (needsErrorLogging) {
   });
 }
 
-console.log('config.apiHost()', config.apiHost());
-console.log('config.environment()', config.environment());
-console.log('config.sentryDsn()', config.sentryDsn());
-console.log('config.projectName()', config.projectName());
-
 const store = configureStore();
 
 ReactDOM.render(
