@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { authActions } from '../../_store/actions';
 import { HttpStatus, ApiError } from '../../_http';
 import { translations } from '../../_translations';
+import { UNAUTHORIZES_ROUTES } from '../../_routing/layouts/unauthorized/UnauthorizedLayout';
+import { routerSelectors } from '../../_store/selectors';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
@@ -16,8 +18,9 @@ interface GenericErrorAction extends Action {
   };
 }
 
-const unauthorizedEpic$: Epic = action$ =>
+const unauthorizedEpic$: Epic = (action$, state$) =>
   action$.pipe(
+    filter(() => !UNAUTHORIZES_ROUTES.some(route => routerSelectors.pathname(state$.value).startsWith(route))),
     filter((action: GenericErrorAction) => action.type !== AuthActionType.LoginError),
     filter((action: GenericErrorAction) => action.payload?.error?.statusCode === HttpStatus.Unauthorized),
     map(() => new authActions.LogoutSuccess()),
