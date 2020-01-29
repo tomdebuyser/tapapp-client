@@ -1,8 +1,9 @@
 import I18n from 'i18n-js';
+import { config } from '../config';
 import en from './en.json';
 
 const getLabel = (key: string, inserts = {}): string => {
-  if (process.env.REACT_APP_ENV !== 'production' && I18n.t(key, inserts) === '') {
+  if (config.environment() !== 'production' && I18n.t(key, inserts) === '') {
     return `[[${key}]]`;
   }
   return I18n.t(key, inserts);

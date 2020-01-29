@@ -1,8 +1,7 @@
 import axios, { AxiosError, ResponseType, AxiosResponse } from 'axios';
+import { config } from '../config';
 import { HttpStatus } from './HttpStatus';
 import { ApiError, ValidationError } from './HttpError';
-
-const apiRootUrl: string | undefined = process.env.REACT_APP_API_HOST;
 
 type Params = Record<string, string | number | boolean | null | undefined>;
 type Headers = Record<string, string>;
@@ -12,7 +11,7 @@ class HttpClient {
     if (route.indexOf('http://') === 0 || route.indexOf('https://') === 0 || route.indexOf('www.') === 0) {
       return route;
     }
-    return `${apiRootUrl}${route}`;
+    return `${config.apiHost()}${route}`;
   }
 
   static getUrlWithParams(route: string, params: Params): string {
