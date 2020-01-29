@@ -12,7 +12,7 @@
 --------------------*/
 @pageBackground: white;
 @textColor: #47525A;
-@placeholderColorInput: #333f4859;
+@placeholderColorInput: #b8bcbf;
 @disabledOpacity: 1;
 
 /*-------------------
