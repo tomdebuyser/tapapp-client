@@ -1,4 +1,4 @@
-@import '../../_styles/colors';
+@import '../../../../_styles/colors';
 
 $HEIGHT: 6.5rem;
 
@@ -17,8 +17,11 @@ $HEIGHT: 6.5rem;
   padding: 0 2rem;
   color: $white;
 
-  img {
-    height: 4rem;
+  a.logo {
+    display: inline-flex;
+    svg {
+      height: 4rem;
+    }
   }
 
   nav {
