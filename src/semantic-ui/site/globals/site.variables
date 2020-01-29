@@ -3,9 +3,11 @@
 *******************************/
 @heightInput: 4rem;
 @borderRadiusDefault: 8px;
+
 /*-------------------
-      Site Colors
+    Brand Colors
 --------------------*/
+@primaryColor: #002548;
 
 /*-------------------
         Page
@@ -31,10 +33,6 @@
 /* The size of page text  */
 @fontSize: 1.6*@remSize;
 
-/*-------------------
-    Brand Colors
---------------------*/
-@primaryColor: #002548;
 /*-------------------
         Sizes
 --------------------*/
