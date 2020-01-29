@@ -1,23 +1,23 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import slash from '../../_assets/images/slash-white.png';
-import { translations } from '../../_translations';
-import { authActions } from '../../_store/actions';
-import { profileSelectors } from '../../_store/selectors';
-import { hasUsersPermissions, hasRolesPermissions } from '../../profile/_utils';
-import { Icon } from '..';
-import './menu.scss';
+import { translations } from '../../../../_translations';
+import { authActions } from '../../../../_store/actions';
+import { profileSelectors } from '../../../../_store/selectors';
+import { hasUsersPermissions, hasRolesPermissions } from '../../../../profile/_utils';
+import { SvgLogo } from '../../../../_assets/svg';
+import { Icon } from '../../../../_shared';
+import './authorizedLayoutMenu.scss';
 
-const Menu: FC = () => {
+const AuthorizedLayoutMenu: FC = () => {
   const dispatch = useDispatch();
   const profile = useSelector(profileSelectors.profile);
   const permissions = useSelector(profileSelectors.permissions);
 
   return (
     <header className="main-menu">
-      <NavLink to="/">
-        <img alt="Silvernext" src={slash} />
+      <NavLink className="logo" to="/">
+        <SvgLogo />
       </NavLink>
       <nav>
         <div>
@@ -39,4 +39,4 @@ const Menu: FC = () => {
   );
 };
 
-export default Menu;
+export default AuthorizedLayoutMenu;

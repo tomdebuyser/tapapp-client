@@ -1,4 +1,4 @@
-@import '../../_styles/colors';
+@import '../../../_styles/colors';
 
 $WIDTH: 30rem;
 
@@ -21,9 +21,8 @@ $WIDTH: 30rem;
       width: 100%;
     }
 
-    img {
-      width: 8rem;
-      height: 8rem;
+    svg {
+      max-height: 10rem;
     }
 
     span {
@@ -32,7 +31,6 @@ $WIDTH: 30rem;
       text-transform: uppercase;
       color: white;
       font-size: 2rem;
-      font-weight: bold;
       letter-spacing: 0.5rem;
     }
   }
