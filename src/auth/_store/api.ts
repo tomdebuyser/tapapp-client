@@ -2,8 +2,8 @@ import { IChangePasswordForm, ILoginForm, IRequestPasswordResetForm } from '../_
 import { HttpClient } from '../../_http';
 import { IProfile } from '../../profile/_models';
 
-export function choosePassword(body: IChangePasswordForm, token: string): Promise<void> {
-  return HttpClient.post('auth/reset-password', { ...body, token });
+export function choosePassword(body: IChangePasswordForm, resetToken: string): Promise<void> {
+  return HttpClient.post('auth/reset-password', { ...body, resetToken });
 }
 
 export function login(body: ILoginForm): Promise<IProfile> {

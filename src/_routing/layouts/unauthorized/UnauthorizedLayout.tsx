@@ -3,6 +3,9 @@ import { Switch, Redirect, Route, NavLink } from 'react-router-dom';
 import Auth from '../../../auth/Auth';
 import './unauthorizedLayout.scss';
 import { SvgLogo } from '../../../_assets/svg';
+import { translations } from '../../../_translations';
+
+export const UNAUTHORIZES_ROUTES = ['/auth'];
 
 const UnauthorizedLayout: React.FC = () => {
   return (
@@ -10,7 +13,7 @@ const UnauthorizedLayout: React.FC = () => {
       <aside>
         <NavLink to="/">
           <SvgLogo />
-          <span>Admin portal</span>
+          <span>{translations.getLabel('AUTH.SIDEBAR_TITLE')}</span>
         </NavLink>
       </aside>
       <Switch>

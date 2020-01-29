@@ -1,5 +1,6 @@
 {
   "AUTH": {
+    "SIDEBAR_TITLE": "Admin portal",
     "LOGIN": {
       "FORGOT_PASSWORD": "Forgot your password?",
       "LOGIN": "Login",

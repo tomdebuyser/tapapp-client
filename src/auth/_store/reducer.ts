@@ -42,6 +42,12 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
         errorLogin: null,
         isLoginLoading: true,
       };
+    case AuthActionType.LoginError:
+      return {
+        ...state,
+        errorLogin: action.payload.error,
+        isLoginLoading: false,
+      };
     case AuthActionType.Authenticate:
       return {
         ...state,
@@ -51,15 +57,11 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
       return {
         ...state,
         isAuthenticateLoading: false,
-        isLoginLoading: false,
       };
     case AuthActionType.AuthenticateError:
-    case AuthActionType.LoginError:
       return {
         ...state,
-        errorLogin: action.payload.error,
         isAuthenticateLoading: false,
-        isLoginLoading: false,
       };
     case AuthActionType.Logout:
       return {
