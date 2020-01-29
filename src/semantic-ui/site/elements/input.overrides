@@ -6,7 +6,7 @@
   min-width: 30rem;
 
   input::placeholder {
-    color: #333f4833;
+    color: #b8bcbf;
   }
 }
 
