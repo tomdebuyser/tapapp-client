@@ -25,10 +25,6 @@ function sentryDsn(): string {
   return process.env.REACT_APP_SENTRY_DSN as string;
 }
 
-function projectName(): string {
-  return process.env.REACT_APP_PROJECT_NAME as string;
-}
-
-const config = { apiHost, brandName, environment, projectName, sentryDsn };
+const config = { apiHost, brandName, environment, sentryDsn };
 
 export { config };
