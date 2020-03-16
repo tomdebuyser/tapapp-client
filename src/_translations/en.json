@@ -87,7 +87,9 @@
     },
     "SEARCH_PLACEHOLDER": "Search...",
     "DETAIL": {
+      "CREATED_AT": "Created at {{date}}",
       "CREATED_AT_BY": "Created at {{date}} by {{name}}",
+      "UPDATED_AT": "Last updated at {{date}}",
       "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}"
     }
   },
