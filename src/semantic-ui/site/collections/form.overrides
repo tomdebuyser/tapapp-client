@@ -1,3 +1,38 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.form textarea.error {
+    background-color: #FFF6F6;
+    border-color: #E0B4B4;
+    color: #9F3A38;
+    box-shadow: none;
+}
+
+.ui.form > textarea::-webkit-input-placeholder {
+  color: @placeholderColorInput;
+}
+.ui.form > textarea::-moz-placeholder {
+  color: @placeholderColorInput;
+}
+.ui.form > textarea:-ms-input-placeholder {
+  color: @placeholderColorInput;
+}
+.ui.form > textarea.error::-webkit-input-placeholder {
+  color: @placeholderColorInputError;
+}
+.ui.form > textarea.error::-moz-placeholder {
+  color: @placeholderColorInputError;
+}
+.ui.form > textarea.error:-ms-input-placeholder {
+  color: @placeholderColorInputError;
+}
+.ui.form > textarea.error:focus::-webkit-input-placeholder {
+  color: @placeholderColorInputErrorFocus;
+}
+.ui.form > textarea.error:focus::-moz-placeholder {
+  color: @placeholderColorInputErrorFocus;
+}
+.ui.form > textarea.error:focus:-ms-input-placeholder {
+  color: @placeholderColorInputErrorFocus;
+}

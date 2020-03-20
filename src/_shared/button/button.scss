@@ -1,8 +1,72 @@
 @import '../../_styles/colors';
 @import '../../_styles/constants';
 
-.semantic-button-content {
-  :not(:first-child) {
+$padding: 1.1rem 2.4rem;
+
+.ui.button {
+  padding: $padding;
+}
+
+button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  > :not(:first-child) {
     margin-left: 0.8rem;
+  }
+}
+
+@mixin setColorTo($color) {
+  color: $color;
+  &:hover,
+  &:focus {
+    outline: transparent;
+    color: darkenOnHover($color);
+  }
+}
+
+button.as-text {
+  padding: $padding;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+  font-family: $font-family;
+  white-space: nowrap;
+
+  @include setColorTo($grey);
+  &.primary {
+    @include setColorTo($primary-color);
+  }
+  &.negative {
+    @include setColorTo($red);
+  }
+
+  &.loading {
+    color: transparent;
+    &:hover,
+    &:focus {
+      color: transparent;
+    }
+
+    .loader-wrapper {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0;
+    }
   }
 }

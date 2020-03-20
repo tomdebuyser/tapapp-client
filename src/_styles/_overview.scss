@@ -7,5 +7,13 @@ main {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    .header-group {
+      display: flex;
+
+      > :not(:first-child) {
+        margin-left: 2.5rem;
+      }
+    }
   }
 }

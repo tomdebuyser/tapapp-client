@@ -27,7 +27,7 @@ const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clic
   return (
     <button
       aria-label={label}
-      className="icon-button"
+      className="plain"
       disabled={disabled}
       id={id}
       onClick={value => onClick && onClick(value)}
@@ -41,6 +41,7 @@ const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clic
 
 Icon.defaultProps = {
   className: '',
+  size: 1.8,
 };
 
 export default Icon;

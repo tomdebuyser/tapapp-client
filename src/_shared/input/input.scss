@@ -1,0 +1,34 @@
+@import '../../_styles/colors';
+
+$icon-height: 2.4rem;
+$label-bottom-margin: 0.5rem;
+
+.input-wrapper {
+  label:not(:last-child) {
+    display: flex;
+    align-items: center;
+    height: $icon-height;
+    margin-bottom: $label-bottom-margin;
+    font-size: 1.4rem;
+    color: $grey-dark;
+
+    :not(:first-child) {
+      margin-left: 0.75rem;
+    }
+
+    i,
+    svg {
+      width: $icon-height;
+      height: $icon-height;
+    }
+  }
+
+  .error-message {
+    padding-top: 1rem;
+  }
+}
+
+.ui.input,
+.ui.selection.dropdown {
+  min-width: 100%;
+}

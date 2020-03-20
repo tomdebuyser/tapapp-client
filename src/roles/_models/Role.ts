@@ -1,9 +1,11 @@
 export interface IRole {
   createdAt: string;
+  createdBy: string;
   id: string;
   name: string;
   permissions: IPermissions;
   updatedAt: string;
+  updatedBy: string;
 }
 
 export interface IPermissions {

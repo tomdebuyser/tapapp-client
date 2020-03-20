@@ -25,11 +25,7 @@ const CreateRole: FC = () => {
     <Container as="main" className="left-container">
       <h1>{translations.getLabel('ROLES.CREATE.TITLE')}</h1>
       <RoleForm
-        buttons={
-          <Button href="/roles" isTextLink>
-            {translations.getLabel('SHARED.BUTTONS.CANCEL')}
-          </Button>
-        }
+        buttons={<Button href="/roles">{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>}
         error={error}
         initialForm={initialForm}
         isSubmitting={isSubmitting}

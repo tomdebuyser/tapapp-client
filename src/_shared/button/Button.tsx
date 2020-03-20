@@ -1,13 +1,15 @@
 import React, { FC, ReactNode } from 'react';
-import { Button as SemanticButton } from 'semantic-ui-react';
+import { Button as SemanticButton, ButtonProps, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 import './button.scss';
 
 interface Props {
+  asText?: boolean;
   children: ReactNode;
+  className?: string;
   disabled?: boolean;
   href?: string;
-  isTextLink?: boolean;
   loading?: boolean;
   negative?: boolean;
   onClick?: () => void;
@@ -18,31 +20,49 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
-const Button: FC<Props> = ({ type, isTextLink, primary, children, onClick = noop, disabled, loading, href, negative }) => {
-  if (isTextLink) {
+const Button: FC<Props> = ({ asText, className, children, onClick = noop, disabled, loading, href, type, primary, negative }) => {
+  const isDisabled = disabled || loading;
+
+  function renderSemanticButton(extraProps: ButtonProps) {
+    if (asText) {
+      const props: Record<string, unknown> = {};
+      if (extraProps.type) props.type = extraProps.type;
+      if (extraProps.onClick) props.onClick = extraProps.onClick;
+      return (
+        <button {...props} className={classnames('as-text', className, { loading, negative, primary })} disabled={isDisabled}>
+          <div className="button-inner">
+            {children}
+            {loading && (
+              <div className="loader-wrapper">
+                <Loader active inline />
+              </div>
+            )}
+          </div>
+        </button>
+      );
+    }
     return (
-      <Link to={href}>
-        <SemanticButton as="span" disabled={disabled || loading} loading={loading} primary={primary}>
-          {children}
-        </SemanticButton>
-      </Link>
+      <SemanticButton
+        {...extraProps}
+        className={className}
+        disabled={isDisabled}
+        loading={loading}
+        negative={negative}
+        primary={primary}
+      >
+        <div className="button-inner">{children}</div>
+      </SemanticButton>
     );
   }
-  return (
-    <SemanticButton
-      disabled={disabled || loading}
-      loading={loading}
-      negative={negative}
-      onClick={onClick}
-      primary={primary}
-      type={type}
-    >
-      {children}
-    </SemanticButton>
-  );
+
+  if (href) {
+    return <Link to={href}>{renderSemanticButton({ as: 'span' })}</Link>;
+  }
+  return renderSemanticButton({ onClick, type });
 };
 
 Button.defaultProps = {
+  className: '',
   type: 'button',
 };
 

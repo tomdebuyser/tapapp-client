@@ -1,11 +1,12 @@
 import Button from './button/Button';
-import Dropdown from './dropdown/Dropdown';
+import Datepicker from './datepicker/Datepicker';
 import GoBackLink from './goBackLink/GoBackLink';
 import Icon from './icon/Icon';
-import InputField from './inputField/InputField';
 import Modal from './modal/Modal';
-import SearchInput from './searchInput/SearchInput';
+import SearchInput from './input/searchInput/SearchInput';
+import SegmentedControl from './segmentedControl/SegmentedControl';
 import Table from './table/Table';
 import Timestamps from './timestamps/Timestamps';
+export * from './input';
 
-export { Icon, InputField, Modal, Table, Button, SearchInput, Dropdown, GoBackLink, Timestamps };
+export { Icon, Modal, Table, Button, SearchInput, GoBackLink, Timestamps, SegmentedControl, Datepicker };

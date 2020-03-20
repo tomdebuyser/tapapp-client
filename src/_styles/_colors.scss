@@ -12,3 +12,7 @@ $green: #24c289;
 $orange: #ed8f21;
 $orange: orange;
 $white: #ffffff;
+
+@function darkenOnHover($color) {
+  @return darken($color, 15%);
+}

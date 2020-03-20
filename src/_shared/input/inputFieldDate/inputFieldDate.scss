@@ -1,0 +1,25 @@
+@import '../../../_styles/constants';
+@import '../input';
+
+.input-date-wrapper {
+  position: relative;
+  .ui.input > input {
+    padding-right: 4rem;
+  }
+
+  .datepicker-icon {
+    position: absolute;
+    right: 1rem;
+    height: $input-height;
+
+    & > * {
+      color: $primary-color;
+    }
+  }
+
+  &.has-label {
+    .datepicker-icon {
+      top: calc(#{$icon-height} + #{$label-bottom-margin});
+    }
+  }
+}

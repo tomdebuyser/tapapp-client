@@ -1,8 +1,8 @@
 import React, { FC, ChangeEvent } from 'react';
 import { Dropdown as SemanticDropdown, InputOnChangeData } from 'semantic-ui-react';
-import { useInputError } from '../../_hooks';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import './dropdown.scss';
+import { useInputError } from '../../../_hooks';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
+import '../input.scss';
 
 export interface DropdownOption {
   key?: string;
@@ -11,7 +11,6 @@ export interface DropdownOption {
 }
 
 interface Props {
-  error?: boolean;
   errorMessage?: string;
   label: string;
   multiple?: boolean;
@@ -26,7 +25,7 @@ const Dropdown: FC<Props> = ({ name, label, normalize, onChange, errorMessage, o
   const { showError, setDirty } = useInputError(errorMessage);
 
   return (
-    <div className="dropdown-wrapper">
+    <div className="input-wrapper">
       <label htmlFor={name}>{label}</label>
       <SemanticDropdown
         error={showError}
