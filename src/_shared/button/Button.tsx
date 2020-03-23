@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, BaseSyntheticEvent } from 'react';
 import { Button as SemanticButton, ButtonProps, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
@@ -12,7 +12,7 @@ interface Props {
   href?: string;
   loading?: boolean;
   negative?: boolean;
-  onClick?: () => void;
+  onClick?: (event?: BaseSyntheticEvent) => void;
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
 }
