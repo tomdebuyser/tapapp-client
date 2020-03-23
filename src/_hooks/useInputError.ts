@@ -15,6 +15,6 @@ export default function useInputError(message: string): Response {
 
   return {
     setDirty: () => setIsDirty(true),
-    showError: message && !isDirty,
+    showError: !!message && !isDirty,
   };
 }

@@ -79,6 +79,7 @@
     "BUTTONS": {
       "CANCEL": "Cancel",
       "CREATE": "Create",
+      "DELETE": "Delete",
       "SAVE": "Save changes"
     },
     "DETAIL": {
@@ -86,6 +87,10 @@
       "CREATED_AT_BY": "Created at {{date}} by {{name}}",
       "UPDATED_AT": "Last updated at {{date}}",
       "UPDATED_AT_BY": "Last updated at {{date}} by {{name}}"
+    },
+    "FILE_UPLOAD": {
+      "TITLE": "Drop your file(s) here, or click to browse on your computer",
+      "REQUIREMENTS": "Allowed extensions: {{extensions}} - Maximum size: {{size}}"
     },
     "NAVIGATION": {
       "ROLES": "Roles",

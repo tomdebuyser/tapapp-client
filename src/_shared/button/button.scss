@@ -2,6 +2,7 @@
 @import '../../_styles/constants';
 
 $padding: 1.1rem 2.4rem;
+$icon-height: 2rem;
 
 .ui.button {
   padding: $padding;
@@ -20,6 +21,12 @@ button:disabled {
 
   > :not(:first-child) {
     margin-left: 0.8rem;
+  }
+
+  i,
+  svg {
+    width: $icon-height;
+    height: $icon-height;
   }
 }
 

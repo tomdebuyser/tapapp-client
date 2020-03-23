@@ -2,7 +2,7 @@ import React, { useEffect, FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { translations } from '../../_translations';
-import { Icon, Button, SearchInput } from '../../_shared';
+import { Icon, Button, SearchField } from '../../_shared';
 import { rolesSelectors, profileSelectors } from '../../_store/selectors';
 import { rolesActions } from '../../_store/actions';
 import { HttpMetadataQuery, FillMetadataQueryFunction } from '../../_http';
@@ -27,7 +27,7 @@ const RolesOverview: FC = () => {
   return (
     <Container as="main" className="roles">
       <div className="header">
-        <SearchInput query={query} setQuery={setQuery} />
+        <SearchField query={query} setQuery={setQuery} />
         {permissions?.roles.edit && (
           <Button href="/roles/create" primary>
             <Icon name="SvgAdd" />

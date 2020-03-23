@@ -4,7 +4,7 @@
 
 .ui.form textarea.error {
     background-color: #FFF6F6;
-    border-color: #E0B4B4;
+    border-color: @errorColor;
     color: #9F3A38;
     box-shadow: none;
 }

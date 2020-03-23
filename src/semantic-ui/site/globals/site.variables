@@ -18,7 +18,8 @@
 @placeholderColorInput: #b8bcbf;
 @placeholderColorInputError: #E7BDBC;
 @placeholderColorInputErrorFocus: #DA9796;
-@disabledOpacity: 1;
+@disabledOpacity: 0.75;
+@errorColor: #E0B4B4;
 
 /*-------------------
        Fonts

@@ -1,18 +1,10 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import { TextArea as SemanticTextArea, TextAreaProps } from 'semantic-ui-react';
 import classnames from 'classnames';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
-import Icon from '../../icon/Icon';
+import BaseInput, { BaseInputProps } from '../Input';
 import { useInputError } from '../../../_hooks';
-import '../input.scss';
 
-export interface Props {
-  className?: string;
-  disabled?: boolean;
-  errorMessage?: string;
-  label?: string;
-  labelIcon?: string;
-  name?: string;
+export interface Props extends BaseInputProps {
   normalize?: (value: string) => string;
   onChange?: (value: string, name: string) => void;
   placeholder?: string;
@@ -20,33 +12,29 @@ export interface Props {
   value?: string;
 }
 
-const TextArea: FC<Props> = ({ className, label, labelIcon, errorMessage, onChange, normalize, ...props }) => {
-  const { showError, setDirty } = useInputError(errorMessage);
+const TextArea: FC<Props> = ({ normalize, onChange, placeholder, rows, value, ...baseProps }) => {
+  const { errorMessage, name } = baseProps;
+  const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <div className={classnames('ui form input-wrapper', className)}>
-      {!!label && (
-        <label htmlFor={props.name}>
-          {!!labelIcon && <Icon name={labelIcon} />}
-          <span>{label}</span>
-        </label>
-      )}
+    <BaseInput {...baseProps} className={classnames('ui form', baseProps.className)} showError={showError}>
       <SemanticTextArea
-        {...props}
         className={classnames({ error: showError })}
-        onChange={(_: ChangeEvent<HTMLTextAreaElement>, data: TextAreaProps) => {
-          const normalizedValue = normalize(data?.value as string);
-          onChange(normalizedValue, data?.name);
+        onChange={(_, data: TextAreaProps) => {
+          console.log('dsfdss');
+          const normalizedValue = normalize(data.value as string);
+          onChange(normalizedValue, name);
           setDirty();
         }}
+        placeholder={placeholder}
+        rows={rows}
+        value={value}
       />
-      <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>
-    </div>
+    </BaseInput>
   );
 };
 
 TextArea.defaultProps = {
-  className: '',
   normalize: (value: string) => value,
   rows: 5,
 };

@@ -17,10 +17,7 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {};
-
-const Button: FC<Props> = ({ asText, className, children, onClick = noop, disabled, loading, href, type, primary, negative }) => {
+const Button: FC<Props> = ({ asText, className, children, onClick, disabled, loading, href, type, primary, negative }) => {
   const isDisabled = disabled || loading;
 
   function renderSemanticButton(extraProps: ButtonProps) {
@@ -63,6 +60,7 @@ const Button: FC<Props> = ({ asText, className, children, onClick = noop, disabl
 
 Button.defaultProps = {
   className: '',
+  onClick: () => {},
   type: 'button',
 };
 

@@ -11,7 +11,7 @@
 }
 
 .ui.disabled.input {
-  opacity: 0.8;
+  opacity: @disabledOpacity;
   
   > input {
     background: #eee;
