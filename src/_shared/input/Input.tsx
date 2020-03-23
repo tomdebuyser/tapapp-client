@@ -11,7 +11,7 @@ import './input.scss';
  *  - Show whether a field is required
  */
 
-export interface BaseInputProps {
+export interface InputWrapperProps {
   className?: string;
   disabled?: boolean;
   errorMessage?: string;
@@ -21,7 +21,7 @@ export interface BaseInputProps {
   required?: boolean;
 }
 
-const BaseInput: FC<BaseInputProps & { children: ReactNode; showError?: boolean }> = ({
+const InputWrapper: FC<InputWrapperProps & { children: ReactNode; showError?: boolean }> = ({
   children,
   className,
   disabled,
@@ -44,8 +44,8 @@ const BaseInput: FC<BaseInputProps & { children: ReactNode; showError?: boolean 
   </div>
 );
 
-BaseInput.defaultProps = {
+InputWrapper.defaultProps = {
   className: '',
 };
 
-export default BaseInput;
+export default InputWrapper;

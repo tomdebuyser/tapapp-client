@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Dropdown as SemanticDropdown, InputOnChangeData } from 'semantic-ui-react';
-import BaseInput, { BaseInputProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../Input';
 import { useInputError } from '../../../_hooks';
 
 export interface DropdownOption {
@@ -9,7 +9,7 @@ export interface DropdownOption {
   value: string;
 }
 
-interface Props extends BaseInputProps {
+interface Props extends InputWrapperProps {
   multiple?: boolean;
   normalize?: (value: string) => string;
   onChange: (value: string | string[], name: string) => void;
@@ -18,12 +18,12 @@ interface Props extends BaseInputProps {
   value: string | string[];
 }
 
-const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placeholder, value, ...baseProps }) => {
-  const { disabled, errorMessage, name } = baseProps;
+const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placeholder, value, ...wrapperProps }) => {
+  const { disabled, errorMessage, name } = wrapperProps;
   const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <BaseInput {...baseProps} showError={showError}>
+    <InputWrapper {...wrapperProps} showError={showError}>
       <SemanticDropdown
         disabled={disabled}
         error={showError}
@@ -39,7 +39,7 @@ const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placehold
         selection
         value={value}
       />
-    </BaseInput>
+    </InputWrapper>
   );
 };
 

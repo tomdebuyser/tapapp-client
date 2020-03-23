@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Checkbox as SemanticCheckbox, CheckboxProps } from 'semantic-ui-react';
 import classnames from 'classnames';
-import BaseInput, { BaseInputProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../Input';
 import { useInputError } from '../../../_hooks';
 
-export interface InputCheckboxProps extends BaseInputProps {
+export interface InputCheckboxProps extends InputWrapperProps {
   checked?: boolean;
   label?: string;
   onChange: (checked: boolean, name: string) => void;
@@ -13,12 +13,12 @@ export interface InputCheckboxProps extends BaseInputProps {
   type?: 'checkbox' | 'radio';
 }
 
-const Checkbox: FC<InputCheckboxProps> = ({ checked, label, onChange, radio, toggle, type, ...baseProps }) => {
-  const { disabled, errorMessage, name } = baseProps;
+const Checkbox: FC<InputCheckboxProps> = ({ checked, label, onChange, radio, toggle, type, ...wrapperProps }) => {
+  const { disabled, errorMessage, name } = wrapperProps;
   const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <BaseInput {...baseProps} showError={showError}>
+    <InputWrapper {...wrapperProps} showError={showError}>
       <SemanticCheckbox
         checked={checked}
         className={classnames({ error: showError })}
@@ -33,7 +33,7 @@ const Checkbox: FC<InputCheckboxProps> = ({ checked, label, onChange, radio, tog
         toggle={toggle}
         type={type}
       />
-    </BaseInput>
+    </InputWrapper>
   );
 };
 

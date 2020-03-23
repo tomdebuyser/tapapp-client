@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Input, InputOnChangeData } from 'semantic-ui-react';
-import BaseInput, { BaseInputProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../Input';
 import { useInputError } from '../../../_hooks';
 
-export interface InputFieldProps extends BaseInputProps {
+export interface InputFieldProps extends InputWrapperProps {
   autoComplete?: string;
   autoFocus?: boolean;
   icon?: string;
@@ -23,13 +23,13 @@ const InputField: FC<InputFieldProps> = ({
   placeholder,
   type,
   value,
-  ...baseProps
+  ...wrapperProps
 }) => {
-  const { disabled, errorMessage, name } = baseProps;
+  const { disabled, errorMessage, name } = wrapperProps;
   const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <BaseInput {...baseProps} showError={showError}>
+    <InputWrapper {...wrapperProps} showError={showError}>
       <Input
         autoComplete={autoComplete}
         autoFocus={autoFocus}
@@ -46,7 +46,7 @@ const InputField: FC<InputFieldProps> = ({
         type={type}
         value={value}
       />
-    </BaseInput>
+    </InputWrapper>
   );
 };
 

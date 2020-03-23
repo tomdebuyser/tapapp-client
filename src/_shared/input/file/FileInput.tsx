@@ -6,7 +6,7 @@ import Button from '../../button/Button';
 import Icon from '../../icon/Icon';
 import { translations } from '../../../_translations';
 import { useToggle, useInputError } from '../../../_hooks';
-import BaseInput, { BaseInputProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../Input';
 
 const MB_MULTIPLIER = 1000000;
 
@@ -29,7 +29,7 @@ const requirements: Record<FileInputType, { accept?: string[]; extensions: strin
   // All mime types here: https://www.iana.org/assignments/media-types/media-types.xhtml
 };
 
-interface Props extends BaseInputProps {
+interface Props extends InputWrapperProps {
   maxAmountOfFiles?: number;
   onChange: (files: File[], name: string) => void;
   type: FileInputType;
@@ -40,8 +40,8 @@ function formatSize(size: number): string {
   return `${(size / MB_MULTIPLIER).toFixed(1)} MB`;
 }
 
-const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...baseProps }) => {
-  const { disabled, errorMessage, name } = baseProps;
+const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...wrapperProps }) => {
+  const { disabled, errorMessage, name } = wrapperProps;
   const { setDirty, showError } = useInputError(errorMessage);
   const [isDropping, setIsDropping] = useToggle(false);
   const [isError, setIsError] = useToggle(false);
@@ -107,7 +107,7 @@ const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...base
   }
 
   return (
-    <BaseInput {...baseProps} showError={showError}>
+    <InputWrapper {...wrapperProps} showError={showError}>
       <div
         {...getRootProps({
           className: classnames('dropzone', { active: isDropping, disabled: isDisabled, error: isError }),
@@ -121,7 +121,7 @@ const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...base
         )}
         {value.map(renderPreview)}
       </div>
-    </BaseInput>
+    </InputWrapper>
   );
 };
 
