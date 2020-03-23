@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 import Icon from '../icon/Icon';
+import Button from '../button/Button';
 import './goBackLink.scss';
 
 interface Props {
@@ -10,10 +10,10 @@ interface Props {
 
 const GoBackLink: FC<Props> = ({ label, to }) => {
   return (
-    <Link className="go-back" to={to}>
+    <Button asText className="go-back" href={to} primary>
       <Icon name="SvgChevronLeft" size={2} />
       <span>{label}</span>
-    </Link>
+    </Button>
   );
 };
 

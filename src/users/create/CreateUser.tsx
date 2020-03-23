@@ -24,11 +24,7 @@ const CreateUser: FC = () => {
     <Container as="main" className="left-container">
       <h1>{translations.getLabel('USERS.CREATE.TITLE')}</h1>
       <UserForm
-        buttons={
-          <Button href="/users" isTextLink>
-            {translations.getLabel('SHARED.BUTTONS.CANCEL')}
-          </Button>
-        }
+        buttons={<Button href="/users">{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>}
         error={error}
         initialForm={initialForm}
         isSubmitting={isSubmitting}

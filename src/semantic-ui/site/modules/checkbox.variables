@@ -1,3 +1,16 @@
 /*******************************
     User Variable Overrides
 *******************************/
+
+@checkboxPressedColor: @primaryColor;
+@checkboxFocusCheckColor: @primaryColor;
+@checkboxActiveCheckColor: @primaryColor;
+@checkboxActiveFocusCheckColor: @primaryColor;
+@checkboxIndeterminateCheckColor: @primaryColor;
+
+@checkboxHoverBorderColor: @primaryColor;
+@checkboxPressedBorderColor: @primaryColor;
+@checkboxFocusBorderColor: @primaryColor;
+@checkboxActiveBorderColor: @primaryColor;
+@checkboxActiveFocusBorderColor: @primaryColor;
+@checkboxIndeterminateBorderColor: @primaryColor;

@@ -1,8 +1,7 @@
-import React, { FormEvent, FC } from 'react';
-import { Checkbox, CheckboxProps } from 'semantic-ui-react';
+import React, { FC } from 'react';
 import { translations } from '../../_translations';
 import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
-import { Button, InputField } from '../../_shared';
+import { Button, InputField, Checkbox } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models';
 import { setInObject } from '../../_utils/objectHelpers';
@@ -36,9 +35,6 @@ function errorAsString(error?: ApiError): string {
 const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   const form = useForm<IRoleForm>({ error, initialForm, submitForm, validateForm });
 
-  const setPermission = (_: FormEvent, data: CheckboxProps) =>
-    form.setAttribute(setInObject(form.values.permissions, data.name, data.checked), 'permissions');
-
   return (
     <form onSubmit={form.submit}>
       <div role="group">
@@ -63,11 +59,12 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
                 return (
                   <Checkbox
                     checked={form.values.permissions[permission][option]}
-                    id={optionName}
                     key={optionName}
                     label={translations.getLabel(`ROLES.PERMISSIONS.RIGHTS.${option.toUpperCase()}`)}
                     name={optionName}
-                    onChange={setPermission}
+                    onChange={(checked: boolean, name: string) =>
+                      form.setAttribute(setInObject(form.values.permissions, name, checked), 'permissions')
+                    }
                   />
                 );
               })}

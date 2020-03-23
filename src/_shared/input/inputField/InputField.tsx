@@ -1,10 +1,10 @@
 import React, { FC, ChangeEvent } from 'react';
 import { Input, InputOnChangeData } from 'semantic-ui-react';
 import classnames from 'classnames';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Icon from '../icon/Icon';
-import { useInputError } from '../../_hooks';
-import './inputField.scss';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
+import Icon from '../../icon/Icon';
+import { useInputError } from '../../../_hooks';
+import '../input.scss';
 
 export interface InputFieldProps {
   autoComplete?: string;
@@ -36,11 +36,10 @@ const InputField: FC<InputFieldProps> = ({
   icon,
   ...props
 }) => {
-  const inputWrapperRef = React.createRef<HTMLDivElement>();
   const { showError, setDirty } = useInputError(errorMessage);
 
   return (
-    <div className={classnames('input-wrapper', className)} ref={inputWrapperRef}>
+    <div className={classnames('input-wrapper', className)}>
       {!!label && (
         <label htmlFor={props.name}>
           {!!labelIcon && <Icon name={labelIcon} />}

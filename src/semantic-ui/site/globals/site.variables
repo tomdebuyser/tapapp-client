@@ -8,6 +8,7 @@
     Brand Colors
 --------------------*/
 @primaryColor: #002548;
+@red: #e45f55;
 
 /*-------------------
         Page
@@ -15,6 +16,8 @@
 @pageBackground: white;
 @textColor: #47525A;
 @placeholderColorInput: #b8bcbf;
+@placeholderColorInputError: #E7BDBC;
+@placeholderColorInputErrorFocus: #DA9796;
 @disabledOpacity: 1;
 
 /*-------------------
@@ -32,6 +35,15 @@
 @emSize: 1.6*@remSize;
 /* The size of page text  */
 @fontSize: 1.6*@remSize;
+
+/*-------------------
+    Focused Input
+--------------------*/
+/* Used on inputs, textarea etc */
+@focusedFormBorderColor: @primaryColor;
+
+/* Used on dropdowns, other larger blocks */
+@focusedFormMutedBorderColor: @primaryColor;
 
 /*-------------------
         Sizes

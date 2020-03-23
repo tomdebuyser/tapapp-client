@@ -1,6 +1,9 @@
 @import './colors';
 
 main {
+  a ~ header {
+    margin-top: 2rem;
+  }
   header {
     h1 {
       margin-bottom: 0;
