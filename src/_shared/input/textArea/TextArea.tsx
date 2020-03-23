@@ -21,7 +21,6 @@ const TextArea: FC<Props> = ({ normalize, onChange, placeholder, rows, value, ..
       <SemanticTextArea
         className={classnames({ error: showError })}
         onChange={(_, data: TextAreaProps) => {
-          console.log('dsfdss');
           const normalizedValue = normalize(data.value as string);
           onChange(normalizedValue, name);
           setDirty();
