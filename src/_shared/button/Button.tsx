@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, BaseSyntheticEvent } from 'react';
 import { Button as SemanticButton, ButtonProps, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
@@ -12,15 +12,12 @@ interface Props {
   href?: string;
   loading?: boolean;
   negative?: boolean;
-  onClick?: () => void;
+  onClick?: (event?: BaseSyntheticEvent) => void;
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {};
-
-const Button: FC<Props> = ({ asText, className, children, onClick = noop, disabled, loading, href, type, primary, negative }) => {
+const Button: FC<Props> = ({ asText, className, children, onClick, disabled, loading, href, type, primary, negative }) => {
   const isDisabled = disabled || loading;
 
   function renderSemanticButton(extraProps: ButtonProps) {
@@ -63,6 +60,7 @@ const Button: FC<Props> = ({ asText, className, children, onClick = noop, disabl
 
 Button.defaultProps = {
   className: '',
+  onClick: () => {},
   type: 'button',
 };
 

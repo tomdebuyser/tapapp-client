@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import { Icon, Button, SearchInput } from '../../_shared';
+import { Icon, Button, SearchField } from '../../_shared';
 import { translations } from '../../_translations';
 import { usersSelectors, profileSelectors } from '../../_store/selectors';
 import { usersActions } from '../../_store/actions';
@@ -27,7 +27,7 @@ const UsersOverview: FC = () => {
   return (
     <Container as="main" className="users">
       <div className="header">
-        <SearchInput query={query} setQuery={setQuery} />
+        <SearchField query={query} setQuery={setQuery} />
         {permissions?.users.edit && (
           <Button href="/users/create" primary>
             <Icon name="SvgAdd" />

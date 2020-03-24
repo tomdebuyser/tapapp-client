@@ -6,6 +6,10 @@
   color: @red;
 }
 
+.ui.checkbox.disabled {
+  pointer-events: none;
+}
+
 @toggleSize: 2rem;
 .ui.checkbox.toggle {
   &.error input:checked ~ label {

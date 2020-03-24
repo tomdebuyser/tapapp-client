@@ -1,0 +1,128 @@
+@import '../../../_styles/colors';
+
+$padding: 2.5rem;
+
+.dropzone {
+  border: 2px dashed $shadow;
+  padding: $padding;
+  cursor: pointer;
+  outline: 0;
+
+  &:hover,
+  &.active {
+    color: $primary-color;
+    border-color: $primary-color;
+  }
+
+  &.error {
+    animation: alert 1s;
+  }
+
+  &.disabled {
+    cursor: default;
+    &:hover {
+      color: inherit;
+      border-color: $shadow;
+    }
+  }
+
+  .trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      color: $primary-color;
+    }
+
+    .title {
+      margin-top: 1.8rem;
+    }
+
+    .requirements {
+      color: $grey;
+      font-size: 1.4rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: -$padding;
+    color: $text-color;
+
+    &:not(:first-child) {
+      margin-top: $padding * 2;
+    }
+
+    &:not(:last-child):after {
+      position: absolute;
+      bottom: -$padding;
+      content: '';
+      display: block;
+      width: calc(100% - #{$padding});
+      height: 1px;
+      background-color: $grey-light;
+    }
+
+    img {
+      width: 25%;
+    }
+
+    .details {
+      padding-left: 3rem;
+      flex: 1;
+      > * {
+        display: block;
+      }
+
+      .name {
+        max-height: 4.5rem;
+        overflow: hidden;
+      }
+
+      .size {
+        color: $grey;
+      }
+    }
+  }
+}
+
+@keyframes alert {
+  0% {
+    border-color: $shadow;
+  }
+  10% {
+    border-color: $red;
+  }
+  20% {
+    border-color: $shadow;
+  }
+  30% {
+    border-color: $red;
+  }
+  40% {
+    border-color: $shadow;
+  }
+  50% {
+    border-color: $red;
+  }
+  60% {
+    border-color: $shadow;
+  }
+  70% {
+    border-color: $red;
+  }
+  80% {
+    border-color: $shadow;
+  }
+  90% {
+    border-color: $red;
+  }
+  100% {
+    border-color: $shadow;
+  }
+}

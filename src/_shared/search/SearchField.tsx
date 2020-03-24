@@ -1,8 +1,8 @@
 import React, { useState, useEffect, FC } from 'react';
-import { translations } from '../../../_translations';
-import { useDebounce } from '../../../_hooks';
-import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../../_http';
-import InputField from '../inputField/InputField';
+import { translations } from '../../_translations';
+import { useDebounce } from '../../_hooks';
+import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http';
+import InputField from '../input/inputField/InputField';
 
 interface Props {
   query?: HttpMetadataQuery;
@@ -15,7 +15,7 @@ function shouldSearch(currentQuery: HttpMetadataQuery, searchString: string): bo
   return true;
 }
 
-const SearchInput: FC<Props> = ({ query, setQuery }) => {
+const SearchField: FC<Props> = ({ query, setQuery }) => {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
 
@@ -29,6 +29,7 @@ const SearchInput: FC<Props> = ({ query, setQuery }) => {
     <InputField
       className="search-field"
       icon="search"
+      name="search"
       onChange={setSearch}
       placeholder={translations.getLabel('SHARED.PLACEHOLDER.SEARCH')}
       value={search}
@@ -36,4 +37,4 @@ const SearchInput: FC<Props> = ({ query, setQuery }) => {
   );
 };
 
-export default SearchInput;
+export default SearchField;

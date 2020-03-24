@@ -1,8 +1,7 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import { Dropdown as SemanticDropdown, InputOnChangeData } from 'semantic-ui-react';
+import InputWrapper, { InputWrapperProps } from '../Input';
 import { useInputError } from '../../../_hooks';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
-import '../input.scss';
 
 export interface DropdownOption {
   key?: string;
@@ -10,38 +9,37 @@ export interface DropdownOption {
   value: string;
 }
 
-interface Props {
-  errorMessage?: string;
-  label: string;
+interface Props extends InputWrapperProps {
   multiple?: boolean;
-  name: string;
   normalize?: (value: string) => string;
   onChange: (value: string | string[], name: string) => void;
   options: DropdownOption[] | [];
+  placeholder?: string;
   value: string | string[];
 }
 
-const Dropdown: FC<Props> = ({ name, label, normalize, onChange, errorMessage, options, ...props }) => {
-  const { showError, setDirty } = useInputError(errorMessage);
+const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placeholder, value, ...wrapperProps }) => {
+  const { disabled, errorMessage, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <div className="input-wrapper">
-      <label htmlFor={name}>{label}</label>
+    <InputWrapper {...wrapperProps} showError={showError}>
       <SemanticDropdown
+        disabled={disabled}
         error={showError}
-        id={name}
+        multiple={multiple}
         name={name}
-        onChange={(_: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
-          const normalizedValue = normalize(data?.value);
-          onChange(normalizedValue, data?.name);
+        onChange={(_, data: InputOnChangeData) => {
+          const normalizedValue = normalize(data.value);
+          onChange(normalizedValue, data.name);
           setDirty();
         }}
         options={options || []}
+        placeholder={placeholder}
         selection
-        {...props}
+        value={value}
       />
-      <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>
-    </div>
+    </InputWrapper>
   );
 };
 

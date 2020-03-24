@@ -1,18 +1,10 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import { TextArea as SemanticTextArea, TextAreaProps } from 'semantic-ui-react';
 import classnames from 'classnames';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
-import Icon from '../../icon/Icon';
+import InputWrapper, { InputWrapperProps } from '../Input';
 import { useInputError } from '../../../_hooks';
-import '../input.scss';
 
-export interface Props {
-  className?: string;
-  disabled?: boolean;
-  errorMessage?: string;
-  label?: string;
-  labelIcon?: string;
-  name?: string;
+export interface Props extends InputWrapperProps {
   normalize?: (value: string) => string;
   onChange?: (value: string, name: string) => void;
   placeholder?: string;
@@ -20,33 +12,28 @@ export interface Props {
   value?: string;
 }
 
-const TextArea: FC<Props> = ({ className, label, labelIcon, errorMessage, onChange, normalize, ...props }) => {
-  const { showError, setDirty } = useInputError(errorMessage);
+const TextArea: FC<Props> = ({ normalize, onChange, placeholder, rows, value, ...wrapperProps }) => {
+  const { errorMessage, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <div className={classnames('ui form input-wrapper', className)}>
-      {!!label && (
-        <label htmlFor={props.name}>
-          {!!labelIcon && <Icon name={labelIcon} />}
-          <span>{label}</span>
-        </label>
-      )}
+    <InputWrapper {...wrapperProps} className={classnames('ui form', wrapperProps.className)} showError={showError}>
       <SemanticTextArea
-        {...props}
         className={classnames({ error: showError })}
-        onChange={(_: ChangeEvent<HTMLTextAreaElement>, data: TextAreaProps) => {
-          const normalizedValue = normalize(data?.value as string);
-          onChange(normalizedValue, data?.name);
+        onChange={(_, data: TextAreaProps) => {
+          const normalizedValue = normalize(data.value as string);
+          onChange(normalizedValue, name);
           setDirty();
         }}
+        placeholder={placeholder}
+        rows={rows}
+        value={value}
       />
-      <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>
-    </div>
+    </InputWrapper>
   );
 };
 
 TextArea.defaultProps = {
-  className: '',
   normalize: (value: string) => value,
   rows: 5,
 };

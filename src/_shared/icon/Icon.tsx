@@ -41,7 +41,6 @@ const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clic
 
 Icon.defaultProps = {
   className: '',
-  size: 1.8,
 };
 
 export default Icon;

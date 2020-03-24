@@ -1,37 +1,39 @@
 import React, { FC } from 'react';
 import { Checkbox as SemanticCheckbox, CheckboxProps } from 'semantic-ui-react';
 import classnames from 'classnames';
+import InputWrapper, { InputWrapperProps } from '../Input';
 import { useInputError } from '../../../_hooks';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
-import '../input.scss';
 
-export interface InputCheckboxProps {
+export interface InputCheckboxProps extends InputWrapperProps {
   checked?: boolean;
-  disabled?: boolean;
-  errorMessage?: string;
   label?: string;
-  name?: string;
-  onChange?: (checked: boolean, name: string) => void;
+  onChange: (checked: boolean, name: string) => void;
   radio?: boolean;
   toggle?: boolean;
   type?: 'checkbox' | 'radio';
 }
 
-const Checkbox: FC<InputCheckboxProps> = ({ errorMessage, onChange, ...props }) => {
-  const { showError, setDirty } = useInputError(errorMessage);
+const Checkbox: FC<InputCheckboxProps> = ({ checked, label, onChange, radio, toggle, type, ...wrapperProps }) => {
+  const { disabled, errorMessage, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(errorMessage);
 
   return (
-    <div className={classnames('input-wrapper', { error: showError })}>
+    <InputWrapper {...wrapperProps} showError={showError}>
       <SemanticCheckbox
-        {...props}
+        checked={checked}
         className={classnames({ error: showError })}
+        disabled={disabled}
+        label={label}
+        name={name}
         onChange={(_, data: CheckboxProps) => {
-          onChange(data?.checked, data.name);
+          onChange(data.checked, data.name);
           setDirty();
         }}
+        radio={radio}
+        toggle={toggle}
+        type={type}
       />
-      <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>
-    </div>
+    </InputWrapper>
   );
 };
 

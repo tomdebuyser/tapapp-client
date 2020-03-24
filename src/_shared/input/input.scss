@@ -1,9 +1,17 @@
 @import '../../_styles/colors';
 
-$icon-height: 2.4rem;
+$icon-height: 2.2rem;
 $label-bottom-margin: 0.5rem;
 
 .input-wrapper {
+  &.required label:after {
+    content: '*';
+    font-size: 2.5rem;
+    color: $red;
+    margin-left: 0.3rem;
+    margin-top: 0.5rem;
+  }
+
   label:not(:last-child) {
     display: flex;
     align-items: center;
@@ -12,7 +20,7 @@ $label-bottom-margin: 0.5rem;
     font-size: 1.4rem;
     color: $grey-dark;
 
-    :not(:first-child) {
+    > :not(:first-child) {
       margin-left: 0.75rem;
     }
 

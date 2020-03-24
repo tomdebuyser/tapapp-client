@@ -5,3 +5,18 @@
 .ui.dropdown {
   width: 30rem;
 }
+
+.ui.disabled.dropdown.selection {
+  opacity: @disabledOpacity;
+  background: #eee;
+}
+
+.ui.dropdown:not(.button)>.default.text {
+    color: @placeholderColorInput;
+}
+.ui.dropdown.error > .default.text {
+    color: @placeholderColorInputError;
+}
+.ui.selection.active.dropdown.error .menu {
+    border-color: @errorColor;
+}
