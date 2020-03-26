@@ -53,11 +53,10 @@ function isNotEmptyArray(array: unknown[]): string {
 }
 
 function getValidationErrorMessage(errors: FormValidationErrors, labelMapper?: (name: string) => string): string {
+  const errorKeys = Object.keys(errors).filter(name => !!errors[name]);
+  if (errorKeys.length === 0) return null;
   return translations.getLabel('ERRORS.VALIDATION.FORM', {
-    fields: Object.keys(errors)
-      .filter(name => !!errors[name])
-      .map(name => (labelMapper ? labelMapper(name) : name))
-      .join(', '),
+    fields: errorKeys.map(name => (labelMapper ? labelMapper(name) : name)).join(', '),
   });
 }
 
