@@ -3,6 +3,8 @@ import { translations } from '../../_translations';
 import { useDebounce } from '../../_hooks';
 import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http';
 import InputField from '../input/inputField/InputField';
+import Icon from '../icon/Icon';
+import './searchField.scss';
 
 interface Props {
   query?: HttpMetadataQuery;
@@ -26,14 +28,17 @@ const SearchField: FC<Props> = ({ query, setQuery }) => {
   }, [debouncedSearch, query, setQuery]);
 
   return (
-    <InputField
-      className="search-field"
-      icon="search"
-      name="search"
-      onChange={setSearch}
-      placeholder={translations.getLabel('SHARED.PLACEHOLDER.SEARCH')}
-      value={search}
-    />
+    <div className="search-field-wrapper">
+      <InputField
+        className="search-field"
+        icon="search"
+        name="search"
+        onChange={setSearch}
+        placeholder={translations.getLabel('SHARED.PLACEHOLDER.SEARCH')}
+        value={search}
+      />
+      {!!search && <Icon name="SvgClose" onClick={() => setSearch('')} size={2.8} />}
+    </div>
   );
 };
 

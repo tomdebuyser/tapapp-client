@@ -23,14 +23,18 @@ const CreateRole: FC = () => {
 
   return (
     <Container as="main" className="left-container">
-      <h1>{translations.getLabel('ROLES.CREATE.TITLE')}</h1>
-      <RoleForm
-        buttons={<Button href="/roles">{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>}
-        error={error}
-        initialForm={initialForm}
-        isSubmitting={isSubmitting}
-        submitForm={(values: IRoleForm) => dispatch(new rolesActions.CreateRole({ values }))}
-      />
+      <header>
+        <h1>{translations.getLabel('ROLES.CREATE.TITLE')}</h1>
+      </header>
+      <section>
+        <RoleForm
+          buttons={<Button href="/roles">{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>}
+          error={error}
+          initialForm={initialForm}
+          isSubmitting={isSubmitting}
+          submitForm={(values: IRoleForm) => dispatch(new rolesActions.CreateRole({ values }))}
+        />
+      </section>
     </Container>
   );
 };

@@ -18,7 +18,7 @@ const UserDetail: FC = () => {
   const isUpdateLoading = useSelector(usersSelectors.isUpdateUserLoading);
   const isDeactivateLoading = useSelector(usersSelectors.isDeactivateUserLoading);
   const isResendRegisterMailLoading = useSelector(usersSelectors.isResendRegisterEmailLoading);
-  const error = useSelector(usersSelectors.errorCrudUser);
+  const error = useSelector(usersSelectors.errorCrudUsers);
   const permissions = useSelector(profileSelectors.permissions);
   const dispatch = useDispatch();
 

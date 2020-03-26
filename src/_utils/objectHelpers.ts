@@ -17,3 +17,7 @@ export function insertUpdatedData<T extends { id: string }>(currentData: T[], up
   const ids = updatedData.map(value => value.id);
   return [...(currentData || []).filter(value => !ids.includes(value.id)), ...updatedData];
 }
+
+export function isEmptyObject(object = {}): boolean {
+  return Object.keys(object).length === 0;
+}

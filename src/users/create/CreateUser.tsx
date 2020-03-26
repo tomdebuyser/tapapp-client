@@ -18,18 +18,22 @@ const initialForm: IUserForm = {
 const CreateUser: FC = () => {
   const dispatch = useDispatch();
   const isSubmitting = useSelector(usersSelectors.isCreateUserLoading);
-  const error = useSelector(usersSelectors.errorCrudUser);
+  const error = useSelector(usersSelectors.errorCrudUsers);
 
   return (
     <Container as="main" className="left-container">
-      <h1>{translations.getLabel('USERS.CREATE.TITLE')}</h1>
-      <UserForm
-        buttons={<Button href="/users">{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>}
-        error={error}
-        initialForm={initialForm}
-        isSubmitting={isSubmitting}
-        submitForm={(values: IUserForm) => dispatch(new usersActions.CreateUser({ values }))}
-      />
+      <header>
+        <h1>{translations.getLabel('USERS.CREATE.TITLE')}</h1>
+      </header>
+      <section>
+        <UserForm
+          buttons={<Button href="/users">{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>}
+          error={error}
+          initialForm={initialForm}
+          isSubmitting={isSubmitting}
+          submitForm={(values: IUserForm) => dispatch(new usersActions.CreateUser({ values }))}
+        />
+      </section>
     </Container>
   );
 };

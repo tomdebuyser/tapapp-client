@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Checkbox as SemanticCheckbox, CheckboxProps } from 'semantic-ui-react';
 import classnames from 'classnames';
-import InputWrapper, { InputWrapperProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 
 export interface InputCheckboxProps extends InputWrapperProps {

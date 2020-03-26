@@ -43,11 +43,15 @@ const Login = () => {
     submitForm: values => dispatch(new authActions.Login({ pathname: state?.pathname, values })),
     validateForm,
   });
+  const errorMessage = errorAsString(error);
 
   return (
     <Container as="main" className="login">
       <h1>{translations.getLabel('AUTH.LOGIN.TITLE')}</h1>
       <form onSubmit={form.submit}>
+        <ErrorMessage isGlobal isVisible={!!errorMessage}>
+          {errorMessage}
+        </ErrorMessage>
         <InputField
           autoComplete="username"
           errorMessage={form.validationErrors.username}
@@ -66,7 +70,6 @@ const Login = () => {
           type="password"
           value={form.values.password}
         />
-        <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
         <div className="actions">
           <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
           <Button loading={isSubmitting} primary type="submit">

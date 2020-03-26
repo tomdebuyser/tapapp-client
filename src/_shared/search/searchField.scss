@@ -1,0 +1,15 @@
+@import '../../_styles/colors';
+
+.search-field-wrapper {
+  position: relative;
+
+  > button.plain {
+    position: absolute;
+    right: 0.7rem;
+    top: 0.6rem;
+    background: $white;
+    .icon {
+      color: $grey-dark;
+    }
+  }
+}

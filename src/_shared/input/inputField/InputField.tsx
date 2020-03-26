@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Input, InputOnChangeData } from 'semantic-ui-react';
-import InputWrapper, { InputWrapperProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 
 export interface InputFieldProps extends InputWrapperProps {

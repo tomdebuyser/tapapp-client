@@ -15,15 +15,24 @@ $padding: 2.5rem;
   }
 
   &.error {
+    border-color: $red;
+  }
+
+  &.animated-error {
     animation: alert 1s;
   }
 
-  &.disabled {
+  &.disabled,
+  &.no-hover {
     cursor: default;
     &:hover {
       color: inherit;
       border-color: $shadow;
     }
+  }
+
+  &.disabled {
+    background-color: $disabled-color;
   }
 
   .trigger {
@@ -37,7 +46,7 @@ $padding: 2.5rem;
     }
 
     .title {
-      margin-top: 1.8rem;
+      margin-top: 1rem;
     }
 
     .requirements {
@@ -75,6 +84,8 @@ $padding: 2.5rem;
     .details {
       padding-left: 3rem;
       flex: 1;
+      overflow: hidden;
+      word-wrap: break-word;
       > * {
         display: block;
       }

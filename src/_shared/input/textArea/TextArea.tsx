@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TextArea as SemanticTextArea, TextAreaProps } from 'semantic-ui-react';
 import classnames from 'classnames';
-import InputWrapper, { InputWrapperProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 
 export interface Props extends InputWrapperProps {
@@ -13,13 +13,14 @@ export interface Props extends InputWrapperProps {
 }
 
 const TextArea: FC<Props> = ({ normalize, onChange, placeholder, rows, value, ...wrapperProps }) => {
-  const { errorMessage, name } = wrapperProps;
+  const { disabled, errorMessage, name } = wrapperProps;
   const { setDirty, showError } = useInputError(errorMessage);
 
   return (
     <InputWrapper {...wrapperProps} className={classnames('ui form', wrapperProps.className)} showError={showError}>
       <SemanticTextArea
         className={classnames({ error: showError })}
+        disabled={disabled}
         onChange={(_, data: TextAreaProps) => {
           const normalizedValue = normalize(data.value as string);
           onChange(normalizedValue, name);
