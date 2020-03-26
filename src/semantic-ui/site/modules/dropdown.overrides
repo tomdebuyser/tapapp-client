@@ -8,7 +8,7 @@
 
 .ui.disabled.dropdown.selection {
   opacity: @disabledOpacity;
-  background: #eee;
+  background: @disabledColor;
 }
 
 .ui.dropdown:not(.button)>.default.text {

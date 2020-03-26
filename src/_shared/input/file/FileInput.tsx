@@ -6,7 +6,7 @@ import Button from '../../button/Button';
 import Icon from '../../icon/Icon';
 import { translations } from '../../../_translations';
 import { useToggle, useInputError } from '../../../_hooks';
-import InputWrapper, { InputWrapperProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 
 const MB_MULTIPLIER = 1000000;
 
@@ -69,7 +69,7 @@ const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...wrap
   function renderTrigger() {
     return (
       <div className="trigger">
-        <Icon name="SvgPencil" size={4.5} />
+        <Icon name="SvgUpload" size={5.5} />
         <span className="title">{translations.getLabel('SHARED.FILE_UPLOAD.TITLE')}</span>
         <span className="requirements">
           {translations.getLabel('SHARED.FILE_UPLOAD.REQUIREMENTS', {
@@ -91,6 +91,7 @@ const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...wrap
         </div>
         <Button
           asText
+          disabled={disabled}
           onClick={() => {
             onChange(
               value.filter(f => f !== file),
@@ -110,7 +111,13 @@ const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...wrap
     <InputWrapper {...wrapperProps} showError={showError}>
       <div
         {...getRootProps({
-          className: classnames('dropzone', { active: isDropping, disabled: isDisabled, error: isError }),
+          className: classnames('dropzone', {
+            active: isDropping,
+            'animated-error': isError,
+            disabled,
+            error: showError,
+            'no-hover': isDisabled,
+          }),
         })}
       >
         {(!isDisabled || value.length === 0) && (

@@ -45,12 +45,16 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
     submitForm: values => dispatch(new authActions.ChoosePassword({ token, values })),
     validateForm,
   });
+  const errorMessage = errorAsString(error);
 
   return (
     <Container as="main" className="choose-password">
       <h1>{translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.TITLE' : 'AUTH.REGISTER.TITLE')}</h1>
       <p>{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
       <form onSubmit={form.submit}>
+        <ErrorMessage global isVisible={!!errorMessage}>
+          {errorMessage}
+        </ErrorMessage>
         <InputField
           autoComplete="new-password"
           errorMessage={form.validationErrors.newPassword}
@@ -59,7 +63,6 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
           type="password"
           value={form.values.newPassword}
         />
-        <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
         <div className="actions">
           <Button loading={isSubmitting} primary type="submit">
             {translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.RESET' : 'AUTH.REGISTER.REGISTER')}

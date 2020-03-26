@@ -1,4 +1,5 @@
 import { translations } from '../_translations';
+import { FormValidationErrors } from '../_hooks/useForm';
 
 /**
  * All form validators return an error message if they validated to false.
@@ -14,7 +15,7 @@ function isEmptyString(value: string): boolean {
 }
 
 function isRequired(value: unknown): string {
-  const isValid = !isEmptyString(`${value}`);
+  const isValid = !isEmptyString(`${value}`) && !!value;
   return !isValid && translations.getLabel('ERRORS.VALIDATION.REQUIRED');
 }
 
@@ -51,7 +52,17 @@ function isNotEmptyArray(array: unknown[]): string {
   return !isValid && translations.getLabel('ERRORS.VALIDATION.EMPTY_ARRAY');
 }
 
+function getValidationErrorMessage(errors: FormValidationErrors, labelMapper?: (name: string) => string): string {
+  return translations.getLabel('ERRORS.VALIDATION.FORM', {
+    fields: Object.keys(errors)
+      .filter(name => !!errors[name])
+      .map(name => (labelMapper ? labelMapper(name) : name))
+      .join(', '),
+  });
+}
+
 export const formValidator = {
+  getValidationErrorMessage,
   hasMaxLength,
   hasMinLength,
   isEmail,

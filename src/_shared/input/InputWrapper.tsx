@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import classnames from 'classnames';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Icon from '../icon/Icon';
-import './input.scss';
+import './inputWrapper.scss';
 
 /**
  * This component serves as a wrapper around the specific input components. It contains some common input logic:

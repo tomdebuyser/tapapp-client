@@ -35,9 +35,13 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
   }
 
   const form = useForm<IUserForm>({ error, initialForm, submitForm, validateForm });
+  const errorMessage = errorAsString(error);
 
   return (
     <form onSubmit={form.submit}>
+      <ErrorMessage global isVisible={!!errorMessage}>
+        {errorMessage}
+      </ErrorMessage>
       {!userId && (
         <div role="group">
           <InputField
@@ -79,7 +83,6 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
         />
         <div />
       </div>
-      <ErrorMessage isVisible>{errorAsString(error)}</ErrorMessage>
       <div className="actions">
         {buttons}
         <Button loading={isSubmitting} primary type="submit">

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import { DeepPartial } from 'redux';
 import { ApiError } from '../_http';
 import { translations } from '../_translations';
 
-export type FormValidationErrors<T> = {
+export type FormValidationErrors<T = Record<string, string>> = {
   [K in keyof T]?: string;
 };
 
@@ -17,7 +18,7 @@ interface Params<T> {
 
 interface Response<T> {
   setAttribute: (value: unknown, name: string) => void;
-  submit: (event: React.FormEvent) => void;
+  submit: (event: React.FormEvent, overrides?: DeepPartial<T>) => void;
   validationErrors: FormValidationErrors<T>;
   values: T;
 }
@@ -35,12 +36,14 @@ function useForm<T>(params: Params<T>): Response<T> {
   const [values, setValues] = useState<T>(initialForm);
   const [validationErrors, setValidationErrors] = useState<FormValidationErrors<T>>({});
 
-  const submit = (event: React.FormEvent): void => {
+  const submit = (event: React.FormEvent, overrides: DeepPartial<T> = {}): void => {
     event.preventDefault();
-    const errors = validateForm(values);
+    const newValues = { ...values, ...overrides };
+    setValues(newValues);
+    const errors = validateForm(newValues);
     const hasError = Object.keys(errors || {}).some(key => !!errors[key]);
     if (!hasError) {
-      submitForm(values, setValues);
+      submitForm(newValues, setValues);
     }
     setValidationErrors(errors);
   };

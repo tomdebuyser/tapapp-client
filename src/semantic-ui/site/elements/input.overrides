@@ -14,6 +14,6 @@
   opacity: @disabledOpacity;
   
   > input {
-    background: #eee;
+    background: @disabledColor;
   } 
 }

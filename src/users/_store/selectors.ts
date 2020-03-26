@@ -9,7 +9,7 @@ export const user = (userId: string) =>
   createSelector(selectNode, (state: UsersState) => state.users?.find(user => user.id === userId));
 export const metadata = createSelector(selectNode, (state: UsersState) => state.metadata);
 export const query = createSelector(selectNode, (state: UsersState) => state.query);
-export const errorCrudUser = createSelector(selectNode, (state: UsersState) => state.errorCrudUser);
+export const errorCrudUsers = createSelector(selectNode, (state: UsersState) => state.errorCrudUsers);
 export const errorDeactivateUser = createSelector(selectNode, (state: UsersState) => state.errorDeactivateUser);
 export const errorResendRegisterEmail = createSelector(selectNode, (state: UsersState) => state.errorResendRegisterEmail);
 export const isCreateUserLoading = createSelector(selectNode, (state: UsersState) => state.isCreateUserLoading);

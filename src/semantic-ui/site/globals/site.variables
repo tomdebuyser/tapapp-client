@@ -19,6 +19,7 @@
 @placeholderColorInputError: #E7BDBC;
 @placeholderColorInputErrorFocus: #DA9796;
 @disabledOpacity: 0.75;
+@disabledColor: #EEEEEE;
 @errorColor: #E0B4B4;
 
 /*-------------------

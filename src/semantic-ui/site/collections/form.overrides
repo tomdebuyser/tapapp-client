@@ -9,6 +9,11 @@
     box-shadow: none;
 }
 
+.ui.form textarea:disabled {
+  opacity: @disabledOpacity;
+  background: @disabledColor;
+}
+
 .ui.form > textarea::-webkit-input-placeholder {
   color: @placeholderColorInput;
 }

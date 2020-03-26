@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Dropdown as SemanticDropdown, InputOnChangeData } from 'semantic-ui-react';
-import InputWrapper, { InputWrapperProps } from '../Input';
+import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 
 export interface DropdownOption {
