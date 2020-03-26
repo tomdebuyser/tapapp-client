@@ -38,7 +38,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
 
   return (
     <form onSubmit={form.submit}>
-      <ErrorMessage global isVisible={!!errorMessage}>
+      <ErrorMessage isGlobal isVisible={!!errorMessage}>
         {errorMessage}
       </ErrorMessage>
       <div role="group">

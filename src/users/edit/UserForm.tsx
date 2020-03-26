@@ -39,7 +39,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
 
   return (
     <form onSubmit={form.submit}>
-      <ErrorMessage global isVisible={!!errorMessage}>
+      <ErrorMessage isGlobal isVisible={!!errorMessage}>
         {errorMessage}
       </ErrorMessage>
       {!userId && (

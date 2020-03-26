@@ -49,7 +49,7 @@ const Login = () => {
     <Container as="main" className="login">
       <h1>{translations.getLabel('AUTH.LOGIN.TITLE')}</h1>
       <form onSubmit={form.submit}>
-        <ErrorMessage global isVisible={!!errorMessage}>
+        <ErrorMessage isGlobal isVisible={!!errorMessage}>
           {errorMessage}
         </ErrorMessage>
         <InputField

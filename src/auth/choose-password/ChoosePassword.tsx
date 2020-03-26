@@ -52,7 +52,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
       <h1>{translations.getLabel(isPasswordReset ? 'AUTH.RESET_PASSWORD.TITLE' : 'AUTH.REGISTER.TITLE')}</h1>
       <p>{translations.getLabel('AUTH.REGISTER.PASSWORD_GUIDELINES')}</p>
       <form onSubmit={form.submit}>
-        <ErrorMessage global isVisible={!!errorMessage}>
+        <ErrorMessage isGlobal isVisible={!!errorMessage}>
           {errorMessage}
         </ErrorMessage>
         <InputField

@@ -5,14 +5,14 @@ import Icon from '../icon/Icon';
 
 interface Props {
   children: ReactNode;
-  global?: boolean;
+  isGlobal?: boolean;
   isVisible: boolean;
 }
 
-const ErrorMessage: FC<Props> = ({ children, global, isVisible }) => {
+const ErrorMessage: FC<Props> = ({ children, isGlobal, isVisible }) => {
   if (isVisible && !!children)
     return (
-      <div className={classnames('error-message', { global })}>
+      <div className={classnames('error-message', { global: isGlobal })}>
         {global && <Icon name="SvgAlert" size={2.5} />}
         <span>{children}</span>
       </div>
@@ -21,7 +21,7 @@ const ErrorMessage: FC<Props> = ({ children, global, isVisible }) => {
 };
 
 ErrorMessage.defaultProps = {
-  global: false,
+  isGlobal: false,
 };
 
 export default ErrorMessage;
