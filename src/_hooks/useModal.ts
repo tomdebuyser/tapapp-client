@@ -1,27 +1,38 @@
-import { useCallback, ReactElement } from 'react';
+import { useCallback, ReactElement, useState } from 'react';
 import useToggle from './useToggle';
 
-function useModal(render: (props: { hideModal: () => void }) => ReactElement, onOpen?: () => void, onClose?: () => void) {
+type Response<T> = [() => void, (props?: Partial<T>) => void];
+
+function useModal<T>(
+  render: (props: Partial<T> & { closeModal: () => void }) => ReactElement,
+  onOpen?: () => void,
+  onClose?: () => void,
+): Response<T> {
   const [isVisible, setVisible] = useToggle(false);
+  const [props, setProps] = useState<Partial<T>>({});
 
-  const showModal = useCallback(() => {
-    if (onOpen) onOpen();
-    setVisible(true);
-  }, [onOpen, setVisible]);
+  const openModal = useCallback(
+    (props: Partial<T> = {}) => {
+      setProps(props);
+      if (onOpen) onOpen();
+      setVisible(true);
+    },
+    [onOpen, setVisible],
+  );
 
-  const hideModal = useCallback(() => {
+  const closeModal = useCallback(() => {
     if (onClose) onClose();
     setVisible(false);
   }, [onClose, setVisible]);
 
   const renderModal = useCallback(() => {
     if (isVisible) {
-      return render({ hideModal });
+      return render({ closeModal, ...props });
     }
     return null;
-  }, [isVisible, render, hideModal]);
+  }, [isVisible, render, closeModal, props]);
 
-  return [renderModal, showModal];
+  return [renderModal, openModal];
 }
 
 export default useModal;

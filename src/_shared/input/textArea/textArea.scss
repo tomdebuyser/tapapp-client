@@ -1,0 +1,14 @@
+@import '../../../_styles/colors';
+
+.character-limit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: $grey;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+
+  &.reached {
+    color: $red;
+  }
+}

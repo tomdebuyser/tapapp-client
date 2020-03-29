@@ -1,29 +1,45 @@
 import { useState, useEffect } from 'react';
-import { DeepPartial } from 'redux';
 import { ApiError } from '../_http';
 import { translations } from '../_translations';
+import { deepCopy } from '../_utils/objectHelpers';
 
-export type FormValidationErrors<T = Record<string, string>> = {
-  [K in keyof T]?: string;
+/**
+ * FormValidationErrors type explanation:
+ * 1. We check to see if the value of property Key is a primitive, if it is, we just require an error message (string).
+ * 2. We check if the value of property Key is an array, if it is, we proceed to 3, else to 5
+ * 3. We check if the Type of the element of the array, using infer, is a Primitive.
+ *    If the value is not a Primitive, proceed to 4, otherwise, we just require a list of error messages (string[]).
+ * 4. If the Array is not a primitive, we use the type we extracted with infer and require an array of FormValidationErrors<InferredArrayType>.
+ * 5. If the array is not a primitive, and not an array, it's an object, so we just recursively use FormValidationErrors with the given type.
+ */
+type Primitive = string | number | boolean;
+export type FormValidationErrors<TForm = Record<string, unknown>> = {
+  [Key in keyof TForm]?: TForm[Key] extends Primitive // 1.
+    ? string
+    : TForm[Key] extends Array<infer TArray> // 2.
+    ? TArray extends Primitive // 3.
+      ? string[]
+      : Array<FormValidationErrors<TArray>> // 4
+    : FormValidationErrors<TForm[Key]>; // 5
 };
 
-export type SubmitFormFunction<T> = (values: T, setValues: (values: T) => void) => void;
+export type SubmitFormFunction<TForm> = (values: TForm, setFormValues: (values: TForm) => void) => void;
 
-interface Params<T> {
+interface Params<TForm, TFormErrors> {
   error?: ApiError;
-  initialForm: T;
-  submitForm: SubmitFormFunction<T>;
-  validateForm: (values: T) => FormValidationErrors<T>;
+  initialForm: TForm;
+  submitForm: SubmitFormFunction<TForm>;
+  validateForm: (values: TForm) => FormValidationErrors<TFormErrors>;
 }
 
-interface Response<T> {
-  setAttribute: (value: unknown, name: string) => void;
-  submit: (event: React.FormEvent, overrides?: DeepPartial<T>) => void;
-  validationErrors: FormValidationErrors<T>;
-  values: T;
+interface Response<TForm, TFormErrors> {
+  setValues: (setter: (values: TForm) => void) => void;
+  submit: (event: React.FormEvent) => void;
+  validationErrors: FormValidationErrors<TFormErrors>;
+  values: TForm;
 }
 
-function mapToFormValidationErrors<T>(error: ApiError): FormValidationErrors<T> {
+function mapToFormValidationErrors<TForm>(error: ApiError): FormValidationErrors<TForm> {
   return Object.keys(error.validationErrors).reduce((acc, key) => {
     let message = translations.getLabel('ERRORS.VALIDATION.INVALID');
     if (error.validationErrors[key].constraints?.isNotEmpty) message = translations.getLabel('ERRORS.VALIDATION.REQUIRED');
@@ -31,26 +47,29 @@ function mapToFormValidationErrors<T>(error: ApiError): FormValidationErrors<T> 
   }, {});
 }
 
-function useForm<T>(params: Params<T>): Response<T> {
+function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>): Response<TForm, TFormErrors> {
   const { error, initialForm, submitForm, validateForm } = params;
-  const [values, setValues] = useState<T>(initialForm);
-  const [validationErrors, setValidationErrors] = useState<FormValidationErrors<T>>({});
+  const [values, setFormValues] = useState<TForm>(initialForm);
+  const [validationErrors, setValidationErrors] = useState<FormValidationErrors<TFormErrors>>({});
 
-  const submit = (event: React.FormEvent, overrides: DeepPartial<T> = {}): void => {
+  const submit = (event: React.FormEvent): void => {
     event.preventDefault();
-    const newValues = { ...values, ...overrides };
-    setValues(newValues);
-    const errors = validateForm(newValues);
+    const errors = validateForm(values);
     const hasError = Object.keys(errors || {}).some(key => !!errors[key]);
     if (!hasError) {
-      submitForm(newValues, setValues);
+      submitForm(values, setFormValues);
     }
     setValidationErrors(errors);
   };
 
-  const setAttribute = (value: unknown, name: string) => setValues({ ...values, [name]: value });
+  const setValues = (setter: (values: TForm) => void) => {
+    const newValues = deepCopy(values);
+    setter(newValues);
+    setFormValues(newValues);
+    console.log(newValues);
+  };
 
-  const clearValues = () => setValues(initialForm);
+  const clearValues = () => setFormValues(initialForm);
 
   // Map server errors to form validation errors
   useEffect(() => {
@@ -60,7 +79,7 @@ function useForm<T>(params: Params<T>): Response<T> {
   }, [error]);
 
   useEffect(() => {
-    setValues(initialForm);
+    setFormValues(initialForm);
     // Clear all if the component unmounts
     return () => {
       clearValues();
@@ -70,7 +89,7 @@ function useForm<T>(params: Params<T>): Response<T> {
   }, []);
 
   return {
-    setAttribute,
+    setValues,
     submit,
     validationErrors,
     values,

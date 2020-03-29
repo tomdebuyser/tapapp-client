@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
 import { translations } from '../../_translations';
-import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
-import { Button, InputField, Checkbox } from '../../_shared';
+import { Button, InputField, Checkbox, ErrorMessage } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models';
-import { setInObject } from '../../_utils/objectHelpers';
 import './roleForm.scss';
 import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
@@ -46,7 +44,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
           errorMessage={form.validationErrors.name}
           label={translations.getLabel('ROLES.NAME')}
           name="name"
-          onChange={form.setAttribute}
+          onChange={value => form.setValues(values => (values.name = value))}
           type="text"
           value={form.values.name}
         />
@@ -66,9 +64,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
                     key={optionName}
                     label={translations.getLabel(`ROLES.PERMISSIONS.RIGHTS.${option.toUpperCase()}`)}
                     name={optionName}
-                    onChange={(checked: boolean, name: string) =>
-                      form.setAttribute(setInObject(form.values.permissions, name, checked), 'permissions')
-                    }
+                    onChange={value => form.setValues(values => (values.permissions[permission][option] = value))}
                   />
                 );
               })}
