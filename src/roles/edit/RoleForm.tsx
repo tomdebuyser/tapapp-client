@@ -44,7 +44,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
           errorMessage={form.validationErrors.name}
           label={translations.getLabel('ROLES.NAME')}
           name="name"
-          onChange={value => form.setValues(values => (values.name = value))}
+          onChange={form.setSimpleAttribute}
           type="text"
           value={form.values.name}
         />

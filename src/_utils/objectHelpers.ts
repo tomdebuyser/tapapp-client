@@ -10,10 +10,37 @@ export function insertUpdatedData<T extends { id: string }>(currentData: T[], up
   return [...(currentData || []).filter(value => !ids.includes(value.id)), ...updatedData];
 }
 
-export function deepCopy<T>(object: T): T {
-  return JSON.parse(JSON.stringify(object)) as T;
+// TODO: Add typings
+export function deepCopy(inObject: unknown): unknown {
+  // Return the value if inObject is not an object
+  if (typeof inObject !== 'object' || inObject === null) {
+    return inObject;
+  }
+
+  // Return a copy of the value if inObject is a Date
+  if (inObject instanceof Date) {
+    return new Date(inObject);
+  }
+
+  // Return the value if inObject is a File
+  if (inObject instanceof File) {
+    return inObject;
+  }
+
+  // Create an array or object to hold the values
+  const outObject = Array.isArray(inObject) ? [] : {};
+  for (const key in inObject) {
+    const value = inObject[key];
+    // Recursively (deep) copy for nested objects, including arrays
+    outObject[key] = typeof value === 'object' && value !== null ? deepCopy(value) : value;
+  }
+
+  return outObject;
 }
 
-export function isEmptyObject(object = {}): boolean {
-  return Object.keys(object).length === 0;
+export function isEmptyObject(object: object): boolean {
+  if (!object) return true;
+  if (Array.isArray(object)) return object.every(isEmptyObject);
+  if (typeof object === 'object') return Object.keys(object).every(key => isEmptyObject(object[key]));
+  return false;
 }

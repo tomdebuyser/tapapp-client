@@ -3,11 +3,15 @@
 .segmented-control {
   display: flex;
   align-items: center;
+  font-size: 1.6rem;
+
+  &.large {
+    font-size: 1.8rem;
+  }
 
   button.plain {
     display: block;
     color: $text-color;
-    font-size: 1.8rem;
 
     &:after {
       content: '';

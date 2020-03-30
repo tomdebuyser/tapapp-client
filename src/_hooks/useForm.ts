@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ApiError } from '../_http';
 import { translations } from '../_translations';
-import { deepCopy } from '../_utils/objectHelpers';
+import { deepCopy, isEmptyObject } from '../_utils/objectHelpers';
 
 /**
  * FormValidationErrors type explanation:
@@ -33,6 +33,7 @@ interface Params<TForm, TFormErrors> {
 }
 
 interface Response<TForm, TFormErrors> {
+  setSimpleAttribute: (value: unknown, name: string) => void;
   setValues: (setter: (values: TForm) => void) => void;
   submit: (event: React.FormEvent) => void;
   validationErrors: FormValidationErrors<TFormErrors>;
@@ -55,15 +56,25 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   const submit = (event: React.FormEvent): void => {
     event.preventDefault();
     const errors = validateForm(values);
-    const hasError = Object.keys(errors || {}).some(key => !!errors[key]);
+    const hasError = !isEmptyObject(errors);
     if (!hasError) {
       submitForm(values, setFormValues);
     }
     setValidationErrors(errors);
   };
 
+  /**
+   * Use this function if the (simple) name of the field matches the name within the form.
+   * Do not use it when the field is an array or (part of) a nested object. Use 'setValues' instead.
+   */
+  const setSimpleAttribute = (value: unknown, name: string) => setFormValues({ ...values, [name]: value });
+
+  /**
+   * Use this function if you cannot change the value with 'setSimpleAttribute' because it is (part of) a nested object or an array.
+   * If it is a simple value, we recommend to use 'setSimpleAttribute' for performance reasons.
+   */
   const setValues = (setter: (values: TForm) => void) => {
-    const newValues = deepCopy(values);
+    const newValues = deepCopy(values) as TForm;
     setter(newValues);
     setFormValues(newValues);
   };
@@ -88,6 +99,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   }, []);
 
   return {
+    setSimpleAttribute,
     setValues,
     submit,
     validationErrors,

@@ -56,7 +56,7 @@ const Login = () => {
           errorMessage={form.validationErrors.username}
           label={translations.getLabel('AUTH.LOGIN.USERNAME')}
           name="username"
-          onChange={value => form.setValues(values => (values.username = value))}
+          onChange={form.setSimpleAttribute}
           type="email"
           value={form.values.username}
         />
@@ -65,7 +65,7 @@ const Login = () => {
           errorMessage={form.validationErrors.password}
           label={translations.getLabel('AUTH.LOGIN.PASSWORD')}
           name="password"
-          onChange={value => form.setValues(values => (values.password = value))}
+          onChange={form.setSimpleAttribute}
           type="password"
           value={form.values.password}
         />
