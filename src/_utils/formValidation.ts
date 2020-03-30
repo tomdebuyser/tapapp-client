@@ -52,6 +52,11 @@ function isNotEmptyArray(array: unknown[]): string {
   return isValid ? null : translations.getLabel('ERRORS.VALIDATION.EMPTY_ARRAY');
 }
 
+function isEnumValue<T>(value: string, enumeration: T): string {
+  const isValid = Object.values(enumeration).includes(value);
+  return isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID');
+}
+
 function getValidationErrorMessage(errors: FormValidationErrors, labelMapper?: (name: string) => string): string {
   const errorKeys = Object.keys(errors).filter(name => !!errors[name]);
   if (errorKeys.length === 0) return null;
@@ -65,6 +70,7 @@ export const formValidator = {
   hasMaxLength,
   hasMinLength,
   isEmail,
+  isEnumValue,
   isNotEmptyArray,
   isNumber,
   isPassword,
