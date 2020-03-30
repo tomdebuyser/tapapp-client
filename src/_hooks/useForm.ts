@@ -66,7 +66,6 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
     const newValues = deepCopy(values);
     setter(newValues);
     setFormValues(newValues);
-    console.log(newValues);
   };
 
   const clearValues = () => setFormValues(initialForm);
