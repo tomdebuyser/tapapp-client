@@ -20,8 +20,8 @@ const initialForm: ILoginForm = {
 
 function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
-    password: formValidator.isRequired(values.password).error,
-    username: formValidator.isEmail(values.username).error,
+    password: formValidator.required(values.password).error,
+    username: formValidator.email(values.username).error,
   };
 }
 

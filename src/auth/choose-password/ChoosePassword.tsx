@@ -23,7 +23,7 @@ const initialForm: IChangePasswordForm = {
 
 function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
   return {
-    newPassword: formValidator.isPassword(values.newPassword).error,
+    newPassword: formValidator.password(values.newPassword).error,
   };
 }
 
