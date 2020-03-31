@@ -1,4 +1,5 @@
 import { translations } from '../_translations';
+import { isAfterDate, isBeforeDate, formatDate, DEFAULT_DATE_STRING_FORMAT, DEFAULT_TIME_STRING_FORMAT } from './timeHelpers';
 
 function trim(value: string): string {
   return value.replace(/\s/g, '');
@@ -14,6 +15,28 @@ interface IValidatorResponse {
 }
 
 export const formValidator = {
+  afterDate: function(value: Date, minDate: Date): IValidatorResponse {
+    const isValid = isAfterDate(value, minDate);
+    return {
+      error: isValid
+        ? null
+        : translations.getLabel('ERRORS.VALIDATION.AFTER_DATE', {
+            date: formatDate(minDate, `${DEFAULT_DATE_STRING_FORMAT} ${DEFAULT_TIME_STRING_FORMAT}`),
+          }),
+      isValid,
+    };
+  },
+  beforeDate: function(value: Date, maxDate: Date): IValidatorResponse {
+    const isValid = isBeforeDate(value, maxDate);
+    return {
+      error: isValid
+        ? null
+        : translations.getLabel('ERRORS.VALIDATION.BEFORE_DATE', {
+            date: formatDate(maxDate, `${DEFAULT_DATE_STRING_FORMAT} ${DEFAULT_TIME_STRING_FORMAT}`),
+          }),
+      isValid,
+    };
+  },
   email: function(email: string): IValidatorResponse {
     const isValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
     return {
