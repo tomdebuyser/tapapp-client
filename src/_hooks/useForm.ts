@@ -70,7 +70,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
    * The name of the input field should be equal to the simple property name within the form.
    * E.g. By using this function with '<Input name='title' />', the new value will be set on 'values.title'.
    */
-  const setSimpleAttribute = (value: unknown, name: string) => setFormValues({ ...values, [name]: value });
+  const setAttribute = (value: unknown, name: string) => setFormValues({ ...values, [name]: value });
 
   /**
    * Use this function if you cannot change the value with 'setSimpleAttribute' because it is (part of) a nested object or an array.
@@ -104,7 +104,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   }, []);
 
   return {
-    setSimpleAttribute,
+    setSimpleAttribute: setAttribute,
     setValues,
     submit,
     validationErrors,
