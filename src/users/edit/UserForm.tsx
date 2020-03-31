@@ -5,7 +5,6 @@ import { useForm } from '../../_hooks';
 import { translations } from '../../_translations';
 import RolesDropdown from '../../roles/edit/RolesDropdown';
 import { ApiError } from '../../_http';
-import './userForm.scss';
 import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
 

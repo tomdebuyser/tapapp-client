@@ -1,7 +1,5 @@
 @import '../../_styles/colors';
-
-$icon-height: 2.2rem;
-$label-bottom-margin: 0.5rem;
+@import '../../_styles/constants';
 
 .input-wrapper {
   &.required label:after {
@@ -15,8 +13,8 @@ $label-bottom-margin: 0.5rem;
   label:not(:last-child) {
     display: flex;
     align-items: center;
-    height: $icon-height;
-    margin-bottom: $label-bottom-margin;
+    height: $input-icon-height;
+    margin-bottom: $input-label-bottom-margin;
     font-size: 1.4rem;
     color: $grey-dark;
 
@@ -26,8 +24,8 @@ $label-bottom-margin: 0.5rem;
 
     i,
     svg {
-      width: $icon-height;
-      height: $icon-height;
+      width: $input-icon-height;
+      height: $input-icon-height;
     }
   }
 
