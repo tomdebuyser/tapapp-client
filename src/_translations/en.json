@@ -163,7 +163,7 @@
     "GENERAL": "Something went wrong. Please try again.",
     "PERMISSION_DENIED": "You do not have permissions to perform this action. Contact your administrator.",
     "VALIDATION": {
-      "FORM": "The following input fields are not filled in (correctly): {{fields}}",
+      "FORM": "Some fields are not filled in (correctly)",
       "REQUIRED": "Required",
       "INVALID": "Value is not correct",
       "PASSWORD_TOO_SHORT": "This password is too short",

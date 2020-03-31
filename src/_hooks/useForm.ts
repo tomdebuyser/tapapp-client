@@ -66,12 +66,17 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   /**
    * Use this function if the (simple) name of the field matches the name within the form.
    * Do not use it when the field is an array or (part of) a nested object. Use 'setValues' instead.
+   *
+   * The name of the input field should be equal to the simple property name within the form.
+   * E.g. By using this function with '<Input name='title' />', the new value will be set on 'values.title'.
    */
   const setSimpleAttribute = (value: unknown, name: string) => setFormValues({ ...values, [name]: value });
 
   /**
    * Use this function if you cannot change the value with 'setSimpleAttribute' because it is (part of) a nested object or an array.
    * If it is a simple value, we recommend to use 'setSimpleAttribute' for performance reasons.
+   *
+   * The name of the input field is not used to set any value here, as the value is set directly in the values
    */
   const setValues = (setter: (values: TForm) => void) => {
     const newValues = deepCopy(values) as TForm;

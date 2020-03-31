@@ -19,7 +19,7 @@ interface Props {
 
 function validateForm(values: IRoleForm): FormValidationErrors<IRoleForm> {
   return {
-    name: formValidator.isRequired(values.name),
+    name: formValidator.isRequired(values.name).error,
   };
 }
 

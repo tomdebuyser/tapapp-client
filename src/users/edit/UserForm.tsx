@@ -31,9 +31,9 @@ function errorAsString(error?: ApiError): string {
 const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   function validateForm(values: IUserForm): FormValidationErrors<IUserFormErrors> {
     const errors: FormValidationErrors<IUserFormErrors> = {};
-    if (values.email) errors.email = formValidator.isEmail(values.email);
-    else if (!userId) errors.email = formValidator.isRequired(values.email);
-    errors.roleIds = formValidator.isNotEmptyArray(values.roleIds);
+    if (values.email) errors.email = formValidator.isEmail(values.email).error;
+    else if (!userId) errors.email = formValidator.isRequired(values.email).error;
+    errors.roleIds = formValidator.isNotEmptyArray(values.roleIds).error;
     return errors;
   }
 

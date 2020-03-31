@@ -17,7 +17,7 @@ const initialForm: IRequestPasswordResetForm = {
 
 function validateForm(values: IRequestPasswordResetForm): FormValidationErrors<IRequestPasswordResetForm> {
   return {
-    email: formValidator.isEmail(values.email),
+    email: formValidator.isEmail(values.email).error,
   };
 }
 

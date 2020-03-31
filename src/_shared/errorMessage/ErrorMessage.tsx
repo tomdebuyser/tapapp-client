@@ -13,7 +13,7 @@ const ErrorMessage: FC<Props> = ({ children, isGlobal, isVisible }) => {
   if (isVisible && !!children)
     return (
       <div className={classnames('error-message', { global: isGlobal })}>
-        {global && <Icon name="SvgAlert" size={2.5} />}
+        {isGlobal && <Icon name="SvgAlert" size={2.5} />}
         <span>{children}</span>
       </div>
     );
