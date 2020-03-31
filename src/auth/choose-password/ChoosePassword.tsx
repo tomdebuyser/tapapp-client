@@ -58,7 +58,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
           autoComplete="new-password"
           errorMessage={form.validationErrors.newPassword}
           name="newPassword"
-          onChange={form.setSimpleAttribute}
+          onChange={form.setAttribute}
           type="password"
           value={form.values.newPassword}
         />

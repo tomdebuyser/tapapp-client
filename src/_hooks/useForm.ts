@@ -33,7 +33,7 @@ interface Params<TForm, TFormErrors> {
 }
 
 interface Response<TForm, TFormErrors> {
-  setSimpleAttribute: (value: unknown, name: string) => void;
+  setAttribute: (value: unknown, name: string) => void;
   setValues: (setter: (values: TForm) => void) => void;
   submit: (event: React.FormEvent) => void;
   validationErrors: FormValidationErrors<TFormErrors>;
@@ -73,8 +73,8 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   const setAttribute = (value: unknown, name: string) => setFormValues({ ...values, [name]: value });
 
   /**
-   * Use this function if you cannot change the value with 'setSimpleAttribute' because it is (part of) a nested object or an array.
-   * If it is a simple value, we recommend to use 'setSimpleAttribute' for performance reasons.
+   * Use this function if you cannot change the value with 'setAttribute' because it is (part of) a nested object or an array.
+   * If it is a simple value, we recommend to use 'setAttribute' for performance reasons.
    *
    * The name of the input field is not used to set any value here, as the value is set directly in the values
    */
@@ -104,7 +104,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   }, []);
 
   return {
-    setSimpleAttribute: setAttribute,
+    setAttribute: setAttribute,
     setValues,
     submit,
     validationErrors,

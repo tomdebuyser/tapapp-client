@@ -39,7 +39,7 @@ const RequestPasswordReset = () => {
           autoComplete="email"
           errorMessage={form.validationErrors.email}
           name="email"
-          onChange={form.setSimpleAttribute}
+          onChange={form.setAttribute}
           type="email"
           value={form.values.email}
         />

@@ -50,7 +50,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
             errorMessage={form.validationErrors.email}
             label={translations.getLabel('USERS.EMAIL')}
             name="email"
-            onChange={form.setSimpleAttribute}
+            onChange={form.setAttribute}
             type="email"
             value={form.values.email}
           />
@@ -62,7 +62,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
           errorMessage={form.validationErrors.firstName}
           label={translations.getLabel('USERS.FIRST_NAME')}
           name="firstName"
-          onChange={form.setSimpleAttribute}
+          onChange={form.setAttribute}
           type="text"
           value={form.values.firstName}
         />
@@ -70,7 +70,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
           errorMessage={form.validationErrors.lastName}
           label={translations.getLabel('USERS.LAST_NAME')}
           name="lastName"
-          onChange={form.setSimpleAttribute}
+          onChange={form.setAttribute}
           type="text"
           value={form.values.lastName}
         />
@@ -80,7 +80,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
           errorMessage={form.validationErrors.roleIds}
           label={translations.getLabel('USERS.ROLE')}
           name="roleIds"
-          onChange={form.setSimpleAttribute}
+          onChange={form.setAttribute}
           value={form.values.roleIds}
         />
         <div />
