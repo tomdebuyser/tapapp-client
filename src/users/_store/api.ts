@@ -12,7 +12,7 @@ export function createUser(body: IUserForm): Promise<IUser> {
 }
 
 export function updateUser(userId: string, body: IUserForm): Promise<IUser> {
-  return HttpClient.patch<IUser>(`users/${userId}`, removeEmptyKeys(body));
+  return HttpClient.put<IUser>(`users/${userId}`, removeEmptyKeys(body));
 }
 
 export function deactivateUser(userId: string): Promise<IUser> {
