@@ -5,8 +5,12 @@
 .ui.input{
   min-width: 30rem;
 
+  > input {
+    border-radius: 0;
+  }
+
   input::placeholder {
-    color: #b8bcbf;
+    color: @placeholderColorInput;
   }
 }
 

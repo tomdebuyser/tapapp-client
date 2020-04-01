@@ -1,0 +1,37 @@
+@import '../../../../_styles/colors';
+
+$height-toolbar: 4.3rem;
+
+.quill {
+  min-height: calc(#{$height-toolbar} + 5rem);
+
+  .ql-toolbar,
+  .ql-container {
+    border-color: $shadow;
+  }
+
+  .ql-container {
+    font-size: 1.6rem;
+    height: calc(100% - #{$height-toolbar});
+
+    .ql-editor.ql-blank::before {
+      font-style: normal;
+      color: $placeholder-color;
+    }
+  }
+
+  &.error {
+    .ql-toolbar,
+    .ql-container {
+      border-color: $error-border-color;
+    }
+
+    .ql-container {
+      background: $error-background-color;
+
+      .ql-editor.ql-blank::before {
+        color: $error-placeholder-color;
+      }
+    }
+  }
+}

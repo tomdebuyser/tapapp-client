@@ -5,5 +5,6 @@ import InputField from './inputField/InputField';
 import InputFieldDate from './inputFieldDate/InputFieldDate';
 import Radio from './radio/Radio';
 import TextArea from './textArea/TextArea';
+import Wysiwyg from './wysiwyg/Wysiwyg';
 
-export { Checkbox, Dropdown, InputField, InputFieldDate, Radio, TextArea, FileInput };
+export { Checkbox, Dropdown, InputField, InputFieldDate, Radio, TextArea, FileInput, Wysiwyg };
