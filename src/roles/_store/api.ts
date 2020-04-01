@@ -12,7 +12,7 @@ export function createRole(body: IRoleForm): Promise<IRole> {
 }
 
 export function updateRole(roleId: string, body: IRoleForm): Promise<IRole> {
-  return HttpClient.patch<IRole>(`roles/${roleId}`, removeEmptyKeys(body));
+  return HttpClient.put<IRole>(`roles/${roleId}`, removeEmptyKeys(body));
 }
 
 export function deleteRole(roleId: string): Promise<void> {

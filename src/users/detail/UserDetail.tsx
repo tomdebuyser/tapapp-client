@@ -40,6 +40,7 @@ const UserDetail: FC = () => {
       lastName: user.lastName || '',
       roleIds: user.roles.map(role => role.id),
     };
+
     return (
       <section>
         <h2>{translations.getLabel('USERS.DETAIL.DETAILS.TITLE')}</h2>
