@@ -32,7 +32,7 @@ const InputWrapper: FC<InputWrapperProps & { children: ReactNode; showError?: bo
   required,
   showError,
 }) => (
-  <div className={classnames('input-wrapper', className, { disabled, error: showError, required })}>
+  <div className={classnames('input-wrapper', { disabled, error: showError, required }, className)}>
     {!!label && (
       <label htmlFor={name}>
         {!!labelIcon && <Icon name={labelIcon} />}
