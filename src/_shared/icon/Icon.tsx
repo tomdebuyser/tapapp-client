@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import classnames from 'classnames';
 import * as ICONS from '../../_assets/svg';
 import './icon.scss';
 
@@ -19,7 +20,7 @@ const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clic
 
   const sizeObject = size ? { height: `${size}rem`, width: `${size}rem` } : {};
   const IconComponent = (
-    <i {...otherProps} className={`icon ${className}`} style={sizeObject}>
+    <i {...otherProps} className={classnames('icon', className)} style={sizeObject}>
       <Svg {...sizeObject} />
     </i>
   );

@@ -9,8 +9,16 @@
   }
 
   .actions {
+    margin: 0;
     display: flex;
     justify-content: flex-end;
+  }
+
+  .content {
+    margin: 0;
+    > :not(:first-child) {
+      margin-top: 1.5rem;
+    }
   }
 
   form {

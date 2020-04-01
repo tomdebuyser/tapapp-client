@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import Picker, { registerLocale, ReactDatePickerProps } from 'react-datepicker';
 import nl from 'date-fns/locale/nl';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import './datepicker.scss';
 

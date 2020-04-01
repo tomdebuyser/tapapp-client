@@ -35,6 +35,7 @@ const UserDetail: FC = () => {
 
   function renderDetailsSection() {
     const initialForm: IUserForm = {
+      email: user.email,
       firstName: user.firstName || '',
       lastName: user.lastName || '',
       roleIds: user.roles.map(role => role.id),

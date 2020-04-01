@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { IUserForm } from '../_models';
-import { InputField, Button } from '../../_shared';
+import { InputField, Button, ErrorMessage } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { translations } from '../../_translations';
 import RolesDropdown from '../../roles/edit/RolesDropdown';
-import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { ApiError } from '../../_http';
 import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
@@ -19,6 +18,10 @@ interface Props {
   userId?: string;
 }
 
+type IUserFormErrors = IUserForm & {
+  roleIds?: string;
+};
+
 function errorAsString(error?: ApiError): string {
   if (error?.error === 'EMAIL_ALREADY_IN_USE') return translations.getLabel(`USERS.ERRORS.EMAIL_ALREADY_IN_USE`);
   if (error?.error === 'PERMISSION_DENIED') return translations.getLabel(`ERRORS.PERMISSION_DENIED`);
@@ -26,15 +29,15 @@ function errorAsString(error?: ApiError): string {
 }
 
 const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
-  function validateForm(values: IUserForm): FormValidationErrors<IUserForm> {
-    const errors: FormValidationErrors<IUserForm> = {};
-    if (values.email) errors.email = formValidator.isEmail(values.email);
-    else if (!userId) errors.email = formValidator.isRequired(values.email);
-    errors.roleIds = formValidator.isNotEmptyArray(values.roleIds);
+  function validateForm(values: IUserForm): FormValidationErrors<IUserFormErrors> {
+    const errors: FormValidationErrors<IUserFormErrors> = {};
+    if (values.email) errors.email = formValidator.email(values.email).error;
+    else if (!userId) errors.email = formValidator.required(values.email).error;
+    errors.roleIds = formValidator.notEmptyArray(values.roleIds).error;
     return errors;
   }
 
-  const form = useForm<IUserForm>({ error, initialForm, submitForm, validateForm });
+  const form = useForm<IUserForm, IUserFormErrors>({ error, initialForm, submitForm, validateForm });
   const errorMessage = errorAsString(error);
 
   return (

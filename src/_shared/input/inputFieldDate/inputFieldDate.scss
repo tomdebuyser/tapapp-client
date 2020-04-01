@@ -1,5 +1,5 @@
+@import '../../../_styles/colors';
 @import '../../../_styles/constants';
-@import '../inputWrapper';
 
 .input-date-wrapper {
   position: relative;
@@ -20,7 +20,7 @@
 
   &.has-label {
     .datepicker-icon {
-      top: calc(#{$icon-height} + #{$label-bottom-margin});
+      top: calc(#{$input-icon-height} + #{$input-label-bottom-margin});
     }
   }
 }

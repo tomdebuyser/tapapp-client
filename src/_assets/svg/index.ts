@@ -5,7 +5,6 @@ export { ReactComponent as SvgChevronDown } from './chevron_down.svg';
 export { ReactComponent as SvgChevronLeft } from './chevron_left.svg';
 export { ReactComponent as SvgChevronRight } from './chevron_right.svg';
 export { ReactComponent as SvgClose } from './close.svg';
-export { ReactComponent as SvgDelete } from './delete.svg';
 export { ReactComponent as SvgLogo } from './logo.svg';
 export { ReactComponent as SvgLogout } from './logout.svg';
 export { ReactComponent as SvgPencil } from './pencil.svg';

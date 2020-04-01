@@ -3,11 +3,10 @@ import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { translations } from '../../_translations';
-import { InputField, Button } from '../../_shared';
+import { InputField, Button, ErrorMessage } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { authSelectors } from '../../_store/selectors';
 import { authActions } from '../../_store/actions';
-import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { FormValidationErrors } from '../../_hooks/useForm';
 import { ApiError, HttpStatus } from '../../_http';
 import { formValidator } from '../../_utils/formValidation';
@@ -21,8 +20,8 @@ const initialForm: ILoginForm = {
 
 function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
-    password: formValidator.isRequired(values.password),
-    username: formValidator.isEmail(values.username),
+    password: formValidator.required(values.password).error,
+    username: formValidator.email(values.username).error,
   };
 }
 

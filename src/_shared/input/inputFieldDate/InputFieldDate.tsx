@@ -8,8 +8,13 @@ import { translations } from '../../../_translations';
 import InputField, { InputFieldProps } from '../inputField/InputField';
 import './inputFieldDate.scss';
 
-const InputFieldDate: FC<InputFieldProps> = props => {
-  const { label, name, onChange, value } = props;
+interface Props extends InputFieldProps {
+  maxDate?: Date;
+  minDate?: Date;
+}
+
+const InputFieldDate: FC<Props> = props => {
+  const { label, maxDate, minDate, name, onChange, value } = props;
   return (
     <div className={classnames('input-date-wrapper', { 'has-label': !!label })}>
       <InputField
@@ -19,11 +24,13 @@ const InputFieldDate: FC<InputFieldProps> = props => {
         type="text"
       />
       <Datepicker
+        maxDate={maxDate}
+        minDate={minDate}
         name={name}
         onChange={(date: Date) => onChange(formatDate(date), name)}
         selected={dateFromString(value)}
         trigger={
-          <button className="plain datepicker-icon">
+          <button className="plain datepicker-icon" type="button">
             <Icon name="SvgCalendar" size={2.4} />
           </button>
         }

@@ -15,10 +15,10 @@ export interface IUser {
 }
 
 export interface IUserForm {
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  roleIds?: string[];
+  email: string;
+  firstName: string;
+  lastName: string;
+  roleIds: string[];
 }
 
 export enum UserState {

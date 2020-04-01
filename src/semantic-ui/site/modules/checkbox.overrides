@@ -12,12 +12,21 @@
 
 @toggleSize: 2rem;
 .ui.checkbox.toggle {
+  &.fitted {
+    width: 4.3rem;
+  }
+
   &.error input:checked ~ label {
     color: @red !important;
   }
   
   > input {
     height: @toggleSize;
+    width: 100%;
+
+    &:checked ~ label:after {
+      left: 2.2rem;
+    }
   }
 
   > label {

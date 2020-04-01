@@ -163,7 +163,7 @@
     "GENERAL": "Something went wrong. Please try again.",
     "PERMISSION_DENIED": "You do not have permissions to perform this action. Contact your administrator.",
     "VALIDATION": {
-      "FORM": "The following input fields are not filled in (correctly): {{fields}}",
+      "FORM": "Some fields are not filled in (correctly)",
       "REQUIRED": "Required",
       "INVALID": "Value is not correct",
       "PASSWORD_TOO_SHORT": "This password is too short",
@@ -171,7 +171,9 @@
       "MAX_LENGTH": "Value should have at least {{length}} characters",
       "MIN_LENGTH": "Value should have maximum {{length}} characters",
       "NOT_A_NUMBER": "Value is not a number",
-      "EMPTY_ARRAY": "Choose at least one"
+      "EMPTY_ARRAY": "Choose at least one",
+      "AFTER_DATE": "Date should be after {{date}}",
+      "BEFORE_DATE": "Date should be before {{date}}"
     }
   }
 }

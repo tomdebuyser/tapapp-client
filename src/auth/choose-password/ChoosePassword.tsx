@@ -2,11 +2,10 @@ import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, InputField } from '../../_shared';
+import { Button, InputField, ErrorMessage } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { translations } from '../../_translations';
 import { authActions } from '../../_store/actions';
-import ErrorMessage from '../../_shared/errorMessage/ErrorMessage';
 import { authSelectors } from '../../_store/selectors';
 import { formValidator } from '../../_utils/formValidation';
 import { FormValidationErrors } from '../../_hooks/useForm';
@@ -24,7 +23,7 @@ const initialForm: IChangePasswordForm = {
 
 function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
   return {
-    newPassword: formValidator.isPassword(values.newPassword),
+    newPassword: formValidator.password(values.newPassword).error,
   };
 }
 

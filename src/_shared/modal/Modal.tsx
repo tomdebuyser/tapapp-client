@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Modal as SemanticModal } from 'semantic-ui-react';
+import classnames from 'classnames';
 import Icon from '../icon/Icon';
 import './modal.scss';
 
@@ -15,7 +16,7 @@ interface Props {
 const Modal: FC<Props> & { Actions; Content; Header } = ({ className, open, onOpen, onClose, trigger, children }) => {
   return (
     <SemanticModal
-      className={`base-modal ${className}`}
+      className={classnames('base-modal', className)}
       closeIcon={<Icon className="close-icon" name="SvgClose" size={2.4} />}
       onClose={onClose}
       onOpen={onOpen}
@@ -25,6 +26,10 @@ const Modal: FC<Props> & { Actions; Content; Header } = ({ className, open, onOp
       {children}
     </SemanticModal>
   );
+};
+
+Modal.defaultProps = {
+  className: '',
 };
 
 Modal.Header = SemanticModal.Header;

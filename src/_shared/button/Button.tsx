@@ -26,7 +26,7 @@ const Button: FC<Props> = ({ asText, className, children, onClick, disabled, loa
       if (extraProps.type) props.type = extraProps.type;
       if (extraProps.onClick) props.onClick = extraProps.onClick;
       return (
-        <button {...props} className={classnames('as-text', className, { loading, negative, primary })} disabled={isDisabled}>
+        <button {...props} className={classnames('as-text', { loading, negative, primary }, className)} disabled={isDisabled}>
           <div className="button-inner">
             {children}
             {loading && (
