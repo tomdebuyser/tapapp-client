@@ -68,6 +68,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
     const hasError = !isEmptyObject(errors);
     if (!hasError) {
       sumbitFunction(values, setFormValues);
+      setIsDirty(false);
     }
     setValidationErrors(errors);
   };
