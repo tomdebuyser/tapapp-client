@@ -1,11 +1,11 @@
 import { translations } from '../_translations';
 import { isAfterDate, isBeforeDate, formatDate, DEFAULT_DATE_STRING_FORMAT, DEFAULT_TIME_STRING_FORMAT } from './timeHelpers';
 
-function trim(value: string): string {
+export function trim(value: string): string {
   return value.replace(/\s/g, '');
 }
 
-function isEmptyString(value: string): boolean {
+export function isEmptyString(value: string): boolean {
   return !value || trim(value) === '';
 }
 

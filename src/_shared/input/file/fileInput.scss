@@ -15,7 +15,8 @@ $padding: 2.5rem;
   }
 
   &.error {
-    border-color: $red;
+    border-color: $error-border-color;
+    background-color: $error-background-color;
   }
 
   &.animated-error {
@@ -32,7 +33,7 @@ $padding: 2.5rem;
   }
 
   &.disabled {
-    background-color: $disabled-color;
+    background-color: $disabled-background-color;
   }
 
   .trigger {
@@ -107,31 +108,31 @@ $padding: 2.5rem;
     border-color: $shadow;
   }
   10% {
-    border-color: $red;
+    border-color: $error-border-color;
   }
   20% {
     border-color: $shadow;
   }
   30% {
-    border-color: $red;
+    border-color: $error-border-color;
   }
   40% {
     border-color: $shadow;
   }
   50% {
-    border-color: $red;
+    border-color: $error-border-color;
   }
   60% {
     border-color: $shadow;
   }
   70% {
-    border-color: $red;
+    border-color: $error-border-color;
   }
   80% {
     border-color: $shadow;
   }
   90% {
-    border-color: $red;
+    border-color: $error-border-color;
   }
   100% {
     border-color: $shadow;

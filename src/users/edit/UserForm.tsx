@@ -7,7 +7,6 @@ import RolesDropdown from '../../roles/edit/RolesDropdown';
 import { ApiError } from '../../_http';
 import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
-import './userForm.scss';
 
 interface Props {
   buttons?: JSX.Element | JSX.Element[];

@@ -2,6 +2,10 @@
          Site Overrides
 *******************************/
 
+.ui.form textarea {
+  border-radius: 0;
+}
+
 .ui.form textarea.error {
     background-color: #FFF6F6;
     border-color: @errorColor;
