@@ -102,4 +102,13 @@ export const formValidator = {
       isValid,
     };
   },
+  url: function(value: string): IValidatorResponse {
+    const isValid = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/i.test(
+      value,
+    );
+    return {
+      error: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID'),
+      isValid,
+    };
+  },
 };
