@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { translations } from '../../_translations';
 import { useModal } from '../../_hooks';
+import { translations } from '../../_translations';
 import ChangePasswordModal from './modals/ChangePasswordModal';
 
 const ChangePassword = () => {

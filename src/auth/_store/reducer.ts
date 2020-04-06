@@ -103,6 +103,7 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
     case AuthActionType.ChangePassword:
       return {
         ...state,
+        errorChangePassword: null,
         isChangePasswordLoading: true,
       };
     case AuthActionType.ChangePasswordSuccess:
@@ -113,6 +114,7 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
     case AuthActionType.ChangePasswordError:
       return {
         ...state,
+        errorChangePassword: action.payload.error,
         isChangePasswordLoading: false,
       };
     default:
