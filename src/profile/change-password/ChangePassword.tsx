@@ -4,6 +4,8 @@ import { useModal } from '../../_hooks';
 import { translations } from '../../_translations';
 import ChangePasswordModal from './modals/ChangePasswordModal';
 
+import './changePassword.scss';
+
 const ChangePassword = () => {
   const [renderChangePasswordModal, showChangePasswordModal] = useModal(modalProps => <ChangePasswordModal {...modalProps} />);
 

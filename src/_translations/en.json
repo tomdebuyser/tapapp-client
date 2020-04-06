@@ -25,7 +25,7 @@
     },
     "CHANGE_PASSWORD": {
       "TITLE": "Change password",
-      "DESCRIPTION": "If you would like to change your password...",
+      "DESCRIPTION": "Changing your password is quiet easy, just press the button",
       "OLD_PASSWORD": "Old password",
       "NEW_PASSWORD": "New password"
     },
