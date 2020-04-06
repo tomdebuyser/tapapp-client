@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ApiError } from '../_http';
 import { translations } from '../_translations';
 import { deepCopy, isEmptyObject } from '../_utils/objectHelpers';
+import useToggle from './useToggle';
 
 /**
  * FormValidationErrors type explanation:
@@ -24,18 +25,21 @@ export type FormValidationErrors<TForm = Record<string, unknown>> = {
 };
 
 export type SubmitFormFunction<TForm> = (values: TForm, setFormValues: (values: TForm) => void) => void;
+type ValidateFormFunction<TForm, TFormErrors> = (values: TForm) => FormValidationErrors<TFormErrors>;
 
 interface Params<TForm, TFormErrors> {
   error?: ApiError;
   initialForm: TForm;
   submitForm: SubmitFormFunction<TForm>;
-  validateForm: (values: TForm) => FormValidationErrors<TFormErrors>;
+  validateForm: ValidateFormFunction<TForm, TFormErrors>;
 }
 
 interface Response<TForm, TFormErrors> {
+  isDirty: boolean;
   setAttribute: (value: unknown, name: string) => void;
   setValues: (setter: (values: TForm) => void) => void;
   submit: (event: React.FormEvent) => void;
+  submitWithParams: (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>) => void;
   validationErrors: FormValidationErrors<TFormErrors>;
   values: TForm;
 }
@@ -52,16 +56,28 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   const { error, initialForm, submitForm, validateForm } = params;
   const [values, setFormValues] = useState<TForm>(initialForm);
   const [validationErrors, setValidationErrors] = useState<FormValidationErrors<TFormErrors>>({});
+  const [isDirty, setIsDirty] = useToggle(false);
 
-  const submit = (event: React.FormEvent): void => {
+  const submit = (
+    event: React.FormEvent,
+    sumbitFunction: SubmitFormFunction<TForm> = submitForm,
+    validateFunction: ValidateFormFunction<TForm, TFormErrors> = validateForm,
+  ): void => {
     event.preventDefault();
-    const errors = validateForm(values);
+    const errors = validateFunction(values);
     const hasError = !isEmptyObject(errors);
     if (!hasError) {
-      submitForm(values, setFormValues);
+      sumbitFunction(values, setFormValues);
+      setIsDirty(false);
     }
     setValidationErrors(errors);
   };
+
+  /**
+   * In some cases, you want to use a different submit / validate function than the default one.
+   */
+  const submitWithParams = (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>): void =>
+    submit(event, params.submitForm, params.validateForm);
 
   /**
    * Use this function if the (simple) name of the field matches the name within the form.
@@ -70,7 +86,10 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
    * The name of the input field should be equal to the simple property name within the form.
    * E.g. By using this function with '<Input name='title' />', the new value will be set on 'values.title'.
    */
-  const setAttribute = (value: unknown, name: string) => setFormValues({ ...values, [name]: value });
+  const setAttribute = (value: unknown, name: string) => {
+    setFormValues({ ...values, [name]: value });
+    setIsDirty(true);
+  };
 
   /**
    * Use this function if you cannot change the value with 'setAttribute' because it is (part of) a nested object or an array.
@@ -82,6 +101,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
     const newValues = deepCopy(values) as TForm;
     setter(newValues);
     setFormValues(newValues);
+    setIsDirty(true);
   };
 
   const clearValues = () => setFormValues(initialForm);
@@ -95,6 +115,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
 
   useEffect(() => {
     setFormValues(initialForm);
+    setIsDirty(false);
     // Clear all if the component unmounts
     return () => {
       clearValues();
@@ -104,9 +125,11 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   }, []);
 
   return {
-    setAttribute: setAttribute,
+    isDirty,
+    setAttribute,
     setValues,
     submit,
+    submitWithParams,
     validationErrors,
     values,
   };

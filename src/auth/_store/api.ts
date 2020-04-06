@@ -19,5 +19,5 @@ export function requestPasswordReset(body: IRequestPasswordResetForm): Promise<v
 }
 
 export function authenticate(): Promise<IProfile> {
-  return HttpClient.get<IProfile>('auth/authenticate');
+  return HttpClient.get<IProfile>('auth/me');
 }
