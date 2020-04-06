@@ -175,5 +175,11 @@
       "AFTER_DATE": "Date should be after {{date}}",
       "BEFORE_DATE": "Date should be before {{date}}"
     }
+  },
+  "PROFILE": {
+    "SETTINGS": {
+      "CHANGE_PASSWORD": "Change password",
+      "CHANGE_PASSWORD_INFORMATION": "If you would like to change your password..."
+    }
   }
 }
