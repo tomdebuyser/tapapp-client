@@ -23,11 +23,18 @@
       "RESET": "Send reset instructions",
       "TITLE": "Forgot your password?"
     },
+    "CHANGE_PASSWORD": {
+      "TITLE": "Change password",
+      "DESCRIPTION": "If you would like to change your password...",
+      "OLD_PASSWORD": "Old password",
+      "NEW_PASSWORD": "New password"
+    },
     "ERRORS": {
       "UNAUTHORIZED": "Incorrect username or password",
       "USER_STATE_NOT_ALLOWED": "This account is not active, hence you cannot login. Contact your administrator.",
       "RESET_TOKEN_INVALID": "The link you are using is invalid.",
-      "RESET_TOKEN_EXPIRED": "The link you are using is expired."
+      "RESET_TOKEN_EXPIRED": "The link you are using is expired.",
+      "INVALID_OLD_PASSWORD": "The password you entered is not your current password."
     },
     "TOASTER": {
       "CHOOSE_PASSWORD": "You can now login with your new password.",
@@ -174,12 +181,6 @@
       "EMPTY_ARRAY": "Choose at least one",
       "AFTER_DATE": "Date should be after {{date}}",
       "BEFORE_DATE": "Date should be before {{date}}"
-    }
-  },
-  "PROFILE": {
-    "SETTINGS": {
-      "CHANGE_PASSWORD": "Change password",
-      "CHANGE_PASSWORD_INFORMATION": "If you would like to change your password..."
     }
   }
 }
