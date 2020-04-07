@@ -17,12 +17,14 @@ interface Props {
 const initialForm: IChangePassword = {
   newPassword: '',
   oldPassword: '',
+  repeatNewPassword: '',
 };
 
 function validateForm(values: IChangePassword): FormValidationErrors<IChangePassword> {
   // No validation on the oldPassword because this is normally aligned with the validation rules
   return {
     newPassword: formValidator.password(values.newPassword).error,
+    repeatNewPassword: formValidator.checkMatchingPasswords(values.newPassword, values.repeatNewPassword).error,
   };
 }
 
@@ -66,6 +68,14 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
             onChange={form.setAttribute}
             type="password"
             value={form.values.newPassword}
+          />
+          <InputField
+            errorMessage={form.validationErrors.repeatNewPassword}
+            label={translations.getLabel('AUTH.CHANGE_PASSWORD.REPEAT_NEW_PASSWORD')}
+            name="repeatNewPassword"
+            onChange={form.setAttribute}
+            type="password"
+            value={form.values.repeatNewPassword}
           />
         </Modal.Content>
         <Modal.Actions>

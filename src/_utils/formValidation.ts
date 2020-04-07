@@ -37,6 +37,16 @@ export const formValidator = {
       isValid,
     };
   },
+  checkMatchingPasswords: function(newPassword, repeatNewPassword): IValidatorResponse {
+    const isNewPasswordValid = formValidator.password(newPassword);
+    const isRepeatNewPasswordValid = formValidator.password(repeatNewPassword);
+
+    const isValid = isNewPasswordValid && isRepeatNewPasswordValid && newPassword === repeatNewPassword;
+    return {
+      error: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID_NEW_AND_REPEATED_PASSWORD'),
+      isValid,
+    };
+  },
   email: function(email: string): IValidatorResponse {
     const isValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
     return {
