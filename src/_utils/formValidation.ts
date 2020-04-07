@@ -52,8 +52,8 @@ export const formValidator = {
     };
   },
   matchingPasswords: function(newPassword: string, repeatNewPassword: string): IValidatorResponse {
-    const isNewPasswordValid = formValidator.password(newPassword);
-    const isRepeatNewPasswordValid = formValidator.password(repeatNewPassword);
+    const isNewPasswordValid = formValidator.password(newPassword).isValid;
+    const isRepeatNewPasswordValid = formValidator.password(repeatNewPassword).isValid;
 
     const isValid = isNewPasswordValid && isRepeatNewPasswordValid && newPassword === repeatNewPassword;
     return {
