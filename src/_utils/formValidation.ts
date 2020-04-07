@@ -51,6 +51,16 @@ export const formValidator = {
       isValid,
     };
   },
+  matchingPasswords: function(newPassword: string, repeatNewPassword: string): IValidatorResponse {
+    const isNewPasswordValid = formValidator.password(newPassword).isValid;
+    const isRepeatNewPasswordValid = formValidator.password(repeatNewPassword).isValid;
+
+    const isValid = isNewPasswordValid && isRepeatNewPasswordValid && newPassword === repeatNewPassword;
+    return {
+      error: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID_NEW_AND_REPEATED_PASSWORD'),
+      isValid,
+    };
+  },
   maxLength: function(value: string, max: number): IValidatorResponse {
     const isValid = `${value}`.length <= max;
     return {

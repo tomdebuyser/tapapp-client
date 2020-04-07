@@ -23,15 +23,24 @@
       "RESET": "Send reset instructions",
       "TITLE": "Forgot your password?"
     },
+    "CHANGE_PASSWORD": {
+      "TITLE": "Change password",
+      "DESCRIPTION": "Changing your password is quiet easy, just press the button",
+      "OLD_PASSWORD": "Old password",
+      "NEW_PASSWORD": "New password",
+      "REPEAT_NEW_PASSWORD": "Repeat new password"
+    },
     "ERRORS": {
       "UNAUTHORIZED": "Incorrect username or password",
       "USER_STATE_NOT_ALLOWED": "This account is not active, hence you cannot login. Contact your administrator.",
       "RESET_TOKEN_INVALID": "The link you are using is invalid.",
-      "RESET_TOKEN_EXPIRED": "The link you are using is expired."
+      "RESET_TOKEN_EXPIRED": "The link you are using is expired.",
+      "INVALID_OLD_PASSWORD": "The password you entered is not your current password."
     },
     "TOASTER": {
       "CHOOSE_PASSWORD": "You can now login with your new password.",
-      "REQUEST_PASSWORD_RESET": "An email with instructions was sent if it is linked to an account."
+      "REQUEST_PASSWORD_RESET": "An email with instructions was sent if it is linked to an account.",
+      "CHANGE_PASSWORD": "Your password is successfully updated."
     }
   },
   "ROLES": {
@@ -163,17 +172,18 @@
     "GENERAL": "Something went wrong. Please try again.",
     "PERMISSION_DENIED": "You do not have permissions to perform this action. Contact your administrator.",
     "VALIDATION": {
+      "AFTER_DATE": "Date should be after {{date}}",
+      "BEFORE_DATE": "Date should be before {{date}}",
+      "EMPTY_ARRAY": "Choose at least one",
       "FORM": "Some fields are not filled in (correctly)",
-      "REQUIRED": "Required",
+      "INVALID_NEW_AND_REPEATED_PASSWORD": "The new and repeated password you've entered aren't matching",
       "INVALID": "Value is not correct",
-      "PASSWORD_TOO_SHORT": "This password is too short",
-      "PASSWORD_UNSAFE": "This password doesn't fit the requirements",
       "MAX_LENGTH": "Value should have at least {{length}} characters",
       "MIN_LENGTH": "Value should have maximum {{length}} characters",
       "NOT_A_NUMBER": "Value is not a number",
-      "EMPTY_ARRAY": "Choose at least one",
-      "AFTER_DATE": "Date should be after {{date}}",
-      "BEFORE_DATE": "Date should be before {{date}}"
+      "PASSWORD_TOO_SHORT": "This password is too short",
+      "PASSWORD_UNSAFE": "This password doesn't fit the requirements",
+      "REQUIRED": "Required"
     }
   }
 }

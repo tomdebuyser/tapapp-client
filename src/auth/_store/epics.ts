@@ -93,10 +93,21 @@ const requestPasswordResetEpic$: Epic = action$ =>
 const requestPasswordResetSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.RequestPasswordResetSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
+const changePasswordEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.ChangePassword).pipe(
+    exhaustMap(({ payload }: authActions.ChangePassword) =>
+      from(authApi.changePassword(payload.values)).pipe(
+        tap(() => toast.success(translations.getLabel('AUTH.TOASTER.CHANGE_PASSWORD'))),
+        map(() => new authActions.ChangePasswordSuccess()),
+        catchError(error => of(new authActions.ChangePasswordError({ error }))),
+      ),
+    ),
+  );
+
 export default [
-  unauthorizedEpic$,
   authenticateEpic$,
   authenticateSuccessEpic$,
+  changePasswordEpic$,
   choosePasswordEpic$,
   choosePasswordSuccessEpic$,
   loginEpic$,
@@ -104,4 +115,5 @@ export default [
   logoutSuccessEpic$,
   requestPasswordResetEpic$,
   requestPasswordResetSuccessEpic$,
+  unauthorizedEpic$,
 ];

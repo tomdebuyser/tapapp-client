@@ -1,12 +1,15 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
-import { IChangePasswordForm, IRequestPasswordResetForm, ILoginForm } from '../_models';
+import { IChangePasswordForm, IRequestPasswordResetForm, ILoginForm, IChangePassword } from '../_models';
 import { IProfile } from '../../profile/_models';
 
 export enum AuthActionType {
   Authenticate = '[Auth] Authenticate',
   AuthenticateError = '[Auth] AuthenticateError',
   AuthenticateSuccess = '[Auth] AuthenticateSuccess',
+  ChangePassword = '[Auth] ChangePassword',
+  ChangePasswordError = '[Auth] ChangePasswordError',
+  ChangePasswordSuccess = '[Auth] ChangePasswordSuccess',
   ChoosePassword = '[Auth] ChoosePassword',
   ChoosePasswordError = '[Auth] ChoosePasswordError',
   ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
@@ -33,6 +36,21 @@ export class AuthenticateSuccess implements Action<AuthActionType> {
 export class AuthenticateError implements Action<AuthActionType> {
   readonly type = AuthActionType.AuthenticateError;
   constructor(public payload: { error?: ApiError }) {}
+}
+
+// CHANGE PASSWORD
+export class ChangePassword implements Action<AuthActionType> {
+  readonly type = AuthActionType.ChangePassword;
+  constructor(public payload: { values: IChangePassword }) {}
+}
+
+export class ChangePasswordSuccess implements Action<AuthActionType> {
+  readonly type = AuthActionType.ChangePasswordSuccess;
+}
+
+export class ChangePasswordError implements Action<AuthActionType> {
+  readonly type = AuthActionType.ChangePasswordError;
+  constructor(public payload: { error: ApiError }) {}
 }
 
 // LOGIN
@@ -94,6 +112,9 @@ export type AuthAction =
   | Authenticate
   | AuthenticateSuccess
   | AuthenticateError
+  | ChangePassword
+  | ChangePasswordSuccess
+  | ChangePasswordError
   | ChoosePassword
   | ChoosePasswordSuccess
   | ChoosePasswordError

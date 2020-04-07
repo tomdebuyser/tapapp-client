@@ -2,11 +2,13 @@ import { ApiError } from '../../_http';
 import { AuthAction, AuthActionType } from './actions';
 
 export interface AuthState {
+  errorChangePassword?: ApiError;
   errorChoosePassword?: ApiError;
   errorLogin?: ApiError;
   errorLogout?: ApiError;
   errorRequestPasswordReset?: ApiError;
   isAuthenticateLoading: boolean;
+  isChangePasswordLoading?: boolean;
   isChoosePasswordLoading?: boolean;
   isLoginLoading?: boolean;
   isLogoutLoading?: boolean;
@@ -97,6 +99,23 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
         ...state,
         errorRequestPasswordReset: action.payload.error,
         isRequestPasswordResetLoading: false,
+      };
+    case AuthActionType.ChangePassword:
+      return {
+        ...state,
+        errorChangePassword: null,
+        isChangePasswordLoading: true,
+      };
+    case AuthActionType.ChangePasswordSuccess:
+      return {
+        ...state,
+        isChangePasswordLoading: false,
+      };
+    case AuthActionType.ChangePasswordError:
+      return {
+        ...state,
+        errorChangePassword: action.payload.error,
+        isChangePasswordLoading: false,
       };
     default:
       return state;
