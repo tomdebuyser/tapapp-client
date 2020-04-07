@@ -7,12 +7,12 @@ export function choosePassword(body: IChangePasswordForm, resetToken: string): P
 }
 
 export function changePassword(body: IChangePassword): Promise<void> {
-  const params = {
+  const payload = {
     newPassword: body.newPassword,
     oldPassword: body.oldPassword,
   };
 
-  return HttpClient.post('auth/change-password', params);
+  return HttpClient.post('auth/change-password', payload);
 }
 
 export function login(body: ILoginForm): Promise<IProfile> {

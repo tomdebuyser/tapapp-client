@@ -24,7 +24,7 @@ function validateForm(values: IChangePassword): FormValidationErrors<IChangePass
   // No validation on the oldPassword because this is normally aligned with the validation rules
   return {
     newPassword: formValidator.password(values.newPassword).error,
-    repeatNewPassword: formValidator.checkMatchingPasswords(values.newPassword, values.repeatNewPassword).error,
+    repeatNewPassword: formValidator.matchingPasswords(values.newPassword, values.repeatNewPassword).error,
   };
 }
 

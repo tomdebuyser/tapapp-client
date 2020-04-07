@@ -13,12 +13,12 @@ const ChangePassword = () => {
     <section className="section-change-password">
       <h2>{translations.getLabel('AUTH.CHANGE_PASSWORD.TITLE')}</h2>
       <div>{translations.getLabel('AUTH.CHANGE_PASSWORD.DESCRIPTION')}</div>
-      {renderChangePasswordModal()}
       <div className="actions">
         <Button className="show-modal" onClick={() => showChangePasswordModal()}>
           {translations.getLabel('AUTH.CHANGE_PASSWORD.TITLE')}
         </Button>
       </div>
+      {renderChangePasswordModal()}
     </section>
   );
 };
