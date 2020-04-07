@@ -10,6 +10,7 @@ export const errorChangePassword = createSelector(selectNode, (state: AuthState)
 export const errorLogin = createSelector(selectNode, (state: AuthState) => state.errorLogin);
 export const errorLogout = createSelector(selectNode, (state: AuthState) => state.errorLogout);
 export const errorRequestPasswordReset = createSelector(selectNode, (state: AuthState) => state.errorRequestPasswordReset);
+export const isChangePasswordLoading = createSelector(selectNode, (state: AuthState) => state.isChangePasswordLoading);
 export const isChoosePasswordLoading = createSelector(selectNode, (state: AuthState) => state.isChoosePasswordLoading);
 export const isLoginLoading = createSelector(selectNode, (state: AuthState) => state.isLoginLoading);
 export const isLogoutLoading = createSelector(selectNode, (state: AuthState) => state.isLogoutLoading);

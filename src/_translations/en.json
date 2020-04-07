@@ -38,7 +38,8 @@
     },
     "TOASTER": {
       "CHOOSE_PASSWORD": "You can now login with your new password.",
-      "REQUEST_PASSWORD_RESET": "An email with instructions was sent if it is linked to an account."
+      "REQUEST_PASSWORD_RESET": "An email with instructions was sent if it is linked to an account.",
+      "CHANGE_PASSWORD": "Your password is successfully updated."
     }
   },
   "ROLES": {

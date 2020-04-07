@@ -33,6 +33,7 @@ function errorAsString(error?: ApiError): string {
 
 const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
   const dispatch = useDispatch();
+  const isSubmitting = useSelector(authSelectors.isChangePasswordLoading);
   const error = useSelector(authSelectors.errorChangePassword);
   const errorMessage = errorAsString(error);
   const form = useForm<IChangePassword>({
@@ -45,10 +46,11 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
   return (
     <Modal className="change-password-modal" onClose={closeModal} open>
       <form onSubmit={form.submit}>
-        <ErrorMessage isGlobal isVisible={!!errorMessage}>
-          {errorMessage}
-        </ErrorMessage>
+        <Modal.Header>{translations.getLabel('AUTH.CHANGE_PASSWORD.TITLE')}</Modal.Header>
         <Modal.Content>
+          <ErrorMessage isGlobal isVisible={!!errorMessage}>
+            {errorMessage}
+          </ErrorMessage>
           <InputField
             errorMessage={form.validationErrors.oldPassword}
             label={translations.getLabel('AUTH.CHANGE_PASSWORD.OLD_PASSWORD')}
@@ -66,11 +68,11 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
             value={form.values.newPassword}
           />
         </Modal.Content>
-        <div className="actions">
-          <Button loading={false} primary type="submit">
-            {translations.getLabel('AUTH.CHANGE_PASSWORD.TITLE')}
+        <Modal.Actions>
+          <Button loading={isSubmitting} primary type="submit">
+            {translations.getLabel('SHARED.BUTTONS.SAVE')}
           </Button>
-        </div>
+        </Modal.Actions>
       </form>
     </Modal>
   );
