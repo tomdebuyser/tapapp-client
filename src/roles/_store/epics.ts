@@ -9,6 +9,16 @@ import { translations } from '../../_translations';
 import { RolesActionType } from './actions';
 import * as rolesApi from './api';
 
+const getRoleEpic$: Epic = action$ =>
+  action$.ofType(RolesActionType.GetRole).pipe(
+    exhaustMap(({ payload }: rolesActions.GetRole) => {
+      return from(rolesApi.getRole(payload.roleId)).pipe(
+        map(data => new rolesActions.GetRoleSuccess(data)),
+        catchError(error => of(new rolesActions.GetRoleError({ error }))),
+      );
+    }),
+  );
+
 const getRolesEpic$: Epic = (action$, state$) =>
   action$.ofType(RolesActionType.GetRoles).pipe(
     exhaustMap(() => {
@@ -74,6 +84,7 @@ const deleteRoleEpic$: Epic = action$ =>
   );
 
 export default [
+  getRoleEpic$,
   getRolesEpic$,
   setRolesQueryEpic$,
   createRoleEpic$,

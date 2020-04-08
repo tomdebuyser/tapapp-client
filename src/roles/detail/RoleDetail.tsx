@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Container } from 'semantic-ui-react';
+import React, { FC, useEffect } from 'react';
+import { Container, Loader } from 'semantic-ui-react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { GoBackLink, Timestamps, Button } from '../../_shared';
@@ -11,11 +11,18 @@ import { rolesActions } from '../../_store/actions';
 
 const RoleDetail: FC = () => {
   const { id } = useParams();
-  const role = useSelector(rolesSelectors.role(id));
+  const role = useSelector(rolesSelectors.role);
   const isDeleteLoading = useSelector(rolesSelectors.isDeleteRoleLoading);
+  const isGetRoleLoading = useSelector(rolesSelectors.isGetRoleLoading);
   const isUpdateLoading = useSelector(rolesSelectors.isUpdateRoleLoading);
   const error = useSelector(rolesSelectors.errorCrudRoles);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(new rolesActions.GetRole({ roleId: id }));
+  }, [dispatch, id]);
+
+  if (isGetRoleLoading) return <Loader active={isGetRoleLoading} size="large" />;
 
   if (!role) return <Redirect to="/roles" />;
 
