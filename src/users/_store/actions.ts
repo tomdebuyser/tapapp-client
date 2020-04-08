@@ -9,6 +9,9 @@ export enum UsersActionType {
   DeactivateUser = '[Users] DeactivateUser',
   DeactivateUserError = '[Users] DeactivateUserError',
   DeactivateUserSuccess = '[Users] DeactivateUserSuccess',
+  GetUser = '[Users] GetUser',
+  GetUserError = '[Users] GetUserError',
+  GetUserSuccess = '[Users] GetUserSuccess',
   GetUsers = '[Users] GetUsers',
   GetUsersError = '[Users] GetUsersError',
   GetUsersSuccess = '[Users] GetUsersSuccess',
@@ -19,6 +22,21 @@ export enum UsersActionType {
   UpdateUser = '[Users] UpdateUser',
   UpdateUserError = '[Users] UpdateUserError',
   UpdateUserSuccess = '[Users] UpdateUserSuccess',
+}
+
+export class GetUser implements Action<UsersActionType> {
+  readonly type = UsersActionType.GetUser;
+  constructor(public payload: { id: string }) {}
+}
+
+export class GetUserSuccess implements Action<UsersActionType> {
+  readonly type = UsersActionType.GetUserSuccess;
+  constructor(public payload: IUser) {}
+}
+
+export class GetUserError implements Action<UsersActionType> {
+  readonly type = UsersActionType.GetUserError;
+  constructor(public payload: { error: ApiError }) {}
 }
 
 export class GetUsers implements Action<UsersActionType> {
@@ -101,6 +119,9 @@ export class ResendRegisterEmailError implements Action<UsersActionType> {
 }
 
 export type UsersAction =
+  | GetUser
+  | GetUserSuccess
+  | GetUserError
   | GetUsers
   | GetUsersSuccess
   | GetUsersError

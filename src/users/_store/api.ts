@@ -7,6 +7,10 @@ export function getUsers(query?: HttpMetadataQuery): Promise<HttpPagedResponse<I
   return HttpClient.get<HttpPagedResponse<IUser>>(`users${getQueryParams(query)}`);
 }
 
+export function getUser(userId: string): Promise<IUser> {
+  return HttpClient.get<IUser>(`users/${userId}`);
+}
+
 export function createUser(body: IUserForm): Promise<IUser> {
   return HttpClient.post<IUser>('users', body);
 }
