@@ -14,13 +14,6 @@ export interface IUser {
   updatedBy?: string;
 }
 
-export interface IUserForm {
-  email: string;
-  firstName: string;
-  lastName: string;
-  roleIds: string[];
-}
-
 export enum UserState {
   Active = 'ACTIVE',
   Inactive = 'INACTIVE',
