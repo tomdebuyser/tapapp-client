@@ -1,4 +1,4 @@
 export * from './ChangePasswordForm';
 export * from './ChoosePasswordForm';
-export * from './Login';
-export * from './RequestPasswordReset';
+export * from './LoginForm';
+export * from './RequestPasswordResetForm';
