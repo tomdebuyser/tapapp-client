@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
-import { IChangePasswordForm, IRequestPasswordResetForm, ILoginForm, IChangePassword } from '../_models';
+import { IChoosePasswordForm, IRequestPasswordResetForm, ILoginForm, IChangePassword } from '../_models';
 import { IProfile } from '../../profile/_models';
 
 export enum AuthActionType {
@@ -67,7 +67,7 @@ export class LoginError implements Action<AuthActionType> {
 // CHOOSE PASSWORD
 export class ChoosePassword implements Action<AuthActionType> {
   readonly type = AuthActionType.ChoosePassword;
-  constructor(public payload: { token: string; values: IChangePasswordForm }) {}
+  constructor(public payload: { token: string; values: IChoosePasswordForm }) {}
 }
 
 export class ChoosePasswordSuccess implements Action<AuthActionType> {
