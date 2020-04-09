@@ -4,11 +4,13 @@ import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { UsersAction, UsersActionType } from './actions';
 
 export interface UsersState {
+  detail?: IUser;
   errorCrudUsers?: ApiError;
   errorDeactivateUser?: ApiError;
   errorResendRegisterEmail?: ApiError;
   isCreateUserLoading?: boolean;
   isDeactivateUserLoading?: boolean;
+  isGetUserDetailLoading?: boolean;
   isGetUsersLoading?: boolean;
   isResendRegisterEmailLoading?: boolean;
   isUpdateUserLoading?: boolean;
@@ -21,6 +23,25 @@ const initialState: UsersState = {};
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
   switch (action.type) {
+    case UsersActionType.GetUserDetail:
+      return {
+        ...state,
+        errorCrudUsers: null,
+        isGetUserDetailLoading: true,
+      };
+    case UsersActionType.GetUserDetailSuccess: {
+      return {
+        ...state,
+        detail: action.payload.data,
+        isGetUserDetailLoading: false,
+      };
+    }
+    case UsersActionType.GetUserDetailError:
+      return {
+        ...state,
+        errorCrudUsers: action.payload.error,
+        isGetUserDetailLoading: false,
+      };
     case UsersActionType.GetUsers:
       return {
         ...state,

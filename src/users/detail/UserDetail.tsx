@@ -1,28 +1,34 @@
-import React, { FC } from 'react';
-import { Container } from 'semantic-ui-react';
+import React, { FC, useEffect } from 'react';
+import { Container, Loader } from 'semantic-ui-react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { Button, GoBackLink, Timestamps } from '../../_shared';
 import { translations } from '../../_translations';
 import { usersSelectors, profileSelectors } from '../../_store/selectors';
-import './userDetail.scss';
 import { usersActions } from '../../_store/actions';
 import { labelForUserState } from '../_utils';
 import { UserState, IUserForm } from '../_models';
 import UserForm from '../edit/UserForm';
+import './userDetail.scss';
 
 const UserDetail: FC = () => {
   const { id } = useParams();
   const user = useSelector(usersSelectors.user(id));
   const isUpdateLoading = useSelector(usersSelectors.isUpdateUserLoading);
+  const isGetUserDetailLoading = useSelector(usersSelectors.isGetUserDetailLoading);
   const isDeactivateLoading = useSelector(usersSelectors.isDeactivateUserLoading);
   const isResendRegisterMailLoading = useSelector(usersSelectors.isResendRegisterEmailLoading);
   const error = useSelector(usersSelectors.errorCrudUsers);
   const permissions = useSelector(profileSelectors.permissions);
   const dispatch = useDispatch();
 
-  if (!user) return <Redirect to="/users" />;
+  useEffect(() => {
+    dispatch(new usersActions.GetUserDetail({ userId: id }));
+  }, [dispatch, id]);
+
+  if (!user && error) return <Redirect to="/users" />;
+  if (!user) return <Loader active={isGetUserDetailLoading} size="large" />;
 
   function renderHeader() {
     return (

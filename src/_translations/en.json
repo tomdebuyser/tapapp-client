@@ -85,6 +85,9 @@
     }
   },
   "SHARED": {
+    "PROFILE": {
+      "TITLE": "Welcome to {{brandName}} admin portal!"
+    },
     "BUTTONS": {
       "CANCEL": "Cancel",
       "CREATE": "Create",
@@ -127,7 +130,7 @@
         "DESCRIPTION": {
           "ACTIVE": "The user is able to login.",
           "INACTIVE": "The user is not able to login.",
-          "REGISTERING": "An email has been sent to this user to activate his/her accound by choosing a password."
+          "REGISTERING": "An email has been sent to this user to activate his/her account by choosing a password."
         },
         "BUTTON": {
           "ACTIVATE": "Activate user",

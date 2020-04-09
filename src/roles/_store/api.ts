@@ -3,6 +3,10 @@ import { HttpClient, HttpPagedResponse, HttpMetadataQuery } from '../../_http';
 import { getQueryParams } from '../../_utils/queryHelpers';
 import { removeEmptyKeys } from '../../_utils/objectHelpers';
 
+export function getRoleDetail(roleId: string): Promise<IRole> {
+  return HttpClient.get<IRole>(`roles/${roleId}`);
+}
+
 export function getRoles(query?: HttpMetadataQuery): Promise<HttpPagedResponse<IRole>> {
   return HttpClient.get<HttpPagedResponse<IRole>>(`roles${getQueryParams(query)}`);
 }

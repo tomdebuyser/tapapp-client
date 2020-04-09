@@ -6,11 +6,12 @@ const selectNode = (state: AppState) => state.roles;
 
 export const roles = createSelector(selectNode, (state: RolesState) => state.roles);
 export const role = (roleId: string) =>
-  createSelector(selectNode, (state: RolesState) => state.roles?.find(role => role.id === roleId));
+  createSelector(selectNode, (state: RolesState) => (state.detail?.id === roleId ? state.detail : null));
 export const metadata = createSelector(selectNode, (state: RolesState) => state.metadata);
 export const query = createSelector(selectNode, (state: RolesState) => state.query);
 export const errorCrudRoles = createSelector(selectNode, (state: RolesState) => state.errorCrudRoles);
 export const isCreateRoleLoading = createSelector(selectNode, (state: RolesState) => state.isCreateRoleLoading);
 export const isDeleteRoleLoading = createSelector(selectNode, (state: RolesState) => state.isDeleteRoleLoading);
+export const isGetRoleDetailLoading = createSelector(selectNode, (state: RolesState) => state.isGetRoleDetailLoading);
 export const isGetRolesLoading = createSelector(selectNode, (state: RolesState) => state.isGetRolesLoading);
 export const isUpdateRoleLoading = createSelector(selectNode, (state: RolesState) => state.isUpdateRoleLoading);

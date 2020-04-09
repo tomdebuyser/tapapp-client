@@ -4,9 +4,11 @@ import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { RolesAction, RolesActionType } from './actions';
 
 export interface RolesState {
+  detail?: IRole;
   errorCrudRoles?: ApiError;
   isCreateRoleLoading?: boolean;
   isDeleteRoleLoading?: boolean;
+  isGetRoleDetailLoading?: boolean;
   isGetRolesLoading?: boolean;
   isUpdateRoleLoading?: boolean;
   metadata?: HttpMetadataPagingResponse;
@@ -18,6 +20,25 @@ const initialState: RolesState = {};
 
 export default function reducer(state = initialState, action: RolesAction): RolesState {
   switch (action.type) {
+    case RolesActionType.GetRoleDetail:
+      return {
+        ...state,
+        errorCrudRoles: null,
+        isGetRoleDetailLoading: true,
+      };
+    case RolesActionType.GetRoleDetailSuccess: {
+      return {
+        ...state,
+        detail: action.payload.data,
+        isGetRoleDetailLoading: false,
+      };
+    }
+    case RolesActionType.GetRoleDetailError:
+      return {
+        ...state,
+        errorCrudRoles: action.payload.error,
+        isGetRoleDetailLoading: false,
+      };
     case RolesActionType.GetRoles:
       return {
         ...state,

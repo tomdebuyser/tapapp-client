@@ -9,6 +9,16 @@ import { translations } from '../../_translations';
 import { UsersActionType } from './actions';
 import * as usersApi from './api';
 
+const getUserDetailEpic$: Epic = action$ =>
+  action$.ofType(UsersActionType.GetUserDetail).pipe(
+    exhaustMap(({ payload }: usersActions.GetUserDetail) => {
+      return from(usersApi.getUserDetail(payload.userId)).pipe(
+        map(data => new usersActions.GetUserDetailSuccess({ data })),
+        catchError(error => of(new usersActions.GetUserDetailError({ error }))),
+      );
+    }),
+  );
+
 const getUsersEpic$: Epic = (action$, state$) =>
   action$.ofType(UsersActionType.GetUsers).pipe(
     exhaustMap(() => {
@@ -83,6 +93,7 @@ const resendRegisterEmailEpic$: Epic = action$ =>
   );
 
 export default [
+  getUserDetailEpic$,
   getUsersEpic$,
   setUsersQueryEpic$,
   createUserEpic$,
