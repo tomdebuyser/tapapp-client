@@ -5,7 +5,6 @@ import { UsersAction, UsersActionType } from './actions';
 
 export interface UsersState {
   detail?: IUser;
-  errorCrudUser?: ApiError;
   errorCrudUsers?: ApiError;
   errorDeactivateUser?: ApiError;
   errorResendRegisterEmail?: ApiError;
@@ -27,7 +26,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.GetUserDetail:
       return {
         ...state,
-        errorCrudUser: null,
+        errorCrudUsers: null,
         isGetUserDetailLoading: true,
       };
     case UsersActionType.GetUserDetailSuccess: {
@@ -40,7 +39,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.GetUserDetailError:
       return {
         ...state,
-        errorCrudUser: action.payload.error,
+        errorCrudUsers: action.payload.error,
         isGetUserDetailLoading: false,
       };
     case UsersActionType.GetUsers:

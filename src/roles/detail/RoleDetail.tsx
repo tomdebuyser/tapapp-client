@@ -11,11 +11,11 @@ import { rolesActions } from '../../_store/actions';
 
 const RoleDetail: FC = () => {
   const { id } = useParams();
-  const role = useSelector(rolesSelectors.role);
+  const role = useSelector(rolesSelectors.role(id));
   const isDeleteLoading = useSelector(rolesSelectors.isDeleteRoleLoading);
   const isGetRoleDetailLoading = useSelector(rolesSelectors.isGetRoleDetailLoading);
   const isUpdateLoading = useSelector(rolesSelectors.isUpdateRoleLoading);
-  const error = useSelector(rolesSelectors.errorCrudRole);
+  const error = useSelector(rolesSelectors.errorCrudRoles);
   const dispatch = useDispatch();
 
   useEffect(() => {

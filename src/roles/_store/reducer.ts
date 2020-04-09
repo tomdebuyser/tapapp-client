@@ -5,7 +5,6 @@ import { RolesAction, RolesActionType } from './actions';
 
 export interface RolesState {
   detail?: IRole;
-  errorCrudRole?: ApiError;
   errorCrudRoles?: ApiError;
   isCreateRoleLoading?: boolean;
   isDeleteRoleLoading?: boolean;
@@ -24,7 +23,7 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.GetRoleDetail:
       return {
         ...state,
-        errorCrudRole: null,
+        errorCrudRoles: null,
         isGetRoleDetailLoading: true,
       };
     case RolesActionType.GetRoleDetailSuccess: {
@@ -37,7 +36,7 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.GetRoleDetailError:
       return {
         ...state,
-        errorCrudRole: action.payload.error,
+        errorCrudRoles: action.payload.error,
         isGetRoleDetailLoading: false,
       };
     case RolesActionType.GetRoles:

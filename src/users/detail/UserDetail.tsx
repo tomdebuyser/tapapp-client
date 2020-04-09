@@ -14,12 +14,12 @@ import './userDetail.scss';
 
 const UserDetail: FC = () => {
   const { id } = useParams();
-  const user = useSelector(usersSelectors.user);
+  const user = useSelector(usersSelectors.user(id));
   const isUpdateLoading = useSelector(usersSelectors.isUpdateUserLoading);
   const isGetUserDetailLoading = useSelector(usersSelectors.isGetUserDetailLoading);
   const isDeactivateLoading = useSelector(usersSelectors.isDeactivateUserLoading);
   const isResendRegisterMailLoading = useSelector(usersSelectors.isResendRegisterEmailLoading);
-  const error = useSelector(usersSelectors.errorCrudUser);
+  const error = useSelector(usersSelectors.errorCrudUsers);
   const permissions = useSelector(profileSelectors.permissions);
   const dispatch = useDispatch();
 
