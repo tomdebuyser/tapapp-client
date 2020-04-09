@@ -26,7 +26,7 @@ export enum UsersActionType {
 
 export class GetUser implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUser;
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { userId: string }) {}
 }
 
 export class GetUserSuccess implements Action<UsersActionType> {

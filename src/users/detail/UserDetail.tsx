@@ -24,7 +24,7 @@ const UserDetail: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(new usersActions.GetUser({ id }));
+    dispatch(new usersActions.GetUser({ userId: id }));
   }, [dispatch, id]);
 
   if (isGetUserLoading) return <Loader active={isGetUserLoading} size="large" />;

@@ -12,7 +12,7 @@ import * as usersApi from './api';
 const getUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.GetUser).pipe(
     exhaustMap(({ payload }: usersActions.GetUser) => {
-      return from(usersApi.getUser(payload.id)).pipe(
+      return from(usersApi.getUser(payload.userId)).pipe(
         map(data => new usersActions.GetUserSuccess(data)),
         catchError(error => of(new usersActions.GetUserError({ error }))),
       );
