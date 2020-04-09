@@ -85,6 +85,9 @@
     }
   },
   "SHARED": {
+    "PROFILE": {
+      "TITLE": "Welcome to {{brandName}} admin portal!"
+    },
     "BUTTONS": {
       "CANCEL": "Cancel",
       "CREATE": "Create",
