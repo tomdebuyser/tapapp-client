@@ -9,7 +9,7 @@ import { authActions } from '../../_store/actions';
 import { authSelectors } from '../../_store/selectors';
 import { formValidator } from '../../_utils/formValidation';
 import { FormValidationErrors } from '../../_hooks/useForm';
-import { IChangePasswordForm } from '../_models';
+import { IChoosePasswordForm } from '../_models';
 import { ApiError } from '../../_http';
 import './choosePassword.scss';
 
@@ -17,11 +17,11 @@ interface Props {
   isPasswordReset?: boolean;
 }
 
-const initialForm: IChangePasswordForm = {
+const initialForm: IChoosePasswordForm = {
   newPassword: '',
 };
 
-function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
+function validateForm(values: IChoosePasswordForm): FormValidationErrors<IChoosePasswordForm> {
   return {
     newPassword: formValidator.password(values.newPassword).error,
   };
@@ -38,7 +38,7 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
   const isSubmitting = useSelector(authSelectors.isChoosePasswordLoading);
   const error = useSelector(authSelectors.errorChoosePassword);
   const { token } = useParams();
-  const form = useForm<IChangePasswordForm>({
+  const form = useForm<IChoosePasswordForm>({
     error,
     initialForm,
     submitForm: values => dispatch(new authActions.ChoosePassword({ token, values })),

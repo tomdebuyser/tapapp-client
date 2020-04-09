@@ -4,7 +4,7 @@ import { Modal, InputField, Button, ErrorMessage } from '../../../_shared';
 import { ApiError } from '../../../_http';
 import { useForm } from '../../../_hooks';
 import { FormValidationErrors } from '../../../_hooks/useForm';
-import { IChangePassword } from '../../../auth/_models';
+import { IChangePasswordForm } from '../../../auth/_models';
 import { authActions } from '../../../_store/actions';
 import { authSelectors } from '../../../_store/selectors';
 import { formValidator } from '../../../_utils/formValidation';
@@ -14,13 +14,13 @@ interface Props {
   closeModal: () => void;
 }
 
-const initialForm: IChangePassword = {
+const initialForm: IChangePasswordForm = {
   newPassword: '',
   oldPassword: '',
   repeatNewPassword: '',
 };
 
-function validateForm(values: IChangePassword): FormValidationErrors<IChangePassword> {
+function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
   // No validation on the oldPassword because this is normally aligned with the validation rules
   return {
     newPassword: formValidator.password(values.newPassword).error,
@@ -38,7 +38,7 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
   const isSubmitting = useSelector(authSelectors.isChangePasswordLoading);
   const error = useSelector(authSelectors.errorChangePassword);
   const errorMessage = errorAsString(error);
-  const form = useForm<IChangePassword>({
+  const form = useForm<IChangePasswordForm>({
     error,
     initialForm,
     submitForm: values => dispatch(new authActions.ChangePassword({ values })),

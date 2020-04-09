@@ -18,8 +18,3 @@ export interface IPermissions {
     view: boolean;
   };
 }
-
-export interface IRoleForm {
-  name: string;
-  permissions: IPermissions;
-}
