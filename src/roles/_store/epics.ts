@@ -9,7 +9,7 @@ import { translations } from '../../_translations';
 import { RolesActionType } from './actions';
 import * as rolesApi from './api';
 
-const getRoleEpic$: Epic = action$ =>
+const getRoleDetailEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.GetRoleDetail).pipe(
     exhaustMap(({ payload }: rolesActions.GetRoleDetail) => {
       return from(rolesApi.getRoleDetail(payload.roleId)).pipe(
@@ -84,7 +84,7 @@ const deleteRoleEpic$: Epic = action$ =>
   );
 
 export default [
-  getRoleEpic$,
+  getRoleDetailEpic$,
   getRolesEpic$,
   setRolesQueryEpic$,
   createRoleEpic$,

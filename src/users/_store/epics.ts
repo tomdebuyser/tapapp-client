@@ -9,7 +9,7 @@ import { translations } from '../../_translations';
 import { UsersActionType } from './actions';
 import * as usersApi from './api';
 
-const getUserEpic$: Epic = action$ =>
+const getUserDetailEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.GetUserDetail).pipe(
     exhaustMap(({ payload }: usersActions.GetUserDetail) => {
       return from(usersApi.getUserDetail(payload.userId)).pipe(
@@ -93,7 +93,7 @@ const resendRegisterEmailEpic$: Epic = action$ =>
   );
 
 export default [
-  getUserEpic$,
+  getUserDetailEpic$,
   getUsersEpic$,
   setUsersQueryEpic$,
   createUserEpic$,
