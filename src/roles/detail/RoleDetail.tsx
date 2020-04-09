@@ -15,16 +15,15 @@ const RoleDetail: FC = () => {
   const isDeleteLoading = useSelector(rolesSelectors.isDeleteRoleLoading);
   const isGetRoleLoading = useSelector(rolesSelectors.isGetRoleLoading);
   const isUpdateLoading = useSelector(rolesSelectors.isUpdateRoleLoading);
-  const error = useSelector(rolesSelectors.errorCrudRoles);
+  const error = useSelector(rolesSelectors.errorCrudRole);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(new rolesActions.GetRole({ roleId: id }));
   }, [dispatch, id]);
 
-  if (isGetRoleLoading) return <Loader active={isGetRoleLoading} size="large" />;
-
-  if (!role) return <Redirect to="/roles" />;
+  if (!role && error) return <Redirect to="/roles" />;
+  if (!role) return <Loader active={isGetRoleLoading} size="large" />;
 
   function renderHeader() {
     return (

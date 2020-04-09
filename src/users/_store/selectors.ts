@@ -8,6 +8,7 @@ export const users = createSelector(selectNode, (state: UsersState) => state.use
 export const user = createSelector(selectNode, (state: UsersState) => state.detail);
 export const metadata = createSelector(selectNode, (state: UsersState) => state.metadata);
 export const query = createSelector(selectNode, (state: UsersState) => state.query);
+export const errorCrudUser = createSelector(selectNode, (state: UsersState) => state.errorCrudUser);
 export const errorCrudUsers = createSelector(selectNode, (state: UsersState) => state.errorCrudUsers);
 export const errorDeactivateUser = createSelector(selectNode, (state: UsersState) => state.errorDeactivateUser);
 export const errorResendRegisterEmail = createSelector(selectNode, (state: UsersState) => state.errorResendRegisterEmail);
