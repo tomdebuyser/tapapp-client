@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.GetRoleDetailSuccess: {
       return {
         ...state,
-        detail: action.payload,
+        detail: action.payload.data,
         isGetRoleDetailLoading: false,
       };
     }

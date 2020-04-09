@@ -31,7 +31,7 @@ export class GetUserDetail implements Action<UsersActionType> {
 
 export class GetUserDetailSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.GetUserDetailSuccess;
-  constructor(public payload: IUser) {}
+  constructor(public payload: { data: IUser }) {}
 }
 
 export class GetUserDetailError implements Action<UsersActionType> {

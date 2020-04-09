@@ -13,7 +13,7 @@ const getUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.GetUserDetail).pipe(
     exhaustMap(({ payload }: usersActions.GetUserDetail) => {
       return from(usersApi.getUserDetail(payload.userId)).pipe(
-        map(data => new usersActions.GetUserDetailSuccess(data)),
+        map(data => new usersActions.GetUserDetailSuccess({ data })),
         catchError(error => of(new usersActions.GetUserDetailError({ error }))),
       );
     }),

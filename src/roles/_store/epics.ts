@@ -13,7 +13,7 @@ const getRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.GetRoleDetail).pipe(
     exhaustMap(({ payload }: rolesActions.GetRoleDetail) => {
       return from(rolesApi.getRoleDetail(payload.roleId)).pipe(
-        map(data => new rolesActions.GetRoleDetailSuccess(data)),
+        map(data => new rolesActions.GetRoleDetailSuccess({ data })),
         catchError(error => of(new rolesActions.GetRoleDetailError({ error }))),
       );
     }),

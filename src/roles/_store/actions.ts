@@ -28,7 +28,7 @@ export class GetRoleDetail implements Action<RolesActionType> {
 
 export class GetRoleDetailSuccess implements Action<RolesActionType> {
   readonly type = RolesActionType.GetRoleDetailSuccess;
-  constructor(public payload: IRole) {}
+  constructor(public payload: { data: IRole }) {}
 }
 
 export class GetRoleDetailError implements Action<RolesActionType> {

@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.GetUserDetailSuccess: {
       return {
         ...state,
-        detail: action.payload,
+        detail: action.payload.data,
         isGetUserDetailLoading: false,
       };
     }
