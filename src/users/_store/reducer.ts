@@ -11,7 +11,7 @@ export interface UsersState {
   errorResendRegisterEmail?: ApiError;
   isCreateUserLoading?: boolean;
   isDeactivateUserLoading?: boolean;
-  isGetUserLoading?: boolean;
+  isGetUserDetailLoading?: boolean;
   isGetUsersLoading?: boolean;
   isResendRegisterEmailLoading?: boolean;
   isUpdateUserLoading?: boolean;
@@ -24,24 +24,24 @@ const initialState: UsersState = {};
 
 export default function reducer(state = initialState, action: UsersAction): UsersState {
   switch (action.type) {
-    case UsersActionType.GetUser:
+    case UsersActionType.GetUserDetail:
       return {
         ...state,
         errorCrudUser: null,
-        isGetUserLoading: true,
+        isGetUserDetailLoading: true,
       };
-    case UsersActionType.GetUserSuccess: {
+    case UsersActionType.GetUserDetailSuccess: {
       return {
         ...state,
         detail: action.payload,
-        isGetUserLoading: false,
+        isGetUserDetailLoading: false,
       };
     }
-    case UsersActionType.GetUserError:
+    case UsersActionType.GetUserDetailError:
       return {
         ...state,
         errorCrudUser: action.payload.error,
-        isGetUserLoading: false,
+        isGetUserDetailLoading: false,
       };
     case UsersActionType.GetUsers:
       return {

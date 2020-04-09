@@ -9,9 +9,9 @@ export enum RolesActionType {
   DeleteRole = '[Roles] DeleteRole',
   DeleteRoleError = '[Roles] DeleteRoleError',
   DeleteRoleSuccess = '[Roles] DeleteRoleSuccess',
-  GetRole = '[Roles] GetRole',
-  GetRoleError = '[Roles] GetRoleError',
-  GetRoleSuccess = '[Roles] GetRoleSuccess',
+  GetRoleDetail = '[Roles] GetRoleDetail',
+  GetRoleDetailError = '[Roles] GetRoleDetailError',
+  GetRoleDetailSuccess = '[Roles] GetRoleDetailSuccess',
   GetRoles = '[Roles] GetRoles',
   GetRolesError = '[Roles] GetRolesError',
   GetRolesSuccess = '[Roles] GetRolesSuccess',
@@ -21,18 +21,18 @@ export enum RolesActionType {
   UpdateRoleSuccess = '[Roles] UpdateRoleSuccess',
 }
 
-export class GetRole implements Action<RolesActionType> {
-  readonly type = RolesActionType.GetRole;
+export class GetRoleDetail implements Action<RolesActionType> {
+  readonly type = RolesActionType.GetRoleDetail;
   constructor(public payload: { roleId: string }) {}
 }
 
-export class GetRoleSuccess implements Action<RolesActionType> {
-  readonly type = RolesActionType.GetRoleSuccess;
+export class GetRoleDetailSuccess implements Action<RolesActionType> {
+  readonly type = RolesActionType.GetRoleDetailSuccess;
   constructor(public payload: IRole) {}
 }
 
-export class GetRoleError implements Action<RolesActionType> {
-  readonly type = RolesActionType.GetRoleError;
+export class GetRoleDetailError implements Action<RolesActionType> {
+  readonly type = RolesActionType.GetRoleDetailError;
   constructor(public payload: { error: ApiError }) {}
 }
 
@@ -107,9 +107,9 @@ export type RolesAction =
   | DeleteRole
   | DeleteRoleError
   | DeleteRoleSuccess
-  | GetRole
-  | GetRoleError
-  | GetRoleSuccess
+  | GetRoleDetail
+  | GetRoleDetailError
+  | GetRoleDetailSuccess
   | GetRoles
   | GetRolesError
   | GetRolesSuccess

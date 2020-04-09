@@ -9,7 +9,7 @@ export interface RolesState {
   errorCrudRoles?: ApiError;
   isCreateRoleLoading?: boolean;
   isDeleteRoleLoading?: boolean;
-  isGetRoleLoading?: boolean;
+  isGetRoleDetailLoading?: boolean;
   isGetRolesLoading?: boolean;
   isUpdateRoleLoading?: boolean;
   metadata?: HttpMetadataPagingResponse;
@@ -17,30 +17,28 @@ export interface RolesState {
   roles?: IRole[];
 }
 
-const initialState: RolesState = {
-  isGetRoleLoading: true,
-};
+const initialState: RolesState = {};
 
 export default function reducer(state = initialState, action: RolesAction): RolesState {
   switch (action.type) {
-    case RolesActionType.GetRole:
+    case RolesActionType.GetRoleDetail:
       return {
         ...state,
         errorCrudRole: null,
-        isGetRoleLoading: true,
+        isGetRoleDetailLoading: true,
       };
-    case RolesActionType.GetRoleSuccess: {
+    case RolesActionType.GetRoleDetailSuccess: {
       return {
         ...state,
         detail: action.payload,
-        isGetRoleLoading: false,
+        isGetRoleDetailLoading: false,
       };
     }
-    case RolesActionType.GetRoleError:
+    case RolesActionType.GetRoleDetailError:
       return {
         ...state,
         errorCrudRole: action.payload.error,
-        isGetRoleLoading: false,
+        isGetRoleDetailLoading: false,
       };
     case RolesActionType.GetRoles:
       return {

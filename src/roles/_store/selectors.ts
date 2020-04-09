@@ -12,6 +12,6 @@ export const errorCrudRole = createSelector(selectNode, (state: RolesState) => s
 export const errorCrudRoles = createSelector(selectNode, (state: RolesState) => state.errorCrudRoles);
 export const isCreateRoleLoading = createSelector(selectNode, (state: RolesState) => state.isCreateRoleLoading);
 export const isDeleteRoleLoading = createSelector(selectNode, (state: RolesState) => state.isDeleteRoleLoading);
-export const isGetRoleLoading = createSelector(selectNode, (state: RolesState) => state.isGetRoleLoading);
+export const isGetRoleDetailLoading = createSelector(selectNode, (state: RolesState) => state.isGetRoleDetailLoading);
 export const isGetRolesLoading = createSelector(selectNode, (state: RolesState) => state.isGetRolesLoading);
 export const isUpdateRoleLoading = createSelector(selectNode, (state: RolesState) => state.isUpdateRoleLoading);

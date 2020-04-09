@@ -10,11 +10,11 @@ import { RolesActionType } from './actions';
 import * as rolesApi from './api';
 
 const getRoleEpic$: Epic = action$ =>
-  action$.ofType(RolesActionType.GetRole).pipe(
-    exhaustMap(({ payload }: rolesActions.GetRole) => {
-      return from(rolesApi.getRole(payload.roleId)).pipe(
-        map(data => new rolesActions.GetRoleSuccess(data)),
-        catchError(error => of(new rolesActions.GetRoleError({ error }))),
+  action$.ofType(RolesActionType.GetRoleDetail).pipe(
+    exhaustMap(({ payload }: rolesActions.GetRoleDetail) => {
+      return from(rolesApi.getRoleDetail(payload.roleId)).pipe(
+        map(data => new rolesActions.GetRoleDetailSuccess(data)),
+        catchError(error => of(new rolesActions.GetRoleDetailError({ error }))),
       );
     }),
   );

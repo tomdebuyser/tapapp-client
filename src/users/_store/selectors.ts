@@ -13,7 +13,7 @@ export const errorCrudUsers = createSelector(selectNode, (state: UsersState) => 
 export const errorDeactivateUser = createSelector(selectNode, (state: UsersState) => state.errorDeactivateUser);
 export const errorResendRegisterEmail = createSelector(selectNode, (state: UsersState) => state.errorResendRegisterEmail);
 export const isCreateUserLoading = createSelector(selectNode, (state: UsersState) => state.isCreateUserLoading);
-export const isGetUserLoading = createSelector(selectNode, (state: UsersState) => state.isGetUserLoading);
+export const isGetUserDetailLoading = createSelector(selectNode, (state: UsersState) => state.isGetUserDetailLoading);
 export const isGetUsersLoading = createSelector(selectNode, (state: UsersState) => state.isGetUsersLoading);
 export const isDeactivateUserLoading = createSelector(selectNode, (state: UsersState) => state.isDeactivateUserLoading);
 export const isResendRegisterEmailLoading = createSelector(selectNode, (state: UsersState) => state.isResendRegisterEmailLoading);

@@ -16,7 +16,7 @@ const UserDetail: FC = () => {
   const { id } = useParams();
   const user = useSelector(usersSelectors.user);
   const isUpdateLoading = useSelector(usersSelectors.isUpdateUserLoading);
-  const isGetUserLoading = useSelector(usersSelectors.isGetUserLoading);
+  const isGetUserDetailLoading = useSelector(usersSelectors.isGetUserDetailLoading);
   const isDeactivateLoading = useSelector(usersSelectors.isDeactivateUserLoading);
   const isResendRegisterMailLoading = useSelector(usersSelectors.isResendRegisterEmailLoading);
   const error = useSelector(usersSelectors.errorCrudUser);
@@ -24,11 +24,11 @@ const UserDetail: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(new usersActions.GetUser({ userId: id }));
+    dispatch(new usersActions.GetUserDetail({ userId: id }));
   }, [dispatch, id]);
 
   if (!user && error) return <Redirect to="/users" />;
-  if (!user) return <Loader active={isGetUserLoading} size="large" />;
+  if (!user) return <Loader active={isGetUserDetailLoading} size="large" />;
 
   function renderHeader() {
     return (

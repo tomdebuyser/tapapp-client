@@ -7,7 +7,7 @@ export function getUsers(query?: HttpMetadataQuery): Promise<HttpPagedResponse<I
   return HttpClient.get<HttpPagedResponse<IUser>>(`users${getQueryParams(query)}`);
 }
 
-export function getUser(userId: string): Promise<IUser> {
+export function getUserDetail(userId: string): Promise<IUser> {
   return HttpClient.get<IUser>(`users/${userId}`);
 }
 
