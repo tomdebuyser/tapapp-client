@@ -5,7 +5,7 @@ import ChangePassword from './change-password/ChangePassword';
 
 const Profile: FC = () => {
   return (
-    <Container as="main">
+    <Container as="main" className="left-container">
       <p>Welcome to {config.brandName()} admin portal!</p>
       <ChangePassword />
     </Container>
