@@ -10,8 +10,8 @@ export function insertUpdatedData<T extends { id: string }>(currentData: T[], up
   return [...(currentData || []).filter(value => !ids.includes(value.id)), ...updatedData];
 }
 
-// TODO: Add typings
-export function deepCopy(inObject: unknown): unknown {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function deepCopy<T>(inObject: T): T {
   // Return the value if inObject is not an object
   if (typeof inObject !== 'object' || inObject === null) {
     return inObject;
@@ -19,7 +19,7 @@ export function deepCopy(inObject: unknown): unknown {
 
   // Return a copy of the value if inObject is a Date
   if (inObject instanceof Date) {
-    return new Date(inObject);
+    return new Date(inObject) as any;
   }
 
   // Return the value if inObject is a File
@@ -28,7 +28,7 @@ export function deepCopy(inObject: unknown): unknown {
   }
 
   // Create an array or object to hold the values
-  const outObject = Array.isArray(inObject) ? [] : {};
+  const outObject: any = Array.isArray(inObject) ? [] : {};
   for (const key in inObject) {
     const value = inObject[key];
     // Recursively (deep) copy for nested objects, including arrays
@@ -37,6 +37,7 @@ export function deepCopy(inObject: unknown): unknown {
 
   return outObject;
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function isEmptyObject(object: object): boolean {
   if (!object) return true;
