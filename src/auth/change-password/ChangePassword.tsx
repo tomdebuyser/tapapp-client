@@ -2,7 +2,7 @@ import React from 'react';
 import { useModal } from '../../_hooks';
 import { translations } from '../../_translations';
 import { Button } from '../../_shared';
-import ChangePasswordModal from './modals/ChangePasswordModal';
+import ChangePasswordModal from './ChangePasswordModal';
 
 import './changePassword.scss';
 

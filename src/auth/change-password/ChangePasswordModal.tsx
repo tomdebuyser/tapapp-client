@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, InputField, Button, ErrorMessage } from '../../../_shared';
-import { ApiError } from '../../../_http';
-import { useForm } from '../../../_hooks';
-import { FormValidationErrors } from '../../../_hooks/useForm';
-import { IChangePasswordForm } from '../../../auth/_models';
-import { authActions } from '../../../_store/actions';
-import { authSelectors } from '../../../_store/selectors';
-import { formValidator } from '../../../_utils/formValidation';
-import { translations } from '../../../_translations';
+import { Modal, InputField, Button, ErrorMessage } from '../../_shared';
+import { ApiError } from '../../_http';
+import { useForm } from '../../_hooks';
+import { FormValidationErrors } from '../../_hooks/useForm';
+import { IChangePasswordForm } from '../_models';
+import { authActions } from '../../_store/actions';
+import { authSelectors } from '../../_store/selectors';
+import { formValidator } from '../../_utils/formValidation';
+import { translations } from '../../_translations';
 
 interface Props {
   closeModal: () => void;
