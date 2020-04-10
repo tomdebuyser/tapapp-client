@@ -41,7 +41,7 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
   const form = useForm<IChangePasswordForm>({
     error,
     initialForm,
-    submitForm: values => dispatch(new authActions.ChangePassword({ values })),
+    submitForm: values => dispatch(new authActions.ChangePassword({ onSuccess: closeModal, values })),
     validateForm,
   });
 

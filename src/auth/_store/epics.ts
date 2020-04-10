@@ -98,7 +98,10 @@ const changePasswordEpic$: Epic = action$ =>
     exhaustMap(({ payload }: authActions.ChangePassword) =>
       from(authApi.changePassword(payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('AUTH.TOASTER.CHANGE_PASSWORD'))),
-        map(() => new authActions.ChangePasswordSuccess()),
+        map(() => {
+          payload.onSuccess?.();
+          return new authActions.ChangePasswordSuccess();
+        }),
         catchError(error => of(new authActions.ChangePasswordError({ error }))),
       ),
     ),
