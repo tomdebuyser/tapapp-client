@@ -8,7 +8,7 @@ const Profile: FC = () => {
   return (
     <Container as="main" className="left-container">
       <h1>
-        {translations.getLabel('SHARED.PROFILE.TITLE', {
+        {translations.getLabel('PROFILE.TITLE', {
           brandName: config.brandName(),
         })}
       </h1>
