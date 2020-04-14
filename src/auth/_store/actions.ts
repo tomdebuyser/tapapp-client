@@ -41,7 +41,7 @@ export class AuthenticateError implements Action<AuthActionType> {
 // CHANGE PASSWORD
 export class ChangePassword implements Action<AuthActionType> {
   readonly type = AuthActionType.ChangePassword;
-  constructor(public payload: { values: IChangePasswordForm }) {}
+  constructor(public payload: { onSuccess?: () => void; values: IChangePasswordForm }) {}
 }
 
 export class ChangePasswordSuccess implements Action<AuthActionType> {

@@ -2,16 +2,16 @@ import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import { config } from '../config';
 import { translations } from '../_translations';
-import ChangePassword from './change-password/ChangePassword';
+import ChangePassword from '../auth/change-password/ChangePassword';
 
 const Profile: FC = () => {
   return (
     <Container as="main" className="left-container">
-      <p>
-        {translations.getLabel('SHARED.PROFILE.TITLE', {
+      <h1>
+        {translations.getLabel('PROFILE.TITLE', {
           brandName: config.brandName(),
         })}
-      </p>
+      </h1>
       <ChangePassword />
     </Container>
   );

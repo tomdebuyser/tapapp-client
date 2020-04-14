@@ -1,3 +1,15 @@
 /*******************************
         User Overrides
 *******************************/
+
+.ui.dimmer .ui.modal .ui.loader.active {
+  color: inherit;
+
+  &:before {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &:after {
+    border-color: #767676 transparent transparent;
+  }
+}

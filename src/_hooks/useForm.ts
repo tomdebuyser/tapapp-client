@@ -44,6 +44,8 @@ interface Response<TForm, TFormErrors> {
   values: TForm;
 }
 
+export type IFormHook<TForm, TFormErrors = TForm> = Response<TForm, TFormErrors>;
+
 function mapToFormValidationErrors<TForm>(error: ApiError): FormValidationErrors<TForm> {
   return Object.keys(error.validationErrors).reduce((acc, key) => {
     let message = translations.getLabel('ERRORS.VALIDATION.INVALID');
@@ -98,7 +100,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
    * The name of the input field is not used to set any value here, as the value is set directly in the values
    */
   const setValues = (setter: (values: TForm) => void) => {
-    const newValues = deepCopy(values) as TForm;
+    const newValues = deepCopy(values);
     setter(newValues);
     setFormValues(newValues);
     setIsDirty(true);

@@ -43,6 +43,9 @@
       "CHANGE_PASSWORD": "Your password is successfully updated."
     }
   },
+  "PROFILE": {
+    "TITLE": "Welcome to {{brandName}} admin portal!"
+  },
   "ROLES": {
     "NAME": "Name",
     "PERMISSIONS": {
