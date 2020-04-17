@@ -3,7 +3,9 @@
 *******************************/
 
 .ui.form textarea {
-  border-radius: 0;
+  &, &:focus {
+    border-radius: 0;
+  }
 }
 
 .ui.form textarea.error {
