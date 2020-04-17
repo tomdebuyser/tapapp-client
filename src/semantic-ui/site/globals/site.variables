@@ -14,7 +14,7 @@
         Page
 --------------------*/
 @pageBackground: white;
-@textColor: #47525A;
+@textColor: #181616;
 @placeholderColorInput: #b8bcbf;
 @placeholderColorInputError: #E7BDBC;
 @placeholderColorInputErrorFocus: #DA9796;

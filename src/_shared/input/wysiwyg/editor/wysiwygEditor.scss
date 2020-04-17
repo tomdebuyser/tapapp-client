@@ -8,6 +8,7 @@ $height-toolbar: 4.3rem;
   .ql-toolbar,
   .ql-container {
     border-color: $shadow;
+    color: $text-color;
   }
 
   .ql-container {
@@ -32,6 +33,25 @@ $height-toolbar: 4.3rem;
       .ql-editor.ql-blank::before {
         color: $error-placeholder-color;
       }
+    }
+  }
+
+  &.active {
+    > div {
+      border-color: $primary-color;
+    }
+    .ql-toolbar,
+    .ql-container {
+      color: rgba(0, 0, 0, 0.95); // Same as color in semantic
+    }
+  }
+
+  &.disabled {
+    opacity: 0.75;
+    > div {
+      border-color: $shadow;
+      background-color: $disabled-background-color;
+      pointer-events: none;
     }
   }
 }

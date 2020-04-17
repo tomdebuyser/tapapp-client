@@ -51,6 +51,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
             label={translations.getLabel('USERS.EMAIL')}
             name="email"
             onChange={form.setAttribute}
+            required
             type="email"
             value={form.values.email}
           />
@@ -81,6 +82,7 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
           label={translations.getLabel('USERS.ROLE')}
           name="roleIds"
           onChange={form.setAttribute}
+          required
           value={form.values.roleIds}
         />
         <div />

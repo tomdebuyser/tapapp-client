@@ -45,6 +45,7 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
           label={translations.getLabel('ROLES.NAME')}
           name="name"
           onChange={form.setAttribute}
+          required
           type="text"
           value={form.values.name}
         />
