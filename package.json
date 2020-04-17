@@ -33,7 +33,7 @@
     "test:coverage": "yarn test --coverage --watchAll=false",
     "eject": "craco eject",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx src",
-    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
+    "prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|json|ts|tsx)\"",
     "format": "yarn prettier --write",
     "format:check": "yarn prettier --list-different"
   },
