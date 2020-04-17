@@ -9,10 +9,11 @@ interface Props {
   label: string;
   name: string;
   onChange: (value: string[], name: string) => void;
+  required?: boolean;
   value: string[];
 }
 
-const RolesDropdown: FC<Props> = ({ label, name, value, onChange, errorMessage }) => {
+const RolesDropdown: FC<Props> = ({ label, name, value, onChange, errorMessage, required }) => {
   const dispatch = useDispatch();
   const roles = useSelector(rolesSelectors.roles);
 
@@ -36,6 +37,7 @@ const RolesDropdown: FC<Props> = ({ label, name, value, onChange, errorMessage }
       name={name}
       onChange={onChange}
       options={options}
+      required={required}
       value={value}
     />
   );
