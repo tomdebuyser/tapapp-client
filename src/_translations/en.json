@@ -9,8 +9,8 @@
       "USERNAME": "Username"
     },
     "LOGOUT": "Logout",
+    "PASSWORD_GUIDELINES": "Password requirements: min. 8 characters, at least one uppercase letter, one lowercase letter, and one number.",
     "REGISTER": {
-      "PASSWORD_GUIDELINES": "Password requirements: min. 8 characters, at least one uppercase letter, one lowercase letter, and one number.",
       "REGISTER": "Set password",
       "TITLE": "Welcome!"
     },

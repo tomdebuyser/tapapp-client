@@ -50,6 +50,7 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
       <form onSubmit={form.submit}>
         <Modal.Header>{translations.getLabel('AUTH.CHANGE_PASSWORD.TITLE')}</Modal.Header>
         <Modal.Content>
+          <p className="content-description">{translations.getLabel('AUTH.PASSWORD_GUIDELINES')}</p>
           <ErrorMessage isGlobal isVisible={!!errorMessage}>
             {errorMessage}
           </ErrorMessage>
