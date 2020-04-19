@@ -83,7 +83,6 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   ): void => {
     event.preventDefault();
     const errors = validateFunction(values);
-    console.log(errors);
     if (!hasValidationErrors(errors)) {
       sumbitFunction(values, setFormValues);
       setIsDirty(false);
