@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from '../../_shared';
 import { rolesSelectors } from '../../_store/selectors';
 import { rolesActions } from '../../_store/actions';
+import { IValidatorResponse } from '../../_utils/formValidation';
 
 interface Props {
-  errorMessage?: string;
   label: string;
   name: string;
   onChange: (value: string[], name: string) => void;
   required?: boolean;
+  validation?: IValidatorResponse;
   value: string[];
 }
 
-const RolesDropdown: FC<Props> = ({ label, name, value, onChange, errorMessage, required }) => {
+const RolesDropdown: FC<Props> = ({ label, name, value, onChange, validation, required }) => {
   const dispatch = useDispatch();
   const roles = useSelector(rolesSelectors.roles);
 
@@ -31,13 +32,13 @@ const RolesDropdown: FC<Props> = ({ label, name, value, onChange, errorMessage, 
   );
   return (
     <Dropdown
-      errorMessage={errorMessage}
       label={label}
       multiple
       name={name}
       onChange={onChange}
       options={options}
       required={required}
+      validation={validation}
       value={value}
     />
   );

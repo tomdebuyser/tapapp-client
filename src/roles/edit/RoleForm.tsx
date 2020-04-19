@@ -19,7 +19,7 @@ interface Props {
 
 function validateForm(values: IRoleForm): FormValidationErrors<IRoleForm> {
   return {
-    name: formValidator.required(values.name).error,
+    name: formValidator.required(values.name),
   };
 }
 
@@ -41,12 +41,12 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
       </ErrorMessage>
       <div role="group">
         <InputField
-          errorMessage={form.validationErrors.name}
           label={translations.getLabel('ROLES.NAME')}
           name="name"
           onChange={form.setAttribute}
           required
           type="text"
+          validation={form.validationErrors.name}
           value={form.values.name}
         />
         <div />

@@ -23,8 +23,8 @@ const initialForm: IChangePasswordForm = {
 function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
   // No validation on the oldPassword because this is normally aligned with the validation rules
   return {
-    newPassword: formValidator.password(values.newPassword).error,
-    repeatNewPassword: formValidator.matchingPasswords(values.newPassword, values.repeatNewPassword).error,
+    newPassword: formValidator.password(values.newPassword),
+    repeatNewPassword: formValidator.matchingPasswords(values.newPassword, values.repeatNewPassword),
   };
 }
 
@@ -55,27 +55,27 @@ const ChangePasswordModal: FC<Props> = ({ closeModal }) => {
             {errorMessage}
           </ErrorMessage>
           <InputField
-            errorMessage={form.validationErrors.oldPassword}
             label={translations.getLabel('AUTH.CHANGE_PASSWORD.OLD_PASSWORD')}
             name="oldPassword"
             onChange={form.setAttribute}
             type="password"
+            validation={form.validationErrors.oldPassword}
             value={form.values.oldPassword}
           />
           <InputField
-            errorMessage={form.validationErrors.newPassword}
             label={translations.getLabel('AUTH.CHANGE_PASSWORD.NEW_PASSWORD')}
             name="newPassword"
             onChange={form.setAttribute}
             type="password"
+            validation={form.validationErrors.newPassword}
             value={form.values.newPassword}
           />
           <InputField
-            errorMessage={form.validationErrors.repeatNewPassword}
             label={translations.getLabel('AUTH.CHANGE_PASSWORD.REPEAT_NEW_PASSWORD')}
             name="repeatNewPassword"
             onChange={form.setAttribute}
             type="password"
+            validation={form.validationErrors.repeatNewPassword}
             value={form.values.repeatNewPassword}
           />
         </Modal.Content>

@@ -20,8 +20,8 @@ const initialForm: ILoginForm = {
 
 function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
   return {
-    password: formValidator.required(values.password).error,
-    username: formValidator.email(values.username).error,
+    password: formValidator.required(values.password),
+    username: formValidator.email(values.username),
   };
 }
 
@@ -53,20 +53,20 @@ const Login = () => {
         </ErrorMessage>
         <InputField
           autoComplete="username"
-          errorMessage={form.validationErrors.username}
           label={translations.getLabel('AUTH.LOGIN.USERNAME')}
           name="username"
           onChange={form.setAttribute}
           type="email"
+          validation={form.validationErrors.username}
           value={form.values.username}
         />
         <InputField
           autoComplete="current-password"
-          errorMessage={form.validationErrors.password}
           label={translations.getLabel('AUTH.LOGIN.PASSWORD')}
           name="password"
           onChange={form.setAttribute}
           type="password"
+          validation={form.validationErrors.password}
           value={form.values.password}
         />
         <div className="actions">

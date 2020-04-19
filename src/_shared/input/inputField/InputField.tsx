@@ -25,8 +25,8 @@ const InputField: FC<InputFieldProps> = ({
   value,
   ...wrapperProps
 }) => {
-  const { disabled, errorMessage, name } = wrapperProps;
-  const { setDirty, showError } = useInputError(errorMessage);
+  const { disabled, validation, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(validation);
 
   return (
     <InputWrapper {...wrapperProps} showError={showError}>

@@ -41,8 +41,8 @@ function formatSize(size: number): string {
 }
 
 const FileInput: FC<Props> = ({ maxAmountOfFiles, onChange, type, value, ...wrapperProps }) => {
-  const { disabled, errorMessage, name } = wrapperProps;
-  const { setDirty, showError } = useInputError(errorMessage);
+  const { disabled, validation, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(validation);
   const [isDropping, setIsDropping] = useToggle(false);
   const [isError, setIsError] = useToggle(false);
   const isDisabled = disabled || value.length === maxAmountOfFiles;

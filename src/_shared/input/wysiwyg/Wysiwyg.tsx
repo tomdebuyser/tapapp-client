@@ -11,8 +11,8 @@ interface Props extends InputWrapperProps {
 }
 
 const Wysiwyg: FC<Props> = ({ onChange, placeholder, rows, value, ...wrapperProps }) => {
-  const { disabled, errorMessage, name } = wrapperProps;
-  const { setDirty, showError } = useInputError(errorMessage);
+  const { disabled, validation, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(validation);
 
   return (
     <InputWrapper {...wrapperProps} showError={showError}>
