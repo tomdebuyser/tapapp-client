@@ -97,6 +97,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.UpdateUserSuccess:
       return {
         ...state,
+        detail: action.payload.updatedUser,
         isUpdateUserLoading: false,
         users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
@@ -115,6 +116,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.DeactivateUserSuccess:
       return {
         ...state,
+        detail: action.payload.updatedUser,
         isDeactivateUserLoading: false,
         users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
@@ -133,6 +135,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.ResendRegisterEmailSuccess:
       return {
         ...state,
+        detail: action.payload.updatedUser,
         isResendRegisterEmailLoading: false,
         users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
