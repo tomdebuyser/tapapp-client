@@ -15,8 +15,8 @@ export interface Props extends InputWrapperProps {
 }
 
 const TextArea: FC<Props> = ({ characterLimit, normalize, onChange, placeholder, rows, value, ...wrapperProps }) => {
-  const { disabled, errorMessage, name } = wrapperProps;
-  const { setDirty, showError } = useInputError(errorMessage);
+  const { disabled, validation, name } = wrapperProps;
+  const { setDirty, showError } = useInputError(validation);
   const hasReachedCharacterLimit = (val?: string) => characterLimit && (val || value || '').length >= characterLimit;
 
   return (

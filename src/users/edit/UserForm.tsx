@@ -5,7 +5,7 @@ import { useForm } from '../../_hooks';
 import { translations } from '../../_translations';
 import RolesDropdown from '../../roles/edit/RolesDropdown';
 import { ApiError } from '../../_http';
-import { FormValidationErrors, SubmitFormFunction } from '../../_hooks/useForm';
+import { SubmitFormFunction, FormValidationErrors } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
 
 interface Props {
@@ -29,11 +29,11 @@ function errorAsString(error?: ApiError): string {
 
 const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, error, buttons }) => {
   function validateForm(values: IUserForm): FormValidationErrors<IUserFormErrors> {
-    const errors: FormValidationErrors<IUserFormErrors> = {};
-    if (values.email) errors.email = formValidator.email(values.email).error;
-    else if (!userId) errors.email = formValidator.required(values.email).error;
-    errors.roleIds = formValidator.notEmptyArray(values.roleIds).error;
-    return errors;
+    const validation: FormValidationErrors<IUserFormErrors> = {};
+    if (values.email) validation.email = formValidator.email(values.email);
+    else if (!userId) validation.email = formValidator.required(values.email);
+    validation.roleIds = formValidator.notEmptyArray(values.roleIds);
+    return validation;
   }
 
   const form = useForm<IUserForm, IUserFormErrors>({ error, initialForm, submitForm, validateForm });
@@ -47,12 +47,12 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
       {!userId && (
         <div role="group">
           <InputField
-            errorMessage={form.validationErrors.email}
             label={translations.getLabel('USERS.EMAIL')}
             name="email"
             onChange={form.setAttribute}
             required
             type="email"
+            validation={form.validationErrors.email}
             value={form.values.email}
           />
           <div />
@@ -60,29 +60,29 @@ const UserForm: FC<Props> = ({ userId, initialForm, submitForm, isSubmitting, er
       )}
       <div role="group">
         <InputField
-          errorMessage={form.validationErrors.firstName}
           label={translations.getLabel('USERS.FIRST_NAME')}
           name="firstName"
           onChange={form.setAttribute}
           type="text"
+          validation={form.validationErrors.firstName}
           value={form.values.firstName}
         />
         <InputField
-          errorMessage={form.validationErrors.lastName}
           label={translations.getLabel('USERS.LAST_NAME')}
           name="lastName"
           onChange={form.setAttribute}
           type="text"
+          validation={form.validationErrors.lastName}
           value={form.values.lastName}
         />
       </div>
       <div role="group">
         <RolesDropdown
-          errorMessage={form.validationErrors.roleIds}
           label={translations.getLabel('USERS.ROLE')}
           name="roleIds"
           onChange={form.setAttribute}
           required
+          validation={form.validationErrors.roleIds}
           value={form.values.roleIds}
         />
         <div />

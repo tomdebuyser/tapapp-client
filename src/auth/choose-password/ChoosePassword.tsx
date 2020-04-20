@@ -23,7 +23,7 @@ const initialForm: IChoosePasswordForm = {
 
 function validateForm(values: IChoosePasswordForm): FormValidationErrors<IChoosePasswordForm> {
   return {
-    newPassword: formValidator.password(values.newPassword).error,
+    newPassword: formValidator.password(values.newPassword),
   };
 }
 
@@ -56,10 +56,10 @@ const ChoosePassword: FC<Props> = ({ isPasswordReset }) => {
         </ErrorMessage>
         <InputField
           autoComplete="new-password"
-          errorMessage={form.validationErrors.newPassword}
           name="newPassword"
           onChange={form.setAttribute}
           type="password"
+          validation={form.validationErrors.newPassword}
           value={form.values.newPassword}
         />
         <div className="actions">

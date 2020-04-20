@@ -17,7 +17,7 @@ const initialForm: IRequestPasswordResetForm = {
 
 function validateForm(values: IRequestPasswordResetForm): FormValidationErrors<IRequestPasswordResetForm> {
   return {
-    email: formValidator.email(values.email).error,
+    email: formValidator.email(values.email),
   };
 }
 
@@ -37,10 +37,10 @@ const RequestPasswordReset = () => {
       <form onSubmit={form.submit}>
         <InputField
           autoComplete="email"
-          errorMessage={form.validationErrors.email}
           name="email"
           onChange={form.setAttribute}
           type="email"
+          validation={form.validationErrors.email}
           value={form.values.email}
         />
         <div className="actions">

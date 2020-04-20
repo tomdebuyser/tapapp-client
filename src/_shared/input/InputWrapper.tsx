@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Icon from '../icon/Icon';
 import './inputWrapper.scss';
+import { IValidatorResponse } from '../../_utils/formValidation';
 
 /**
  * This component serves as a wrapper around the specific input components. It contains some common input logic:
@@ -14,18 +15,18 @@ import './inputWrapper.scss';
 export interface InputWrapperProps {
   className?: string;
   disabled?: boolean;
-  errorMessage?: string;
   label?: string;
   labelIcon?: string;
   name: string;
   required?: boolean;
+  validation?: IValidatorResponse;
 }
 
 const InputWrapper: FC<InputWrapperProps & { children: ReactNode; showError?: boolean }> = ({
   children,
   className,
   disabled,
-  errorMessage,
+  validation,
   label,
   labelIcon,
   name,
@@ -40,7 +41,7 @@ const InputWrapper: FC<InputWrapperProps & { children: ReactNode; showError?: bo
       </label>
     )}
     {children}
-    <ErrorMessage isVisible={showError}>{errorMessage}</ErrorMessage>
+    <ErrorMessage isVisible={showError}>{validation?.message}</ErrorMessage>
   </div>
 );
 

@@ -2,24 +2,25 @@ import { useState, useEffect } from 'react';
 import { ApiError } from '../_http';
 import { translations } from '../_translations';
 import { deepCopy, isEmptyObject } from '../_utils/objectHelpers';
+import { IValidatorResponse } from '../_utils/formValidation';
 import useToggle from './useToggle';
 
 /**
  * FormValidationErrors type explanation:
- * 1. We check to see if the value of property Key is a primitive, if it is, we just require an error message (string).
+ * 1. We check to see if the value of property Key is a primitive, if it is, we just require a validator response (IValidatorResponse).
  * 2. We check if the value of property Key is an array, if it is, we proceed to 3, else to 5
  * 3. We check if the Type of the element of the array, using infer, is a Primitive.
- *    If the value is not a Primitive, proceed to 4, otherwise, we just require a list of error messages (string[]).
+ *    If the value is not a Primitive, proceed to 4, otherwise, we just require a list of validator responses (IValidatorResponse[]).
  * 4. If the Array is not a primitive, we use the type we extracted with infer and require an array of FormValidationErrors<InferredArrayType>.
  * 5. If the array is not a primitive, and not an array, it's an object, so we just recursively use FormValidationErrors with the given type.
  */
 type Primitive = string | number | boolean;
 export type FormValidationErrors<TForm = Record<string, unknown>> = {
   [Key in keyof TForm]?: TForm[Key] extends Primitive // 1.
-    ? string
+    ? IValidatorResponse
     : TForm[Key] extends Array<infer TArray> // 2.
     ? TArray extends Primitive // 3.
-      ? string[]
+      ? IValidatorResponse[]
       : Array<FormValidationErrors<TArray>> // 4
     : FormValidationErrors<TForm[Key]>; // 5
 };
@@ -35,6 +36,7 @@ interface Params<TForm, TFormErrors> {
 }
 
 interface Response<TForm, TFormErrors> {
+  hasValidationErrors: boolean;
   isDirty: boolean;
   setAttribute: (value: unknown, name: string) => void;
   setValues: (setter: (values: TForm) => void) => void;
@@ -50,8 +52,22 @@ function mapToFormValidationErrors<TForm>(error: ApiError): FormValidationErrors
   return Object.keys(error.validationErrors).reduce((acc, key) => {
     let message = translations.getLabel('ERRORS.VALIDATION.INVALID');
     if (error.validationErrors[key].constraints?.isNotEmpty) message = translations.getLabel('ERRORS.VALIDATION.REQUIRED');
-    return { ...acc, [key]: message };
+    return { ...acc, [key]: { isValid: false, message } };
   }, {});
+}
+
+function isValidatorResponse(object: unknown): object is IValidatorResponse {
+  return Object.keys(object).includes('isValid');
+}
+
+export function hasValidationErrors(errors: FormValidationErrors): boolean {
+  if (isEmptyObject(errors)) return false;
+  if (Array.isArray(errors)) return errors.some(hasValidationErrors);
+  if (typeof errors === 'object') {
+    if (isValidatorResponse(errors)) return !errors.isValid;
+    return Object.keys(errors).some(key => hasValidationErrors(errors[key]));
+  }
+  return false;
 }
 
 function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>): Response<TForm, TFormErrors> {
@@ -67,8 +83,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   ): void => {
     event.preventDefault();
     const errors = validateFunction(values);
-    const hasError = !isEmptyObject(errors);
-    if (!hasError) {
+    if (!hasValidationErrors(errors)) {
       sumbitFunction(values, setFormValues);
       setIsDirty(false);
     }
@@ -127,6 +142,7 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
   }, []);
 
   return {
+    hasValidationErrors: hasValidationErrors(validationErrors),
     isDirty,
     setAttribute,
     setValues,
