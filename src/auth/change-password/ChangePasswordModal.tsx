@@ -22,10 +22,13 @@ const initialForm: IChangePasswordForm = {
 
 function validateForm(values: IChangePasswordForm): FormValidationErrors<IChangePasswordForm> {
   // No validation on the oldPassword because this is normally aligned with the validation rules
-  return {
+  const validation: FormValidationErrors<IChangePasswordForm> = {
     newPassword: formValidator.password(values.newPassword),
-    repeatNewPassword: formValidator.matchingPasswords(values.newPassword, values.repeatNewPassword),
   };
+  if (validation.newPassword.isValid) {
+    validation.repeatNewPassword = formValidator.matchingPasswords(values.newPassword, values.repeatNewPassword);
+  }
+  return validation;
 }
 
 function errorAsString(error?: ApiError): string {
