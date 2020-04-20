@@ -60,7 +60,7 @@ function isValidatorResponse(object: unknown): object is IValidatorResponse {
   return Object.keys(object).includes('isValid');
 }
 
-function hasValidationErrors(errors: FormValidationErrors): boolean {
+export function hasValidationErrors(errors: FormValidationErrors): boolean {
   if (isEmptyObject(errors)) return false;
   if (Array.isArray(errors)) return errors.some(hasValidationErrors);
   if (typeof errors === 'object') {
