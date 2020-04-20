@@ -94,6 +94,7 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.UpdateRoleSuccess:
       return {
         ...state,
+        detail: action.payload.updatedRole,
         isUpdateRoleLoading: false,
         roles: insertUpdatedData(state.roles, [action.payload.updatedRole]),
       };
