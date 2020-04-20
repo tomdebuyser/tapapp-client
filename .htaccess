@@ -1,5 +1,7 @@
-# Upload this file along with built version to webspace.
-RewriteEngine On
-# Rewrite HTTP to HTTPS
+##Force SSL 
+#Normal way (in case you need to deploy to NON-heroku)
 RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [R,L]
+#Heroku way
+RewriteCond %{HTTP:X-Forwarded-Proto} !https 
+#If neither above conditions are met, redirect to https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
