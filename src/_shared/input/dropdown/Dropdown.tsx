@@ -2,8 +2,10 @@ import React, { FC } from 'react';
 import { Dropdown as SemanticDropdown, InputOnChangeData } from 'semantic-ui-react';
 import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
+import './dropdown.scss';
 
 export interface DropdownOption {
+  className?: string;
   key?: string;
   text: string;
   value: string;
@@ -22,6 +24,11 @@ const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placehold
   const { disabled, validation, name } = wrapperProps;
   const { setDirty, showError } = useInputError(validation);
 
+  let allOptions: DropdownOption[] = options || [];
+  if (value && !multiple) {
+    allOptions = [{ className: 'empty-item', key: placeholder, text: placeholder, value: null }, ...allOptions];
+  }
+
   return (
     <InputWrapper {...wrapperProps} showError={showError}>
       <SemanticDropdown
@@ -34,10 +41,10 @@ const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placehold
           onChange(normalizedValue, data.name);
           setDirty();
         }}
-        options={options || []}
+        options={allOptions}
         placeholder={placeholder}
         selection
-        value={value}
+        value={value || ''}
       />
     </InputWrapper>
   );

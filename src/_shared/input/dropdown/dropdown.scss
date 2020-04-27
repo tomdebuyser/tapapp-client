@@ -1,0 +1,10 @@
+@import '../../../_styles/colors';
+
+.ui.dropdown .menu {
+  > .item.empty-item {
+    &,
+    &.selected-item {
+      color: $placeholder-color;
+    }
+  }
+}
