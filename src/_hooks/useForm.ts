@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ApiError } from '../_http';
+import { ApiError, ValidationError } from '../_http';
 import { translations } from '../_translations';
 import { deepCopy, isEmptyObject } from '../_utils/objectHelpers';
 import { IValidatorResponse } from '../_utils/formValidation';
@@ -49,10 +49,16 @@ interface Response<TForm, TFormErrors> {
 export type IFormHook<TForm, TFormErrors = TForm> = Response<TForm, TFormErrors>;
 
 function mapToFormValidationErrors<TForm>(error: ApiError): FormValidationErrors<TForm> {
-  return Object.keys(error.validationErrors).reduce((acc, key) => {
+  const mapper = (validationError: ValidationError) => {
+    if (validationError.children.length > 0) {
+      return validationError.children.reduce((acc, child) => ({ ...acc, [child.property]: { ...mapper(child) } }), {});
+    }
     let message = translations.getLabel('ERRORS.VALIDATION.INVALID');
-    if (error.validationErrors[key].constraints?.isNotEmpty) message = translations.getLabel('ERRORS.VALIDATION.REQUIRED');
-    return { ...acc, [key]: { isValid: false, message } };
+    if (validationError.constraints?.isNotEmpty) message = translations.getLabel('ERRORS.VALIDATION.REQUIRED');
+    return { isValid: false, message };
+  };
+  return Object.keys(error.validationErrors).reduce((acc, key) => {
+    return { ...acc, [key]: { ...mapper(error.validationErrors[key]) } };
   }, {});
 }
 
