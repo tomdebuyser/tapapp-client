@@ -49,16 +49,16 @@ interface Response<TForm, TFormErrors> {
 export type IFormHook<TForm, TFormErrors = TForm> = Response<TForm, TFormErrors>;
 
 function mapToFormValidationErrors<TForm>(error: ApiError): FormValidationErrors<TForm> {
-  const mapper = (validationError: ValidationError) => {
+  const mapError = (validationError: ValidationError) => {
     if (validationError.children.length > 0) {
-      return validationError.children.reduce((acc, child) => ({ ...acc, [child.property]: { ...mapper(child) } }), {});
+      return validationError.children.reduce((acc, child) => ({ ...acc, [child.property]: { ...mapError(child) } }), {});
     }
     let message = translations.getLabel('ERRORS.VALIDATION.INVALID');
     if (validationError.constraints?.isNotEmpty) message = translations.getLabel('ERRORS.VALIDATION.REQUIRED');
     return { isValid: false, message };
   };
   return Object.keys(error.validationErrors).reduce((acc, key) => {
-    return { ...acc, [key]: { ...mapper(error.validationErrors[key]) } };
+    return { ...acc, [key]: { ...mapError(error.validationErrors[key]) } };
   }, {});
 }
 
