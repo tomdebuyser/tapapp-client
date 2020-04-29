@@ -7,11 +7,12 @@ export interface ApiError {
   validationErrors?: Record<string, ValidationError>;
 }
 
-export interface ValidationError {
+export type ValidationError = {
+  children: Array<ValidationError & { property: string }>;
   constraints: Record<string, unknown>;
   target?: Record<string, unknown>;
   value?: unknown;
-}
+};
 
 export function getValidationError(error: ApiError, property: string): ValidationError {
   if (!error || !error.validationErrors) return null;
