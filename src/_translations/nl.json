@@ -1,25 +1,25 @@
 {
   "AUTH": {
-    "SIDEBAR_TITLE": "Administratief portaal",
+    "SIDEBAR_TITLE": "Admin portaal",
     "LOGIN": {
       "FORGOT_PASSWORD": "Wachtwoord vergeten?",
-      "LOGIN": "Login",
+      "LOGIN": "Aanmelden",
       "PASSWORD": "Wachtwoord",
       "TITLE": "Welkom!",
       "USERNAME": "Gebruikersnaam"
     },
-    "LOGOUT": "Logout",
+    "LOGOUT": "Afmelden",
     "REGISTER": {
-      "PASSWORD_GUIDELINES": "Wachtwoord vereisten: min. 8 karakters, tenminste 1 letter in hoofdletters, 1 letter in kleine letters, en 1 nummer.",
+      "PASSWORD_GUIDELINES": "Wachtwoord vereisten: min. 8 karakters, tenminste 1 hoofdletter, 1 kleine letter, en 1 nummer.",
       "REGISTER": "Stel een wachtwoord in",
       "TITLE": "Welkom!"
     },
     "RESET_PASSWORD": {
       "RESET": "Reset wachtwoord",
-      "TITLE": "Kies jouw nieuwe wachtwoord"
+      "TITLE": "Kies jouw nieuw wachtwoord"
     },
     "REQUEST_PASSWORD_RESET": {
-      "DESCRIPTION": "Geef het emailadres dat je gebruikte om te registreren en we zullen je via mail de wachtwoord reset instructies sturen.",
+      "DESCRIPTION": "Geef het emailadres dat je gebruikte om te registreren en we zullen je via mail instructies toesturen om jouw wachtwoord opnieuw in te stellen",
       "RESET": "Verzend reset instructies",
       "TITLE": "Uw wachtwoord vergeten?"
     },
@@ -35,16 +35,16 @@
       "USER_STATE_NOT_ALLOWED": "Dit account is niet actief, waardoor je niet kan inloggen. Contacteer jouw administrator.",
       "RESET_TOKEN_INVALID": "De link die je gebruikt is fout.",
       "RESET_TOKEN_EXPIRED": "De link die je gebruikt is vervallen.",
-      "INVALID_OLD_PASSWORD": "Het wachtwoord dat je juist ingaf is niet jouw huidig wachtwoord."
+      "INVALID_OLD_PASSWORD": "Het wachtwoord dat je ingaf is niet jouw huidig wachtwoord."
     },
     "TOASTER": {
       "CHOOSE_PASSWORD": "Je kan nu inloggen met jouw nieuw wachtwoord.",
-      "REQUEST_PASSWORD_RESET": "Een email met instructies was veronden als het gelinked is aan een account.",
-      "CHANGE_PASSWORD": "Jouw wachtwoord is succesvol geupdate."
+      "REQUEST_PASSWORD_RESET": "Een email met instructies werd verzonden als het gelinked is aan een account.",
+      "CHANGE_PASSWORD": "Jouw wachtwoord is succesvol aangepast."
     }
   },
   "PROFILE": {
-    "TITLE": "Welkom op het {{brandName}} administratief portaal!"
+    "TITLE": "Welkom op het {{brandName}} admin portaal!"
   },
   "ROLES": {
     "NAME": "Naam",
@@ -60,14 +60,14 @@
       }
     },
     "OVERVIEW": {
-      "CREATE_ROLE": "Creëer rol",
-      "CREATED_AT": "Gecreëerd op",
+      "CREATE_ROLE": "Maak rol aan",
+      "CREATED_AT": "Aangemaakt op",
       "EMPTY": "Geen rollen gevonden",
       "TITLE": "Rollen",
-      "UPDATED_AT": "Geüpdatet op"
+      "UPDATED_AT": "Aangepast op"
     },
     "CREATE": {
-      "TITLE": "Creëer rol"
+      "TITLE": "Maak rol aan"
     },
     "DETAIL": {
       "BACK": "Terug naar rollen",
@@ -78,33 +78,33 @@
       "CONFIRM": "Verwijder rol"
     },
     "ERRORS": {
-      "ROLE_IN_USE": "Deze rol is nog steeds in gebruik. Daarom is het niet mogelijk om het te verwijderen.",
+      "ROLE_IN_USE": "Deze rol is nog steeds in gebruik. Daarom is het niet mogelijk om deze te verwijderen.",
       "ROLE_NAME_ALREADY_IN_USE": "Een rol met deze naam bestaat al."
     },
     "TOASTER": {
-      "ROLE_CREATED": "De rol was succesvol aangemaakt.",
+      "ROLE_CREATED": "De rol werd succesvol aangemaakt.",
       "ROLE_UPDATED": "De aanpassingen zijn succesvol toegepast.",
-      "ROLE_DELETED": "De rol was succesvol verwijderd."
+      "ROLE_DELETED": "De rol werd succesvol verwijderd."
     }
   },
   "SHARED": {
     "PROFILE": {
-      "TITLE": "Welkom om het {{brandName}} administratief portaal!"
+      "TITLE": "Welkom om het {{brandName}} admin portaal!"
     },
     "BUTTONS": {
-      "CANCEL": "Annuleer",
-      "CREATE": "Creëer",
-      "DELETE": "Verwijder",
-      "SAVE": "Slaag wijzingen op"
+      "CANCEL": "Annuleren",
+      "CREATE": "Aanmaken",
+      "DELETE": "Verwijderen",
+      "SAVE": "Wijzigingen opslaan"
     },
     "DETAIL": {
-      "CREATED_AT": "Gecreëert op {{date}}",
-      "CREATED_AT_BY": "Gecreëert op {{date}} door {{name}}",
-      "UPDATED_AT": "Laatst geüpdatet op {{date}}",
-      "UPDATED_AT_BY": "Laatst geüpdatet op {{date}} door {{name}}"
+      "CREATED_AT": "Aangemaakt op {{date}}",
+      "CREATED_AT_BY": "Aangemaakt op {{date}} door {{name}}",
+      "UPDATED_AT": "Laatst aangepast op {{date}}",
+      "UPDATED_AT_BY": "Laatst aangepast op {{date}} door {{name}}"
     },
     "FILE_UPLOAD": {
-      "TITLE": "Sleep je bestanden hiernaar toe, of klik om te zoeken op jouw computer",
+      "TITLE": "Sleep je bestanden hiernaar toe of klik om te zoeken op jouw computer",
       "REQUIREMENTS": "Toegelaten extensies: {{extensions}} - Maximum grootte: {{size}}"
     },
     "NAVIGATION": {
@@ -133,7 +133,7 @@
         "DESCRIPTION": {
           "ACTIVE": "De gebruiker kan inloggen.",
           "INACTIVE": "De gebruiker kan niet inloggen.",
-          "REGISTERING": "Een email is verzonden naar deze gebruiker om zijn/haar account te activeren door een wachtwoord te kiezen."
+          "REGISTERING": "Er is een email verzonden naar deze gebruiker om zijn/haar account te activeren door een wachtwoord te kiezen."
         },
         "BUTTON": {
           "ACTIVATE": "Activeer gebruiker",
@@ -143,20 +143,20 @@
       }
     },
     "OVERVIEW": {
-      "CREATE_USER": "Creëer gebruiker",
+      "CREATE_USER": "Maak gebruiker aan",
       "EMPTY": "Geen gebruiker gevonden",
       "TITLE": "Gebruikers",
-      "CREATED_AT": "Gecreëerd op",
-      "CREATED_BY": "Gecreëerd door",
-      "UPDATED_AT": "Geüpdatet op",
-      "UPDATED_BY": "Geüpdatet door"
+      "CREATED_AT": "Aangemaakt op",
+      "CREATED_BY": "Aangemaakt door",
+      "UPDATED_AT": "Aangepast op",
+      "UPDATED_BY": "Aangepast door"
     },
     "CREATE": {
-      "TITLE": "Creëer gebruiker"
+      "TITLE": "Maak gebruiker aan"
     },
     "DEACTIVATE": {
-      "CONTENT": "Bent u zeker dat u deze gebruiker wilt deactiveren? Door dit te doen, zal de gebruiker niet meer kunnen inloggen..",
-      "CONFIRM": "Deactivate gebruiker"
+      "CONTENT": "Bent u zeker dat u deze gebruiker wilt deactiveren? Door dit te doen zal de gebruiker niet meer kunnen inloggen.",
+      "CONFIRM": "Deactivateer gebruiker"
     },
     "STATE": {
       "TITLE": "Status",
@@ -170,22 +170,22 @@
       "EMAIL_ALREADY_IN_USE": "Een gebruiker met het gegeven emailadres bestaat al."
     },
     "TOASTER": {
-      "USER_CREATED": "De gebruiker was succesvol gecreëerd.",
+      "USER_CREATED": "De gebruiker werd succesvol aangemaakt.",
       "USER_UPDATED": "De wijzigingen zijn succesvol opgeslagen."
     }
   },
   "ERRORS": {
     "GENERAL": "Er ging iets mis. Probeer alstublieft opnieuw.",
-    "PERMISSION_DENIED": "U hebt niet de permissies om deze actie uit te voeren. Contacteer uw administrator.",
+    "PERMISSION_DENIED": "U hebt geen rechten om deze actie uit te voeren",
     "VALIDATION": {
-      "AFTER_DATE": "Datum zou moeten zijn na {{date}}",
-      "BEFORE_DATE": "Datum zou moeten zijn voor {{date}}",
+      "AFTER_DATE": "Datum zou na {{date}} moeten vallen",
+      "BEFORE_DATE": "Datum zou voor {{date}} moeten vallen",
       "EMPTY_ARRAY": "Kies tenminste één",
       "FORM": "Sommige velden zijn niet (correct) ingevuld.",
-      "INVALID_NEW_AND_REPEATED_PASSWORD": "Het nieuwe wachtwoord en hetgene dat u ingaf komen niet overeen.",
+      "INVALID_NEW_AND_REPEATED_PASSWORD": "Het nieuwe wachtwoord komt niet overeen met de herhaling.",
       "INVALID": "Waarde is niet correct.",
       "MAX_LENGTH": "Waarde zou tenminste {{length}} karakters moeten hebben.",
-      "MIN_LENGTH": "Waarde zou maximum  {{length}} karakters moeten hebben.",
+      "MIN_LENGTH": "Waarde zou maximum {{length}} karakters mogen hebben.",
       "NOT_A_NUMBER": "Waarde is geen nummer.",
       "PASSWORD_TOO_SHORT": "Dit wachtwoord is te kort",
       "PASSWORD_UNSAFE": "Dit wachtwoord voldoet niet aan de vereisten.",

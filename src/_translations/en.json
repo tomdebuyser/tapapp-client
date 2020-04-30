@@ -25,7 +25,7 @@
     },
     "CHANGE_PASSWORD": {
       "TITLE": "Change password",
-      "DESCRIPTION": "Changing your password is quiet easy, just press the button",
+      "DESCRIPTION": "Changing your password is quite easy, just press the button",
       "OLD_PASSWORD": "Old password",
       "NEW_PASSWORD": "New password",
       "REPEAT_NEW_PASSWORD": "Repeat new password"
@@ -184,8 +184,8 @@
       "FORM": "Some fields are not filled in (correctly)",
       "INVALID_NEW_AND_REPEATED_PASSWORD": "The new and repeated password you've entered aren't matching",
       "INVALID": "Value is not correct",
-      "MAX_LENGTH": "Value should have at least {{length}} characters",
-      "MIN_LENGTH": "Value should have maximum {{length}} characters",
+      "MAX_LENGTH": "Value should have maximum {{length}} characters",
+      "MIN_LENGTH": "Value should have at least {{length}} characters",
       "NOT_A_NUMBER": "Value is not a number",
       "PASSWORD_TOO_SHORT": "This password is too short",
       "PASSWORD_UNSAFE": "This password doesn't fit the requirements",
