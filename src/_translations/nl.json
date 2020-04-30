@@ -1,0 +1,196 @@
+{
+    "AUTH": {
+      "SIDEBAR_TITLE": "Administratief portaal",
+      "LOGIN": {
+        "FORGOT_PASSWORD": "Wachtwoord vergeten?",
+        "LOGIN": "Login",
+        "PASSWORD": "Wachtwoord",
+        "TITLE": "Welkom!",
+        "USERNAME": "Gebruikersnaam"
+      },
+      "LOGOUT": "Logout",
+      "REGISTER": {
+        "PASSWORD_GUIDELINES": "Wachtwoord vereisten: min. 8 karakters, tenminste 1 letter in hoofdletters, 1 letter in kleine letters, en 1 nummer.",
+        "REGISTER": "Stel een wachtwoord in",
+        "TITLE": "Welkom!"
+      },
+      "RESET_PASSWORD": {
+        "RESET": "Reset wachtwoord",
+        "TITLE": "Kies jouw nieuwe wachtwoord"
+      },
+      "REQUEST_PASSWORD_RESET": {
+        "DESCRIPTION": "Geef het email adres dat je gebruikte om te registreren en we zullen je via mail de wachtwoord reset instructies sturen.",
+        "RESET": "Verzend reset instructies",
+        "TITLE": "Uw wachtwoord vergeten?"
+      },
+      "CHANGE_PASSWORD": {
+        "TITLE": "Verander wachtwoord",
+        "DESCRIPTION": "Uw wachtwoord aanpassen is heel makkelijk, drink gewoon op de knop.",
+        "OLD_PASSWORD": "Oud wachtwoord",
+        "NEW_PASSWORD": "Nieuw wachtwoord",
+        "REPEAT_NEW_PASSWORD": "Herhaal nieuw wachtwoord"
+      },
+      "ERRORS": {
+        "UNAUTHORIZED": "Incorrecte gebruikersnaam or wachtwoord",
+        "USER_STATE_NOT_ALLOWED": "Dit account is niet actief, waardoor je niet kan inloggen. Contacteer jouw administrator.",
+        "RESET_TOKEN_INVALID": "De link die je gebruikt is fout.",
+        "RESET_TOKEN_EXPIRED": "De link die je gebruikt is vervallen.",
+        "INVALID_OLD_PASSWORD": "Het wachtwoord dat je juist ingaf is niet jouw huidig wachtwoord."
+      },
+      "TOASTER": {
+        "CHOOSE_PASSWORD": "Je kan nu inloggen met jouw nieuw wachtwoord.",
+        "REQUEST_PASSWORD_RESET": "Een email met instructies was veronden als het gelinked is aan een account.",
+        "CHANGE_PASSWORD": "Jouw wachtwoord is succesvol geupdate."
+      }
+    },
+    "PROFILE": {
+      "TITLE": "Welkom op het {{brandName}} administratief portaal!"
+    },
+    "ROLES": {
+      "NAME": "Naam",
+      "PERMISSIONS": {
+        "TITLE": "Permissies",
+        "FEATURES": {
+          "ROLES": "Rollen",
+          "USERS": "Gebruikers"
+        },
+        "RIGHTS": {
+          "EDIT": "Pas aan",
+          "VIEW": "Bekijk"
+        }
+      },
+      "OVERVIEW": {
+        "CREATE_ROLE": "Creëer rol",
+        "CREATED_AT": "Gecreëerd op",
+        "EMPTY": "Geen rollen gevonden",
+        "TITLE": "Rollen",
+        "UPDATED_AT": "Geupdate op"
+      },
+      "CREATE": {
+        "TITLE": "Creëer rol"
+      },
+      "DETAIL": {
+        "BACK": "Terug naar rollen",
+        "BUTTON_DELETE": "Verwijder rol"
+      },
+      "DELETE": {
+        "CONTENT": "Bent u zeker dat u deze rol wilt verwijderen? Dit kan falen als de rol nog in gebruik is.",
+        "CONFIRM": "Verwijder rol"
+      },
+      "ERRORS": {
+        "ROLE_IN_USE": "Deze rol is nog steeds in gebruik. Daarom is het niet mogelijk om het te verwijderen.",
+        "ROLE_NAME_ALREADY_IN_USE": "Een rol met deze naam bestaat al."
+      },
+      "TOASTER": {
+        "ROLE_CREATED": "De rol was succesvol aangemaakt.",
+        "ROLE_UPDATED": "De aanpassingen zijn succesvol toegepast.",
+        "ROLE_DELETED": "De rol was succesvol verwijderd."
+      }
+    },
+    "SHARED": {
+      "PROFILE": {
+        "TITLE": "Welkom om het {{brandName}} administratief portaal!"
+      },
+      "BUTTONS": {
+        "CANCEL": "Annuleer",
+        "CREATE": "Creëer",
+        "DELETE": "Verwijder",
+        "SAVE": "Slaag wijzingen op"
+      },
+      "DETAIL": {
+        "CREATED_AT": "Gecreëert op {{date}}",
+        "CREATED_AT_BY": "Gecreëert op {{date}} door {{name}}",
+        "UPDATED_AT": "Laatst geupdate op {{date}}",
+        "UPDATED_AT_BY": "Laatst geupdate op {{date}} door {{name}}"
+      },
+      "FILE_UPLOAD": {
+        "TITLE": "Drop jouw bestanden hier, of click om te browsen op jouw computer.",
+        "REQUIREMENTS": "Toegelaten extensies: {{extensions}} - Maximum grootte: {{size}}"
+      },
+      "NAVIGATION": {
+        "ROLES": "Rollen",
+        "USERS": "Gebruikers"
+      },
+      "PLACEHOLDER": {
+        "DATE": "dd/mm/yyyy",
+        "SEARCH": "Search...",
+        "TIME": "hh:mm"
+      }
+    },
+    "USERS": {
+      "EMAIL": "Email",
+      "FIRST_NAME": "Voornaam",
+      "LAST_NAME": "Achternaam",
+      "ROLE": "Rollen",
+      "DETAIL": {
+        "BACK": "Terug naar gebruikers",
+        "DETAILS": {
+          "TITLE": "Details"
+        },
+        "STATUS": {
+          "TITLE": "Status",
+          "SUBTITLE": "Deze gebruiker is momenteel",
+          "DESCRIPTION": {
+            "ACTIVE": "De gebruiker kan inloggen.",
+            "INACTIVE": "De gebruiker kan niet inloggen.",
+            "REGISTERING": "Een email is verzonden naar deze gebruiker om zijn/haar account te activeren door een wachtwoord te kiezen."
+          },
+          "BUTTON": {
+            "ACTIVATE": "Activeer gebruiker",
+            "DEACTIVATE": "Deactiveer gebruiker",
+            "RESEND_REGISTER_MAIL": "Verzend email opnieuw"
+          }
+        }
+      },
+      "OVERVIEW": {
+        "CREATE_USER": "Creëer gebruiker",
+        "EMPTY": "Geen gebruiker gevonden",
+        "TITLE": "Gebruikers",
+        "CREATED_AT": "Gecreëerd op",
+        "CREATED_BY": "Gecreëerd door",
+        "UPDATED_AT": "Geupdate op",
+        "UPDATED_BY": "Geupdate door"
+      },
+      "CREATE": {
+        "TITLE": "Creëer gebruiker"
+      },
+      "DEACTIVATE": {
+        "CONTENT": "Bent u zeker dat u deze gebruiker wilt deactiveren? Door dit te doen, zal de gebruiker niet meer kunnen inloggen..",
+        "CONFIRM": "Deactivate gebruiker"
+      },
+      "STATE": {
+        "TITLE": "Status",
+        "OPTIONS": {
+          "ACTIVE": "Actief",
+          "INACTIVE": "Inactief",
+          "REGISTERING": "Registreren"
+        }
+      },
+      "ERRORS": {
+        "EMAIL_ALREADY_IN_USE": "Een gebruiker met de gegeven email bestaat al."
+      },
+      "TOASTER": {
+        "USER_CREATED": "De gebruiker was succesvol gecreëerd.",
+        "USER_UPDATED": "De wijzingen zijn succesvol opgeslagen."
+      }
+    },
+    "ERRORS": {
+      "GENERAL": "Er ging iets mis. Probeer alstublieft opnieuw.",
+      "PERMISSION_DENIED": "U hebt niet de permissies om deze actie uit te voeren. Contacteer uw administrator.",
+      "VALIDATION": {
+        "AFTER_DATE": "Datum zou moeten zijn na {{date}}",
+        "BEFORE_DATE": "Datum zou moeten zijn voor {{date}}",
+        "EMPTY_ARRAY": "Kies tenminste één",
+        "FORM": "Sommige velden zijn niet (correct) ingevuld.",
+        "INVALID_NEW_AND_REPEATED_PASSWORD": "Het nieuw wachtwoord en hetgene dat u ingaf komen niet overeen.",
+        "INVALID": "Waarde is niet correct.",
+        "MAX_LENGTH": "Waarde zou tenminste {{length}} karakters moeten hebben.",
+        "MIN_LENGTH": "Waarde zou maximum  {{length}} karakters moeten hebben.",
+        "NOT_A_NUMBER": "Waarde is geen nummer.",
+        "PASSWORD_TOO_SHORT": "Dit wachtwoord is te kort",
+        "PASSWORD_UNSAFE": "Dit wachtwoord voldoet niet aan de vereisten.",
+        "REQUIRED": "Verplicht"
+      }
+    }
+  }
+  
