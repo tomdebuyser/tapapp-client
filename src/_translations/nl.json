@@ -39,7 +39,7 @@
     },
     "TOASTER": {
       "CHOOSE_PASSWORD": "Je kan nu inloggen met jouw nieuw wachtwoord.",
-      "REQUEST_PASSWORD_RESET": "Een email met instructies werd verzonden als het gelinked is aan een account.",
+      "REQUEST_PASSWORD_RESET": "Een email met instructies werd verzonden als het gelinkt is aan een account.",
       "CHANGE_PASSWORD": "Jouw wachtwoord is succesvol aangepast."
     }
   },
@@ -49,7 +49,7 @@
   "ROLES": {
     "NAME": "Naam",
     "PERMISSIONS": {
-      "TITLE": "Permissies",
+      "TITLE": "Rechten",
       "FEATURES": {
         "ROLES": "Rollen",
         "USERS": "Gebruikers"
