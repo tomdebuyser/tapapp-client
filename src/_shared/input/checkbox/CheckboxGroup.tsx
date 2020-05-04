@@ -4,7 +4,7 @@ import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import './checkboxGroup.scss';
 
 export interface CheckboxGroupProps extends InputWrapperProps {
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
   horizontal?: boolean;
 }
 
