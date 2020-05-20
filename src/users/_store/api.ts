@@ -12,7 +12,7 @@ export function getUserDetail(userId: string): Promise<IUser> {
 }
 
 export function createUser(body: IUserForm): Promise<void> {
-  return HttpClient.post('users', body);
+  return HttpClient.post('users', removeEmptyKeys(body));
 }
 
 export function updateUser(userId: string, body: IUserForm): Promise<void> {

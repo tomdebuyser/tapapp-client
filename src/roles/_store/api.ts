@@ -12,7 +12,7 @@ export function getRoles(query?: HttpMetadataQuery): Promise<HttpPagedResponse<I
 }
 
 export function createRole(body: IRoleForm): Promise<void> {
-  return HttpClient.post('roles', body);
+  return HttpClient.post('roles', removeEmptyKeys(body));
 }
 
 export function updateRole(roleId: string, body: IRoleForm): Promise<void> {
