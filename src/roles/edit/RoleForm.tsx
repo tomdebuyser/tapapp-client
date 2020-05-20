@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { translations } from '../../_translations';
-import { Button, InputField, Checkbox, ErrorMessage } from '../../_shared';
+import { Button, InputField, Checkbox, ErrorMessage, CheckboxGroup } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { IRoleForm } from '../_models';
 import './roleForm.scss';
@@ -54,23 +54,25 @@ const RoleForm: FC<Props> = ({ roleId, initialForm, submitForm, isSubmitting, er
       <div className="permissions">
         <h3>{translations.getLabel('ROLES.PERMISSIONS.TITLE')}</h3>
         {Object.keys(form.values.permissions).map(permission => (
-          <fieldset key={permission}>
-            <legend>{translations.getLabel(`ROLES.PERMISSIONS.FEATURES.${permission.toUpperCase()}`)}</legend>
-            <div>
-              {Object.keys(form.values.permissions[permission]).map(option => {
-                const optionName = `${permission}.${option}`;
-                return (
-                  <Checkbox
-                    checked={form.values.permissions[permission][option]}
-                    key={optionName}
-                    label={translations.getLabel(`ROLES.PERMISSIONS.RIGHTS.${option.toUpperCase()}`)}
-                    name={optionName}
-                    onChange={value => form.setValues(values => (values.permissions[permission][option] = value))}
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+          <CheckboxGroup
+            horizontal
+            key={permission}
+            label={translations.getLabel(`ROLES.PERMISSIONS.FEATURES.${permission.toUpperCase()}`)}
+            name={permission}
+          >
+            {Object.keys(form.values.permissions[permission]).map(option => {
+              const optionName = `${permission}.${option}`;
+              return (
+                <Checkbox
+                  checked={form.values.permissions[permission][option]}
+                  key={optionName}
+                  label={translations.getLabel(`ROLES.PERMISSIONS.RIGHTS.${option.toUpperCase()}`)}
+                  name={optionName}
+                  onChange={value => form.setValues(values => (values.permissions[permission][option] = value))}
+                />
+              );
+            })}
+          </CheckboxGroup>
         ))}
       </div>
       <div className="actions">
