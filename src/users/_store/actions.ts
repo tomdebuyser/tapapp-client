@@ -65,7 +65,6 @@ export class CreateUser implements Action<UsersActionType> {
 
 export class CreateUserSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.CreateUserSuccess;
-  constructor(public payload: { createdUser: IUser }) {}
 }
 
 export class CreateUserError implements Action<UsersActionType> {
@@ -80,7 +79,6 @@ export class UpdateUser implements Action<UsersActionType> {
 
 export class UpdateUserSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.UpdateUserSuccess;
-  constructor(public payload: { updatedUser: IUser }) {}
 }
 
 export class UpdateUserError implements Action<UsersActionType> {
@@ -95,7 +93,6 @@ export class DeactivateUser implements Action<UsersActionType> {
 
 export class DeactivateUserSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.DeactivateUserSuccess;
-  constructor(public payload: { updatedUser: IUser }) {}
 }
 
 export class DeactivateUserError implements Action<UsersActionType> {
@@ -110,7 +107,6 @@ export class ResendRegisterEmail implements Action<UsersActionType> {
 
 export class ResendRegisterEmailSuccess implements Action<UsersActionType> {
   readonly type = UsersActionType.ResendRegisterEmailSuccess;
-  constructor(public payload: { updatedUser: IUser }) {}
 }
 
 export class ResendRegisterEmailError implements Action<UsersActionType> {

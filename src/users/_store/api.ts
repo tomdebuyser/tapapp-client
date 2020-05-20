@@ -11,18 +11,18 @@ export function getUserDetail(userId: string): Promise<IUser> {
   return HttpClient.get<IUser>(`users/${userId}`);
 }
 
-export function createUser(body: IUserForm): Promise<IUser> {
-  return HttpClient.post<IUser>('users', body);
+export function createUser(body: IUserForm): Promise<void> {
+  return HttpClient.post('users', body);
 }
 
-export function updateUser(userId: string, body: IUserForm): Promise<IUser> {
-  return HttpClient.put<IUser>(`users/${userId}`, removeEmptyKeys(body));
+export function updateUser(userId: string, body: IUserForm): Promise<void> {
+  return HttpClient.put(`users/${userId}`, removeEmptyKeys(body));
 }
 
-export function deactivateUser(userId: string): Promise<IUser> {
-  return HttpClient.post<IUser>(`users/${userId}/deactivate`);
+export function deactivateUser(userId: string): Promise<void> {
+  return HttpClient.post(`users/${userId}/deactivate`);
 }
 
-export function resendRegisterEmail(userId: string): Promise<IUser> {
-  return HttpClient.post<IUser>(`users/${userId}/resend-register-mail`);
+export function resendRegisterEmail(userId: string): Promise<void> {
+  return HttpClient.post(`users/${userId}/resend-register-mail`);
 }
