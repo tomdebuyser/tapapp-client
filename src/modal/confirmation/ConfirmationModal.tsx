@@ -5,9 +5,9 @@ import { Button, Modal } from '../../_shared';
 import { translations } from '../../_translations';
 import { modalActions } from '../../_store/actions';
 
-interface Props {
+type Props = {
   data?: IConfirmationModalData;
-}
+};
 
 const ConfirmationModal: FC<Props> = ({ data }) => {
   const dispatch = useDispatch();

@@ -12,11 +12,11 @@ import { routerSelectors } from '../../_store/selectors';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
-interface GenericErrorAction extends Action {
+type GenericErrorAction = Action & {
   payload?: {
     error?: ApiError;
   };
-}
+};
 
 const unauthorizedEpic$: Epic = (action$, state$) =>
   action$.pipe(

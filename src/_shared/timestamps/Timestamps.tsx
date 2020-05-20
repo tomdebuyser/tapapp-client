@@ -3,14 +3,14 @@ import { translations } from '../../_translations';
 import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
 import './timestamps.scss';
 
-interface Props {
+type Props = {
   entity: {
     createdAt?: string;
     createdBy?: string;
     updatedAt?: string;
     updatedBy?: string;
   };
-}
+};
 
 function formatTimestamp(at: string, by: string, translationKey: string): string {
   const params: Record<string, string> = { date: formatDate(dateFromISOString(at), 'dd/MM/yyyy HH:mm') };

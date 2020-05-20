@@ -3,12 +3,12 @@ import classnames from 'classnames';
 import './errorMessage.scss';
 import Icon from '../icon/Icon';
 
-interface Props {
+type Props = {
   children: ReactNode;
   className?: string;
   isGlobal?: boolean;
   isVisible: boolean;
-}
+};
 
 const ErrorMessage: FC<Props> = ({ className, children, isGlobal, isVisible }) => {
   if (isVisible && !!children)

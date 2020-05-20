@@ -1,9 +1,9 @@
 import { IProfile } from '../_models';
 import { AuthAction, AuthActionType } from '../../auth/_store/actions';
 
-export interface ProfileState {
+export type ProfileState = {
   profile?: IProfile;
-}
+};
 
 const initialState: ProfileState = {};
 

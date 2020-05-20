@@ -4,13 +4,13 @@ export enum ModalType {
   Confirmation = 'CONFIRMATION',
 }
 
-export interface IModalData {
+export type IModalData = {
   content: string;
   title: string;
-}
+};
 
-export interface IConfirmationModalData extends IModalData {
+export type IConfirmationModalData = IModalData & {
   cancelAction?: () => Action;
   confirmAction?: () => Action;
   confirmText: string;
-}
+};

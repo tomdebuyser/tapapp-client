@@ -6,10 +6,10 @@ import InputField from '../input/inputField/InputField';
 import Icon from '../icon/Icon';
 import './searchField.scss';
 
-interface Props {
+type Props = {
   query?: HttpMetadataQuery;
   setQuery: FillMetadataQueryFunction;
-}
+};
 
 function shouldSearch(currentQuery: HttpMetadataQuery, searchString: string): boolean {
   if (currentQuery?.search === searchString) return false;

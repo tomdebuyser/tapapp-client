@@ -8,10 +8,10 @@ import { translations } from '../../../_translations';
 import InputField, { InputFieldProps } from '../inputField/InputField';
 import './inputFieldDate.scss';
 
-interface Props extends InputFieldProps {
+type Props = InputFieldProps & {
   maxDate?: Date;
   minDate?: Date;
-}
+};
 
 const InputFieldDate: FC<Props> = props => {
   const { label, maxDate, minDate, name, onChange, value } = props;

@@ -1,3 +1,3 @@
-export interface IRequestPasswordResetForm {
+export type IRequestPasswordResetForm = {
   email: string;
-}
+};

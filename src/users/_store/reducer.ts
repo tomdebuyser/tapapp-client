@@ -3,7 +3,7 @@ import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_
 import { insertUpdatedData } from '../../_utils/objectHelpers';
 import { UsersAction, UsersActionType } from './actions';
 
-export interface UsersState {
+export type UsersState = {
   detail?: IUser;
   errorCrudUsers?: ApiError;
   errorDeactivateUser?: ApiError;
@@ -17,7 +17,7 @@ export interface UsersState {
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   users?: IUser[];
-}
+};
 
 const initialState: UsersState = {};
 

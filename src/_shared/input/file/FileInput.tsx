@@ -29,12 +29,12 @@ const requirements: Record<FileInputType, { accept?: string[]; extensions: strin
   // All mime types here: https://www.iana.org/assignments/media-types/media-types.xhtml
 };
 
-interface Props extends InputWrapperProps {
+type Props = InputWrapperProps & {
   maxAmountOfFiles?: number;
   onChange: (files: File[], name: string) => void;
   type: FileInputType;
   value?: File[];
-}
+};
 
 function formatSize(size: number): string {
   return `${(size / MB_MULTIPLIER).toFixed(1)} MB`;

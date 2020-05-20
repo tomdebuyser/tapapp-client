@@ -13,9 +13,9 @@ import { IChoosePasswordForm } from '../_models';
 import { ApiError } from '../../_http';
 import './choosePassword.scss';
 
-interface Props {
+type Props = {
   isPasswordReset?: boolean;
-}
+};
 
 const initialForm: IChoosePasswordForm = {
   newPassword: '',

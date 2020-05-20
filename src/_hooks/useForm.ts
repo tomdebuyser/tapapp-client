@@ -28,14 +28,14 @@ export type FormValidationErrors<TForm = Record<string, unknown>> = {
 export type SubmitFormFunction<TForm> = (values: TForm, setFormValues: (values: TForm) => void) => void;
 type ValidateFormFunction<TForm, TFormErrors> = (values: TForm) => FormValidationErrors<TFormErrors>;
 
-interface Params<TForm, TFormErrors> {
+type Params<TForm, TFormErrors> = {
   error?: ApiError;
   initialForm: TForm;
   submitForm: SubmitFormFunction<TForm>;
   validateForm: ValidateFormFunction<TForm, TFormErrors>;
-}
+};
 
-interface Response<TForm, TFormErrors> {
+type Response<TForm, TFormErrors> = {
   hasValidationErrors: boolean;
   isDirty: boolean;
   setAttribute: (value: unknown, name: string) => void;
@@ -44,7 +44,7 @@ interface Response<TForm, TFormErrors> {
   submitWithParams: (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>) => void;
   validationErrors: FormValidationErrors<TFormErrors>;
   values: TForm;
-}
+};
 
 export type IFormHook<TForm, TFormErrors = TForm> = Response<TForm, TFormErrors>;
 

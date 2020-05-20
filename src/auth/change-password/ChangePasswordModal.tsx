@@ -10,9 +10,9 @@ import { authSelectors } from '../../_store/selectors';
 import { formValidator } from '../../_utils/formValidation';
 import { translations } from '../../_translations';
 
-interface Props {
+type Props = {
   closeModal: () => void;
-}
+};
 
 const initialForm: IChangePasswordForm = {
   newPassword: '',

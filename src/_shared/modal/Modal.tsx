@@ -4,14 +4,14 @@ import classnames from 'classnames';
 import Icon from '../icon/Icon';
 import './modal.scss';
 
-interface Props {
+type Props = {
   children: ReactNode;
   className?: string;
   onClose?: () => void;
   onOpen?: () => void;
   open: boolean;
   trigger?: ReactNode;
-}
+};
 
 const Modal: FC<Props> & { Actions; Content; Header } = ({ className, open, onOpen, onClose, trigger, children }) => {
   return (

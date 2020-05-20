@@ -1,6 +1,6 @@
-export interface IUserForm {
+export type IUserForm = {
   email: string;
   firstName: string;
   lastName: string;
   roleIds: string[];
-}
+};

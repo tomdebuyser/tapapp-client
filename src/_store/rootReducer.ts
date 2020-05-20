@@ -8,14 +8,14 @@ import modalReducer, { ModalState } from '../modal/_store/reducer';
 import profileReducer, { ProfileState } from '../profile/_store/reducer';
 import { AuthActionType } from '../auth/_store/actions';
 
-export interface AppState {
+export type AppState = {
   auth: AuthState;
   modal: ModalState;
   profile: ProfileState;
   roles: RolesState;
   router: RouterState;
   users: UsersState;
-}
+};
 
 function appReducer(history: History): Reducer {
   return combineReducers<AppState>({

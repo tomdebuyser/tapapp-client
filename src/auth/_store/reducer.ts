@@ -1,7 +1,7 @@
 import { ApiError } from '../../_http';
 import { AuthAction, AuthActionType } from './actions';
 
-export interface AuthState {
+export type AuthState = {
   errorChangePassword?: ApiError;
   errorChoosePassword?: ApiError;
   errorLogin?: ApiError;
@@ -13,7 +13,7 @@ export interface AuthState {
   isLoginLoading?: boolean;
   isLogoutLoading?: boolean;
   isRequestPasswordResetLoading?: boolean;
-}
+};
 
 const initialState: AuthState = {
   isAuthenticateLoading: true,

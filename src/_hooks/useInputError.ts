@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { IValidatorResponse } from '../_utils/formValidation';
 import useToggle from './useToggle';
 
-interface Response {
+type Response = {
   setDirty: () => void;
   showError: boolean;
-}
+};
 
 export default function useInputError(validation?: IValidatorResponse): Response {
   const [isDirty, setIsDirty] = useToggle(false);

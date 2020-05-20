@@ -11,11 +11,11 @@ import { usersSelectors } from '../../_store/selectors';
 import { IUser, UserState } from '../_models';
 import { labelForUserState } from '../_utils';
 
-interface Props {
+type Props = {
   data?: IUser[];
   isLoading: boolean;
   setQuery: FillMetadataQueryFunction;
-}
+};
 
 const columns: TableColumn[] = [
   { className: 'email-column', label: 'USERS.EMAIL', name: 'email', sortable: true },

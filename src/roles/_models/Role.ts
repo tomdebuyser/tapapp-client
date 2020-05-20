@@ -1,4 +1,4 @@
-export interface IRole {
+export type IRole = {
   createdAt: string;
   createdBy: string;
   id: string;
@@ -6,9 +6,9 @@ export interface IRole {
   permissions: IPermissions;
   updatedAt: string;
   updatedBy: string;
-}
+};
 
-export interface IPermissions {
+export type IPermissions = {
   roles: {
     edit: boolean;
     view: boolean;
@@ -17,4 +17,4 @@ export interface IPermissions {
     edit: boolean;
     view: boolean;
   };
-}
+};

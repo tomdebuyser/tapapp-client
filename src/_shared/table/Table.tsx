@@ -5,21 +5,21 @@ import { translations } from '../../_translations';
 import { SortFunctions } from '../../_hooks/useTableSort';
 import './table.scss';
 
-export interface TableColumn {
+export type TableColumn = {
   className?: string;
   label?: string;
   name: string;
   sortable?: boolean;
-}
+};
 
-interface Props {
+type Props = {
   columns: TableColumn[];
   data?: object[];
   emptyLabel: string;
   isLoading: boolean;
   renderRow: (item: unknown) => ReactElement;
   sortFunctions?: SortFunctions;
-}
+};
 
 const Table: FC<Props> & { Cell; Row } = ({ columns, renderRow, data = [], isLoading, emptyLabel, sortFunctions }) => {
   function renderHeaderCell(column: TableColumn) {

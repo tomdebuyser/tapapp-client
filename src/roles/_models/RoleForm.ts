@@ -1,6 +1,6 @@
 import { IPermissions } from './Role';
 
-export interface IRoleForm {
+export type IRoleForm = {
   name: string;
   permissions: IPermissions;
-}
+};
