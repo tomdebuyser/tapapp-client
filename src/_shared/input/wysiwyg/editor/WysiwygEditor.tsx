@@ -51,14 +51,14 @@ function replaceClassNames(value: string): string {
   );
 }
 
-interface Props {
+type Props = {
   disabled?: boolean;
   error?: boolean;
   onChange?: (value: string) => void;
   placeholder?: string;
   rows?: number;
   value?: string;
-}
+};
 
 const WysiwygEditor: FC<Props> = ({ disabled, error, onChange, placeholder, rows, value }) => {
   // We keep the content containing class names here to pass to the editor, otherwise it does not function well.

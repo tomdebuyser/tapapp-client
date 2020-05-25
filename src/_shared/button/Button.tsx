@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import './button.scss';
 
-interface Props {
+type Props = {
   asText?: boolean;
   children: ReactNode;
   className?: string;
@@ -15,7 +15,7 @@ interface Props {
   onClick?: (event?: BaseSyntheticEvent) => void;
   primary?: boolean;
   type?: 'button' | 'submit' | 'reset';
-}
+};
 
 const Button: FC<Props> = ({ asText, className, children, onClick, disabled, loading, href, type, primary, negative }) => {
   const isDisabled = disabled || loading;

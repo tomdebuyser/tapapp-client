@@ -3,10 +3,10 @@ import classnames from 'classnames';
 import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import './checkboxGroup.scss';
 
-export interface CheckboxGroupProps extends InputWrapperProps {
+export type CheckboxGroupProps = InputWrapperProps & {
   children: ReactNode;
   horizontal?: boolean;
-}
+};
 
 const CheckboxGroup: FC<CheckboxGroupProps> = ({ children, horizontal, ...wrapperProps }) => {
   const { validation } = wrapperProps;

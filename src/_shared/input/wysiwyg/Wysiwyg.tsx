@@ -3,12 +3,12 @@ import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 import WysiwygEditor from './editor/WysiwygEditor';
 
-interface Props extends InputWrapperProps {
+type Props = InputWrapperProps & {
   onChange: (value: string, name: string) => void;
   placeholder?: string;
   rows?: number;
   value?: string;
-}
+};
 
 const Wysiwyg: FC<Props> = ({ onChange, placeholder, rows, value, ...wrapperProps }) => {
   const { disabled, validation, name } = wrapperProps;

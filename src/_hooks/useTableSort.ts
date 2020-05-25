@@ -3,10 +3,10 @@ import { HttpSortDirection } from '../_http';
 
 type SemanticSortDirection = 'ascending' | 'descending';
 
-export interface SortFunctions {
+export type SortFunctions = {
   getSortDirectionForColumn: (column: string) => SemanticSortDirection;
   onChangeSortColumn: (column: string) => void;
-}
+};
 
 function sortDirectionOpposite(direction: string): HttpSortDirection {
   return direction === HttpSortDirection.Ascending ? HttpSortDirection.Descending : HttpSortDirection.Ascending;
@@ -16,11 +16,11 @@ function semanticSortDirection(direction: HttpSortDirection): SemanticSortDirect
   return direction === HttpSortDirection.Ascending ? 'ascending' : 'descending';
 }
 
-interface Response {
+type Response = {
   sortColumn?: string;
   sortDirection?: HttpSortDirection;
   sortFunctions: SortFunctions;
-}
+};
 
 const useTableSort = (
   callback: (column: string, direction: HttpSortDirection) => void,

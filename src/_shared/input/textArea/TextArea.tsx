@@ -5,14 +5,14 @@ import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 import './textArea.scss';
 
-export interface Props extends InputWrapperProps {
+export type Props = InputWrapperProps & {
   characterLimit?: number;
   normalize?: (value: string) => string;
   onChange?: (value: string, name: string) => void;
   placeholder?: string;
   rows?: number;
   value?: string;
-}
+};
 
 const TextArea: FC<Props> = ({ characterLimit, normalize, onChange, placeholder, rows, value, ...wrapperProps }) => {
   const { disabled, validation, name } = wrapperProps;

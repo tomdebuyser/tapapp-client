@@ -3,7 +3,7 @@ import { Input, InputOnChangeData } from 'semantic-ui-react';
 import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 
-export interface InputFieldProps extends InputWrapperProps {
+export type InputFieldProps = InputWrapperProps & {
   autoComplete?: string;
   autoFocus?: boolean;
   icon?: string;
@@ -12,7 +12,7 @@ export interface InputFieldProps extends InputWrapperProps {
   placeholder?: string;
   type?: string;
   value?: string;
-}
+};
 
 const InputField: FC<InputFieldProps> = ({
   autoComplete,

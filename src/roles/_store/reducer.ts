@@ -3,7 +3,7 @@ import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_
 import { keepRetrievedDataPage } from '../../_utils/objectHelpers';
 import { RolesAction, RolesActionType } from './actions';
 
-export interface RolesState {
+export type RolesState = {
   detail?: IRole;
   errorCrudRoles?: ApiError;
   isCreateRoleLoading?: boolean;
@@ -14,7 +14,7 @@ export interface RolesState {
   metadata?: HttpMetadataPagingResponse;
   query?: HttpMetadataQuery;
   roles?: IRole[];
-}
+};
 
 const initialState: RolesState = {};
 

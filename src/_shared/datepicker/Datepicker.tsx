@@ -6,9 +6,9 @@ import './datepicker.scss';
 
 registerLocale('nl', nl);
 
-interface Props extends ReactDatePickerProps {
+type Props = ReactDatePickerProps & {
   trigger?: ReactNode;
-}
+};
 
 const Datepicker: FC<Props> = ({ trigger, ...props }) => (
   <Picker popperPlacement="bottom-start" {...props} customInput={trigger} locale="nl" />

@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import * as ICONS from '../../_assets/svg';
 import './icon.scss';
 
-interface Props {
+type Props = {
   className?: string;
   clickable?: boolean;
   disabled?: boolean;
@@ -12,7 +12,7 @@ interface Props {
   name: string;
   onClick?: (value: React.MouseEvent) => void;
   size?: number;
-}
+};
 
 const Icon: FC<Props> = ({ size, name, onClick, disabled, className, label, clickable, id, ...otherProps }) => {
   const Svg = ICONS[name];

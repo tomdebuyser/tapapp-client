@@ -1,3 +1,3 @@
-export interface IChoosePasswordForm {
+export type IChoosePasswordForm = {
   newPassword: string;
-}
+};

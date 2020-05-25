@@ -1,7 +1,7 @@
 import { UserState } from '../../users/_models';
 import { IPermissions } from '../../roles/_models';
 
-export interface IProfile {
+export type IProfile = {
   createdAt?: string;
   createdBy?: string;
   email: string;
@@ -12,4 +12,4 @@ export interface IProfile {
   state: UserState;
   updatedAt?: string;
   updatedBy?: string;
-}
+};

@@ -1,25 +1,25 @@
-export interface HttpMetadataPagingResponse {
+export type HttpMetadataPagingResponse = {
   count: number;
   skip: number;
   totalCount: number;
-}
+};
 
 export enum HttpSortDirection {
   Ascending = 'ASC',
   Descending = 'DESC',
 }
 
-export interface HttpPagedResponse<T> {
+export type HttpPagedResponse<T> = {
   data: T[];
   meta: HttpMetadataPagingResponse;
-}
+};
 
-export interface HttpMetadataQuery {
+export type HttpMetadataQuery = {
   search?: string;
   skip?: number;
   sortBy?: string;
   sortDirection?: HttpSortDirection;
   take?: number;
-}
+};
 
 export type FillMetadataQueryFunction = (partialQuery: HttpMetadataQuery) => void;

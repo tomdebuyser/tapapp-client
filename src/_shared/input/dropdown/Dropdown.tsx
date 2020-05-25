@@ -4,21 +4,21 @@ import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 import './dropdown.scss';
 
-export interface DropdownOption {
+export type DropdownOption = {
   className?: string;
   key?: string;
   text: string;
   value: string;
-}
+};
 
-interface Props extends InputWrapperProps {
+type Props = InputWrapperProps & {
   multiple?: boolean;
   normalize?: (value: string) => string;
   onChange: (value: string | string[], name: string) => void;
   options: DropdownOption[] | [];
   placeholder?: string;
   value: string | string[];
-}
+};
 
 const Dropdown: FC<Props> = ({ multiple, normalize, onChange, options, placeholder, value, ...wrapperProps }) => {
   const { disabled, validation, name } = wrapperProps;

@@ -1,11 +1,11 @@
 import { HttpStatus } from './HttpStatus';
 
-export interface ApiError {
+export type ApiError = {
   error?: string;
   message?: string;
   statusCode: HttpStatus;
   validationErrors?: Record<string, ValidationError>;
-}
+};
 
 export type ValidationError = {
   children: Array<ValidationError & { property: string }>;

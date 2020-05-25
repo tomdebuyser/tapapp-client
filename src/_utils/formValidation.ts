@@ -9,10 +9,10 @@ export function isEmptyString(value: string): boolean {
   return !value || trim(value) === '';
 }
 
-export interface IValidatorResponse {
+export type IValidatorResponse = {
   isValid: boolean;
   message?: string;
-}
+};
 
 export const formValidator = {
   afterDate: function(value: Date, minDate: Date): IValidatorResponse {

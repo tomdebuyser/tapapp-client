@@ -1,4 +1,4 @@
-export interface IUser {
+export type IUser = {
   createdAt?: string;
   createdBy?: string;
   email: string;
@@ -12,7 +12,7 @@ export interface IUser {
   state: UserState;
   updatedAt?: string;
   updatedBy?: string;
-}
+};
 
 export enum UserState {
   Active = 'ACTIVE',

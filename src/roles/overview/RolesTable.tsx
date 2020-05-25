@@ -9,11 +9,11 @@ import { translations } from '../../_translations';
 import { rolesSelectors } from '../../_store/selectors';
 import { IRole } from '../_models';
 
-interface Props {
+type Props = {
   data?: IRole[];
   isLoading: boolean;
   setQuery: FillMetadataQueryFunction;
-}
+};
 
 const columns: TableColumn[] = [
   { label: 'ROLES.NAME', name: 'name', sortable: true },

@@ -8,14 +8,14 @@ import { ApiError } from '../../_http';
 import { SubmitFormFunction, FormValidationErrors } from '../../_hooks/useForm';
 import { formValidator } from '../../_utils/formValidation';
 
-interface Props {
+type Props = {
   buttons?: JSX.Element | JSX.Element[];
   error?: ApiError;
   initialForm: IUserForm;
   isSubmitting?: boolean;
   submitForm: SubmitFormFunction<IUserForm>;
   userId?: string;
-}
+};
 
 type IUserFormErrors = IUserForm & {
   roleIds?: string;

@@ -1,11 +1,11 @@
 import { ModalType, IModalData } from '../_models';
 import { ModalActionType, ModalAction } from './actions';
 
-export interface ModalState {
+export type ModalState = {
   data?: IModalData;
   isOpen: boolean;
   type?: ModalType;
-}
+};
 
 const initialState: ModalState = {
   isOpen: false,

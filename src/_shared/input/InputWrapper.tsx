@@ -12,7 +12,7 @@ import { IValidatorResponse } from '../../_utils/formValidation';
  *  - Show whether a field is required
  */
 
-export interface InputWrapperProps {
+export type InputWrapperProps = {
   className?: string;
   disabled?: boolean;
   label?: string;
@@ -20,7 +20,7 @@ export interface InputWrapperProps {
   name: string;
   required?: boolean;
   validation?: IValidatorResponse;
-}
+};
 
 const InputWrapper: FC<InputWrapperProps & { children: ReactNode; showError?: boolean }> = ({
   children,

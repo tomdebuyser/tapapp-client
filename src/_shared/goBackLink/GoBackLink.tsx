@@ -3,10 +3,10 @@ import Icon from '../icon/Icon';
 import Button from '../button/Button';
 import './goBackLink.scss';
 
-interface Props {
+type Props = {
   label: string;
   to: string;
-}
+};
 
 const GoBackLink: FC<Props> = ({ label, to }) => {
   return (

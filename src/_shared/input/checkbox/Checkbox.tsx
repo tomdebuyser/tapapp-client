@@ -4,14 +4,14 @@ import classnames from 'classnames';
 import InputWrapper, { InputWrapperProps } from '../InputWrapper';
 import { useInputError } from '../../../_hooks';
 
-export interface InputCheckboxProps extends InputWrapperProps {
+export type InputCheckboxProps = InputWrapperProps & {
   checked?: boolean;
   label?: string;
   onChange: (checked: boolean, name: string) => void;
   radio?: boolean;
   toggle?: boolean;
   type?: 'checkbox' | 'radio';
-}
+};
 
 const Checkbox: FC<InputCheckboxProps> = ({ checked, label, onChange, radio, toggle, type, ...wrapperProps }) => {
   const { disabled, validation, name } = wrapperProps;
