@@ -11,6 +11,7 @@ import { labelForUserState } from '../_utils';
 import { UserState, IUserForm } from '../_models';
 import UserForm from '../edit/UserForm';
 import './userDetail.scss';
+import { canUserBeDeactiveated, canResendRegisterEmailForUser } from '../_models/rules';
 
 const UserDetail: FC = () => {
   const { id } = useParams();
@@ -62,23 +63,25 @@ const UserDetail: FC = () => {
   }
 
   function renderStatusSection() {
-    let button = (
-      <Button
-        loading={isResendRegisterMailLoading}
-        onClick={() => dispatch(new usersActions.ResendRegisterEmail({ userId: user.id }))}
-        primary
-      >
-        {translations.getLabel(
-          user.state === UserState.Registering
-            ? 'USERS.DETAIL.STATUS.BUTTON.RESEND_REGISTER_MAIL'
-            : 'USERS.DETAIL.STATUS.BUTTON.ACTIVATE',
-        )}
-      </Button>
-    );
-    if (user.state === UserState.Active) {
+    let button = null;
+    if (canUserBeDeactiveated(user)) {
       button = (
         <Button loading={isDeactivateLoading} negative onClick={() => dispatch(new usersActions.DeactivateUser({ user }))}>
           {translations.getLabel('USERS.DETAIL.STATUS.BUTTON.DEACTIVATE')}
+        </Button>
+      );
+    } else if (canResendRegisterEmailForUser(user)) {
+      button = (
+        <Button
+          loading={isResendRegisterMailLoading}
+          onClick={() => dispatch(new usersActions.ResendRegisterEmail({ userId: user.id }))}
+          primary
+        >
+          {translations.getLabel(
+            user.state === UserState.Registering
+              ? 'USERS.DETAIL.STATUS.BUTTON.RESEND_REGISTER_MAIL'
+              : 'USERS.DETAIL.STATUS.BUTTON.ACTIVATE',
+          )}
         </Button>
       );
     }

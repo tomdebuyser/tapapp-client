@@ -1,3 +1,5 @@
+import { HttpMetadataPagingResponse } from '../_http';
+
 export function removeEmptyKeys<T>(object: T): Partial<T> {
   return Object.keys(object).reduce<Partial<T>>((acc, key: string) => {
     if (object[key]) return { ...acc, [key]: object[key] };
@@ -5,9 +7,23 @@ export function removeEmptyKeys<T>(object: T): Partial<T> {
   }, {});
 }
 
-export function insertUpdatedData<T extends { id: string }>(currentData: T[], updatedData: T[]): T[] {
-  const ids = updatedData.map(value => value.id);
-  return [...(currentData || []).filter(value => !ids.includes(value.id)), ...updatedData];
+export function insertUpdatedData<T extends { id: string }>(currentData: T[], dataToInsert: T[]): T[] {
+  const result = [...(currentData || [])];
+  const updatedData = dataToInsert.filter(updatedObject => result.some(currentObject => currentObject.id === updatedObject.id));
+  updatedData.forEach(updatedObject =>
+    result.splice(
+      result.findIndex(currentObject => currentObject.id === updatedObject.id),
+      1,
+      updatedObject,
+    ),
+  );
+  return [...result, ...dataToInsert.filter(newObject => !updatedData.some(updatedObject => updatedObject.id === newObject.id))];
+}
+
+export function keepRetrievedDataPage<T>(currentData: T[], retrievedData: T[], metadata: HttpMetadataPagingResponse): T[] {
+  let result = currentData || [];
+  if (!metadata.skip) result = []; // Start overnew when the offset was reset
+  return [...result, ...retrievedData];
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

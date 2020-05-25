@@ -38,21 +38,18 @@ const createUserEpic$: Epic = action$ =>
     switchMap(({ payload }: usersActions.CreateUser) =>
       from(usersApi.createUser(payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('USERS.TOASTER.USER_CREATED'))),
-        map(createdUser => new usersActions.CreateUserSuccess({ createdUser })),
+        switchMap(() => of(new usersActions.CreateUserSuccess(), push('/users'))),
         catchError(error => of(new usersActions.CreateUserError({ error }))),
       ),
     ),
   );
-
-const createUserSuccessEpic$: Epic = action$ =>
-  action$.ofType(UsersActionType.CreateUserSuccess).pipe(switchMap(() => of(push('/users'))));
 
 const updateUserEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.UpdateUser).pipe(
     exhaustMap(({ payload }: usersActions.UpdateUser) =>
       from(usersApi.updateUser(payload.userId, payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('USERS.TOASTER.USER_UPDATED'))),
-        map(updatedUser => new usersActions.UpdateUserSuccess({ updatedUser })),
+        switchMap(() => of(new usersActions.UpdateUserSuccess(), new usersActions.GetUserDetail({ userId: payload.userId }))),
         catchError(error => of(new usersActions.UpdateUserError({ error }))),
       ),
     ),
@@ -76,7 +73,9 @@ const deactivateUserEpic$: Epic = action$ =>
     filter(({ payload }: usersActions.DeactivateUser) => payload.confirmed),
     exhaustMap(({ payload }: usersActions.DeactivateUser) =>
       from(usersApi.deactivateUser(payload.user.id)).pipe(
-        map(updatedUser => new usersActions.DeactivateUserSuccess({ updatedUser })),
+        switchMap(() =>
+          of(new usersActions.DeactivateUserSuccess(), new usersActions.GetUserDetail({ userId: payload.user.id })),
+        ),
         catchError(error => of(new usersActions.DeactivateUserError({ error }))),
       ),
     ),
@@ -86,7 +85,9 @@ const resendRegisterEmailEpic$: Epic = action$ =>
   action$.ofType(UsersActionType.ResendRegisterEmail).pipe(
     exhaustMap(({ payload }: usersActions.ResendRegisterEmail) =>
       from(usersApi.resendRegisterEmail(payload.userId)).pipe(
-        map(updatedUser => new usersActions.ResendRegisterEmailSuccess({ updatedUser })),
+        switchMap(() =>
+          of(new usersActions.ResendRegisterEmailSuccess(), new usersActions.GetUserDetail({ userId: payload.userId })),
+        ),
         catchError(error => of(new usersActions.ResendRegisterEmailError({ error }))),
       ),
     ),
@@ -97,7 +98,6 @@ export default [
   getUsersEpic$,
   setUsersQueryEpic$,
   createUserEpic$,
-  createUserSuccessEpic$,
   updateUserEpic$,
   deactivateUserWithConfirmationEpic$,
   deactivateUserEpic$,
