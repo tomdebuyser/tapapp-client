@@ -1,6 +1,6 @@
 import { IRole } from '../_models';
 import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http';
-import { insertUpdatedData } from '../../_utils/objectHelpers';
+import { keepRetrievedDataPage } from '../../_utils/objectHelpers';
 import { RolesAction, RolesActionType } from './actions';
 
 export type RolesState = {
@@ -46,16 +46,13 @@ export default function reducer(state = initialState, action: RolesAction): Role
         isGetRolesLoading: true,
         metadata: null,
       };
-    case RolesActionType.GetRolesSuccess: {
-      let currentData = state.roles || [];
-      if (!action.payload.meta.skip) currentData = []; // Start overnew when the offset was reset
+    case RolesActionType.GetRolesSuccess:
       return {
         ...state,
         isGetRolesLoading: false,
         metadata: action.payload.meta,
-        roles: insertUpdatedData(currentData, action.payload.data),
+        roles: keepRetrievedDataPage(state.roles, action.payload.data, action.payload.meta),
       };
-    }
     case RolesActionType.GetRolesError:
       return {
         ...state,
@@ -77,7 +74,6 @@ export default function reducer(state = initialState, action: RolesAction): Role
       return {
         ...state,
         isCreateRoleLoading: false,
-        roles: insertUpdatedData(state.roles || [], [action.payload.createdRole]),
       };
     case RolesActionType.CreateRoleError:
       return {
@@ -94,9 +90,7 @@ export default function reducer(state = initialState, action: RolesAction): Role
     case RolesActionType.UpdateRoleSuccess:
       return {
         ...state,
-        detail: action.payload.updatedRole,
         isUpdateRoleLoading: false,
-        roles: insertUpdatedData(state.roles, [action.payload.updatedRole]),
       };
     case RolesActionType.UpdateRoleError:
       return {

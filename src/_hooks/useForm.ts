@@ -40,8 +40,8 @@ type Response<TForm, TFormErrors> = {
   isDirty: boolean;
   setAttribute: (value: unknown, name: string) => void;
   setValues: (setter: (values: TForm) => void) => void;
-  submit: (event: React.FormEvent) => void;
-  submitWithParams: (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>) => void;
+  submit: (event: React.FormEvent) => boolean;
+  submitWithParams: (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>) => boolean;
   validationErrors: FormValidationErrors<TFormErrors>;
   values: TForm;
 };
@@ -86,20 +86,22 @@ function useForm<TForm, TFormErrors = TForm>(params: Params<TForm, TFormErrors>)
     event: React.FormEvent,
     sumbitFunction: SubmitFormFunction<TForm> = submitForm,
     validateFunction: ValidateFormFunction<TForm, TFormErrors> = validateForm,
-  ): void => {
+  ): boolean => {
     event.preventDefault();
     const errors = validateFunction(values);
-    if (!hasValidationErrors(errors)) {
+    const hasErrors = hasValidationErrors(errors);
+    if (!hasErrors) {
       sumbitFunction(values, setFormValues);
       setIsDirty(false);
     }
     setValidationErrors(errors);
+    return !hasErrors;
   };
 
   /**
    * In some cases, you want to use a different submit / validate function than the default one.
    */
-  const submitWithParams = (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>): void =>
+  const submitWithParams = (event: React.FormEvent, params: Partial<Params<TForm, TFormErrors>>): boolean =>
     submit(event, params.submitForm, params.validateForm);
 
   /**

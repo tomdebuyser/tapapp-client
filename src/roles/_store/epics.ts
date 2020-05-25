@@ -38,21 +38,18 @@ const createRoleEpic$: Epic = action$ =>
     switchMap(({ payload }: rolesActions.CreateRole) =>
       from(rolesApi.createRole(payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_CREATED'))),
-        map(createdRole => new rolesActions.CreateRoleSuccess({ createdRole })),
+        switchMap(() => of(new rolesActions.CreateRoleSuccess(), push('/roles'))),
         catchError(error => of(new rolesActions.CreateRoleError({ error }))),
       ),
     ),
   );
-
-const createDeleteRoleSuccessEpic$: Epic = action$ =>
-  action$.ofType(RolesActionType.CreateRoleSuccess, RolesActionType.DeleteRoleSuccess).pipe(switchMap(() => of(push('/roles'))));
 
 const updateRoleEpic$: Epic = action$ =>
   action$.ofType(RolesActionType.UpdateRole).pipe(
     exhaustMap(({ payload }: rolesActions.UpdateRole) =>
       from(rolesApi.updateRole(payload.roleId, payload.values)).pipe(
         tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_UPDATED'))),
-        map(updatedRole => new rolesActions.UpdateRoleSuccess({ updatedRole })),
+        switchMap(() => of(new rolesActions.UpdateRoleSuccess(), new rolesActions.GetRoleDetail({ roleId: payload.roleId }))),
         catchError(error => of(new rolesActions.UpdateRoleError({ error }))),
       ),
     ),
@@ -77,7 +74,7 @@ const deleteRoleEpic$: Epic = action$ =>
     exhaustMap(({ payload }: rolesActions.DeleteRole) =>
       from(rolesApi.deleteRole(payload.role.id)).pipe(
         tap(() => toast.success(translations.getLabel('ROLES.TOASTER.ROLE_DELETED'))),
-        map(() => new rolesActions.DeleteRoleSuccess({ roleId: payload.role.id })),
+        switchMap(() => of(new rolesActions.DeleteRoleSuccess({ roleId: payload.role.id }), push('/roles'))),
         catchError(error => of(new rolesActions.DeleteRoleError({ error }))),
       ),
     ),
@@ -88,7 +85,6 @@ export default [
   getRolesEpic$,
   setRolesQueryEpic$,
   createRoleEpic$,
-  createDeleteRoleSuccessEpic$,
   updateRoleEpic$,
   deleteRoleEpic$,
   deleteRoleWithConfirmationEpic$,

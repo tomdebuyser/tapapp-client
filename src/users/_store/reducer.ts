@@ -1,6 +1,6 @@
 import { IUser } from '../_models';
 import { ApiError, HttpMetadataPagingResponse, HttpMetadataQuery } from '../../_http';
-import { insertUpdatedData } from '../../_utils/objectHelpers';
+import { keepRetrievedDataPage } from '../../_utils/objectHelpers';
 import { UsersAction, UsersActionType } from './actions';
 
 export type UsersState = {
@@ -49,16 +49,13 @@ export default function reducer(state = initialState, action: UsersAction): User
         isGetUsersLoading: true,
         metadata: null,
       };
-    case UsersActionType.GetUsersSuccess: {
-      let currentData = state.users || [];
-      if (!action.payload.meta.skip) currentData = []; // Start overnew when the offset was reset
+    case UsersActionType.GetUsersSuccess:
       return {
         ...state,
         isGetUsersLoading: false,
         metadata: action.payload.meta,
-        users: insertUpdatedData(currentData, action.payload.data),
+        users: keepRetrievedDataPage(state.users, action.payload.data, action.payload.meta),
       };
-    }
     case UsersActionType.GetUsersError:
       return {
         ...state,
@@ -80,7 +77,6 @@ export default function reducer(state = initialState, action: UsersAction): User
       return {
         ...state,
         isCreateUserLoading: false,
-        users: insertUpdatedData(state.users || [], [action.payload.createdUser]),
       };
     case UsersActionType.CreateUserError:
       return {
@@ -97,9 +93,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.UpdateUserSuccess:
       return {
         ...state,
-        detail: action.payload.updatedUser,
         isUpdateUserLoading: false,
-        users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
     case UsersActionType.UpdateUserError:
       return {
@@ -116,9 +110,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.DeactivateUserSuccess:
       return {
         ...state,
-        detail: action.payload.updatedUser,
         isDeactivateUserLoading: false,
-        users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
     case UsersActionType.DeactivateUserError:
       return {
@@ -135,9 +127,7 @@ export default function reducer(state = initialState, action: UsersAction): User
     case UsersActionType.ResendRegisterEmailSuccess:
       return {
         ...state,
-        detail: action.payload.updatedUser,
         isResendRegisterEmailLoading: false,
-        users: insertUpdatedData(state.users, [action.payload.updatedUser]),
       };
     case UsersActionType.ResendRegisterEmailError:
       return {

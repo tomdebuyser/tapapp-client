@@ -11,12 +11,12 @@ export function getRoles(query?: HttpMetadataQuery): Promise<HttpPagedResponse<I
   return HttpClient.get<HttpPagedResponse<IRole>>(`roles${getQueryParams(query)}`);
 }
 
-export function createRole(body: IRoleForm): Promise<IRole> {
-  return HttpClient.post<IRole>('roles', body);
+export function createRole(body: IRoleForm): Promise<void> {
+  return HttpClient.post('roles', removeEmptyKeys(body));
 }
 
-export function updateRole(roleId: string, body: IRoleForm): Promise<IRole> {
-  return HttpClient.put<IRole>(`roles/${roleId}`, removeEmptyKeys(body));
+export function updateRole(roleId: string, body: IRoleForm): Promise<void> {
+  return HttpClient.put(`roles/${roleId}`, removeEmptyKeys(body));
 }
 
 export function deleteRole(roleId: string): Promise<void> {

@@ -2,7 +2,7 @@
 @import '../../_styles/constants';
 
 .input-wrapper {
-  &.required label:after {
+  &.required .input-wrapper-label:after {
     content: '*';
     font-size: 2.5rem;
     color: $red;
@@ -10,7 +10,7 @@
     margin-top: 0.5rem;
   }
 
-  label:not(:last-child) {
+  .input-wrapper-label:not(:last-child) {
     display: flex;
     align-items: center;
     height: $input-icon-height;
