@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { translations } from '../../_translations';
-import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
+import { formatISOString } from '../../_utils/dateHelpers';
 import './timestamps.scss';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 };
 
 function formatTimestamp(at: string, by: string, translationKey: string): string {
-  const params: Record<string, string> = { date: formatDate(dateFromISOString(at), 'dd/MM/yyyy HH:mm') };
+  const params: Record<string, string> = { date: formatISOString(at, 'dd/MM/yyyy HH:mm') };
   if (by) params.name = by;
   return translations.getLabel(`${translationKey}${by ? '_BY' : ''}`, params);
 }

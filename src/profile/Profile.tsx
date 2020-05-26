@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
-import { config } from '../config';
+import { Config } from '../config';
 import { translations } from '../_translations';
 import ChangePassword from '../auth/change-password/ChangePassword';
 
@@ -9,7 +9,7 @@ const Profile: FC = () => {
     <Container as="main" className="left-container">
       <h1>
         {translations.getLabel('PROFILE.TITLE', {
-          brandName: config.brandName(),
+          brandName: Config.brandName,
         })}
       </h1>
       <ChangePassword />

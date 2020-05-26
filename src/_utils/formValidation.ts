@@ -1,5 +1,5 @@
 import { translations } from '../_translations';
-import { isAfterDate, isBeforeDate, formatDate, DEFAULT_DATE_STRING_FORMAT, DEFAULT_TIME_STRING_FORMAT } from './timeHelpers';
+import { isAfterDate, isBeforeDate, formatDate, DEFAULT_DATE_STRING_FORMAT, DEFAULT_TIME_STRING_FORMAT } from './dateHelpers';
 
 export function trim(value: string): string {
   return value.replace(/\s/g, '');

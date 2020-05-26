@@ -1,10 +1,10 @@
 import I18n from 'i18n-js';
-import { config } from '../config';
+import { Config } from '../config';
 import en from './en.json';
 import nl from './nl.json';
 
 const getLabel = (key: string, inserts = {}): string => {
-  if (config.environment() !== 'production' && I18n.t(key, inserts) === '') {
+  if (Config.environment !== 'production' && I18n.t(key, inserts) === '') {
     return `[[${key}]]`;
   }
   return I18n.t(key, inserts);

@@ -9,22 +9,20 @@ function assertNodeEnv(env: string | undefined): asserts env {
 
 assertNodeEnv(nodeEnv);
 
-function apiHost(): string {
-  return process.env.REACT_APP_API_HOST as string;
+export class Config {
+  static get apiHost(): string {
+    return process.env.REACT_APP_API_HOST as string;
+  }
+
+  static get brandName(): string {
+    return process.env.REACT_APP_BRAND_NAME as string;
+  }
+
+  static get environment(): Environment {
+    return nodeEnv as Environment;
+  }
+
+  static get sentryDsn(): string {
+    return process.env.REACT_APP_SENTRY_DSN as string;
+  }
 }
-
-function brandName(): string {
-  return process.env.REACT_APP_BRAND_NAME as string;
-}
-
-function environment(): Environment {
-  return nodeEnv as Environment;
-}
-
-function sentryDsn(): string {
-  return process.env.REACT_APP_SENTRY_DSN as string;
-}
-
-const config = { apiHost, brandName, environment, sentryDsn };
-
-export { config };

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 import Datepicker from '../../datepicker/Datepicker';
-import { formatDate, dateFromString } from '../../../_utils/timeHelpers';
+import { formatDate, dateFromString } from '../../../_utils/dateHelpers';
 import { normalizeDate } from '../../../_utils/normalizeHelpers';
 import Icon from '../../icon/Icon';
 import { translations } from '../../../_translations';

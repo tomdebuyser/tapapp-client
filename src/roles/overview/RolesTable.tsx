@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http';
 import Table, { TableColumn } from '../../_shared/table/Table';
-import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
+import { formatISOString } from '../../_utils/dateHelpers';
 import { useTableSort, useInfiniteScroll } from '../../_hooks';
 import { translations } from '../../_translations';
 import { rolesSelectors } from '../../_store/selectors';
@@ -36,8 +36,8 @@ const RolesTable: FC<Props> = ({ data, isLoading, setQuery }) => {
         <Table.Cell>
           <Link to={{ pathname: `/roles/${role.id}` }}>{role.name}</Link>
         </Table.Cell>
-        <Table.Cell>{formatDate(dateFromISOString(role.createdAt))}</Table.Cell>
-        <Table.Cell>{formatDate(dateFromISOString(role.updatedAt))}</Table.Cell>
+        <Table.Cell>{formatISOString(role.createdAt)}</Table.Cell>
+        <Table.Cell>{formatISOString(role.updatedAt)}</Table.Cell>
         <Table.Cell>
           <ul className="permissions">
             {Object.keys(role.permissions).map(permission => {
