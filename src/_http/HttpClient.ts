@@ -1,5 +1,5 @@
 import axios, { AxiosError, ResponseType, AxiosResponse } from 'axios';
-import { config } from '../config';
+import { Config } from '../config';
 import { HttpStatus } from './HttpStatus';
 import { ApiError, ValidationError } from './HttpError';
 
@@ -11,7 +11,7 @@ class HttpClient {
     if (route.indexOf('http://') === 0 || route.indexOf('https://') === 0 || route.indexOf('www.') === 0) {
       return route;
     }
-    return `${config.apiHost()}${route}`;
+    return `${Config.apiHost}${route}`;
   }
 
   static getUrlWithParams(route: string, params: Params): string {

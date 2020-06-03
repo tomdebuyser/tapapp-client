@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import Table, { TableColumn } from '../../_shared/table/Table';
-import { formatDate, dateFromISOString } from '../../_utils/timeHelpers';
+import { formatISOString } from '../../_utils/dateHelpers';
 import { FillMetadataQueryFunction, HttpSortDirection } from '../../_http';
 import { translations } from '../../_translations';
 import { useTableSort, useInfiniteScroll } from '../../_hooks';
@@ -43,8 +43,8 @@ const UsersTable: FC<Props> = ({ data, isLoading, setQuery }) => {
         </Table.Cell>
         <Table.Cell>{user.firstName}</Table.Cell>
         <Table.Cell>{user.lastName}</Table.Cell>
-        <Table.Cell>{formatDate(dateFromISOString(user.createdAt))}</Table.Cell>
-        <Table.Cell>{formatDate(dateFromISOString(user.updatedAt))}</Table.Cell>
+        <Table.Cell>{formatISOString(user.createdAt)}</Table.Cell>
+        <Table.Cell>{formatISOString(user.updatedAt)}</Table.Cell>
         <Table.Cell>{labelForUserState(user.state)}</Table.Cell>
       </Table.Row>
     );
