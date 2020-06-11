@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { translations } from '../../_translations';
 import { InputField, Button, ErrorMessage } from '../../_shared';
 import { useForm } from '../../_hooks';
@@ -33,9 +33,10 @@ function errorAsString(error?: ApiError): string {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { state } = useLocation();
+  const { state } = useLocation<{ pathname: string }>();
   const isSubmitting = useSelector(authSelectors.isLoginLoading);
   const error = useSelector(authSelectors.errorLogin);
+  console.log(state?.pathname);
   const form = useForm<ILoginForm>({
     error,
     initialForm,
@@ -46,33 +47,33 @@ const Login = () => {
 
   return (
     <Container as="main" className="login">
-      <h1>{translations.getLabel('AUTH.LOGIN.TITLE')}</h1>
       <form onSubmit={form.submit}>
         <ErrorMessage isGlobal isVisible={!!errorMessage}>
           {errorMessage}
         </ErrorMessage>
-        <InputField
-          autoComplete="username"
-          label={translations.getLabel('AUTH.LOGIN.USERNAME')}
-          name="username"
-          onChange={form.setAttribute}
-          type="email"
-          validation={form.validationErrors.username}
-          value={form.values.username}
-        />
-        <InputField
-          autoComplete="current-password"
-          label={translations.getLabel('AUTH.LOGIN.PASSWORD')}
-          name="password"
-          onChange={form.setAttribute}
-          type="password"
-          validation={form.validationErrors.password}
-          value={form.values.password}
-        />
+        <div className="input-fields">
+          <InputField
+            autoComplete="username"
+            name="username"
+            onChange={form.setAttribute}
+            placeholder={translations.getLabel('AUTH.LOGIN.USERNAME')}
+            type="email"
+            validation={form.validationErrors.username}
+            value={form.values.username}
+          />
+          <InputField
+            autoComplete="current-password"
+            name="password"
+            onChange={form.setAttribute}
+            placeholder={translations.getLabel('AUTH.LOGIN.PASSWORD')}
+            type="password"
+            validation={form.validationErrors.password}
+            value={form.values.password}
+          />
+        </div>
         <div className="actions">
-          <Link to="/auth/request-password-reset">{translations.getLabel('AUTH.LOGIN.FORGOT_PASSWORD')}</Link>
           <Button loading={isSubmitting} primary type="submit">
-            {translations.getLabel('AUTH.LOGIN.LOGIN')}
+            {translations.getLabel('AUTH.LOGIN.BUTTON')}
           </Button>
         </div>
       </form>

@@ -1,42 +1,24 @@
 @import '../../../_styles/colors';
 
-$WIDTH: 30rem;
-
 .unauthorized-layout {
+  height: 100vh;
+  margin-top: -5.5rem;
   display: flex;
-  > aside {
-    background: $primary-color;
-    height: 100vh;
-    width: $WIDTH;
-    padding: 8rem 2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    &,
-    a {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-    }
+  svg.logo {
+    width: 20rem;
+    height: auto;
 
-    a {
-      width: 100%;
-    }
-
-    svg {
-      max-height: 10rem;
-    }
-
-    span {
-      display: block;
-      margin-top: 1rem;
-      text-transform: uppercase;
-      color: white;
-      font-size: 2rem;
-      letter-spacing: 0.5rem;
+    g {
+      fill: $grey-dark;
     }
   }
 
   form {
-    width: 40rem;
-    max-width: 40rem;
+    width: 38rem;
+    max-width: 38rem;
   }
 }

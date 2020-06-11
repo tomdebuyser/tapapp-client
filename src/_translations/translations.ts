@@ -1,6 +1,5 @@
 import I18n from 'i18n-js';
 import { Config } from '../config';
-import en from './en.json';
 import nl from './nl.json';
 
 const getLabel = (key: string, inserts = {}): string => {
@@ -11,12 +10,11 @@ const getLabel = (key: string, inserts = {}): string => {
 };
 
 I18n.fallbacks = true;
-I18n.locale = 'en';
+I18n.locale = 'nl';
 I18n.missingTranslation = translation => `[[${translation}]]`;
 
 // Make translations object with all the labels
 const translations = {
-  en,
   nl,
 };
 

@@ -1,12 +1,10 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, tap, catchError, switchMap, exhaustMap, filter } from 'rxjs/operators';
+import { map, catchError, switchMap, exhaustMap, filter } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { Action } from 'redux';
-import { toast } from 'react-toastify';
 import { authActions } from '../../_store/actions';
 import { HttpStatus, ApiError } from '../../_http';
-import { translations } from '../../_translations';
 import { UNAUTHORIZES_ROUTES } from '../../_routing/layouts/unauthorized/UnauthorizedLayout';
 import { routerSelectors } from '../../_store/selectors';
 import * as authApi from './api';
@@ -42,20 +40,6 @@ const authenticateSuccessEpic$: Epic = action$ =>
     switchMap(({ payload }: authActions.AuthenticateSuccess) => of(push(payload.pathname))),
   );
 
-const choosePasswordEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.ChoosePassword).pipe(
-    switchMap(({ payload }: authActions.ChoosePassword) =>
-      from(authApi.choosePassword(payload.values, payload.token)).pipe(
-        tap(() => toast.success(translations.getLabel('AUTH.TOASTER.CHOOSE_PASSWORD'))),
-        map(() => new authActions.ChoosePasswordSuccess()),
-        catchError(error => of(new authActions.ChoosePasswordError({ error }))),
-      ),
-    ),
-  );
-
-const choosePasswordSuccessEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.ChoosePasswordSuccess).pipe(switchMap(() => of(push('/auth/login'))));
-
 const loginEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.Login).pipe(
     exhaustMap(({ payload }: authActions.Login) =>
@@ -79,44 +63,4 @@ const logoutEpic$: Epic = action$ =>
 const logoutSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.LogoutSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
-const requestPasswordResetEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.RequestPasswordReset).pipe(
-    exhaustMap(({ payload }: authActions.RequestPasswordReset) =>
-      from(authApi.requestPasswordReset(payload.values)).pipe(
-        tap(() => toast.info(translations.getLabel('AUTH.TOASTER.REQUEST_PASSWORD_RESET'))),
-        map(() => new authActions.RequestPasswordResetSuccess()),
-        catchError(error => of(new authActions.RequestPasswordResetError({ error }))),
-      ),
-    ),
-  );
-
-const requestPasswordResetSuccessEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.RequestPasswordResetSuccess).pipe(switchMap(() => of(push('/auth/login'))));
-
-const changePasswordEpic$: Epic = action$ =>
-  action$.ofType(AuthActionType.ChangePassword).pipe(
-    exhaustMap(({ payload }: authActions.ChangePassword) =>
-      from(authApi.changePassword(payload.values)).pipe(
-        tap(() => toast.success(translations.getLabel('AUTH.TOASTER.CHANGE_PASSWORD'))),
-        map(() => {
-          payload.onSuccess?.();
-          return new authActions.ChangePasswordSuccess();
-        }),
-        catchError(error => of(new authActions.ChangePasswordError({ error }))),
-      ),
-    ),
-  );
-
-export default [
-  authenticateEpic$,
-  authenticateSuccessEpic$,
-  changePasswordEpic$,
-  choosePasswordEpic$,
-  choosePasswordSuccessEpic$,
-  loginEpic$,
-  logoutEpic$,
-  logoutSuccessEpic$,
-  requestPasswordResetEpic$,
-  requestPasswordResetSuccessEpic$,
-  unauthorizedEpic$,
-];
+export default [authenticateEpic$, authenticateSuccessEpic$, loginEpic$, logoutEpic$, logoutSuccessEpic$, unauthorizedEpic$];

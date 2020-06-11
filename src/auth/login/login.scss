@@ -1,5 +1,16 @@
 .login {
+  .input-fields {
+    :not(:first-child) {
+      margin-top: 1rem;
+    }
+    input {
+      text-align: center;
+    }
+  }
   .actions {
-    justify-content: space-between;
+    justify-content: center;
+    > * {
+      width: 100%;
+    }
   }
 }

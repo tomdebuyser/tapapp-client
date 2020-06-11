@@ -1,29 +1,19 @@
 import { Action } from 'redux';
 import { ApiError } from '../../_http';
-import { IChoosePasswordForm, IRequestPasswordResetForm, ILoginForm, IChangePasswordForm } from '../_models';
+import { ILoginForm } from '../_models';
 import { IProfile } from '../../profile/_models';
 
 export enum AuthActionType {
   Authenticate = '[Auth] Authenticate',
   AuthenticateError = '[Auth] AuthenticateError',
   AuthenticateSuccess = '[Auth] AuthenticateSuccess',
-  ChangePassword = '[Auth] ChangePassword',
-  ChangePasswordError = '[Auth] ChangePasswordError',
-  ChangePasswordSuccess = '[Auth] ChangePasswordSuccess',
-  ChoosePassword = '[Auth] ChoosePassword',
-  ChoosePasswordError = '[Auth] ChoosePasswordError',
-  ChoosePasswordSuccess = '[Auth] ChoosePasswordSuccess',
   Login = '[Auth] Login',
   LoginError = '[Auth] LoginError',
   Logout = '[Auth] Logout',
   LogoutError = '[Auth] LogoutError',
   LogoutSuccess = '[Auth] LogoutSuccess',
-  RequestPasswordReset = '[Auth] RequestPasswordReset',
-  RequestPasswordResetError = '[Auth] RequestPasswordResetError',
-  RequestPasswordResetSuccess = '[Auth] RequestPasswordResetSuccess',
 }
 
-// AUTHENTICATE
 export class Authenticate implements Action<AuthActionType> {
   readonly type = AuthActionType.Authenticate;
 }
@@ -38,22 +28,6 @@ export class AuthenticateError implements Action<AuthActionType> {
   constructor(public payload: { error?: ApiError }) {}
 }
 
-// CHANGE PASSWORD
-export class ChangePassword implements Action<AuthActionType> {
-  readonly type = AuthActionType.ChangePassword;
-  constructor(public payload: { onSuccess?: () => void; values: IChangePasswordForm }) {}
-}
-
-export class ChangePasswordSuccess implements Action<AuthActionType> {
-  readonly type = AuthActionType.ChangePasswordSuccess;
-}
-
-export class ChangePasswordError implements Action<AuthActionType> {
-  readonly type = AuthActionType.ChangePasswordError;
-  constructor(public payload: { error: ApiError }) {}
-}
-
-// LOGIN
 export class Login implements Action<AuthActionType> {
   readonly type = AuthActionType.Login;
   constructor(public payload: { pathname?: string; values: ILoginForm }) {}
@@ -64,22 +38,6 @@ export class LoginError implements Action<AuthActionType> {
   constructor(public payload: { error?: ApiError }) {}
 }
 
-// CHOOSE PASSWORD
-export class ChoosePassword implements Action<AuthActionType> {
-  readonly type = AuthActionType.ChoosePassword;
-  constructor(public payload: { token: string; values: IChoosePasswordForm }) {}
-}
-
-export class ChoosePasswordSuccess implements Action<AuthActionType> {
-  readonly type = AuthActionType.ChoosePasswordSuccess;
-}
-
-export class ChoosePasswordError implements Action<AuthActionType> {
-  readonly type = AuthActionType.ChoosePasswordError;
-  constructor(public payload: { error: ApiError }) {}
-}
-
-// LOGOUT
 export class Logout implements Action<AuthActionType> {
   readonly type = AuthActionType.Logout;
 }
@@ -93,36 +51,12 @@ export class LogoutError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
-// REQUEST PASSWORD RESET
-export class RequestPasswordReset implements Action<AuthActionType> {
-  readonly type = AuthActionType.RequestPasswordReset;
-  constructor(public payload: { values: IRequestPasswordResetForm }) {}
-}
-
-export class RequestPasswordResetSuccess implements Action<AuthActionType> {
-  readonly type = AuthActionType.RequestPasswordResetSuccess;
-}
-
-export class RequestPasswordResetError implements Action<AuthActionType> {
-  readonly type = AuthActionType.RequestPasswordResetError;
-  constructor(public payload: { error: ApiError }) {}
-}
-
 export type AuthAction =
   | Authenticate
   | AuthenticateSuccess
   | AuthenticateError
-  | ChangePassword
-  | ChangePasswordSuccess
-  | ChangePasswordError
-  | ChoosePassword
-  | ChoosePasswordSuccess
-  | ChoosePasswordError
   | Login
   | LoginError
   | Logout
   | LogoutSuccess
-  | LogoutError
-  | RequestPasswordReset
-  | RequestPasswordResetSuccess
-  | RequestPasswordResetError;
+  | LogoutError;

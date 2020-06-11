@@ -6,6 +6,9 @@ $icon-height: 2rem;
 
 .ui.button {
   padding: $padding;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 0.6rem;
 }
 
 button:disabled {
@@ -43,7 +46,7 @@ button.as-text {
   padding: $padding;
   background: transparent;
   border: none;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: bold;
   height: 100%;
   text-align: center;

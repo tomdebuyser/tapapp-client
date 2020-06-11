@@ -2,17 +2,11 @@ import { ApiError } from '../../_http';
 import { AuthAction, AuthActionType } from './actions';
 
 export type AuthState = {
-  errorChangePassword?: ApiError;
-  errorChoosePassword?: ApiError;
   errorLogin?: ApiError;
   errorLogout?: ApiError;
-  errorRequestPasswordReset?: ApiError;
   isAuthenticateLoading: boolean;
-  isChangePasswordLoading?: boolean;
-  isChoosePasswordLoading?: boolean;
   isLoginLoading?: boolean;
   isLogoutLoading?: boolean;
-  isRequestPasswordResetLoading?: boolean;
 };
 
 const initialState: AuthState = {
@@ -21,23 +15,6 @@ const initialState: AuthState = {
 
 export default function reducer(state = initialState, action: AuthAction): AuthState {
   switch (action.type) {
-    case AuthActionType.ChoosePassword:
-      return {
-        ...state,
-        errorChoosePassword: null,
-        isChoosePasswordLoading: true,
-      };
-    case AuthActionType.ChoosePasswordSuccess:
-      return {
-        ...state,
-        isChoosePasswordLoading: false,
-      };
-    case AuthActionType.ChoosePasswordError:
-      return {
-        ...state,
-        errorChoosePassword: action.payload.error,
-        isChoosePasswordLoading: false,
-      };
     case AuthActionType.Login:
       return {
         ...state,
@@ -82,40 +59,6 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
         ...state,
         errorLogout: action.payload.error,
         isLogoutLoading: false,
-      };
-    case AuthActionType.RequestPasswordReset:
-      return {
-        ...state,
-        errorRequestPasswordReset: null,
-        isRequestPasswordResetLoading: true,
-      };
-    case AuthActionType.RequestPasswordResetSuccess:
-      return {
-        ...state,
-        isRequestPasswordResetLoading: false,
-      };
-    case AuthActionType.RequestPasswordResetError:
-      return {
-        ...state,
-        errorRequestPasswordReset: action.payload.error,
-        isRequestPasswordResetLoading: false,
-      };
-    case AuthActionType.ChangePassword:
-      return {
-        ...state,
-        errorChangePassword: null,
-        isChangePasswordLoading: true,
-      };
-    case AuthActionType.ChangePasswordSuccess:
-      return {
-        ...state,
-        isChangePasswordLoading: false,
-      };
-    case AuthActionType.ChangePasswordError:
-      return {
-        ...state,
-        errorChangePassword: action.payload.error,
-        isChangePasswordLoading: false,
       };
     default:
       return state;
