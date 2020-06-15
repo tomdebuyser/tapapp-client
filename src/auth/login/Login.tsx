@@ -36,7 +36,6 @@ const Login = () => {
   const { state } = useLocation<{ pathname: string }>();
   const isSubmitting = useSelector(authSelectors.isLoginLoading);
   const error = useSelector(authSelectors.errorLogin);
-  console.log(state?.pathname);
   const form = useForm<ILoginForm>({
     error,
     initialForm,

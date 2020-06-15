@@ -1,0 +1,40 @@
+@import '../../../_styles/colors';
+@import '../../../_styles/constants';
+
+.bar {
+  position: fixed;
+  bottom: -$action-bar-height;
+  right: 0;
+  height: $action-bar-height;
+  width: calc(100vw - #{$sidebar-width});
+  background-color: white;
+  box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+
+  > :not(:first-child) {
+    margin-left: 2rem;
+  }
+
+  opacity: 0;
+  &.open {
+    bottom: 0;
+    opacity: 1;
+    transition: bottom 1s;
+  }
+}
+
+.total {
+  flex: 1;
+  .label {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    color: $grey-dark;
+  }
+  .price {
+    font-size: 2.8rem;
+    font-weight: bold;
+  }
+}

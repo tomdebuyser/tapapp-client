@@ -10,6 +10,21 @@
       "USER_STATE_NOT_ALLOWED": "Dit account is niet actief, waardoor je niet kan inloggen. Contacteer jouw administrator."
     }
   },
+  "ORDER": {
+    "COMPOSE": {
+      "ACTION_BAR": {
+        "CANCEL": "Wijziging annuleren",
+        "CHECKOUT": "Afrekenen",
+        "DELETE": "Bestelling verwijderen",
+        "TOTAL": "Totaal"
+      }
+    },
+    "CONFIRM_DELETE": {
+      "BUTTON": "Ja, verwijder",
+      "CONTENT": "Ben je zeker dat je deze bestelling in zijn geheel wil verwijderen?",
+      "TITLE": "Bestelling verwijderen"
+    }
+  },
   "SHARED": {
     "BUTTONS": {
       "CANCEL": "Annuleren",

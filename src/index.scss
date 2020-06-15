@@ -1,8 +1,7 @@
 @import './_styles/colors';
 @import './_styles/constants';
-@import './_styles/detail';
 @import './_styles/form';
-@import './_styles/overview';
+@import './_styles/sidebar';
 @import './_styles/reset';
 
 html,
@@ -19,6 +18,25 @@ body {
 button {
   color: $text-color;
   font-family: $font-family;
+  font: unset;
+}
+
+h1 {
+  font-size: 3.2rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 2.2rem;
+  margin-top: 0;
+  margin-bottom: 1.4rem;
+}
+
+.container {
+  margin-top: $navbar-height;
+  margin-left: $sidebar-width;
+  padding: 2rem;
 }
 
 h1 {
@@ -26,29 +44,9 @@ h1 {
   font-weight: bold;
 }
 
-h2 {
-  font-size: 2.4rem;
-  font-weight: 500;
-}
-
 h3 {
   font-size: 2rem;
   font-weight: bold;
-}
-
-h4 {
-  font-size: 1.8rem;
-  font-weight: 500;
-}
-
-h5 {
-  font-size: 1.6rem;
-  font-weight: bold;
-}
-
-h6 {
-  font-size: 1.4rem;
-  font-weight: 500;
 }
 
 body {

@@ -8,7 +8,7 @@ $icon-height: 2rem;
   padding: $padding;
   font-size: 2rem;
   font-weight: bold;
-  border-radius: 0.6rem;
+  border-radius: $border-radius;
 }
 
 button:disabled {
@@ -59,7 +59,7 @@ button.as-text {
     @include setColorTo($primary-color);
   }
   &.negative {
-    @include setColorTo($red);
+    @include setColorTo($secondary-color);
   }
 
   &.loading {

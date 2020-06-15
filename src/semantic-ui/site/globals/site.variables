@@ -8,7 +8,7 @@
     Brand Colors
 --------------------*/
 @primaryColor: #00cec7;
-@red: #e45f55;
+@red: #f36;
 
 /*-------------------
         Page

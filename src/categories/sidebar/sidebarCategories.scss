@@ -1,0 +1,29 @@
+@import '../../_styles/colors';
+
+button.category {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  text-transform: uppercase;
+  padding: 1.6rem 2rem;
+  font-size: 2rem;
+  border-bottom: 1px solid $grey;
+  &:first-child {
+    border-top: 1px solid $grey;
+  }
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background-color: $grey-dark;
+  }
+
+  .badge.hidden {
+    visibility: hidden;
+  }
+}
