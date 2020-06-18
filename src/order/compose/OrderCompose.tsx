@@ -12,7 +12,7 @@ const OrderCompose = () => {
   const totalCount = useSelector(orderSelectors.totalProductsCount);
   const isActionBarOpen = totalCount > 0;
   return (
-    <>
+    <div className="order-compose">
       <SidebarCategories />
       <div className={classnames('container', { 'extra-bottom-padding': isActionBarOpen })}>
         <div className="grid">
@@ -24,7 +24,7 @@ const OrderCompose = () => {
         </div>
         <OrderActionBar isOpen={isActionBarOpen} />
       </div>
-    </>
+    </div>
   );
 };
 

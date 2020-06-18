@@ -1,7 +1,7 @@
 @import '../../../_styles/colors';
 @import '../../../_styles/constants';
 
-.bar {
+.order-action-bar {
   position: fixed;
   bottom: -$action-bar-height;
   right: 0;
@@ -24,17 +24,17 @@
     opacity: 1;
     transition: bottom 1s;
   }
-}
 
-.total {
-  flex: 1;
-  .label {
-    font-size: 1.6rem;
-    line-height: 1.6rem;
-    color: $grey-dark;
-  }
-  .price {
-    font-size: 2.8rem;
-    font-weight: bold;
+  .total {
+    flex: 1;
+    .label {
+      font-size: 1.6rem;
+      line-height: 1.6rem;
+      color: $grey-dark;
+    }
+    .price {
+      font-size: 2.8rem;
+      font-weight: bold;
+    }
   }
 }

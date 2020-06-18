@@ -20,7 +20,7 @@ const ProductItem: FC<Props> = ({ product }) => {
   }
 
   return (
-    <div className="item" onClick={event => addRemoveAmount(event, 1)}>
+    <div className="product-item" onClick={event => addRemoveAmount(event, 1)}>
       {count > 0 && (
         <div className="item-active">
           <div className="item-active-buttons">
@@ -35,8 +35,8 @@ const ProductItem: FC<Props> = ({ product }) => {
           </div>
         </div>
       )}
-      <div className="logo" style={{ backgroundImage: `url(${require(`../../../_assets/images/${product.logo}`)})` }} />
-      <div className="name">{product.name}</div>
+      <div className="item-logo" style={{ backgroundImage: `url(${require(`../../../_assets/images/${product.logo}`)})` }} />
+      <div className="item-name">{product.name}</div>
     </div>
   );
 };

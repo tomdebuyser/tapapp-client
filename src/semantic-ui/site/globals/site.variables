@@ -9,6 +9,7 @@
 --------------------*/
 @primaryColor: #00cec7;
 @red: #f36;
+@greyDark: #C8C8C8;
 
 /*-------------------
         Page
@@ -21,6 +22,7 @@
 @disabledOpacity: 0.75;
 @disabledColor: #EEEEEE;
 @errorColor: #E0B4B4;
+@useCustomScrollbars: false;
 
 /*-------------------
        Fonts

@@ -1,6 +1,6 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, filter } from 'rxjs/operators';
+import { map, catchError, exhaustMap, filter, switchMap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { orderActions, modalActions } from '../../_store/actions';
 import { orderSelectors } from '../../_store/selectors';
@@ -73,19 +73,18 @@ const deleteOrderWithConfirmationEpic$: Epic = action$ =>
     ),
   );
 
-const deleteOrderEpic$: Epic = (action$, state$) => {
-  const orderId = orderSelectors.orderId(state$.value);
-  return action$.ofType(OrderActionType.DeleteOrder).pipe(
+const deleteOrderEpic$: Epic = (action$, state$) =>
+  action$.ofType(OrderActionType.DeleteOrder).pipe(
     filter(({ payload }: orderActions.DeleteOrder) => payload?.confirmed),
-    filter(() => !!orderId),
-    exhaustMap(() =>
+    map(() => orderSelectors.orderId(state$.value)),
+    filter(orderId => !!orderId),
+    exhaustMap(orderId =>
       from(orderApi.deleteOrder(orderId)).pipe(
-        map(() => new orderActions.DeleteOrderSuccess()),
+        switchMap(() => of(new orderActions.DeleteOrderSuccess(), new orderActions.ClearState())),
         catchError(error => of(new orderActions.DeleteOrderError({ error }))),
       ),
     ),
   );
-};
 
 const cancelCreateOrderEpic$: Epic = (action$, state$) =>
   action$.ofType(OrderActionType.DeleteOrder).pipe(

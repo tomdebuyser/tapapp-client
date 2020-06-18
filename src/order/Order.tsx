@@ -3,7 +3,6 @@ import { Switch, Redirect, Route, useRouteMatch } from 'react-router-dom';
 import OrderCompose from './compose/OrderCompose';
 import OrderCheckout from './checkout/OrderCheckout';
 import OrderFinished from './finished/OrderFinished';
-import './order.scss';
 
 const Order: React.FC = () => {
   const { url } = useRouteMatch();

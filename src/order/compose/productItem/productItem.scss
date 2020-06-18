@@ -4,7 +4,7 @@
 $border-rarius: 10px;
 $name-height: 5rem;
 
-.item {
+.product-item {
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,56 +15,56 @@ $name-height: 5rem;
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
-}
 
-.item-active {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: $border-rarius;
-  border: 3px solid $primary-color;
+  .item-active {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: $border-rarius;
+    border: 3px solid $primary-color;
 
-  .item-active-buttons {
-    position: relative;
+    .item-active-buttons {
+      position: relative;
 
-    > div {
-      position: absolute;
-      padding: 0.7rem;
-      top: 0rem;
-    }
+      > div {
+        position: absolute;
+        padding: 0.7rem;
+        top: 0rem;
+      }
 
-    .badge-remove {
-      left: 0rem;
+      .badge-remove {
+        left: 0rem;
 
-      .minus {
-        width: 2rem;
+        .minus {
+          width: 2rem;
+        }
+      }
+
+      .badge-counter {
+        right: 0rem;
       }
     }
-
-    .badge-counter {
-      right: 0rem;
-    }
   }
-}
 
-.logo {
-  flex: 1;
-  border-top-left-radius: $border-rarius;
-  border-top-right-radius: $border-rarius;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: $grey-light;
-}
+  .item-logo {
+    flex: 1;
+    border-top-left-radius: $border-rarius;
+    border-top-right-radius: $border-rarius;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: $grey-light;
+  }
 
-.name {
-  height: $name-height;
-  color: $grey-dark2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 0.5rem;
-  border-top: 1px solid $grey;
+  .item-name {
+    height: $name-height;
+    color: $grey-dark2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 0.5rem;
+    border-top: 1px solid $grey;
+  }
 }

@@ -116,6 +116,11 @@ export default function reducer(state = initialState, action: OrderAction): Orde
         errorCrudOrder: null,
         isDeleteOrderLoading: true,
       };
+    case OrderActionType.DeleteOrderSuccess:
+      return {
+        ...state,
+        isDeleteOrderLoading: false,
+      };
     case OrderActionType.DeleteOrderError:
       return {
         ...state,
@@ -128,15 +133,17 @@ export default function reducer(state = initialState, action: OrderAction): Orde
         errorPayOrder: null,
         isPayOrderLoading: true,
       };
+    case OrderActionType.PayOrderSuccess:
+      return {
+        ...state,
+        isPayOrderLoading: false,
+      };
     case OrderActionType.PayOrderError:
       return {
         ...state,
         errorPayOrder: action.payload.error,
         isPayOrderLoading: false,
       };
-    case OrderActionType.DeleteOrderSuccess:
-    case OrderActionType.PayOrderSuccess:
-      return initialState;
     default:
       return state;
   }

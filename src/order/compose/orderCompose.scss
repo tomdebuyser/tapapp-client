@@ -1,26 +1,28 @@
 @import '../../_styles/constants';
 
-.container.extra-bottom-padding {
-  padding-bottom: calc(2rem + #{$action-bar-height});
-}
+.order-compose {
+  .container.extra-bottom-padding {
+    padding-bottom: calc(2rem + #{$action-bar-height});
+  }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15.6rem, 1fr));
-  grid-auto-rows: 1fr;
-  grid-column-gap: 2rem;
-  grid-row-gap: 2rem;
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.6rem, 1fr));
+    grid-auto-rows: 1fr;
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
 
-.grid::before {
-  content: '';
-  width: 0;
-  padding-bottom: 100%;
-  grid-row: 1 / 1;
-  grid-column: 1 / 1;
-}
+  .grid::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+  }
 
-.grid > *:first-child {
-  grid-row: 1 / 1;
-  grid-column: 1 / 1;
+  .grid > *:first-child {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+  }
 }

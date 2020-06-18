@@ -46,7 +46,7 @@ const OrderActionBar: FC<Props> = ({ isOpen }) => {
   }
 
   return (
-    <div className={classnames('bar', { open: isOpen })}>
+    <div className={classnames('order-action-bar', { open: isOpen })}>
       <Badge>{totalCount}</Badge>
       <div className="total">
         <div className="label">{translations.getLabel('ORDER.COMPOSE.ACTION_BAR.TOTAL').toUpperCase()}</div>

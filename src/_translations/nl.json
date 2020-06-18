@@ -19,6 +19,22 @@
         "TOTAL": "Totaal"
       }
     },
+    "CHECKOUT": {
+      "TITLE": "Kies een betaalmethode",
+      "PAYMENT_TYPES": {
+        "CASH": "Cash betalen",
+        "SMARTPHONE": "Smartphone betalen",
+        "MERGE": "Later betalen",
+        "FREE": "Gratis"
+      },
+      "SIDEBAR": {
+        "TITLE": "Bestelling overzicht",
+        "TOTAL_COUNT": {
+          "SINGULAR": "{{amount}} product",
+          "PLURAL": "{{amount}} producten"
+        }
+      }
+    },
     "CONFIRM_DELETE": {
       "BUTTON": "Ja, verwijder",
       "CONTENT": "Ben je zeker dat je deze bestelling in zijn geheel wil verwijderen?",
@@ -30,6 +46,7 @@
       "CANCEL": "Annuleren",
       "CREATE": "Aanmaken",
       "DELETE": "Verwijderen",
+      "EDIT": "Wijzigen",
       "SAVE": "Wijzigingen opslaan"
     },
     "NAVIGATION": {},

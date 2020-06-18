@@ -1,0 +1,43 @@
+@import '../../../_styles/colors';
+@import '../../../_styles/constants';
+
+.button-checkout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  border-radius: $border-radius;
+  font-size: 2rem;
+  padding: 0 2rem;
+  background: $white;
+  border: 1px solid $shadow;
+  box-shadow: 1px 1px 4px 0 $shadow;
+  cursor: pointer;
+  outline: none;
+
+  .left-wrapper {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    .icon {
+      margin-right: 2rem;
+      &,
+      > svg {
+        height: 3rem;
+        width: auto;
+      }
+    }
+  }
+
+  .provider-logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    > svg {
+      height: 2rem;
+      width: auto;
+    }
+  }
+}
