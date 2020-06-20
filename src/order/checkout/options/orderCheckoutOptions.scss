@@ -1,0 +1,14 @@
+.order-checkout-options {
+  .buttons {
+    width: 100%;
+    margin-top: 2rem;
+
+    > * {
+      display: block;
+    }
+
+    > *:not(:first-child) {
+      margin-top: 2rem;
+    }
+  }
+}

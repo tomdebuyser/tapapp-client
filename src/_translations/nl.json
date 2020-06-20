@@ -35,6 +35,10 @@
         }
       }
     },
+    "FINISHED": {
+      "ORDER_PAID": "De bestelling is succesvol betaald!",
+      "BUTTON": "Nieuwe bestelling"
+    },
     "CONFIRM_DELETE": {
       "BUTTON": "Ja, verwijder",
       "CONTENT": "Ben je zeker dat je deze bestelling in zijn geheel wil verwijderen?",

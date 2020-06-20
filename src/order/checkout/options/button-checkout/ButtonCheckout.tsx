@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { Icon } from '../../../_shared';
+import { Icon } from '../../../../_shared';
 import './buttonCheckout.scss';
 
 type Props = {
