@@ -17,19 +17,21 @@ const OrderCheckout: FC = () => {
   const orderId = useSelector(orderSelectors.orderId);
 
   if (!orderId) {
-    dispatch(new orderActions.ClearState());
+    // dispatch(new orderActions.ClearState());
   }
 
   return (
-    <div className="order-checkout">
+    <>
       <SidebarCheckout readonly={pathname.split('/order/checkout')[1].length > 0} />
-      <Switch>
-        <Route component={OrderCheckoutOptions} exact path={`${url}/`} />
-        <Route component={OrderCheckoutCash} exact path={`${url}/cash`} />
-        <Route component={OrderCheckoutPayconiq} exact path={`${url}/payconiq`} />
-        <Route component={OrderCheckoutMerge} exact path={`${url}/merge`} />
-      </Switch>
-    </div>
+      <div className="order-checkout">
+        <Switch>
+          <Route component={OrderCheckoutOptions} exact path={`${url}/`} />
+          <Route component={OrderCheckoutCash} exact path={`${url}/cash`} />
+          <Route component={OrderCheckoutPayconiq} exact path={`${url}/payconiq`} />
+          <Route component={OrderCheckoutMerge} exact path={`${url}/merge`} />
+        </Switch>
+      </div>
+    </>
   );
 };
 
