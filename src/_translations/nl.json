@@ -33,6 +33,16 @@
           "SINGULAR": "{{amount}} product",
           "PLURAL": "{{amount}} producten"
         }
+      },
+      "CASH": {
+        "TITLE": "Cash betalen",
+        "EXPLANATION": "Ontvang het geld en steek het in de kassa",
+        "BUTTON_PAY": "Betaling ontvangen",
+        "BUTTON_STOP": "Betaling stoppen",
+        "CALCULATOR": {
+          "PLACEHOLDER": "Vul ontvangen bedrag in",
+          "BUTTON": "Wisselgeld berekenen"
+        }
       }
     },
     "FINISHED": {
