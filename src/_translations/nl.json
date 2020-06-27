@@ -43,6 +43,21 @@
           "PLACEHOLDER": "Vul ontvangen bedrag in",
           "BUTTON": "Wisselgeld berekenen"
         }
+      },
+      "PAYCONIQ": {
+        "TITLE": "Smartphone betalen",
+        "EXPLANATION": "Betaal door de QR Code te scannen met de Payconiq app",
+        "STATUS": {
+          "IDENTIFIED": "Betaling bezig",
+          "AUTHORIZED": "Betaling controleren",
+          "SUCCEEDED": "Betaling ontvangen",
+          "FAILED": "Betaling mislukt",
+          "EXPIRED": "Betaling verlopen",
+          "CANCELLED": "Betaling geannuleerd",
+          "LOADING": "QR Code ophalen"
+        },
+        "BUTTON_RETRY": "Opnieuw proberen",
+        "BUTTON_STOP": "Betaling stoppen"
       }
     },
     "FINISHED": {

@@ -1,0 +1,82 @@
+@import '../../_styles/colors';
+
+$size: 30rem;
+$padding: 0.1;
+$qr-size: calc(#{$size} - calc(#{$size} * #{$padding} * 2));
+
+.payconiq-qr-code {
+  position: relative;
+  width: $size;
+  max-width: $size;
+  height: auto;
+
+  .branding {
+    width: $size;
+    height: 100%;
+  }
+
+  .qr-code-wrapper,
+  .status-overlay,
+  .loading-wrapper {
+    position: absolute;
+    bottom: calc(#{$padding} * 100%);
+    left: calc(#{$padding} * 100%);
+    height: $qr-size;
+    width: $qr-size;
+  }
+
+  .qr-code-wrapper {
+    z-index: 1;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .status-overlay {
+    z-index: 2;
+    background-color: black;
+    opacity: 0.5;
+  }
+
+  .loading-wrapper {
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .payconiq-qr-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    span,
+    .text {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .icon {
+      &,
+      svg,
+      g {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+
+    .icon {
+      color: $secondary-color;
+      &.success {
+        color: $primary-color;
+      }
+    }
+
+    :not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+}

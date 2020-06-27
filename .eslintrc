@@ -42,7 +42,8 @@
         "typescript-sort-keys/string-enum": 1,
         "react/jsx-sort-props": 1,
         "sort-keys-fix/sort-keys-fix": 1,
-        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+        "react-hooks/exhaustive-deps": 0
       }
     }
   ]

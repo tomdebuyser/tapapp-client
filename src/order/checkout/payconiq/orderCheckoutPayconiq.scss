@@ -1,0 +1,22 @@
+.order-checkout-payconiq {
+  .content {
+    height: 36rem;
+
+    > * {
+      height: 100%;
+    }
+
+    .app-icons {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 2.5rem;
+
+      img.app-icon {
+        box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        height: 8rem;
+      }
+    }
+  }
+}
