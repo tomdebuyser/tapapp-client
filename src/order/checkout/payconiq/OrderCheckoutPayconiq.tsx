@@ -11,9 +11,7 @@ import { PayconiqPaymentStatus } from '../../../payconiq/_models';
 import { isIntermediatePayconiqStatus } from '../../../payconiq/_models/rules';
 import './orderCheckoutPayconiq.scss';
 
-type Props = {};
-
-const OrderCheckoutPayconiq: FC<Props> = () => {
+const OrderCheckoutPayconiq: FC = () => {
   const dispatch = useDispatch();
   const payment = useSelector(payconiqSelectors.payment);
 
@@ -48,7 +46,7 @@ const OrderCheckoutPayconiq: FC<Props> = () => {
           <PayconiqQrCode payment={payment} />
           <div className="buttons-wrapper">
             <div className="app-icons">
-              <img className="app-icon" src={require('../../../_assets/images/payconiq-app-icon.png')} />
+              <img alt="payconiq-app-icon" className="app-icon" src={require('../../../_assets/images/payconiq-app-icon.png')} />
             </div>
             {canRetryPayment() && (
               <Button onClick={() => dispatch(new payconiqActions.CreatePayconiqPayment())} primary>

@@ -14,7 +14,7 @@ const PayconiqQrCode: FC<Props> = ({ payment }) => (
     <SvgPayconiqQr className="branding" />
     {isIntermediatePayconiqStatus(payment?.payconiqStatus) && (
       <div className="qr-code-wrapper">
-        <img src={payment.payconiqQrCode} />
+        <img alt="qr-code" src={payment.payconiqQrCode} />
       </div>
     )}
     {isReadyToScanPayconiqStatus(payment?.payconiqStatus) && <div className="status-overlay"></div>}

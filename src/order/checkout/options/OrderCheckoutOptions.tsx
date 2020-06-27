@@ -5,11 +5,9 @@ import { translations } from '../../../_translations';
 import { SvgPayconiq } from '../../../_assets/svg';
 import { orderActions } from '../../../_store/actions';
 import { PaymentType } from '../../_models';
-import ButtonCheckout from './button-checkout/ButtonCheckout';
+import ButtonCheckout from './buttonCheckout/ButtonCheckout';
 
-type Props = {};
-
-const OrderCheckoutOptions: FC<Props> = () => {
+const OrderCheckoutOptions: FC = () => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
 

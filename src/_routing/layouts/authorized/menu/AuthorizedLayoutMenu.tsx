@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { translations } from '../../../../_translations';
-import { authActions } from '../../../../_store/actions';
-import { profileSelectors } from '../../../../_store/selectors';
+import { profileSelectors, orderSelectors } from '../../../../_store/selectors';
 import { SvgLogo } from '../../../../_assets/svg';
 import { Icon } from '../../../../_shared';
 import './authorizedLayoutMenu.scss';
 
 const AuthorizedLayoutMenu: FC = () => {
-  const dispatch = useDispatch();
   const profile = useSelector(profileSelectors.profile);
+  const orderId = useSelector(orderSelectors.orderId);
 
   return (
     <>
@@ -19,18 +18,24 @@ const AuthorizedLayoutMenu: FC = () => {
       </NavLink>
       <header className="main-menu">
         <nav>
-          <div />
-          <div className="profile">
-            <Icon name="SvgUser" size={2} />
-            <span>{profile.organisation.name}</span>
-          </div>
+          {!orderId && (
+            <div>
+              <NavLink to="/orders/unfinished">
+                <Icon name="SvgBill" size={2.5} />
+                <span>{translations.getLabel('SHARED.NAVIGATION.UNFINISHED_ORDERS')}</span>
+              </NavLink>
+            </div>
+          )}
         </nav>
-        <Icon
+        <div className="profile">
+          <span>{profile.organisation.name}</span>
+        </div>
+        {/* <Icon
           label={translations.getLabel('AUTH.LOGOUT')}
           name="SvgLogout"
           onClick={() => dispatch(new authActions.Logout())}
           size={1.6}
-        />
+        /> */}
       </header>
     </>
   );

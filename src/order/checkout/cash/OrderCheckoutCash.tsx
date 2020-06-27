@@ -7,9 +7,7 @@ import { PaymentType } from '../../_models';
 import { translations } from '../../../_translations';
 import Calculator from './calculator/Calculator';
 
-type Props = {};
-
-const OrderCheckoutCash: FC<Props> = () => {
+const OrderCheckoutCash: FC = () => {
   const dispatch = useDispatch();
 
   return (

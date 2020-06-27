@@ -70,6 +70,19 @@
       "TITLE": "Bestelling verwijderen"
     }
   },
+  "ORDERS": {
+    "UNFINISHED": {
+      "TITLE": "Openstaande rekeningen",
+      "EXPLANATION": "Selecteer een openstaande rekening om ze af te rekenen",
+      "NO_RESULTS": "Er zijn geen openstaande rekeningen",
+      "ITEM": {
+        "NO_NAME": "Naamloos",
+        "CREATED_AT": "Aangemaakt op {{date}}",
+        "BUTTON_CHECKOUT": "Afrekenen",
+        "BUTTON_ADD": "Voeg toe"
+      }
+    }
+  },
   "SHARED": {
     "BUTTONS": {
       "CANCEL": "Annuleren",
@@ -78,7 +91,9 @@
       "EDIT": "Wijzigen",
       "SAVE": "Wijzigingen opslaan"
     },
-    "NAVIGATION": {},
+    "NAVIGATION": {
+      "UNFINISHED_ORDERS": "Openstaande rekeningen"
+    },
     "PLACEHOLDER": {
       "DATE": "dd/mm/jjjj",
       "SEARCH": "Zoeken…",

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 import { PayconiqPaymentStatus } from '../_models';
 import { Icon } from '../../_shared';
@@ -10,8 +9,6 @@ type Props = {
 };
 
 const PayconiqQrStatus: FC<Props> = ({ status }) => {
-  const dispatch = useDispatch();
-
   function renderLoader(text: string) {
     return (
       <Loader active inverted size="huge">

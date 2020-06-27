@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useRouteMatch, Switch, Route, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { orderActions } from '../../_store/actions';
+import { useSelector } from 'react-redux';
 import { orderSelectors } from '../../_store/selectors';
 import SidebarCheckout from './sidebar/SidebarCheckout';
 import OrderCheckoutCash from './cash/OrderCheckoutCash';
@@ -13,7 +12,6 @@ import './orderCheckout.scss';
 const OrderCheckout: FC = () => {
   const { url } = useRouteMatch();
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
   const orderId = useSelector(orderSelectors.orderId);
 
   if (!orderId) {

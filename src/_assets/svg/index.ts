@@ -16,6 +16,7 @@ export { ReactComponent as SvgMinus } from './minus.svg';
 export { ReactComponent as SvgPayconiq } from './payconiq.svg';
 export { ReactComponent as SvgPayconiqQr } from './payconiq-qr.svg';
 export { ReactComponent as SvgPencil } from './pencil.svg';
+export { ReactComponent as SvgRockHand } from './rock-hand.svg';
 export { ReactComponent as SvgSmartphone } from './smartphone.svg';
 export { ReactComponent as SvgSuccess } from './success.svg';
 export { ReactComponent as SvgTrash } from './trash.svg';

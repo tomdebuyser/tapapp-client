@@ -5,6 +5,7 @@ import authReducer, { AuthState } from '../auth/_store/reducer';
 import categoriesReducer, { CategoriesState } from '../categories/_store/reducer';
 import modalReducer, { ModalState } from '../modal/_store/reducer';
 import orderReducer, { OrderState } from '../order/_store/reducer';
+import ordersReducer, { OrdersState } from '../orders/_store/reducer';
 import payconiqReducer, { PayconiqState } from '../payconiq/_store/reducer';
 import profileReducer, { ProfileState } from '../profile/_store/reducer';
 import { AuthActionType } from '../auth/_store/actions';
@@ -14,6 +15,7 @@ export type AppState = {
   categories: CategoriesState;
   modal: ModalState;
   order: OrderState;
+  orders: OrdersState;
   payconiq: PayconiqState;
   profile: ProfileState;
   router: RouterState;
@@ -25,6 +27,7 @@ function appReducer(history: History): Reducer {
     categories: categoriesReducer,
     modal: modalReducer,
     order: orderReducer,
+    orders: ordersReducer,
     payconiq: payconiqReducer,
     profile: profileReducer,
     router: connectRouter(history),
