@@ -21,7 +21,7 @@ export function createOrder(items: IOrderItem[]): Promise<IOrder> {
 
 export function updateOrder(orderId: string, items?: IOrderItem[], clientName?: string): Promise<IOrder> {
   return HttpClient.patch<IOrder>(`orders/${orderId}`, {
-    ...(items && { items: items.map(composeOrderItemPayload) }),
+    ...(items && { items: items.map(composeOrderItemPayload).filter(item => item.amount > 0) }),
     ...(clientName && { clientName }),
   });
 }

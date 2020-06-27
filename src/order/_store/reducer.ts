@@ -45,7 +45,7 @@ export default function reducer(state = initialState, action: OrderAction): Orde
             amount: (item?.amount || 0) + action.payload.amountToAdd,
             product,
           })
-          .filter(p => p.amount > 0),
+          .filter(it => it.amount > 0 || !!it.id),
       };
     }
     case OrderActionType.SetActiveCategory:
