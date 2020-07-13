@@ -26,7 +26,7 @@ const getPayconiqPaymentSuccessEpic$: Epic = action$ =>
       ({ payload }: payconiqActions.GetPayconiqPaymentSuccess) =>
         payload.payment.payconiqStatus === PayconiqPaymentStatus.SUCCEEDED,
     ),
-    tap(() => new Audio(require('../../_assets/sounds/notification.mp3')).play()), // TODO: gives error
+    tap(() => new Audio(require('../../_assets/sounds/notification.mp3')).play()),
     delay(2000),
     map(() => push('/order/success')),
   );

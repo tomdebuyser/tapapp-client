@@ -30,6 +30,7 @@ export const totalProductsCount = createSelector(selectNode, (state: OrderState)
 export const totalPrice = createSelector(selectNode, (state: OrderState) =>
   state.items.map(item => item.amount * item.product.price).reduce((a, b) => a + b, 0),
 );
+export const isUnfinishedOrder = createSelector(selectNode, (state: OrderState) => state.isUnfinishedOrder);
 export const isCreateOrderLoading = createSelector(selectNode, (state: OrderState) => state.isCreateOrderLoading);
 export const isDeleteOrderLoading = createSelector(selectNode, (state: OrderState) => state.isDeleteOrderLoading);
 export const isGetOrderLoading = createSelector(selectNode, (state: OrderState) => state.isGetOrderLoading);

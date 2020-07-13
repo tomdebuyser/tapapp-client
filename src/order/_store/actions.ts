@@ -43,7 +43,7 @@ export class SetActiveCategory implements Action<OrderActionType> {
 
 export class GetOrder implements Action<OrderActionType> {
   readonly type = OrderActionType.GetOrder;
-  constructor(public payload: { orderId: string }) {}
+  constructor(public payload: { isUnfinished?: boolean; orderId: string }) {}
 }
 
 export class GetOrderSuccess implements Action<OrderActionType> {
@@ -86,7 +86,7 @@ export class UpdateOrderError implements Action<OrderActionType> {
 
 export class AddClientName implements Action<OrderActionType> {
   readonly type = OrderActionType.AddClientName;
-  constructor(public payload: { clientName?: string }) {}
+  constructor(public payload: { clientName?: string; onSuccess?: () => void }) {}
 }
 
 export class AddClientNameSuccess implements Action<OrderActionType> {

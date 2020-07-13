@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { translations } from '../../../../_translations';
 import { profileSelectors, orderSelectors } from '../../../../_store/selectors';
@@ -10,15 +10,23 @@ import './authorizedLayoutMenu.scss';
 const AuthorizedLayoutMenu: FC = () => {
   const profile = useSelector(profileSelectors.profile);
   const orderId = useSelector(orderSelectors.orderId);
+  const isUnfinishedOrder = useSelector(orderSelectors.isUnfinishedOrder);
+  const { pathname } = useLocation();
+
+  function shouldShowUnfinishedOrdersTab(): boolean {
+    if (!orderId) return true;
+    if (pathname === '/order/checkout') return isUnfinishedOrder;
+    return false;
+  }
 
   return (
     <>
-      <NavLink className="logo" to="/">
+      <div className="menu-logo">
         <SvgLogo />
-      </NavLink>
+      </div>
       <header className="main-menu">
         <nav>
-          {!orderId && (
+          {shouldShowUnfinishedOrdersTab() && (
             <div>
               <NavLink to="/orders/unfinished">
                 <Icon name="SvgBill" size={2.5} />

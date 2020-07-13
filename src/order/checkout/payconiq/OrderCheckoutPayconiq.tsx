@@ -47,6 +47,7 @@ const OrderCheckoutPayconiq: FC = () => {
           <div className="buttons-wrapper">
             <div className="app-icons">
               <img alt="payconiq-app-icon" className="app-icon" src={require('../../../_assets/images/payconiq-app-icon.png')} />
+              <img alt="kbc-app-icon" className="app-icon" src={require('../../../_assets/images/kbc-app-icon.png')} />
             </div>
             {canRetryPayment() && (
               <Button onClick={() => dispatch(new payconiqActions.CreatePayconiqPayment())} primary>

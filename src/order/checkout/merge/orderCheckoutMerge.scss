@@ -1,0 +1,18 @@
+.order-checkout-merge {
+  .container {
+    > .content {
+      min-width: unset;
+      width: 100%;
+      display: block;
+      margin-bottom: 0;
+
+      .orders-unfinished-list-wrapper.hidden {
+        display: none;
+      }
+
+      .orders-unfinished-list {
+        margin-top: 2.5rem;
+      }
+    }
+  }
+}

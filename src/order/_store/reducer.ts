@@ -11,6 +11,7 @@ export type OrderState = {
   isDeleteOrderLoading: boolean;
   isGetOrderLoading: boolean;
   isPayOrderLoading: boolean;
+  isUnfinishedOrder?: boolean;
   isUpdateOrderLoading: boolean;
   items: IOrderItem[];
   orderId?: string;
@@ -58,6 +59,7 @@ export default function reducer(state = initialState, action: OrderAction): Orde
         ...state,
         errorCrudOrder: null,
         isGetOrderLoading: true,
+        isUnfinishedOrder: !!action.payload.isUnfinished,
       };
     case OrderActionType.GetOrderSuccess:
       return {

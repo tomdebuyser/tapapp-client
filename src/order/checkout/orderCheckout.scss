@@ -1,9 +1,15 @@
+@import '../../_styles/constants';
+
 .order-checkout {
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 2.2rem;
+
+    > span {
+      text-align: center;
+    }
   }
 
   .content {

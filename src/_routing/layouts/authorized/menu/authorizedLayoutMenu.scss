@@ -3,7 +3,7 @@
 
 $logo-height: 2.5rem;
 
-a.logo {
+.menu-logo {
   position: fixed;
   top: calc((#{$navbar-height} - #{$logo-height}) / 2);
   left: 1.8rem;

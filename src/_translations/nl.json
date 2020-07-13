@@ -24,7 +24,9 @@
       "PAYMENT_TYPES": {
         "CASH": "Cash betalen",
         "SMARTPHONE": "Smartphone betalen",
+        "SMARTPHONE_REACHED_LIMIT": "Smartphone betalen niet mogelijk (+ €{{limit}})",
         "MERGE": "Later betalen",
+        "MERGE_UNFINISHED": "Rekening samenvoegen",
         "FREE": "Gratis"
       },
       "SIDEBAR": {
@@ -46,7 +48,7 @@
       },
       "PAYCONIQ": {
         "TITLE": "Smartphone betalen",
-        "EXPLANATION": "Betaal door de QR Code te scannen met de Payconiq app",
+        "EXPLANATION": "Betaal door de QR Code te scannen met één van onderstaande banking apps",
         "STATUS": {
           "IDENTIFIED": "Betaling bezig",
           "AUTHORIZED": "Betaling controleren",
@@ -58,10 +60,32 @@
         },
         "BUTTON_RETRY": "Opnieuw proberen",
         "BUTTON_STOP": "Betaling stoppen"
+      },
+      "MERGE": {
+        "TITLE": "Later betalen",
+        "EXPLANATION": "Voeg de bestelling toe aan een bestaande of nieuwe rekening",
+        "EXPLANATION_NEW": "Voeg de bestelling toe aan een nieuwe rekening",
+        "BUTTON_NEW": "Nieuwe rekening",
+        "BUTTON_STOP": "Betaling stoppen",
+        "ADD_CLIENT_NAME_MODAL": {
+          "TITLE": "Nieuwe rekening maken",
+          "CONTENT": "Voer de naam van de persoon in waarvoor je de rekening maakt. Je kan deze rekening op een later tijdsstip afrekenen.",
+          "ERROR_ALREADY_IN_USE": "Er bestaat al een rekening met deze naam.",
+          "INPUT_PLACEHOLDER": "Naam van de persoon",
+          "BUTTON": "Voeg toe"
+        },
+        "UNFINISHED": {
+          "TITLE": "Rekening samenvoegen",
+          "EXPLANATION": "Voeg de rekening samen met één van de onderstaande rekeningen"
+        }
       }
     },
     "FINISHED": {
-      "ORDER_PAID": "De bestelling is succesvol betaald!",
+      "EXPLANATION": {
+        "ORDER_PAID": "De bestelling werd succesvol betaald!",
+        "ADDED_CLIENT_NAME": "De bestelling werd op een nieuwe rekening geplaatst!",
+        "ORDERS_MERGED": "De bestelling werd op de bestaande rekening geplaatst!"
+      },
       "BUTTON": "Nieuwe bestelling"
     },
     "CONFIRM_DELETE": {
@@ -75,12 +99,20 @@
       "TITLE": "Openstaande rekeningen",
       "EXPLANATION": "Selecteer een openstaande rekening om ze af te rekenen",
       "NO_RESULTS": "Er zijn geen openstaande rekeningen",
+      "SIDEBAR": {
+        "CHECKOUT_ASAP": "Probeer openstaande rekeningen steeds tijdens hetzelfde bezoek af te rekenen."
+      },
       "ITEM": {
         "NO_NAME": "Naamloos",
         "CREATED_AT": "Aangemaakt op {{date}}",
         "BUTTON_CHECKOUT": "Afrekenen",
         "BUTTON_ADD": "Voeg toe"
       }
+    },
+    "CONFIRM_MERGE": {
+      "BUTTON": "Ja, voeg toe",
+      "CONTENT": "Ben je zeker dat je deze bestelling aan de rekening van \"{{name}}\" wil toevoegen?",
+      "TITLE": "Aan rekening toevoegen"
     }
   },
   "SHARED": {

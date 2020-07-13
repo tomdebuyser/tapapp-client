@@ -1,5 +1,5 @@
 export type IPayconiqPayment = {
-  id: string; // TODO: backend should return correct payment
+  id: string;
   orderId: string;
   payconiqQrCode?: string;
   payconiqStatus: PayconiqPaymentStatus;

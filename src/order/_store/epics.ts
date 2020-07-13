@@ -1,10 +1,11 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, filter, switchMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap, filter, switchMap, tap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { orderActions, modalActions } from '../../_store/actions';
 import { orderSelectors } from '../../_store/selectors';
 import { translations } from '../../_translations';
+import { IOrderFinishedRouterState } from '../finished/OrderFinished';
 import * as orderApi from './api';
 import { OrderActionType } from './actions';
 
@@ -53,7 +54,15 @@ const addClientNameEpic$: Epic = (action$, state$) =>
     exhaustMap(({ payload }: orderActions.AddClientName) => {
       const orderId = orderSelectors.orderId(state$.value);
       return from(orderApi.updateOrder(orderId, null, payload.clientName)).pipe(
-        map(updatedOrder => new orderActions.AddClientNameSuccess({ updatedOrder })),
+        tap(() => payload.onSuccess?.()),
+        switchMap(updatedOrder =>
+          of(
+            new orderActions.AddClientNameSuccess({ updatedOrder }),
+            push<IOrderFinishedRouterState>('/order/success', {
+              text: translations.getLabel('ORDER.FINISHED.EXPLANATION.ADDED_CLIENT_NAME'),
+            }),
+          ),
+        ),
         catchError(error => of(new orderActions.AddClientNameError({ error }))),
       );
     }),
@@ -98,14 +107,11 @@ const payOrderEpic$: Epic = (action$, state$) =>
     exhaustMap(({ payload }: orderActions.PayOrder) => {
       const orderId = orderSelectors.orderId(state$.value);
       return from(orderApi.payOrder(orderId, payload.paymentType)).pipe(
-        map(() => new orderActions.PayOrderSuccess()),
+        switchMap(() => of(new orderActions.PayOrderSuccess(), push('/order/success'))),
         catchError(error => of(new orderActions.PayOrderError({ error }))),
       );
     }),
   );
-
-const payOrderSuccessEpic$: Epic = action$ =>
-  action$.ofType(OrderActionType.PayOrderSuccess, OrderActionType.AddClientNameSuccess).pipe(map(() => push('/order/success')));
 
 export default [
   clearStateEpic$,
@@ -118,5 +124,4 @@ export default [
   deleteOrderEpic$,
   cancelCreateOrderEpic$,
   payOrderEpic$,
-  payOrderSuccessEpic$,
 ];

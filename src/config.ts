@@ -25,4 +25,8 @@ export class Config {
   static get sentryDsn(): string {
     return process.env.REACT_APP_SENTRY_DSN as string;
   }
+
+  static get payconiqLimit(): number {
+    return parseInt(process.env.REACT_APP_PAYCONIQ_LIMIT as string, 10);
+  }
 }

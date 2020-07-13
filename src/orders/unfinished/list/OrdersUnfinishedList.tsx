@@ -11,10 +11,11 @@ import { formatDate } from '../../../_utils/dateHelpers';
 import './ordersUnfinishedList.scss';
 
 type Props = {
-  renderButton: (orderId: string) => ReactNode;
+  filter?: (order: IOrder) => boolean;
+  renderButton: (order: IOrder) => ReactNode;
 };
 
-const OrdersUnfinishedList: FC<Props> = ({ renderButton }) => {
+const OrdersUnfinishedList: FC<Props> = ({ filter, renderButton }) => {
   const dispatch = useDispatch();
   const orders = useSelector(ordersSelectors.unfinishedOrders);
   const isLoading = useSelector(ordersSelectors.isGetUnfinishedOrdersLoading);
@@ -26,7 +27,7 @@ const OrdersUnfinishedList: FC<Props> = ({ renderButton }) => {
   function renderOrder(order: IOrder) {
     const price = order.items.map(item => item.amount * item.product.price).reduce((a, b) => a + b, 0);
     return (
-      <div className="item">
+      <div className="item" key={order.id}>
         <div>
           <div className="item-name">{order.clientName || translations.getLabel('ORDERS.UNFINISHED.ITEM.NO_NAME')}</div>
           <div className="item-date">
@@ -34,7 +35,7 @@ const OrdersUnfinishedList: FC<Props> = ({ renderButton }) => {
           </div>
         </div>
         <div className="item-price">{parseCurrency(price)}</div>
-        <div className="item-button">{renderButton(order.id)}</div>
+        <div className="item-button">{renderButton(order)}</div>
       </div>
     );
   }
@@ -49,10 +50,14 @@ const OrdersUnfinishedList: FC<Props> = ({ renderButton }) => {
   }
   return (
     <div className="orders-unfinished-list">
-      {orders?.map(renderOrder)}
+      {orders?.filter(filter)?.map(renderOrder)}
       <Loader active={isLoading} inline="centered" size="large" />
     </div>
   );
+};
+
+OrdersUnfinishedList.defaultProps = {
+  filter: () => true,
 };
 
 export default OrdersUnfinishedList;

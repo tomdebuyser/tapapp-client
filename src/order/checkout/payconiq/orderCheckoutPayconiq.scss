@@ -14,8 +14,12 @@
 
       img.app-icon {
         box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-        height: 8rem;
+        border-radius: 8px;
+        height: 7rem;
+
+        &:not(:first-child) {
+          margin-left: 2rem;
+        }
       }
     }
   }

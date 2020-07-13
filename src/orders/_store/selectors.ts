@@ -10,3 +10,5 @@ export const isGetUnfinishedOrdersLoading = createSelector(
   (state: OrdersState) => state.isGetUnfinishedOrdersLoading,
 );
 export const errorGetUnfinishedOrders = createSelector(selectNode, (state: OrdersState) => state.errorGetUnfinishedOrders);
+export const isMergeOrdersLoading = createSelector(selectNode, (state: OrdersState) => state.isMergeOrdersLoading);
+export const errorMergeOrders = createSelector(selectNode, (state: OrdersState) => state.errorMergeOrders);

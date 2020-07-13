@@ -6,6 +6,9 @@ export enum OrdersActionType {
   GetUnfinishedOrders = '[Orders] GetUnfinishedOrders',
   GetUnfinishedOrdersError = '[Orders] GetUnfinishedOrdersError',
   GetUnfinishedOrdersSuccess = '[Orders] GetUnfinishedOrdersSuccess',
+  MergeOrders = '[Orders] MergeOrders',
+  MergeOrdersError = '[Orders] MergeOrdersError',
+  MergeOrdersSuccess = '[Orders] MergeOrdersSuccess',
 }
 
 export class GetUnfinishedOrders implements Action<OrdersActionType> {
@@ -22,4 +25,24 @@ export class GetUnfinishedOrdersError implements Action<OrdersActionType> {
   constructor(public payload: { error?: ApiError }) {}
 }
 
-export type OrdersAction = GetUnfinishedOrders | GetUnfinishedOrdersSuccess | GetUnfinishedOrdersError;
+export class MergeOrders implements Action<OrdersActionType> {
+  readonly type = OrdersActionType.MergeOrders;
+  constructor(public payload: { confirmed?: boolean; targetOrder: IOrder }) {}
+}
+
+export class MergeOrdersSuccess implements Action<OrdersActionType> {
+  readonly type = OrdersActionType.MergeOrdersSuccess;
+}
+
+export class MergeOrdersError implements Action<OrdersActionType> {
+  readonly type = OrdersActionType.MergeOrdersError;
+  constructor(public payload: { error?: ApiError }) {}
+}
+
+export type OrdersAction =
+  | GetUnfinishedOrders
+  | GetUnfinishedOrdersSuccess
+  | GetUnfinishedOrdersError
+  | MergeOrders
+  | MergeOrdersSuccess
+  | MergeOrdersError;

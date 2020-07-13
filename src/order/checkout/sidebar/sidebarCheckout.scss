@@ -1,4 +1,5 @@
 @import '../../../_styles/colors';
+@import '../../../_styles/constants';
 
 .sidebar-checkout {
   .content {
@@ -19,7 +20,7 @@
 
     h3 {
       flex: 0;
-      padding: 0 2rem;
+      padding: 0 $sidebar-padding;
     }
 
     .products-wrapper {
@@ -39,7 +40,7 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 2rem;
+          padding: 0 $sidebar-padding;
 
           flex: 0;
           .name {
@@ -58,27 +59,14 @@
       flex: 0;
       color: $grey-dark;
       text-align: center;
-      padding: 0 2rem;
-      padding-top: 2rem;
+      padding: 0 $sidebar-padding;
+      padding-top: $sidebar-padding;
     }
   }
 
-  .bottom {
-    flex: 0;
-    padding: 2rem;
-    text-align: center;
-    :not(:first-child) {
-      padding-top: 1rem;
-    }
-
-    button {
-      width: 100%;
-    }
-
-    &.readonly {
-      .button-wrapper {
-        visibility: hidden;
-      }
+  .bottom.readonly {
+    .button-wrapper {
+      visibility: hidden;
     }
   }
 }
