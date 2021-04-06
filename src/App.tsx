@@ -10,14 +10,31 @@ import ReduxDelegatedModal from './modal/ReduxDelegatedModal';
 import { authActions } from './_store/actions';
 import { authSelectors } from './_store/selectors';
 import Toastify from './Toastify';
+import { I18n } from './_translations';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(authSelectors.isAuthenticateLoading);
+  const locale = useSelector(authSelectors.locale);
+  const isDevMode = useSelector(authSelectors.isDevMode);
 
   useEffect(() => {
     dispatch(new authActions.Authenticate());
   }, [dispatch]);
+
+  /**
+   * This useEffect hook is here to make the app re-render on a locale change
+   */
+  useEffect(() => {
+    if (locale) I18n.setLocale(locale);
+  }, [locale]);
+
+  /**
+   * This useEffect hook is here to make the app re-render on a dev mode change
+   */
+  useEffect(() => {
+    if (isDevMode) I18n.setDevMode(isDevMode);
+  }, [isDevMode]);
 
   if (isLoading) {
     return (

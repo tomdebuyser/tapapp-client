@@ -1,3 +1,1 @@
-import translations from './translations';
-
-export { translations };
+export * from './I18n';

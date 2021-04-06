@@ -3,9 +3,9 @@ import { from, of } from 'rxjs';
 import { map, catchError, exhaustMap, filter, switchMap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { ordersActions, modalActions } from '../../_store/actions';
-import { translations } from '../../_translations';
 import { orderSelectors } from '../../_store/selectors';
 import { IOrderFinishedRouterState } from '../../order/finished/OrderFinished';
+import { I18n } from '../../_translations';
 import * as ordersApi from './api';
 import { OrdersActionType } from './actions';
 
@@ -26,11 +26,11 @@ const mergeOrdersWithConfirmationEpic$: Epic = action$ =>
       ({ payload }: ordersActions.MergeOrders) =>
         new modalActions.ShowConfirmationModal({
           confirmAction: () => new ordersActions.MergeOrders({ confirmed: true, targetOrder: payload.targetOrder }),
-          confirmText: translations.getLabel('ORDERS.CONFIRM_MERGE.BUTTON'),
-          content: translations.getLabel('ORDERS.CONFIRM_MERGE.CONTENT', {
-            name: payload.targetOrder.clientName || translations.getLabel('ORDERS.UNFINISHED.ITEM.NO_NAME'),
+          confirmText: I18n.labels.ORDERS.CONFIRM_MERGE.BUTTON,
+          content: I18n.insert(I18n.labels.ORDERS.CONFIRM_MERGE.CONTENT, {
+            name: payload.targetOrder.clientName || I18n.labels.ORDERS.UNFINISHED.ITEM.NO_NAME,
           }),
-          title: translations.getLabel('ORDERS.CONFIRM_MERGE.TITLE'),
+          title: I18n.labels.ORDERS.CONFIRM_MERGE.TITLE,
         }),
     ),
   );
@@ -45,7 +45,7 @@ const mergeOrdersEpic$: Epic = (action$, state$) =>
           of(
             new ordersActions.MergeOrdersSuccess(),
             push<IOrderFinishedRouterState>('/order/success', {
-              text: translations.getLabel('ORDER.FINISHED.EXPLANATION.ORDERS_MERGED'),
+              text: I18n.labels.ORDER.FINISHED.EXPLANATION.ORDERS_MERGED,
             }),
           ),
         ),

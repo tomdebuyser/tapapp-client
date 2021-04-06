@@ -1,12 +1,13 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, switchMap, exhaustMap, filter } from 'rxjs/operators';
+import { map, catchError, switchMap, exhaustMap, filter, tap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { Action } from 'redux';
 import { authActions } from '../../_store/actions';
 import { HttpStatus, ApiError } from '../../_http';
 import { UNAUTHORIZES_ROUTES } from '../../_routing/layouts/unauthorized/UnauthorizedLayout';
 import { routerSelectors } from '../../_store/selectors';
+import { I18n } from '../../_translations';
 import * as authApi from './api';
 import { AuthActionType } from './actions';
 
@@ -63,4 +64,25 @@ const logoutEpic$: Epic = action$ =>
 const logoutSuccessEpic$: Epic = action$ =>
   action$.ofType(AuthActionType.LogoutSuccess).pipe(switchMap(() => of(push('/auth/login'))));
 
-export default [authenticateEpic$, authenticateSuccessEpic$, loginEpic$, logoutEpic$, logoutSuccessEpic$, unauthorizedEpic$];
+const setLocaleEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.SetLocale).pipe(
+    tap(({ payload }: authActions.SetLocale) => I18n.setLocale(payload.locale)),
+    switchMap(() => of()),
+  );
+
+const setDevModeEpic$: Epic = action$ =>
+  action$.ofType(AuthActionType.SetDevMode).pipe(
+    tap(({ payload }: authActions.SetDevMode) => I18n.setDevMode(payload.isDevMode)),
+    switchMap(() => of()),
+  );
+
+export default [
+  authenticateEpic$,
+  authenticateSuccessEpic$,
+  loginEpic$,
+  logoutEpic$,
+  logoutSuccessEpic$,
+  unauthorizedEpic$,
+  setLocaleEpic$,
+  setDevModeEpic$,
+];

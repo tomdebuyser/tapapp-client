@@ -8,7 +8,6 @@ import Modal from './modal/Modal';
 import SearchField from './search/SearchField';
 import SegmentedControl from './segmentedControl/SegmentedControl';
 import Table from './table/Table';
-import Timestamps from './timestamps/Timestamps';
 export * from './input';
 
-export { Icon, Modal, Table, Button, ErrorMessage, SearchField, GoBackLink, Timestamps, SegmentedControl, Datepicker, Badge };
+export { Icon, Modal, Table, Button, ErrorMessage, SearchField, GoBackLink, SegmentedControl, Datepicker, Badge };

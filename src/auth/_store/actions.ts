@@ -2,6 +2,7 @@ import { Action } from 'redux';
 import { ApiError } from '../../_http';
 import { ILoginForm } from '../_models';
 import { IProfile } from '../../profile/_models';
+import { Locale } from '../../_translations';
 
 export enum AuthActionType {
   Authenticate = '[Auth] Authenticate',
@@ -12,6 +13,8 @@ export enum AuthActionType {
   Logout = '[Auth] Logout',
   LogoutError = '[Auth] LogoutError',
   LogoutSuccess = '[Auth] LogoutSuccess',
+  SetDevMode = '[Auth] SetDevMode',
+  SetLocale = '[Auth] SetLocale',
 }
 
 export class Authenticate implements Action<AuthActionType> {
@@ -51,6 +54,16 @@ export class LogoutError implements Action<AuthActionType> {
   constructor(public payload: { error: ApiError }) {}
 }
 
+export class SetLocale implements Action<AuthActionType> {
+  readonly type = AuthActionType.SetLocale;
+  constructor(public payload: { locale: Locale }) {}
+}
+
+export class SetDevMode implements Action<AuthActionType> {
+  readonly type = AuthActionType.SetDevMode;
+  constructor(public payload: { isDevMode: boolean }) {}
+}
+
 export type AuthAction =
   | Authenticate
   | AuthenticateSuccess
@@ -59,4 +72,6 @@ export type AuthAction =
   | LoginError
   | Logout
   | LogoutSuccess
-  | LogoutError;
+  | LogoutError
+  | SetLocale
+  | SetDevMode;

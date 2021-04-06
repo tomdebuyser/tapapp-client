@@ -4,8 +4,8 @@ import { map, catchError, exhaustMap, filter, switchMap, tap } from 'rxjs/operat
 import { push } from 'connected-react-router';
 import { orderActions, modalActions } from '../../_store/actions';
 import { orderSelectors } from '../../_store/selectors';
-import { translations } from '../../_translations';
 import { IOrderFinishedRouterState } from '../finished/OrderFinished';
+import { I18n } from '../../_translations';
 import * as orderApi from './api';
 import { OrderActionType } from './actions';
 
@@ -59,7 +59,7 @@ const addClientNameEpic$: Epic = (action$, state$) =>
           of(
             new orderActions.AddClientNameSuccess({ updatedOrder }),
             push<IOrderFinishedRouterState>('/order/success', {
-              text: translations.getLabel('ORDER.FINISHED.EXPLANATION.ADDED_CLIENT_NAME'),
+              text: I18n.labels.ORDER.FINISHED.EXPLANATION.ADDED_CLIENT_NAME,
             }),
           ),
         ),
@@ -75,9 +75,9 @@ const deleteOrderWithConfirmationEpic$: Epic = action$ =>
       () =>
         new modalActions.ShowConfirmationModal({
           confirmAction: () => new orderActions.DeleteOrder({ confirmed: true }),
-          confirmText: translations.getLabel('ORDER.CONFIRM_DELETE.BUTTON'),
-          content: translations.getLabel('ORDER.CONFIRM_DELETE.CONTENT'),
-          title: translations.getLabel('ORDER.CONFIRM_DELETE.TITLE'),
+          confirmText: I18n.labels.ORDER.CONFIRM_DELETE.BUTTON,
+          content: I18n.labels.ORDER.CONFIRM_DELETE.CONTENT,
+          title: I18n.labels.ORDER.CONFIRM_DELETE.TITLE,
         }),
     ),
   );

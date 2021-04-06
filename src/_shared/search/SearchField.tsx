@@ -1,10 +1,10 @@
 import React, { useState, useEffect, FC } from 'react';
-import { translations } from '../../_translations';
 import { useDebounce } from '../../_hooks';
 import { FillMetadataQueryFunction, HttpMetadataQuery } from '../../_http';
 import InputField from '../input/inputField/InputField';
 import Icon from '../icon/Icon';
 import './searchField.scss';
+import { I18n } from '../../_translations';
 
 type Props = {
   query?: HttpMetadataQuery;
@@ -34,7 +34,7 @@ const SearchField: FC<Props> = ({ query, setQuery }) => {
         icon="search"
         name="search"
         onChange={setSearch}
-        placeholder={translations.getLabel('SHARED.PLACEHOLDER.SEARCH')}
+        placeholder={I18n.labels.SHARED.PLACEHOLDER.SEARCH}
         value={search}
       />
       {!!search && <Icon name="SvgClose" onClick={() => setSearch('')} size={2.8} />}

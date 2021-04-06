@@ -9,3 +9,5 @@ export const errorLogin = createSelector(selectNode, (state: AuthState) => state
 export const errorLogout = createSelector(selectNode, (state: AuthState) => state.errorLogout);
 export const isLoginLoading = createSelector(selectNode, (state: AuthState) => state.isLoginLoading);
 export const isLogoutLoading = createSelector(selectNode, (state: AuthState) => state.isLogoutLoading);
+export const locale = createSelector(selectNode, (state: AuthState) => state.locale);
+export const isDevMode = createSelector(selectNode, (state: AuthState) => state.isDevMode);

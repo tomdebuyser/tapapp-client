@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { IConfirmationModalData } from '../_models';
 import { Button, Modal } from '../../_shared';
-import { translations } from '../../_translations';
 import { modalActions } from '../../_store/actions';
+import { I18n } from '../../_translations';
 
 type Props = {
   data?: IConfirmationModalData;
@@ -29,7 +29,7 @@ const ConfirmationModal: FC<Props> = ({ data }) => {
         <p>{data.content}</p>
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={cancelModal}>{translations.getLabel('SHARED.BUTTONS.CANCEL')}</Button>
+        <Button onClick={cancelModal}>{I18n.labels.SHARED.BUTTONS.CANCEL}</Button>
         <Button onClick={confirmModal} primary>
           {data.confirmText}
         </Button>

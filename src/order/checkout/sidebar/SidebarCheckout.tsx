@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderSelectors } from '../../../_store/selectors';
-import { translations } from '../../../_translations';
 import { parseCurrency } from '../../../_utils/parseHelpers';
 import { Button } from '../../../_shared';
 import { orderActions } from '../../../_store/actions';
 import './sidebarCheckout.scss';
+import { I18n } from '../../../_translations';
 
 type Props = {
   readonly?: boolean;
@@ -22,7 +22,7 @@ const SidebarCheckout: FC<Props> = ({ readonly }) => {
     <div className="sidebar sidebar-checkout">
       <div className="content">
         <div className="order-overview">
-          <h3>{translations.getLabel('ORDER.CHECKOUT.SIDEBAR.TITLE')}</h3>
+          <h3>{I18n.labels.ORDER.CHECKOUT.SIDEBAR.TITLE}</h3>
           <div className="products-wrapper">
             {items.map((item, index) => (
               <div className="item-wrapper" key={item.id || index}>
@@ -38,19 +38,24 @@ const SidebarCheckout: FC<Props> = ({ readonly }) => {
             ))}
           </div>
           <div className="products-amount">
-            {translations.getLabel(`ORDER.CHECKOUT.SIDEBAR.TOTAL_COUNT.${totalCount === 1 ? 'SINGULAR' : 'PLURAL'}`, {
-              amount: totalCount,
-            })}
+            {I18n.insert(
+              totalCount === 1
+                ? I18n.labels.ORDER.CHECKOUT.SIDEBAR.TOTAL_COUNT.SINGULAR
+                : I18n.labels.ORDER.CHECKOUT.SIDEBAR.TOTAL_COUNT.PLURAL,
+              {
+                amount: totalCount,
+              },
+            )}
           </div>
         </div>
         <div className={classnames('bottom', { readonly })}>
           <h1>{parseCurrency(totalPrice)}</h1>
           <div className="button-wrapper">
-            <Button href="/order/compose">{translations.getLabel('SHARED.BUTTONS.EDIT')}</Button>
+            <Button href="/order/compose">{I18n.labels.SHARED.BUTTONS.EDIT}</Button>
           </div>
           <div className="button-wrapper">
             <Button negative onClick={() => dispatch(new orderActions.DeleteOrder())}>
-              {translations.getLabel('SHARED.BUTTONS.DELETE')}
+              {I18n.labels.SHARED.BUTTONS.DELETE}
             </Button>
           </div>
         </div>

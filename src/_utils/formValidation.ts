@@ -1,4 +1,4 @@
-import { translations } from '../_translations';
+import { I18n } from '../_translations';
 import { isAfterDate, isBeforeDate, formatDate, DEFAULT_DATE_STRING_FORMAT, DEFAULT_TIME_STRING_FORMAT } from './dateHelpers';
 
 export function trim(value: string): string {
@@ -21,7 +21,7 @@ export const formValidator = {
       isValid,
       message: isValid
         ? null
-        : translations.getLabel('ERRORS.VALIDATION.AFTER_DATE', {
+        : I18n.insert(I18n.labels.ERRORS.VALIDATION.AFTER_DATE, {
             date: formatDate(minDate, `${DEFAULT_DATE_STRING_FORMAT} ${DEFAULT_TIME_STRING_FORMAT}`),
           }),
     };
@@ -32,7 +32,7 @@ export const formValidator = {
       isValid,
       message: isValid
         ? null
-        : translations.getLabel('ERRORS.VALIDATION.BEFORE_DATE', {
+        : I18n.insert(I18n.labels.ERRORS.VALIDATION.BEFORE_DATE, {
             date: formatDate(maxDate, `${DEFAULT_DATE_STRING_FORMAT} ${DEFAULT_TIME_STRING_FORMAT}`),
           }),
     };
@@ -41,14 +41,14 @@ export const formValidator = {
     const isValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.INVALID,
     };
   },
   enumValue: function<T>(value: string, enumeration: T): IValidatorResponse {
     const isValid = Object.values(enumeration).includes(value);
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.INVALID,
     };
   },
   matchingPasswords: function(newPassword: string, repeatNewPassword: string): IValidatorResponse {
@@ -58,35 +58,35 @@ export const formValidator = {
     const isValid = isNewPasswordValid && isRepeatNewPasswordValid && newPassword === repeatNewPassword;
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID_NEW_AND_REPEATED_PASSWORD'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.INVALID_NEW_AND_REPEATED_PASSWORD,
     };
   },
   maxLength: function(value: string, max: number): IValidatorResponse {
     const isValid = `${value}`.length <= max;
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.MAX_LENGTH', { length: max }),
+      message: isValid ? null : I18n.insert(I18n.labels.ERRORS.VALIDATION.MAX_LENGTH, { length: max }),
     };
   },
   minLength: function(value: string, min: number): IValidatorResponse {
     const isValid = `${value}`.length >= min;
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.MIN_LENGTH', { length: min }),
+      message: isValid ? null : I18n.insert(I18n.labels.ERRORS.VALIDATION.MIN_LENGTH, { length: min }),
     };
   },
   notEmptyArray: function(array: unknown[]): IValidatorResponse {
     const isValid = array?.length > 0;
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.EMPTY_ARRAY'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.EMPTY_ARRAY,
     };
   },
   number: function(value: string): IValidatorResponse {
     const isValid = !Number.isNaN(parseFloat(value));
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.NOT_A_NUMBER'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.NOT_A_NUMBER,
     };
   },
   password: function(password: string): IValidatorResponse {
@@ -96,20 +96,20 @@ export const formValidator = {
     if (!isValid) {
       return {
         isValid,
-        message: translations.getLabel('ERRORS.VALIDATION.PASSWORD_TOO_SHORT'),
+        message: I18n.labels.ERRORS.VALIDATION.PASSWORD_TOO_SHORT,
       };
     }
     isValid = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test(password);
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.PASSWORD_UNSAFE'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.PASSWORD_UNSAFE,
     };
   },
   required: function(value: unknown): IValidatorResponse {
     const isValid = !isEmptyString(`${value}`) && !!value;
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.REQUIRED'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.REQUIRED,
     };
   },
   url: function(value: string): IValidatorResponse {
@@ -118,7 +118,7 @@ export const formValidator = {
     );
     return {
       isValid,
-      message: isValid ? null : translations.getLabel('ERRORS.VALIDATION.INVALID'),
+      message: isValid ? null : I18n.labels.ERRORS.VALIDATION.INVALID,
     };
   },
 };

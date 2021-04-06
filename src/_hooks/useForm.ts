@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ApiError, ValidationError } from '../_http';
-import { translations } from '../_translations';
 import { deepCopy, isEmptyObject } from '../_utils/objectHelpers';
 import { IValidatorResponse } from '../_utils/formValidation';
+import { I18n } from '../_translations';
 import useToggle from './useToggle';
 
 /**
@@ -53,8 +53,8 @@ function mapToFormValidationErrors<TForm>(error: ApiError): FormValidationErrors
     if (validationError.children.length > 0) {
       return validationError.children.reduce((acc, child) => ({ ...acc, [child.property]: { ...mapError(child) } }), {});
     }
-    let message = translations.getLabel('ERRORS.VALIDATION.INVALID');
-    if (validationError.constraints?.isNotEmpty) message = translations.getLabel('ERRORS.VALIDATION.REQUIRED');
+    let message: string = I18n.labels.ERRORS.VALIDATION.INVALID;
+    if (validationError.constraints?.isNotEmpty) message = I18n.labels.ERRORS.VALIDATION.REQUIRED;
     return { isValid: false, message };
   };
   return Object.keys(error.validationErrors).reduce((acc, key) => {

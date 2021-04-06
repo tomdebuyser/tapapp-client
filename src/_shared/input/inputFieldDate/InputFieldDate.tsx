@@ -4,9 +4,9 @@ import Datepicker from '../../datepicker/Datepicker';
 import { formatDate, dateFromString } from '../../../_utils/dateHelpers';
 import { normalizeDate } from '../../../_utils/normalizeHelpers';
 import Icon from '../../icon/Icon';
-import { translations } from '../../../_translations';
 import InputField, { InputFieldProps } from '../inputField/InputField';
 import './inputFieldDate.scss';
+import { I18n } from '../../../_translations';
 
 type Props = InputFieldProps & {
   maxDate?: Date;
@@ -17,12 +17,7 @@ const InputFieldDate: FC<Props> = props => {
   const { label, maxDate, minDate, name, onChange, value } = props;
   return (
     <div className={classnames('input-date-wrapper', { 'has-label': !!label })}>
-      <InputField
-        {...props}
-        normalize={normalizeDate}
-        placeholder={translations.getLabel('SHARED.PLACEHOLDER.DATE')}
-        type="text"
-      />
+      <InputField {...props} normalize={normalizeDate} placeholder={I18n.labels.SHARED.PLACEHOLDER.DATE} type="text" />
       <Datepicker
         maxDate={maxDate}
         minDate={minDate}

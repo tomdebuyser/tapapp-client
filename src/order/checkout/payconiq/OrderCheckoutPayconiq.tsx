@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { payconiqActions } from '../../../_store/actions';
 import { usePolling } from '../../../_hooks';
-import { translations } from '../../../_translations';
 import PayconiqQrCode from '../../../payconiq/qrCode/PayconiqQrCode';
 import { payconiqSelectors } from '../../../_store/selectors';
 import { Button } from '../../../_shared';
 import { PayconiqPaymentStatus } from '../../../payconiq/_models';
 import { isIntermediatePayconiqStatus } from '../../../payconiq/_models/rules';
+import { I18n } from '../../../_translations';
 import './orderCheckoutPayconiq.scss';
 
 const OrderCheckoutPayconiq: FC = () => {
@@ -40,8 +40,8 @@ const OrderCheckoutPayconiq: FC = () => {
   return (
     <div className="order-checkout-payconiq">
       <div className="container">
-        <h1>{translations.getLabel('ORDER.CHECKOUT.PAYCONIQ.TITLE')}</h1>
-        <span>{translations.getLabel('ORDER.CHECKOUT.PAYCONIQ.EXPLANATION')}</span>
+        <h1>{I18n.labels.ORDER.CHECKOUT.PAYCONIQ.TITLE}</h1>
+        <span>{I18n.labels.ORDER.CHECKOUT.PAYCONIQ.EXPLANATION}</span>
         <div className="content">
           <PayconiqQrCode payment={payment} />
           <div className="buttons-wrapper">
@@ -51,7 +51,7 @@ const OrderCheckoutPayconiq: FC = () => {
             </div>
             {canRetryPayment() && (
               <Button onClick={() => dispatch(new payconiqActions.CreatePayconiqPayment())} primary>
-                {translations.getLabel('ORDER.CHECKOUT.PAYCONIQ.BUTTON_RETRY')}
+                {I18n.labels.ORDER.CHECKOUT.PAYCONIQ.BUTTON_RETRY}
               </Button>
             )}
             {canStopPayment() && (
@@ -62,7 +62,7 @@ const OrderCheckoutPayconiq: FC = () => {
                   dispatch(push('/order/checkout'));
                 }}
               >
-                {translations.getLabel('ORDER.CHECKOUT.PAYCONIQ.BUTTON_STOP')}
+                {I18n.labels.ORDER.CHECKOUT.PAYCONIQ.BUTTON_STOP}
               </Button>
             )}
           </div>

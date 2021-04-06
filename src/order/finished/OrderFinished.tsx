@@ -5,7 +5,7 @@ import SidebarCheckout from '../checkout/sidebar/SidebarCheckout';
 import { Icon, Button } from '../../_shared';
 import { orderActions } from '../../_store/actions';
 import { orderSelectors } from '../../_store/selectors';
-import { translations } from '../../_translations';
+import { I18n } from '../../_translations';
 import './orderFinished.scss';
 
 export type IOrderFinishedRouterState = {
@@ -27,9 +27,9 @@ const OrderFinished: FC = () => {
       <SidebarCheckout readonly />
       <div className="container">
         <Icon name="SvgSuccess" size={7.5} />
-        <div className="text">{state?.text || translations.getLabel('ORDER.FINISHED.EXPLANATION.ORDER_PAID')}</div>
+        <div className="text">{state?.text || I18n.labels.ORDER.FINISHED.EXPLANATION.ORDER_PAID}</div>
         <Button onClick={() => dispatch(new orderActions.ClearState())} primary>
-          {translations.getLabel('ORDER.FINISHED.BUTTON')}
+          {I18n.labels.ORDER.FINISHED.BUTTON}
         </Button>
       </div>
     </div>

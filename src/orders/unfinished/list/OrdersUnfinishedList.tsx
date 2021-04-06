@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'semantic-ui-react';
 import { ordersSelectors } from '../../../_store/selectors';
 import { ordersActions } from '../../../_store/actions';
-import { translations } from '../../../_translations';
 import { Icon } from '../../../_shared';
 import { IOrder } from '../../../order/_models';
 import { parseCurrency } from '../../../_utils/parseHelpers';
 import { formatDate } from '../../../_utils/dateHelpers';
+import { I18n } from '../../../_translations';
 import './ordersUnfinishedList.scss';
 
 type Props = {
@@ -29,9 +29,9 @@ const OrdersUnfinishedList: FC<Props> = ({ filter, renderButton }) => {
     return (
       <div className="item" key={order.id}>
         <div>
-          <div className="item-name">{order.clientName || translations.getLabel('ORDERS.UNFINISHED.ITEM.NO_NAME')}</div>
+          <div className="item-name">{order.clientName || I18n.labels.ORDERS.UNFINISHED.ITEM.NO_NAME}</div>
           <div className="item-date">
-            {translations.getLabel('ORDERS.UNFINISHED.ITEM.CREATED_AT', { date: formatDate(new Date(order.createdAt)) })}
+            {I18n.insert(I18n.labels.ORDERS.UNFINISHED.ITEM.CREATED_AT, { date: formatDate(new Date(order.createdAt)) })}
           </div>
         </div>
         <div className="item-price">{parseCurrency(price)}</div>
@@ -44,7 +44,7 @@ const OrdersUnfinishedList: FC<Props> = ({ filter, renderButton }) => {
     return (
       <div className="no-results">
         <Icon name="SvgRockHand" size={10} />
-        <span>{translations.getLabel('ORDERS.UNFINISHED.NO_RESULTS')}</span>
+        <span>{I18n.labels.ORDERS.UNFINISHED.NO_RESULTS}</span>
       </div>
     );
   }

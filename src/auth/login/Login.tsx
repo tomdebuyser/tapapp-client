@@ -2,7 +2,6 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { translations } from '../../_translations';
 import { InputField, Button, ErrorMessage } from '../../_shared';
 import { useForm } from '../../_hooks';
 import { authSelectors } from '../../_store/selectors';
@@ -12,6 +11,7 @@ import { ApiError, HttpStatus } from '../../_http';
 import { formValidator } from '../../_utils/formValidation';
 import { ILoginForm } from '../_models';
 import './login.scss';
+import { I18n } from '../../_translations';
 
 const initialForm: ILoginForm = {
   password: '',
@@ -26,8 +26,8 @@ function validateForm(values: ILoginForm): FormValidationErrors<ILoginForm> {
 }
 
 function errorAsString(error?: ApiError): string {
-  if (error?.statusCode === HttpStatus.Unauthorized) return translations.getLabel(`AUTH.ERRORS.UNAUTHORIZED`);
-  if (error?.error === 'USER_STATE_NOT_ALLOWED') return translations.getLabel(`AUTH.ERRORS.USER_STATE_NOT_ALLOWED`);
+  if (error?.statusCode === HttpStatus.Unauthorized) return I18n.labels.AUTH.ERRORS.UNAUTHORIZED;
+  if (error?.error === 'USER_STATE_NOT_ALLOWED') return I18n.labels.AUTH.ERRORS.USER_STATE_NOT_ALLOWED;
   return null;
 }
 
@@ -55,7 +55,7 @@ const Login = () => {
             autoComplete="username"
             name="username"
             onChange={form.setAttribute}
-            placeholder={translations.getLabel('AUTH.LOGIN.USERNAME')}
+            placeholder={I18n.labels.AUTH.LOGIN.USERNAME}
             type="email"
             validation={form.validationErrors.username}
             value={form.values.username}
@@ -64,7 +64,7 @@ const Login = () => {
             autoComplete="current-password"
             name="password"
             onChange={form.setAttribute}
-            placeholder={translations.getLabel('AUTH.LOGIN.PASSWORD')}
+            placeholder={I18n.labels.AUTH.LOGIN.PASSWORD}
             type="password"
             validation={form.validationErrors.password}
             value={form.values.password}
@@ -72,8 +72,24 @@ const Login = () => {
         </div>
         <div className="actions">
           <Button loading={isSubmitting} primary type="submit">
-            {translations.getLabel('AUTH.LOGIN.BUTTON')}
+            {I18n.labels.AUTH.LOGIN.BUTTON}
           </Button>
+        </div>
+        <div className="actions">
+          {window.localStorage.getItem('locale') === 'en' && (
+            <Button onClick={() => dispatch(new authActions.SetLocale({ locale: 'nl' }))}>Nederlands</Button>
+          )}
+          {window.localStorage.getItem('locale') === 'nl' && (
+            <Button onClick={() => dispatch(new authActions.SetLocale({ locale: 'en' }))}>Engels</Button>
+          )}
+        </div>
+        <div className="actions">
+          {window.localStorage.getItem('dev-mode') === 'true' && (
+            <Button onClick={() => dispatch(new authActions.SetDevMode({ isDevMode: false }))}>Dev-mode off</Button>
+          )}
+          {window.localStorage.getItem('dev-mode') !== 'true' && (
+            <Button onClick={() => dispatch(new authActions.SetDevMode({ isDevMode: true }))}>Dev-mode on</Button>
+          )}
         </div>
       </form>
     </Container>

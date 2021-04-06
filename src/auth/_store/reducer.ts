@@ -1,12 +1,15 @@
 import { ApiError } from '../../_http';
+import { Locale } from '../../_translations';
 import { AuthAction, AuthActionType } from './actions';
 
 export type AuthState = {
   errorLogin?: ApiError;
   errorLogout?: ApiError;
   isAuthenticateLoading: boolean;
+  isDevMode?: boolean;
   isLoginLoading?: boolean;
   isLogoutLoading?: boolean;
+  locale?: Locale;
 };
 
 const initialState: AuthState = {
@@ -59,6 +62,16 @@ export default function reducer(state = initialState, action: AuthAction): AuthS
         ...state,
         errorLogout: action.payload.error,
         isLogoutLoading: false,
+      };
+    case AuthActionType.SetLocale:
+      return {
+        ...state,
+        locale: action.payload.locale,
+      };
+    case AuthActionType.SetDevMode:
+      return {
+        ...state,
+        isDevMode: action.payload.isDevMode,
       };
     default:
       return state;

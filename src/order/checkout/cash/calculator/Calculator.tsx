@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Button } from '../../../../_shared';
 import { useToggle } from '../../../../_hooks';
 import { orderSelectors } from '../../../../_store/selectors';
-import { translations } from '../../../../_translations';
+import { I18n } from '../../../../_translations';
 import './calculator.scss';
 
 const Calculator: FC = () => {
@@ -35,7 +35,7 @@ const Calculator: FC = () => {
           {value ? (
             <span className="value">{`€ ${value}`}</span>
           ) : (
-            <span className="placeholder">{translations.getLabel('ORDER.CHECKOUT.CASH.CALCULATOR.PLACEHOLDER')}</span>
+            <span className="placeholder">{I18n.labels.ORDER.CHECKOUT.CASH.CALCULATOR.PLACEHOLDER}</span>
           )}
         </div>
       </div>
@@ -67,7 +67,7 @@ const Calculator: FC = () => {
       </div>
       <div className="calculator-line calculator-button">
         <Button onClick={calculateChange} primary>
-          {translations.getLabel('ORDER.CHECKOUT.CASH.CALCULATOR.BUTTON')}
+          {I18n.labels.ORDER.CHECKOUT.CASH.CALCULATOR.BUTTON}
         </Button>
       </div>
     </div>
