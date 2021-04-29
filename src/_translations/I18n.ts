@@ -1,9 +1,9 @@
 import { translationsEn, TranslationsEn } from './typings/en';
 import { translationsNl, TranslationsNl } from './typings/nl';
 import { translationKeys } from './typings/keys';
-// import './translate';
 
 export type Locale = 'en' | 'nl';
+const defaultLocale: Locale = 'en';
 
 type Translations = TranslationsEn | TranslationsNl;
 
@@ -15,7 +15,8 @@ const translations: Record<Locale, Translations> = {
 export class I18n {
   static get labels(): Translations {
     if (this.isDevMode()) return translationKeys as Translations;
-    return translations[I18n.getLocale()];
+    const locale = I18n.getLocale().split('-').length > 1 ? defaultLocale : I18n.getLocale();
+    return translations[locale] || translations[defaultLocale];
   }
 
   static insert(value: string, inserts: Record<string, string | number> = {}): string {
@@ -24,17 +25,21 @@ export class I18n {
 
   static setLocale(locale: Locale): void {
     window.localStorage.setItem('locale', locale);
+    // Reload the window to make app re-render
+    window.location.reload();
   }
 
   static setDevMode(flag: boolean): void {
-    window.localStorage.setItem('dev-mode', `${flag}`);
+    window.sessionStorage.setItem('dev-mode', `${flag}`);
+    // Reload the window to make app re-render
+    window.location.reload();
   }
 
-  private static getLocale(): Locale {
-    return (window.localStorage.getItem('locale') as Locale) || 'en';
+  static getLocale(): Locale {
+    return (window.localStorage.getItem('locale') as Locale) || defaultLocale;
   }
 
-  private static isDevMode(): boolean {
-    return window.localStorage.getItem('dev-mode') === `${true}`;
+  static isDevMode(): boolean {
+    return window.sessionStorage.getItem('dev-mode') === `${true}`;
   }
 }

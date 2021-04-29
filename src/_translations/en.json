@@ -1,7 +1,7 @@
 {
   "AUTH": {
     "LOGIN": {
-      "USERNAME": "",
+      "USERNAME": "Username",
       "PASSWORD": "Password",
       "BUTTON": "Login"
     },
@@ -130,7 +130,8 @@
       "DATE": "dd/mm/jjjj",
       "SEARCH": "Zoeken…",
       "TIME": "uu:mm"
-    }
+    },
+    "LOADING_APPLICATION": "Loading tapapp..."
   },
   "ERRORS": {
     "GENERAL": "Er ging iets mis. Probeer opnieuw.",

@@ -55,7 +55,7 @@ export function deepCopy<T>(inObject: T): T {
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
-export function isEmptyObject(object: object): boolean {
+export function isEmptyObject(object: unknown): boolean {
   if (!object) return true;
   if (Array.isArray(object)) return object.every(isEmptyObject);
   if (typeof object === 'object') return Object.keys(object).every(key => isEmptyObject(object[key]));

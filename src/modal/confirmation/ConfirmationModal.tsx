@@ -1,41 +1,52 @@
 import React, { FC } from 'react';
+import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
-import { IConfirmationModalData } from '../_models';
-import { Button, Modal } from '../../_shared';
-import { modalActions } from '../../_store/actions';
+import { Button } from '../../_shared';
 import { I18n } from '../../_translations';
+import Modal from '../Modal';
+import { ModalOpener } from '../ModalOpener';
 
 type Props = {
-  data?: IConfirmationModalData;
+  confirmText: string;
+  content: string;
+  onCancel?: () => void;
+  onConfirm: (dispatch: Dispatch) => void;
+  title: string;
 };
 
-const ConfirmationModal: FC<Props> = ({ data }) => {
+const ConfirmationModal: FC<Props> = ({ confirmText, content, onCancel, onConfirm, title }) => {
   const dispatch = useDispatch();
-
-  const cancelModal = () => {
-    if (data.cancelAction) dispatch(data.cancelAction());
-    dispatch(new modalActions.CloseModal());
-  };
-
-  const confirmModal = () => {
-    dispatch(data.confirmAction());
-    dispatch(new modalActions.CloseModal());
-  };
-
   return (
-    <Modal onClose={cancelModal} open>
-      <Modal.Header>{data.title}</Modal.Header>
+    <Modal onCancel={onCancel}>
+      <Modal.Header>{title}</Modal.Header>
       <Modal.Content>
-        <p>{data.content}</p>
+        <p>{content}</p>
       </Modal.Content>
-      <Modal.Actions>
-        <Button onClick={cancelModal}>{I18n.labels.SHARED.BUTTONS.CANCEL}</Button>
-        <Button onClick={confirmModal} primary>
-          {data.confirmText}
+      <Modal.Buttons>
+        <Button
+          onClick={() => {
+            onCancel?.();
+            ModalOpener.instance.close();
+          }}
+        >
+          {I18n.labels.SHARED.BUTTONS.CANCEL}
         </Button>
-      </Modal.Actions>
+        <Button
+          onClick={() => {
+            onConfirm(dispatch);
+            ModalOpener.instance.close();
+          }}
+          primary
+        >
+          {confirmText}
+        </Button>
+      </Modal.Buttons>
     </Modal>
   );
 };
 
-export default ConfirmationModal;
+export default Object.assign(ConfirmationModal, {
+  render: (props: Props) => {
+    return <ConfirmationModal {...props} />;
+  },
+});

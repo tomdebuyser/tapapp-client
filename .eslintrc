@@ -14,7 +14,7 @@
   "extends": ["eslint:recommended", "plugin:react/recommended", "eslint-config-prettier", "plugin:import/warnings"],
   "rules": {
     "import/order": 1,
-    "react-hooks/exhaustive-deps": 1,
+    "react-hooks/exhaustive-deps": 0,
     "react/prop-types": 0,
     "strict": ["error", "never"]
   },
@@ -36,6 +36,7 @@
       ],
       "rules": {
         "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0,
         "@typescript-eslint/interface-name-prefix": 0,
         "@typescript-eslint/no-empty-function": 0,
         "typescript-sort-keys/interface": 1,
@@ -43,7 +44,8 @@
         "react/jsx-sort-props": 1,
         "sort-keys-fix/sort-keys-fix": 1,
         "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-        "react-hooks/exhaustive-deps": 0
+        "@typescript-eslint/camelcase": 0,
+        "react/display-name": 0
       }
     }
   ]

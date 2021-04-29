@@ -102,7 +102,7 @@ class HttpClient {
     return result.data;
   }
 
-  static async put<T>(route: string, body: object = {}, headers: Headers = {}, params: Params = {}): Promise<T> {
+  static async put<T>(route: string, body: Record<string, unknown> = {}, headers: Headers = {}, params: Params = {}): Promise<T> {
     try {
       const result = await axios.put<T>(this.getUrlWithParams(route, params), body, {
         headers: { ...this.getBasicHeaders(), ...headers },
@@ -114,7 +114,7 @@ class HttpClient {
     }
   }
 
-  static async patch<T>(route: string, body: object = {}, headers: Headers = {}): Promise<T> {
+  static async patch<T>(route: string, body: Record<string, unknown> = {}, headers: Headers = {}): Promise<T> {
     try {
       const result = await axios.patch<T>(this.getUrl(route), body, {
         headers: { ...this.getBasicHeaders(), ...headers },
@@ -126,7 +126,7 @@ class HttpClient {
     }
   }
 
-  static async post<T>(route: string, body: object = {}, headers: Headers = {}): Promise<T> {
+  static async post<T>(route: string, body: Record<string, unknown> = {}, headers: Headers = {}): Promise<T> {
     try {
       const result = await axios.post<T>(this.getUrl(route), body, {
         headers: { ...this.getBasicHeaders(), ...headers },

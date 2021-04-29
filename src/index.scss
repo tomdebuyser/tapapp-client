@@ -1,14 +1,19 @@
+@import './_styles/breakpoints';
 @import './_styles/colors';
 @import './_styles/constants';
 @import './_styles/form';
 @import './_styles/sidebar';
 @import './_styles/reset';
 
+html {
+  // This value defines the value of '1rem'
+  font-size: 10px;
+}
+
 html,
 body {
   height: auto;
   margin: 0;
-  font-size: 10px;
   font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

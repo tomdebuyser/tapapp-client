@@ -1,6 +1,9 @@
-import { readdirSync, writeFileSync } from 'fs';
+// eslint-disable-next-line
+// @ts-ignore
+// eslint-disable-next-line
+const fs = require('fs');
 
-const TRANSLATIONS_PATH = `${__dirname}`;
+const TRANSLATIONS_PATH = `${__dirname}/../src/_translations`;
 const TRANSLATION_TYPINGS_PATH = `${TRANSLATIONS_PATH}/typings`;
 
 function valueIfEmpty(key: string): string {
@@ -32,25 +35,24 @@ function capitalizeFirstLetter(value: string): string {
 
 // Create a 'typings' folder
 try {
-  require('fs').mkdirSync(TRANSLATION_TYPINGS_PATH);
+  fs.mkdirSync(TRANSLATION_TYPINGS_PATH);
 } catch (e) {
   // Already exists
 }
 
 // Create TS typing files for each .json translations file
-require('fs')
-  .readdirSync(TRANSLATIONS_PATH)
+fs.readdirSync(TRANSLATIONS_PATH)
   .filter(file => file.endsWith('.json'))
   .forEach((file, index) => {
     // Read the .json file
-    const content = require('fs').readFileSync(`${TRANSLATIONS_PATH}/${file}`);
+    const content = `${fs.readFileSync(`${TRANSLATIONS_PATH}/${file}`)}`;
     const locale = file.replace('.json', '');
 
     // Use the json values, but mark the empty values
     const translations = JSON.stringify(fillEmptyValues(JSON.parse(content)));
 
     // Create a .ts file for the current locale
-    require('fs').writeFileSync(
+    fs.writeFileSync(
       `${TRANSLATION_TYPINGS_PATH}/${locale}.ts`,
       `export type Translations${capitalizeFirstLetter(locale)} = ${translations};
       \n\n
@@ -59,7 +61,7 @@ require('fs')
 
     // Create one 'keys.ts' file where all translation keys are used as value for dev-mode
     if (index === 0) {
-      require('fs').writeFileSync(
+      fs.writeFileSync(
         `${TRANSLATION_TYPINGS_PATH}/keys.ts`,
         `export const translationKeys = ${JSON.stringify(translationKeys(JSON.parse(content)))}`,
       );

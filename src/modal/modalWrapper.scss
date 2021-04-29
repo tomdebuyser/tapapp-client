@@ -1,0 +1,26 @@
+@import '../_styles/breakpoints';
+
+.modal-wrapper {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  &.is-visible {
+    pointer-events: all;
+    .modal-wrapper-content {
+      visibility: visible;
+
+      @include breakpoint(mobile) {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

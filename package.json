@@ -3,29 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "12.16.3"
+    "node": "14.15.0"
   },
   "dependencies": {
-    "@sentry/browser": "^5.11.1",
-    "axios": "^0.19.0",
+    "@sentry/browser": "^5.27.0",
+    "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.6.1",
-    "date-fns": "^2.8.1",
-    "node-sass": "^4.13.0",
-    "react": "^16.12.0",
-    "react-datepicker": "^2.14.0",
-    "react-dom": "^16.12.0",
+    "date-fns": "^2.16.1",
+    "node-sass": "^4.14.1",
+    "react": "^17.0.0",
+    "react-datepicker": "^3.3.0",
+    "react-dom": "^17.0.0",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "react-toastify": "^5.5.0",
+    "react-scripts": "3.4.4",
+    "react-toastify": "^6.0.9",
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0",
     "reselect": "^4.0.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
-    "ts-node": "^8.10.2",
-    "typescript": "~3.7.2"
+    "ts-node": "^9.0.0"
   },
   "scripts": {
     "start": "craco start",
@@ -33,14 +32,11 @@
     "test": "craco test",
     "test:coverage": "yarn test --coverage --watchAll=false",
     "eject": "craco eject",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx src",
+    "lint": "eslint --ignore-path .gitignore --ignore-path .eslintignore --ext .js,.ts,.tsx src",
     "prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|json|ts|tsx)\"",
     "format": "yarn prettier --write",
     "format:check": "yarn prettier --list-different",
-    "translate": "ts-node ./src/_translations/translate.script.ts"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "translate": "ts-node ./scripts/translate.script.ts && prettier --write \"src/_translations/typings/*.ts\""
   },
   "browserslist": {
     "production": [
@@ -55,28 +51,26 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^5.6.2",
+    "@craco/craco": "^5.7.0",
     "@semantic-ui-react/craco-less": "^1.2.1",
-    "@types/jest": "^25.1.0",
-    "@types/node": "^13.5.1",
-    "@types/react": "^16.9.0",
-    "@types/react-datepicker": "^2.11.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-dropzone": "^5.1.0",
+    "@types/node": "^14.14.2",
+    "@types/react": "^16.9.53",
+    "@types/react-datepicker": "^3.1.1",
+    "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.5",
-    "@types/react-router-dom": "^5.1.5",
+    "@types/react-router-dom": "^5.1.6",
     "@types/redux-logger": "^3.0.7",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
-    "eslint-plugin-sort-keys-fix": "^1.1.0",
-    "eslint-plugin-typescript-sort-keys": "^0.5.0",
-    "prettier": "^1.19.1",
+    "@typescript-eslint/eslint-plugin": "3.10.1",
+    "@typescript-eslint/parser": "3.10.1",
+    "eslint-config-prettier": "^6.14.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.1",
+    "eslint-plugin-typescript-sort-keys": "^1.5.0",
+    "prettier": "^2.1.2",
     "redux-logger": "^3.0.6",
-    "semantic-ui-less": "^2.4.1"
+    "semantic-ui-less": "^2.4.1",
+    "typescript": "4.0.3"
   }
 }

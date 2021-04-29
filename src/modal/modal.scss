@@ -1,0 +1,112 @@
+@import '../_styles/colors';
+@import '../_styles/breakpoints';
+
+$max-height: calc(100vh - 10rem);
+$padding: 4rem;
+
+.modal-dimmer {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+
+  @include breakpoint(mobile) {
+    display: none;
+  }
+}
+
+.modal {
+  position: relative;
+  z-index: 1;
+  width: 60rem;
+  max-height: $max-height;
+  overflow-y: hidden;
+
+  @include breakpoint(mobile) {
+    width: 100%;
+    height: 100%;
+    max-height: unset;
+  }
+
+  .modal-close-icon {
+    position: absolute;
+    right: 3rem;
+    top: 3rem;
+    margin: 0;
+
+    @include breakpoint(mobile) {
+      right: $padding;
+      top: $padding;
+    }
+  }
+
+  .modal-box {
+    padding: $padding;
+    padding-right: 0;
+    background-color: $white;
+    width: 100%;
+    height: 100%;
+    max-height: $max-height;
+
+    @include breakpoint(mobile) {
+      max-height: unset;
+    }
+
+    form {
+      max-height: calc(#{$max-height} - 2 * #{$padding});
+
+      @include breakpoint(mobile) {
+        max-height: unset;
+      }
+    }
+
+    &,
+    form {
+      display: flex;
+      flex-direction: column;
+
+      > :not(:first-child) {
+        margin-top: 2.5rem;
+      }
+    }
+
+    .modal-header {
+      flex: 0;
+      padding-right: calc(#{$padding} + 5rem);
+      h1 {
+        font-size: 2.4rem;
+
+        @include breakpoint(mobile) {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .modal-content {
+      flex: 1;
+      overflow-y: auto;
+      margin-right: calc(#{$padding} - 1rem);
+      padding-right: 1rem;
+      > :not(:first-child) {
+        margin-top: 1.5rem;
+      }
+      .description {
+        color: $grey-dark;
+      }
+    }
+
+    .modal-buttons {
+      flex: 0;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: $padding;
+      > :not(:first-child) {
+        margin-left: 1.5rem;
+      }
+    }
+  }
+}

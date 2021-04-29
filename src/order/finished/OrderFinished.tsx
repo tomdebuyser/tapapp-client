@@ -19,7 +19,9 @@ const OrderFinished: FC = () => {
 
   useEffect(() => {
     if (!orderId) dispatch(new orderActions.ClearState());
-    return () => dispatch(new orderActions.ClearState());
+    return () => {
+      dispatch(new orderActions.ClearState());
+    };
   });
 
   return (

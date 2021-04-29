@@ -130,7 +130,8 @@
       "DATE": "dd/mm/jjjj",
       "SEARCH": "Zoeken…",
       "TIME": "uu:mm"
-    }
+    },
+    "LOADING_APPLICATION": "Laden van tapapp..."
   },
   "ERRORS": {
     "GENERAL": "Er ging iets mis. Probeer opnieuw.",

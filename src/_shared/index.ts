@@ -7,7 +7,8 @@ import Icon from './icon/Icon';
 import Modal from './modal/Modal';
 import SearchField from './search/SearchField';
 import SegmentedControl from './segmentedControl/SegmentedControl';
+import Spinner from './spinner/Spinner';
 import Table from './table/Table';
 export * from './input';
 
-export { Icon, Modal, Table, Button, ErrorMessage, SearchField, GoBackLink, SegmentedControl, Datepicker, Badge };
+export { Icon, Modal, Table, Button, ErrorMessage, SearchField, GoBackLink, SegmentedControl, Datepicker, Badge, Spinner };

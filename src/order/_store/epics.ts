@@ -2,12 +2,14 @@ import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
 import { map, catchError, exhaustMap, filter, switchMap, tap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
-import { orderActions, modalActions } from '../../_store/actions';
+import { orderActions } from '../../_store/actions';
 import { orderSelectors } from '../../_store/selectors';
 import { IOrderFinishedRouterState } from '../finished/OrderFinished';
 import { I18n } from '../../_translations';
-import * as orderApi from './api';
+import { ModalOpener } from '../../modal/ModalOpener';
+import ConfirmationModal from '../../modal/confirmation/ConfirmationModal';
 import { OrderActionType } from './actions';
+import * as orderApi from './api';
 
 const clearStateEpic$: Epic = action$ => action$.ofType(OrderActionType.ClearState).pipe(map(() => push('/order/compose')));
 
@@ -71,15 +73,18 @@ const addClientNameEpic$: Epic = (action$, state$) =>
 const deleteOrderWithConfirmationEpic$: Epic = action$ =>
   action$.ofType(OrderActionType.DeleteOrder).pipe(
     filter(({ payload }: orderActions.DeleteOrder) => !payload?.confirmed),
-    map(
-      () =>
-        new modalActions.ShowConfirmationModal({
-          confirmAction: () => new orderActions.DeleteOrder({ confirmed: true }),
-          confirmText: I18n.labels.ORDER.CONFIRM_DELETE.BUTTON,
-          content: I18n.labels.ORDER.CONFIRM_DELETE.CONTENT,
-          title: I18n.labels.ORDER.CONFIRM_DELETE.TITLE,
-        }),
-    ),
+    tap(() => {
+      ModalOpener.instance.open({
+        render: () =>
+          ConfirmationModal.render({
+            confirmText: I18n.labels.ORDER.CONFIRM_DELETE.BUTTON,
+            content: I18n.labels.ORDER.CONFIRM_DELETE.CONTENT,
+            onConfirm: () => new orderActions.DeleteOrder({ confirmed: true }),
+            title: I18n.labels.ORDER.CONFIRM_DELETE.TITLE,
+          }),
+      });
+    }),
+    switchMap(() => of()),
   );
 
 const deleteOrderEpic$: Epic = (action$, state$) =>

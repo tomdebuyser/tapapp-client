@@ -75,22 +75,6 @@ const Login = () => {
             {I18n.labels.AUTH.LOGIN.BUTTON}
           </Button>
         </div>
-        <div className="actions">
-          {window.localStorage.getItem('locale') === 'en' && (
-            <Button onClick={() => dispatch(new authActions.SetLocale({ locale: 'nl' }))}>Nederlands</Button>
-          )}
-          {window.localStorage.getItem('locale') === 'nl' && (
-            <Button onClick={() => dispatch(new authActions.SetLocale({ locale: 'en' }))}>Engels</Button>
-          )}
-        </div>
-        <div className="actions">
-          {window.localStorage.getItem('dev-mode') === 'true' && (
-            <Button onClick={() => dispatch(new authActions.SetDevMode({ isDevMode: false }))}>Dev-mode off</Button>
-          )}
-          {window.localStorage.getItem('dev-mode') !== 'true' && (
-            <Button onClick={() => dispatch(new authActions.SetDevMode({ isDevMode: true }))}>Dev-mode on</Button>
-          )}
-        </div>
       </form>
     </Container>
   );

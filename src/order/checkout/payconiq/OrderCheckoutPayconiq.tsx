@@ -18,7 +18,9 @@ const OrderCheckoutPayconiq: FC = () => {
   useEffect(() => {
     dispatch(new payconiqActions.CreatePayconiqPayment());
     // Make sure pending payments are cancelled
-    return () => dispatch(new payconiqActions.InterruptPayconiqPayment());
+    return () => {
+      dispatch(new payconiqActions.InterruptPayconiqPayment());
+    };
   }, []);
 
   usePolling(1000, () => {

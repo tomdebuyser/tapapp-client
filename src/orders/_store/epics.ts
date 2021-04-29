@@ -1,11 +1,13 @@
 import { Epic } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { map, catchError, exhaustMap, filter, switchMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap, filter, switchMap, tap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
-import { ordersActions, modalActions } from '../../_store/actions';
+import { ordersActions } from '../../_store/actions';
 import { orderSelectors } from '../../_store/selectors';
 import { IOrderFinishedRouterState } from '../../order/finished/OrderFinished';
 import { I18n } from '../../_translations';
+import { ModalOpener } from '../../modal/ModalOpener';
+import ConfirmationModal from '../../modal/confirmation/ConfirmationModal';
 import * as ordersApi from './api';
 import { OrdersActionType } from './actions';
 
@@ -22,17 +24,19 @@ const getUnfinishedOrdersEpic$: Epic = action$ =>
 const mergeOrdersWithConfirmationEpic$: Epic = action$ =>
   action$.ofType(OrdersActionType.MergeOrders).pipe(
     filter(({ payload }: ordersActions.MergeOrders) => !payload?.confirmed),
-    map(
-      ({ payload }: ordersActions.MergeOrders) =>
-        new modalActions.ShowConfirmationModal({
-          confirmAction: () => new ordersActions.MergeOrders({ confirmed: true, targetOrder: payload.targetOrder }),
-          confirmText: I18n.labels.ORDERS.CONFIRM_MERGE.BUTTON,
-          content: I18n.insert(I18n.labels.ORDERS.CONFIRM_MERGE.CONTENT, {
-            name: payload.targetOrder.clientName || I18n.labels.ORDERS.UNFINISHED.ITEM.NO_NAME,
+    tap(payload => {
+      ModalOpener.instance.open({
+        render: () =>
+          ConfirmationModal.render({
+            confirmText: I18n.labels.ORDERS.CONFIRM_MERGE.BUTTON,
+            content: I18n.insert(I18n.labels.ORDERS.CONFIRM_MERGE.CONTENT, {
+              name: payload.targetOrder.clientName || I18n.labels.ORDERS.UNFINISHED.ITEM.NO_NAME,
+            }),
+            onConfirm: () => new ordersActions.MergeOrders({ confirmed: true, targetOrder: payload.targetOrder }),
+            title: I18n.labels.ORDERS.CONFIRM_MERGE.TITLE,
           }),
-          title: I18n.labels.ORDERS.CONFIRM_MERGE.TITLE,
-        }),
-    ),
+      });
+    }),
   );
 
 const mergeOrdersEpic$: Epic = (action$, state$) =>

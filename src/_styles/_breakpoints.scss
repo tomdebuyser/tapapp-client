@@ -1,0 +1,36 @@
+/**
+* The breakpoints defined here should be changed per project.
+* It also depends whether you design mobile-first or dektop-first.
+* Mobile first: use 'min-width' in the media queries
+* Desktop first: use 'max-width' in the media queries
+*/
+
+$breakpoint-big-monitor: 1920px;
+$breakpoint-monitor: 1280px;
+$breakpoint-desktop: 1025px;
+$breakpoint-tablet: 864px;
+$breakpoint-mobile: 632px;
+
+@mixin breakpoint($point) {
+  @if $point == mobile {
+    @media (max-width: $breakpoint-mobile) {
+      @content;
+    }
+  } @else if $point == tablet {
+    @media (max-width: $breakpoint-tablet) {
+      @content;
+    }
+  } @else if $point == desktop {
+    @media (max-width: $breakpoint-desktop) {
+      @content;
+    }
+  } @else if $point == monitor {
+    @media (max-width: $breakpoint-monitor) {
+      @content;
+    }
+  } @else if $point == big-monitor {
+    @media (max-width: $breakpoint-big-monitor) {
+      @content;
+    }
+  }
+}
