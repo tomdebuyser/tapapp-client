@@ -12,9 +12,7 @@ import { IOrder } from '../../_models';
 import { I18n } from '../../../_translations';
 import OrderAddClientNameModal from './addClientName/OrderAddClientNameModal';
 
-type Props = {};
-
-const OrderCheckoutMerge: FC<Props> = () => {
+const OrderCheckoutMerge: FC = () => {
   const dispatch = useDispatch();
   const orderId = useSelector(orderSelectors.orderId);
   const orders = useSelector(ordersSelectors.unfinishedOrders);

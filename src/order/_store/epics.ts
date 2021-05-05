@@ -55,7 +55,8 @@ const addClientNameEpic$: Epic = (action$, state$) =>
   action$.ofType(OrderActionType.AddClientName).pipe(
     exhaustMap(({ payload }: orderActions.AddClientName) => {
       const orderId = orderSelectors.orderId(state$.value);
-      return from(orderApi.updateOrder(orderId, null, payload.clientName)).pipe(
+      const items = orderSelectors.items(state$.value);
+      return from(orderApi.updateOrder(orderId, items, payload.clientName)).pipe(
         tap(() => payload.onSuccess?.()),
         switchMap(updatedOrder =>
           of(
@@ -79,7 +80,7 @@ const deleteOrderWithConfirmationEpic$: Epic = action$ =>
           ConfirmationModal.render({
             confirmText: I18n.labels.ORDER.CONFIRM_DELETE.BUTTON,
             content: I18n.labels.ORDER.CONFIRM_DELETE.CONTENT,
-            onConfirm: () => new orderActions.DeleteOrder({ confirmed: true }),
+            onConfirm: dispatch => dispatch(new orderActions.DeleteOrder({ confirmed: true })),
             title: I18n.labels.ORDER.CONFIRM_DELETE.TITLE,
           }),
       });

@@ -20,8 +20,8 @@ export function createOrder(items: IOrderItem[]): Promise<IOrder> {
 }
 
 export function updateOrder(orderId: string, items?: IOrderItem[], clientName?: string): Promise<IOrder> {
-  return HttpClient.patch<IOrder>(`orders/${orderId}`, {
-    ...(items && { items: items.map(composeOrderItemPayload).filter(item => item.amount > 0) }),
+  return HttpClient.put<IOrder>(`orders/${orderId}`, {
+    items: items.map(composeOrderItemPayload).filter(item => item.amount > 0),
     ...(clientName && { clientName }),
   });
 }
@@ -31,7 +31,7 @@ export function deleteOrder(orderId: string): Promise<void> {
 }
 
 export function payOrder(orderId: string, type: PaymentType.Cash | PaymentType.Free): Promise<void> {
-  return HttpClient.post('payments', { orderId, type });
+  return HttpClient.post(`payments/${type.toLowerCase()}`, { orderId });
 }
 
 export function mergeOrders(orderId: string, targetOrderId: string): Promise<void> {

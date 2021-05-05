@@ -24,7 +24,7 @@ const Calculator: FC = () => {
 
   function calculateChange() {
     if (isShowingChange) return;
-    setValue(`${parseFloat(value) - totalPrice}`);
+    setValue(`${parseFloat(value) - totalPrice / 100}`);
     setIsShowingChange();
   }
 

@@ -1,8 +1,8 @@
 export type IPayconiqPayment = {
   id: string;
   orderId: string;
-  payconiqQrCode?: string;
-  payconiqStatus: PayconiqPaymentStatus;
+  qrCode?: string;
+  status: PayconiqPaymentStatus;
 };
 
 export enum PayconiqPaymentStatus {

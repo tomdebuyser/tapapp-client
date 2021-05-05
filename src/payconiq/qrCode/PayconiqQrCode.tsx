@@ -12,14 +12,14 @@ type Props = {
 const PayconiqQrCode: FC<Props> = ({ payment }) => (
   <div className="payconiq-qr-code">
     <SvgPayconiqQr className="branding" />
-    {isIntermediatePayconiqStatus(payment?.payconiqStatus) && (
+    {isIntermediatePayconiqStatus(payment?.status) && (
       <div className="qr-code-wrapper">
-        <img alt="qr-code" src={payment.payconiqQrCode} />
+        <img alt="qr-code" src={payment.qrCode} />
       </div>
     )}
-    {isReadyToScanPayconiqStatus(payment?.payconiqStatus) && <div className="status-overlay"></div>}
+    {isReadyToScanPayconiqStatus(payment?.status) && <div className="status-overlay"></div>}
     <div className="loading-wrapper">
-      <PayconiqQrStatus status={payment?.payconiqStatus} />
+      <PayconiqQrStatus status={payment?.status} />
     </div>
   </div>
 );

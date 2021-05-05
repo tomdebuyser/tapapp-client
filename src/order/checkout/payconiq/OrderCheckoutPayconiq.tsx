@@ -24,19 +24,19 @@ const OrderCheckoutPayconiq: FC = () => {
   }, []);
 
   usePolling(1000, () => {
-    if (payment && isIntermediatePayconiqStatus(payment.payconiqStatus)) {
+    if (payment && isIntermediatePayconiqStatus(payment.status)) {
       dispatch(new payconiqActions.GetPayconiqPayment());
     }
   });
 
   function canRetryPayment(): boolean {
     if (!payment) return false;
-    if (isIntermediatePayconiqStatus(payment.payconiqStatus)) return false;
-    return payment.payconiqStatus !== PayconiqPaymentStatus.SUCCEEDED;
+    if (isIntermediatePayconiqStatus(payment.status)) return false;
+    return payment.status !== PayconiqPaymentStatus.SUCCEEDED;
   }
 
   function canStopPayment(): boolean {
-    return payment?.payconiqStatus !== PayconiqPaymentStatus.SUCCEEDED;
+    return payment?.status !== PayconiqPaymentStatus.SUCCEEDED;
   }
 
   return (

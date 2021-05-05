@@ -14,6 +14,8 @@ const AuthorizedLayoutMenu: FC = () => {
   const { pathname } = useLocation();
 
   function shouldShowUnfinishedOrdersTab(): boolean {
+    // TODO: Implement merge order
+    return false;
     if (!orderId) return true;
     if (pathname === '/order/checkout') return isUnfinishedOrder;
     return false;

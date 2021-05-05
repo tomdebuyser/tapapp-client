@@ -23,8 +23,7 @@ const getPayconiqPaymentEpic$: Epic = (action$, state$) =>
 const getPayconiqPaymentSuccessEpic$: Epic = action$ =>
   action$.ofType(PayconiqPaymentActionType.GetPayconiqPaymentSuccess).pipe(
     filter(
-      ({ payload }: payconiqActions.GetPayconiqPaymentSuccess) =>
-        payload.payment.payconiqStatus === PayconiqPaymentStatus.SUCCEEDED,
+      ({ payload }: payconiqActions.GetPayconiqPaymentSuccess) => payload.payment.status === PayconiqPaymentStatus.SUCCEEDED,
     ),
     tap(() => new Audio(require('../../_assets/sounds/notification.mp3')).play()),
     delay(2000),
@@ -57,7 +56,7 @@ const interruptPayconiqPaymentEpic$: Epic = (action$, state$) =>
   action$.ofType(PayconiqPaymentActionType.InterruptPayconiqPayment).pipe(
     map(() => {
       const payment = payconiqSelectors.payment(state$.value);
-      if (isIntermediatePayconiqStatus(payment?.payconiqStatus)) return new payconiqActions.CancelPayconiqPayment();
+      if (isIntermediatePayconiqStatus(payment?.status)) return new payconiqActions.CancelPayconiqPayment();
       return new payconiqActions.ClearState();
     }),
   );

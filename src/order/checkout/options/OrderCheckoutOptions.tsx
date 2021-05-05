@@ -15,7 +15,7 @@ import './orderCheckoutOptions.scss';
 const OrderCheckoutOptions: FC = () => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
-  const isUnfinishedOrder = useSelector(orderSelectors.isUnfinishedOrder);
+  // const isUnfinishedOrder = useSelector(orderSelectors.isUnfinishedOrder);
   const totalPrice = useSelector(orderSelectors.totalPrice);
 
   return (
@@ -36,7 +36,8 @@ const OrderCheckoutOptions: FC = () => {
             logo={<SvgPayconiq />}
           />
         </Link>
-        <Link to={`${url}/merge`}>
+        {/* TODO: Introduct merging */}
+        {/* <Link to={`${url}/merge`}>
           <ButtonCheckout
             icon="SvgBill"
             label={
@@ -45,7 +46,7 @@ const OrderCheckoutOptions: FC = () => {
                 : I18n.labels.ORDER.CHECKOUT.PAYMENT_TYPES.MERGE
             }
           />
-        </Link>
+        </Link> */}
         <ButtonCheckout
           icon="SvgFree"
           label={I18n.labels.ORDER.CHECKOUT.PAYMENT_TYPES.FREE}
