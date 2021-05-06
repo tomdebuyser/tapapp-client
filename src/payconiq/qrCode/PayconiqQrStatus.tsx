@@ -26,7 +26,7 @@ const PayconiqQrStatus: FC<Props> = ({ status }) => {
       case PayconiqPaymentStatus.SUCCEEDED:
         return (
           <>
-            <Icon className="success" name="SvgCheckCircle" />
+            <Icon name="SvgCheckCircle" />
             <span>{I18n.labels.ORDER.CHECKOUT.PAYCONIQ.STATUS.SUCCEEDED}</span>
           </>
         );

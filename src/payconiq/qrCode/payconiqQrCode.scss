@@ -70,9 +70,6 @@ $qr-size: calc(#{$size} - calc(#{$size} * #{$padding} * 2));
 
     .icon {
       color: $secondary-color;
-      &.success {
-        color: $primary-color;
-      }
     }
 
     :not(:first-child) {
