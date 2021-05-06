@@ -13,7 +13,7 @@ export type TableColumn = {
 
 type Props = {
   columns: TableColumn[];
-  data?: object[];
+  data?: Record<string, unknown>[];
   emptyLabel: string;
   isLoading: boolean;
   renderRow: (item: unknown) => ReactElement;
