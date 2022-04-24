@@ -12,7 +12,7 @@ import { Spinner } from './_shared';
 import { I18n } from './_translations';
 import ModalWrapper from './modal/ModalWrapper';
 
-// TODO: https://github.com/mars/create-react-app-buildpack#user-content-compile-time-vs-runtime
+//: https://github.com/mars/create-react-app-buildpack#user-content-compile-time-vs-runtime
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
